@@ -38,6 +38,7 @@ public class VistaDarAlta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setText("Dar de alta");
 
         jLabel2.setText("DNI:");

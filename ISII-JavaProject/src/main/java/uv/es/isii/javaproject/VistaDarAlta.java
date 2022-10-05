@@ -4,6 +4,9 @@
  */
 package uv.es.isii.javaproject;
 
+import javax.swing.JOptionPane;
+import java.lang.Math;
+
 /**
  *
  * @author algar
@@ -61,6 +64,11 @@ public class VistaDarAlta extends javax.swing.JFrame {
         });
 
         btn_atras.setText("Atrás");
+        btn_atras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_atrasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,7 +125,19 @@ public class VistaDarAlta extends javax.swing.JFrame {
 
     private void btn_aceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_aceptarActionPerformed
         // TODO add your handling code here:
+        if ( Math.random() % 2 == 1 ){
+            JOptionPane.showMessageDialog(this, "El paciente ya existe en la base de datos.", "Dar de alta", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "El paciente ha sido dado de alta satisfactoriamente", "Dar de alta", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_btn_aceptarActionPerformed
+
+    private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
+        // TODO add your handling code here:
+        new Vista();
+        this.dispose();
+    }//GEN-LAST:event_btn_atrasActionPerformed
 
     /**
      * @param args the command line arguments

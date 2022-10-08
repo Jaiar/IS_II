@@ -10,6 +10,9 @@ package uv.es.isii.javaproject;
  */
 public class Vista extends javax.swing.JFrame {
 
+    private VistaMedico vistaMedico;
+    private VistaEnfermeros vistaEnfermeros;
+    
     /**
      * Creates new form Vista
      */
@@ -40,6 +43,11 @@ public class Vista extends javax.swing.JFrame {
         });
 
         btn_enfermero.setText("Enfermero");
+        btn_enfermero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_enfermeroActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Hospitalito");
 
@@ -75,7 +83,15 @@ public class Vista extends javax.swing.JFrame {
 
     private void btn_medicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_medicoActionPerformed
         // TODO add your handling code here:
+        vistaMedico = new VistaMedico();
+        dispose();
     }//GEN-LAST:event_btn_medicoActionPerformed
+
+    private void btn_enfermeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enfermeroActionPerformed
+        // TODO add your handling code here:
+        vistaEnfermeros = new VistaEnfermeros();
+        dispose();
+    }//GEN-LAST:event_btn_enfermeroActionPerformed
 
     /**
      * @param args the command line arguments

@@ -28,7 +28,7 @@ public class Vista extends javax.swing.JFrame {
 
         btn_medico = new javax.swing.JButton();
         btn_enfermero = new javax.swing.JButton();
-        btn_paciente = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,33 +41,33 @@ public class Vista extends javax.swing.JFrame {
 
         btn_enfermero.setText("Enfermero");
 
-        btn_paciente.setText("Paciente");
+        jLabel1.setText("Hospitalito");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(171, 171, 171)
+                .addContainerGap(141, Short.MAX_VALUE)
                 .addComponent(btn_medico)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 208, Short.MAX_VALUE)
+                .addGap(109, 109, 109)
                 .addComponent(btn_enfermero)
-                .addGap(184, 184, 184))
+                .addGap(153, 153, 153))
             .addGroup(layout.createSequentialGroup()
-                .addGap(302, 302, 302)
-                .addComponent(btn_paciente)
+                .addGap(240, 240, 240)
+                .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(195, 195, 195)
+                .addGap(58, 58, 58)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(93, 93, 93)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_medico)
                     .addComponent(btn_enfermero))
-                .addGap(36, 36, 36)
-                .addComponent(btn_paciente)
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
 
         pack();
@@ -115,6 +115,6 @@ public class Vista extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_enfermero;
     private javax.swing.JButton btn_medico;
-    private javax.swing.JButton btn_paciente;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

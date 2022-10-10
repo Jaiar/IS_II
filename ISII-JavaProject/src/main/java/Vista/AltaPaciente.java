@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package uv.es.isii.javaproject;
+package Vista;
 
 /**
  *
  * @author jaumearnau
  */
-public class VistaDarAltaPaciente extends javax.swing.JFrame {
-
+public class AltaPaciente extends javax.swing.JFrame {
+    private VistaMedico viewMedico;
     /**
      * Creates new form DarAltaPaciente
      */
-    public VistaDarAltaPaciente() {
+    public AltaPaciente() {
         initComponents();
     }
 
@@ -102,6 +102,11 @@ public class VistaDarAltaPaciente extends javax.swing.JFrame {
         });
 
         exitButton.setText("Salir");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -202,6 +207,13 @@ public class VistaDarAltaPaciente extends javax.swing.JFrame {
     private void addHistorialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHistorialButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_addHistorialButtonActionPerformed
+
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        // TODO add your handling code here:
+        viewMedico = new VistaMedico();
+        viewMedico.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_exitButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

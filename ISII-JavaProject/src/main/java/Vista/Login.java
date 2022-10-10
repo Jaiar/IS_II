@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package uv.es.isii.javaproject;
+package Vista;
 
 /**
  *
  * @author algar
  */
-public class Vista extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
 
     private VistaMedico vistaMedico;
     private VistaEnfermeros vistaEnfermeros;
@@ -16,7 +16,7 @@ public class Vista extends javax.swing.JFrame {
     /**
      * Creates new form Vista
      */
-    public Vista() {
+    public Login() {
         initComponents();
     }
 
@@ -55,27 +55,27 @@ public class Vista extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(141, Short.MAX_VALUE)
-                .addComponent(btn_medico)
-                .addGap(109, 109, 109)
-                .addComponent(btn_enfermero)
-                .addGap(153, 153, 153))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(240, 240, 240)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(143, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btn_medico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btn_enfermero))
+                .addGap(140, 140, 140))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_medico)
-                    .addComponent(btn_enfermero))
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(btn_medico)
+                .addGap(18, 18, 18)
+                .addComponent(btn_enfermero)
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
@@ -84,12 +84,14 @@ public class Vista extends javax.swing.JFrame {
     private void btn_medicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_medicoActionPerformed
         // TODO add your handling code here:
         vistaMedico = new VistaMedico();
+        vistaMedico.setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_medicoActionPerformed
 
     private void btn_enfermeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enfermeroActionPerformed
         // TODO add your handling code here:
         vistaEnfermeros = new VistaEnfermeros();
+        vistaEnfermeros.setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_enfermeroActionPerformed
 
@@ -110,20 +112,21 @@ public class Vista extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Vista.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Vista().setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }

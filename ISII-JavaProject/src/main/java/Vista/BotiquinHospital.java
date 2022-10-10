@@ -2,18 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package uv.es.isii.javaproject;
+package Vista;
 
 /**
  *
  * @author algar
  */
-public class VistaBotiquin extends javax.swing.JFrame {
-
+public class BotiquinHospital extends javax.swing.JFrame {
+    private VistaEnfermeros viewEnfemeros;
     /**
      * Creates new form VistaBotiquin
      */
-    public VistaBotiquin() {
+    public BotiquinHospital() {
         initComponents();
     }
 
@@ -94,7 +94,8 @@ public class VistaBotiquin extends javax.swing.JFrame {
 
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
         // TODO add your handling code here:
-        new Vista();
+        viewEnfemeros  = new VistaEnfermeros();
+        viewEnfemeros.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_atrasActionPerformed
 

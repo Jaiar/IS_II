@@ -2,18 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package uv.es.isii.javaproject;
+package Vista;
 
 /**
  *
- * @author algar
+ * @author ernes
  */
-public class VistaMedico extends javax.swing.JFrame {
-
+public class VistaEnfermeros extends javax.swing.JFrame {
+    private BotiquinHospital vistaBotiquin;
+    private Login viewLogin ;
     /**
-     * Creates new form MedicoVista
+     * Creates new form EnfermerosVista
      */
-    public VistaMedico() {
+    public VistaEnfermeros() {
         initComponents();
     }
 
@@ -26,19 +27,26 @@ public class VistaMedico extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dia = new javax.swing.JTextField();
+        jMenu1 = new javax.swing.JMenu();
         jLabel1 = new javax.swing.JLabel();
-        txt_mes = new javax.swing.JTextField();
+        dia = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txt_anyo = new javax.swing.JTextField();
+        txt_mes = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        txt_anyo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
+        BotiquinHospitalButton = new javax.swing.JButton();
+        SalirButton = new javax.swing.JButton();
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Dia:");
 
         dia.setText("jTextField1");
         dia.addActionListener(new java.awt.event.ActionListener() {
@@ -47,7 +55,7 @@ public class VistaMedico extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Dia:");
+        jLabel2.setText("Mes:");
 
         txt_mes.setText("jTextField1");
         txt_mes.addActionListener(new java.awt.event.ActionListener() {
@@ -56,7 +64,7 @@ public class VistaMedico extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Mes:");
+        jLabel3.setText("Año:");
 
         txt_anyo.setText("jTextField1");
         txt_anyo.addActionListener(new java.awt.event.ActionListener() {
@@ -64,8 +72,6 @@ public class VistaMedico extends javax.swing.JFrame {
                 txt_anyoActionPerformed(evt);
             }
         });
-
-        jLabel3.setText("Año:");
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -79,16 +85,31 @@ public class VistaMedico extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextArea1);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel4.setText("Médicos");
+        jLabel4.setText("Enfermeros");
+
+        BotiquinHospitalButton.setText("Botiquín Hospital");
+        BotiquinHospitalButton.setToolTipText("");
+        BotiquinHospitalButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotiquinHospitalButtonActionPerformed(evt);
+            }
+        });
+
+        SalirButton.setText("Salir");
+        SalirButton.setToolTipText("");
+        SalirButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalirButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1)
@@ -104,16 +125,24 @@ public class VistaMedico extends javax.swing.JFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txt_anyo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 27, Short.MAX_VALUE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addComponent(SalirButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BotiquinHospitalButton)
+                .addGap(135, 135, 135))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
@@ -121,11 +150,15 @@ public class VistaMedico extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txt_anyo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(138, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BotiquinHospitalButton)
+                    .addComponent(SalirButton))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,15 +176,32 @@ public class VistaMedico extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_anyoActionPerformed
 
+    private void BotiquinHospitalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotiquinHospitalButtonActionPerformed
+        // TODO add your handling code here:
+        vistaBotiquin = new BotiquinHospital ();
+        vistaBotiquin.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_BotiquinHospitalButtonActionPerformed
+
+    private void SalirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirButtonActionPerformed
+        // TODO add your handling code here:
+        viewLogin = new Login();
+        viewLogin.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_SalirButtonActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotiquinHospitalButton;
+    private javax.swing.JButton SalirButton;
     private javax.swing.JTextField dia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;

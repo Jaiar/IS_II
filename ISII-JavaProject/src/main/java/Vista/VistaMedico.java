@@ -12,6 +12,7 @@ public class VistaMedico extends javax.swing.JFrame {
 
     private AltaPaciente vistaDarAltaPaciente;
     private InfoMedicamentos vistaMedicamento;
+    private ConsultarHistorial viewHistorialPaciente;
     private InfoEnfermedades viewInfoEfermedades;
     private Login viewLogin;
     /**
@@ -210,6 +211,9 @@ public class VistaMedico extends javax.swing.JFrame {
 
     private void HistorialPacienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistorialPacienteButtonActionPerformed
         // TODO add your handling code here:
+        viewHistorialPaciente = new ConsultarHistorial();
+        viewHistorialPaciente.setVisible(true);
+        dispose();
     }//GEN-LAST:event_HistorialPacienteButtonActionPerformed
 
     private void InfoEnfermedadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoEnfermedadButtonActionPerformed

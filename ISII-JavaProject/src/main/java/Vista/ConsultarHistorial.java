@@ -6,6 +6,7 @@ package Vista;
 
 import Vista.VistaMedico;
 import Modelo.Historial;
+import java.util.ArrayList;
 
 /**
  *
@@ -156,8 +157,8 @@ public class ConsultarHistorial extends javax.swing.JFrame {
        {
        if(DNI == vhistorialmedico.get(i.DNI)) 
         {
-         jList1.add(vhistorialmedico.get(i.fechas))
-         jList2.add(vhistorialmedico.get(i.enfermedades))    
+         jList1.add(vhistorialmedico.get(i.fechas));
+         jList2.add(vhistorialmedico.get(i.enfermedades)) ;   
         }
     }//GEN-LAST:event_jButton1ActionPerformed
     }
@@ -185,4 +186,5 @@ public class ConsultarHistorial extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
     private String DNI;
     private int size;
+    private ArrayList<Historial> vhistorialmedico;
 }

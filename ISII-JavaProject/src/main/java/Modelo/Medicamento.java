@@ -52,16 +52,16 @@ public class Medicamento {
     }
     
     /**
-    * Obtiene el nombre de la enfermedad que cura el medicamento.
-    * @return Nombre de la enferemdad que cura el medicamento.
+    * Obtiene el nombre de las enfermedades que trata el medicamento.
+    * @return nombre de las enfermedades que trata el medicamento.
     */
     public String getEnfermedad_cura() {
       return enfermedad_cura;
     }
     
     /**
-    * Asigna el nombre de la enfermedad que cura el medicamento.
-    * @param enfermedad_cura Nombre dela enfermedad que cura el medicamento.
+    * Asigna los nombres de las enfermedades que trata el medicamento.
+    * @param enfermedad_cura nombre de las enfermedades que trata el medicamento.
     */
     public void setEnfermedad_cura(String enfermedad_cura) {
       this.enfermedad_cura = enfermedad_cura;

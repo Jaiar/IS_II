@@ -179,7 +179,9 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ch_contagiosaActionPerformed
 
-
+    private void cbo_enfermedadActionPerformed(java.awt.event.ActionEvent evt) {  
+        enfermedad = cbo_enfermedad.getSelectedItem();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_salir;
     private javax.swing.JComboBox<String> cbo_enfermedad;
@@ -197,4 +199,5 @@ public class InfoEnfermedades extends javax.swing.JFrame {
     private javax.swing.JTextField txt_dosis_dia;
     private javax.swing.JTextField txt_dosis_recom;
     // End of variables declaration//GEN-END:variables
+    private String enfermedad;
 }

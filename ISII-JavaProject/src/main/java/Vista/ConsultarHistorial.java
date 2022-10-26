@@ -154,7 +154,7 @@ public class ConsultarHistorial extends javax.swing.JFrame {
        size = vhistorialmedico.size();
        for(int i = 0;i<size;i++)
        {
-       if(DNI == vhistorialmedico.get(i.dni)) 
+       if(DNI == vhistorialmedico.get(i.DNI)) 
         {
          jList1.add(vhistorialmedico.get(i.fechas))
          jList2.add(vhistorialmedico.get(i.enfermedades))    

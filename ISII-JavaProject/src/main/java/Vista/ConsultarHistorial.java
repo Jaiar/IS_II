@@ -5,6 +5,7 @@
 package Vista;
 
 import Vista.VistaMedico;
+import Modelo.Historial;
 
 /**
  *
@@ -153,13 +154,13 @@ public class ConsultarHistorial extends javax.swing.JFrame {
        size = vhistorialmedico.size();
        for(int i = 0;i<size;i++)
        {
-       if(DNI == vhistorialmedico.get(i.dni)) 
+       if(DNI == vhistorialmedico.get(i.DNI)) 
         {
          jList1.add(vhistorialmedico.get(i.fechas))
          jList2.add(vhistorialmedico.get(i.enfermedades))    
         }
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         viewMedico = new VistaMedico();

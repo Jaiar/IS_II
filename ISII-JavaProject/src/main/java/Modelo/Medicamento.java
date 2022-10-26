@@ -18,10 +18,10 @@ public class Medicamento {
     private ArrayList<String> enfermedad_cura = new ArrayList<String>();
     
     // Alérgenos que contiene el medicamento
-    private String alergia;
+    private ArrayList<String> alergia;
     
     // Efectos secundarios que puede producir el medicamento
-    private String efecto_s;
+    private ArrayList<String> efecto_s;
     
     /**
     * Constructor de Medicamento
@@ -30,7 +30,7 @@ public class Medicamento {
     * @param alergia Alérgenos que contiene el medicamento
     * @param efecto_s Efectos secundarios que puede producir el medicamento
     */
-    public Medicamento(String nombre, ArrayList<String> enfermedad_cura, String alergia, String efecto_s) {
+    public Medicamento(String nombre, ArrayList<String> enfermedad_cura, ArrayList<String> alergia, ArrayList<String> efecto_s) {
         this.nombre = nombre;
         this.enfermedad_cura = enfermedad_cura;
         this.alergia = alergia;
@@ -41,7 +41,7 @@ public class Medicamento {
     * Obtiene los alérgenos que contiene el medicamento.
     * @return alérgenos que contiene el medicamento.
     */
-    public String getAlergia() {
+    public ArrayList<String> getAlergia() {
       return alergia;
     }
     
@@ -49,7 +49,7 @@ public class Medicamento {
     * Asigna los alérgenos que contiene el medicamento.
     * @param alergia alérgenos que contiene el medicamento.
     */
-    public void setAlergia(String alergia) {
+    public void setAlergia(ArrayList<String> alergia) {
       this.alergia = alergia;
     }
     
@@ -57,7 +57,7 @@ public class Medicamento {
     * Obtiene el nombre de las enfermedades que trata el medicamento.
     * @return nombre de las enfermedades que trata el medicamento.
     */
-    public String getEnfermedad_cura() {
+    public ArrayList<String> getEnfermedad_cura() {
       return enfermedad_cura;
     }
     
@@ -65,7 +65,7 @@ public class Medicamento {
     * Asigna los nombres de las enfermedades que trata el medicamento.
     * @param enfermedad_cura nombre de las enfermedades que trata el medicamento.
     */
-    public void setEnfermedad_cura(String enfermedad_cura) {
+    public void setEnfermedad_cura(ArrayList<String> enfermedad_cura) {
       this.enfermedad_cura = enfermedad_cura;
     }
     
@@ -90,7 +90,7 @@ public class Medicamento {
     * Obtiene el nombre de los efectos secundarios que puede producir el medicamento.
     * @return efectos secundarios que puede produir el medicamento.
     */
-    public String getEfecto_s(){
+    public ArrayList<String> getEfecto_s(){
         return efecto_s;
     }    
   
@@ -98,12 +98,11 @@ public class Medicamento {
     * Asigna los efectos secundarios que puede producir el medicamento.
     * @param efecto_s efectos secundarios que puede producir el medicamento.
     */
-    public void setEfecto_s(String efecto_s) {
-        this.efecto_s=efecto_s;
+    public void setEfecto_s(ArrayList<String> efecto_s) {
+        this.efecto_s = efecto_s;
     }
     
-    @Override
-    public String toString(){
+    public String toSting(){
         return "Nombre: "+nombre+"\n"+"Enfermedades: "+enfermedad_cura+
             "\n"+"Alergias: "+alergia+"\n"+"Efectos secundarios: "+efecto_s+"\n";
     }

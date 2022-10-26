@@ -54,4 +54,14 @@ public class Paciente {
         //Hay que hacer una conslta a la base de datos con la fecha actual y el dni del paciente
         return true;//Si hay una igualdad será falso y sino verdad
     }
+    public String getEnfermedades(){
+        String enfe="";
+        for(String e: enfermedad)
+            enfe += e;
+        
+        return enfe;
+    }
+    public String toString(){
+        return "DNI: "+ dni + " // ROOM: " + room + " -- Nombre: "+ nombre +", Apellidos: "+ apellidos;
+    }
 }

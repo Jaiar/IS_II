@@ -32,5 +32,8 @@ public class Medico {
     public void listaDeEnfermos(int code){
         //La consulta a la base de datos y almacenamos los pacientes en la lista de pacientes   
     }
+    public ArrayList<Paciente> getPacientes(){
+        return pacientes;
+    }
 }
 

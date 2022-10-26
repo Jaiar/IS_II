@@ -4,6 +4,11 @@
  */
 package Vista;
 
+import Modelo.Medico;
+import Modelo.Paciente;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author algar
@@ -15,11 +20,26 @@ public class VistaMedico extends javax.swing.JFrame {
     private ConsultarHistorial viewHistorialPaciente;
     private InfoEnfermedades viewInfoEfermedades;
     private Login viewLogin;
+    private Medico medico;
+    private ArrayList<Paciente> pacientes;
+    
+    DefaultListModel listaEnfermosModel;
+    
     /**
      * Creates new form MedicoVista
      */
     public VistaMedico() {
         initComponents();
+        this.medico = medico;
+        listaEnfermosModel = new DefaultListModel();
+        pacientes = medico.getPacientes();
+        
+        for (Paciente p: pacientes)
+            listaEnfermosModel.addElement(p.toString());
+        
+        listaEnfermos.setModel(listaEnfermosModel);
+        
+        
     }
 
     /**
@@ -37,8 +57,6 @@ public class VistaMedico extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txt_anyo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
@@ -47,6 +65,8 @@ public class VistaMedico extends javax.swing.JFrame {
         HistorialPacienteButton = new javax.swing.JButton();
         InfoMedicamenteButton = new javax.swing.JButton();
         SalirButton = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listaEnfermos = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,13 +96,6 @@ public class VistaMedico extends javax.swing.JFrame {
         });
 
         jLabel3.setText("Año:");
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -126,6 +139,18 @@ public class VistaMedico extends javax.swing.JFrame {
             }
         });
 
+        listaEnfermos.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        listaEnfermos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaEnfermosMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(listaEnfermos);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,8 +169,7 @@ public class VistaMedico extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(HistorialPacienteButton))
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -157,7 +181,8 @@ public class VistaMedico extends javax.swing.JFrame {
                                     .addGap(12, 12, 12)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txt_anyo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txt_anyo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane3))
                             .addGap(18, 18, 18)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(40, Short.MAX_VALUE))
@@ -182,8 +207,8 @@ public class VistaMedico extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
+                    .addComponent(jScrollPane3))
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DarAltaPacienteButton)
                     .addComponent(InfoEnfermedadButton)
@@ -244,6 +269,14 @@ public class VistaMedico extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_SalirButtonActionPerformed
 
+    private void listaEnfermosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaEnfermosMouseClicked
+        // TODO add your handling code here:
+         if(listaEnfermos.getSelectedIndex() != -1)
+        {
+            jTextArea1.setText(pacientes.get(listaEnfermos.getSelectedIndex()).getEnfermedades());
+        }
+    }//GEN-LAST:event_listaEnfermosMouseClicked
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -257,10 +290,10 @@ public class VistaMedico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JList<String> listaEnfermos;
     private javax.swing.JTextField txt_anyo;
     private javax.swing.JTextField txt_mes;
     // End of variables declaration//GEN-END:variables

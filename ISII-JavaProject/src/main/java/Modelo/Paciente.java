@@ -8,11 +8,6 @@ package Modelo;
  *
  * @author jaumearnau
  */
-public class Enfermero {
-    private String nombre;
-    private String apellidos;
-    private String dni;
-    private String telefono;
-    private String anyo_incorporacion;
+public class Paciente {
     
 }

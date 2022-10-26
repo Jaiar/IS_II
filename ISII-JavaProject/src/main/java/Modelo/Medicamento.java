@@ -4,6 +4,8 @@
  */
 package Modelo;
 
+import java.util.ArrayList;
+
 /**
  * 
  * @author ernes
@@ -13,7 +15,7 @@ public class Medicamento {
     private String nombre;
     
     // Enfermedades que trata el medicamento
-    private String enfermedad_cura;
+    private ArrayList<String> enfermedad_cura = new ArrayList<String>();
     
     // Alérgenos que contiene el medicamento
     private String alergia;
@@ -28,7 +30,7 @@ public class Medicamento {
     * @param alergia Alérgenos que contiene el medicamento
     * @param efecto_s Efectos secundarios que puede producir el medicamento
     */
-    public Medicamento(String nombre, String enfermedad_cura, String alergia, String efecto_s) {
+    public Medicamento(String nombre, ArrayList<String> enfermedad_cura, String alergia, String efecto_s) {
         this.nombre = nombre;
         this.enfermedad_cura = enfermedad_cura;
         this.alergia = alergia;

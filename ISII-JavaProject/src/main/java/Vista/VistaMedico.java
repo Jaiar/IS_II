@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Modelo.Gestor;
 import Modelo.Enfermero;
 import Modelo.Medico;
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ public class VistaMedico extends javax.swing.JFrame {
     private Login viewLogin;
     private Medico medico;
     private Enfermero enfermero;
+    private Gestor gestor;
     private ArrayList<Paciente> pacientes;
      private LocalDate currentdate = LocalDate.now();
     
@@ -32,7 +34,7 @@ public class VistaMedico extends javax.swing.JFrame {
     /**
      * Creates new form MedicoVista
      */
-    public VistaMedico(Medico medico, Enfermero enfermero) {
+    public VistaMedico(Medico medico, Enfermero enfermero, Gestor gestor) {
         initComponents();
         
         this.diaText.setText(currentdate.getDayOfMonth()+"");
@@ -49,6 +51,7 @@ public class VistaMedico extends javax.swing.JFrame {
         
         this.medico = medico;
         this.enfermero = enfermero;
+        this.gestor = gestor;
         
         
     }
@@ -251,35 +254,35 @@ public class VistaMedico extends javax.swing.JFrame {
 
     private void HistorialPacienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistorialPacienteButtonActionPerformed
         // TODO add your handling code here:
-        viewHistorialPaciente = new ConsultarHistorial(medico,enfermero);
+        viewHistorialPaciente = new ConsultarHistorial(medico,enfermero,gestor);
         viewHistorialPaciente.setVisible(true);
         dispose();
     }//GEN-LAST:event_HistorialPacienteButtonActionPerformed
 
     private void InfoEnfermedadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoEnfermedadButtonActionPerformed
         // TODO add your handling code here:
-        viewInfoEfermedades = new InfoEnfermedades(medico,enfermero);
+        viewInfoEfermedades = new InfoEnfermedades(medico,enfermero,gestor);
         viewInfoEfermedades.setVisible(true);
         dispose();
     }//GEN-LAST:event_InfoEnfermedadButtonActionPerformed
 
     private void DarAltaPacienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DarAltaPacienteButtonActionPerformed
         // TODO add your handling code here:
-        vistaDarAltaPaciente = new AltaPaciente(medico,enfermero);
+        vistaDarAltaPaciente = new AltaPaciente(medico,enfermero,gestor);
         vistaDarAltaPaciente.setVisible(true);
         dispose();
     }//GEN-LAST:event_DarAltaPacienteButtonActionPerformed
 
     private void InfoMedicamenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoMedicamenteButtonActionPerformed
         // TODO add your handling code here:
-        vistaMedicamento = new InfoMedicamentos(medico,enfermero);
+        vistaMedicamento = new InfoMedicamentos(medico,enfermero,gestor);
         vistaMedicamento.setVisible(true);
         dispose();
     }//GEN-LAST:event_InfoMedicamenteButtonActionPerformed
 
     private void SalirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirButtonActionPerformed
         // TODO add your handling code here:
-        viewLogin = new Login(medico,enfermero);
+        viewLogin = new Login(medico,enfermero, gestor);
         viewLogin.setVisible(true);
         dispose();
     }//GEN-LAST:event_SalirButtonActionPerformed

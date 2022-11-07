@@ -5,6 +5,7 @@
 package Vista;
 
 import Modelo.Enfermero;
+import Modelo.Gestor;
 import Modelo.Medicamento;
 import Modelo.Medico;
 import Modelo.Paciente;
@@ -19,6 +20,7 @@ public class BotiquinHospital extends javax.swing.JFrame {
     private VistaEnfermeros viewEnfemeros;
     private Medico medico;
     private Enfermero enfermero;
+    private Gestor gestor;
     private DefaultListModel listaMedicamentosBotiquin;
     private ArrayList<Medicamento> medicamentos;
     
@@ -27,11 +29,12 @@ public class BotiquinHospital extends javax.swing.JFrame {
     /**
      * Creates new form VistaBotiquin
      */
-    public BotiquinHospital(Medico medico, Enfermero enfermero) {
+    public BotiquinHospital(Medico medico, Enfermero enfermero, Gestor gestor) {
         initComponents();
         
         this.medico = medico;
         this.enfermero = enfermero;
+        this.gestor = gestor;
     }
 
     /**
@@ -120,7 +123,7 @@ public class BotiquinHospital extends javax.swing.JFrame {
 
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
         // TODO add your handling code here:
-        viewEnfemeros  = new VistaEnfermeros(medico, enfermero);
+        viewEnfemeros  = new VistaEnfermeros(medico, enfermero, gestor);
         viewEnfemeros.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_atrasActionPerformed

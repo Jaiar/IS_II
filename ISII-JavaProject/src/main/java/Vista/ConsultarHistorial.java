@@ -5,6 +5,7 @@
 package Vista;
 
 import Modelo.Enfermero;
+import Modelo.Gestor;
 import Vista.VistaMedico;
 import Modelo.Historial;
 import Modelo.Medico;
@@ -22,13 +23,15 @@ public class ConsultarHistorial extends javax.swing.JFrame {
     private DefaultListModel fechaList;
     private Medico medico;
     private Enfermero enfermero;
+    private Gestor gestor;
     /**
      * Creates new form ConsultarHistorial
      */
-    public ConsultarHistorial(Medico medico, Enfermero enfermero ) {
+    public ConsultarHistorial(Medico medico, Enfermero enfermero, Gestor gestor) {
         initComponents();
         this.medico = medico;
         this.enfermero = enfermero;
+        this.gestor = gestor;
     }
 
     /**
@@ -181,7 +184,7 @@ public class ConsultarHistorial extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        viewMedico = new VistaMedico(medico,enfermero);
+        viewMedico = new VistaMedico(medico,enfermero,gestor);
         viewMedico.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed

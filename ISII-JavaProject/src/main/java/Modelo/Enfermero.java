@@ -4,7 +4,7 @@
  */
 package Modelo;
 
-import Modelo.Botiquin;
+import Data.Hospital;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -20,19 +20,20 @@ public class Enfermero {
     private String telefono;
     private Date incorporacion; //Es una fecha
     private ArrayList<Paciente> pacientes;
-    private Botiquin botiquin;
+    private Hospital hospital;
     
     public Enfermero(int code, String name, String sur, String dni, String telefono,
-            Date incorporacion, Botiquin boti){
+            Date incorporacion, Hospital hospital){
         this.code=code;
         this.apellidos = sur;
         this.nombre = name;
         this.dni = dni;
         this.telefono = telefono;
         this.incorporacion = incorporacion;
+        this.hospital = hospital;
         pacientes = new ArrayList<Paciente>();
         listaDeEnfermos(code);
-        botiquin = boti;
+        
     }
     
     public void listaDeEnfermos(int code){
@@ -40,6 +41,6 @@ public class Enfermero {
     }
     
     public ArrayList consultarBotiquin(int num){
-        return botiquin.consultarBotiquin(num);
+        return hospital.consultarBotiquin(num);
     }
 }

@@ -4,6 +4,7 @@
  */
 package Data;
 
+import Modelo.Botiquin;
 import Modelo.Paciente;
 import java.util.ArrayList;
 
@@ -13,12 +14,16 @@ import java.util.ArrayList;
  */
 public class Hospital {
     private Enfermos pacientes_hospital;
-    
+    private Botiquin botiquin;
     public Hospital(){
         pacientes_hospital = new Enfermos();
-        System.out.print("HOLA MANOLA DESDE EL HOSPITAL");
+        botiquin = new Botiquin();
     }
     public ArrayList<Paciente> getPacientes(int code){        
         return pacientes_hospital.getPacientes(code);
+    }
+    
+    public ArrayList consultarBotiquin(int num){
+        return botiquin.consultarBotiquin(num);
     }
 }

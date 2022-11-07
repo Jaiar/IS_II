@@ -5,6 +5,7 @@
 package Vista;
 
 import Data.Hospital;
+import Modelo.Enfermero;
 import Modelo.Medico;
 import java.util.Date;
 
@@ -17,12 +18,14 @@ public class Login extends javax.swing.JFrame {
     private VistaMedico vistaMedico;
     private VistaEnfermeros vistaEnfermeros;
     private Medico medico;
+    private Enfermero enfermero;
     
     /**
      * Creates new form Vista
      */
-    public Login(Medico medico) {
+    public Login(Medico medico, Enfermero enfermero) {
         this.medico = medico;
+        this.enfermero = enfermero;
         initComponents();
     }
 
@@ -90,14 +93,14 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_medicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_medicoActionPerformed
         // TODO add your handling code here:
-        vistaMedico = new VistaMedico(medico);
+        vistaMedico = new VistaMedico(medico,enfermero);
         vistaMedico.setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_medicoActionPerformed
 
     private void btn_enfermeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enfermeroActionPerformed
         // TODO add your handling code here:
-        vistaEnfermeros = new VistaEnfermeros(medico);
+        vistaEnfermeros = new VistaEnfermeros(medico,enfermero);
         vistaEnfermeros.setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_enfermeroActionPerformed
@@ -132,10 +135,11 @@ public class Login extends javax.swing.JFrame {
         System.out.print("ESTOY EN EL MAIN");
         Hospital hospital = new Hospital();
         Medico medico= new Medico(hospital,1,"Manolo","García","34567812F","546993455",new Date());
+        Enfermero enfermero= new Enfermero(1,"Manolo","García","34567812F","546993455",new Date(),hospital);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login(medico).setVisible(true);
+                new Login(medico, enfermero).setVisible(true);
             }
         });
     }

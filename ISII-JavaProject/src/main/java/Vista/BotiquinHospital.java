@@ -4,7 +4,12 @@
  */
 package Vista;
 
+import Modelo.Enfermero;
+import Modelo.Medicamento;
 import Modelo.Medico;
+import Modelo.Paciente;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -13,12 +18,20 @@ import Modelo.Medico;
 public class BotiquinHospital extends javax.swing.JFrame {
     private VistaEnfermeros viewEnfemeros;
     private Medico medico;
+    private Enfermero enfermero;
+    private DefaultListModel listaMedicamentosBotiquin;
+    private ArrayList<Medicamento> medicamentos;
+    
+    int number;
+    
     /**
      * Creates new form VistaBotiquin
      */
-    public BotiquinHospital(Medico medico) {
+    public BotiquinHospital(Medico medico, Enfermero enfermero) {
         initComponents();
+        
         this.medico = medico;
+        this.enfermero = enfermero;
     }
 
     /**
@@ -36,6 +49,7 @@ public class BotiquinHospital extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         lst_botiquin = new javax.swing.JList<>();
         btn_atras = new javax.swing.JButton();
+        findButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,8 +57,6 @@ public class BotiquinHospital extends javax.swing.JFrame {
         jLabel1.setText("Botiquin");
 
         jLabel2.setText("Cantidad mínima:");
-
-        txt_cantminima.setText("jTextField1");
 
         lst_botiquin.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -57,6 +69,13 @@ public class BotiquinHospital extends javax.swing.JFrame {
         btn_atras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_atrasActionPerformed(evt);
+            }
+        });
+
+        findButton.setText("BUSCAR");
+        findButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                findButtonActionPerformed(evt);
             }
         });
 
@@ -74,7 +93,9 @@ public class BotiquinHospital extends javax.swing.JFrame {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txt_cantminima, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txt_cantminima, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(findButton))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -85,7 +106,8 @@ public class BotiquinHospital extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txt_cantminima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_cantminima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(findButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
@@ -98,15 +120,39 @@ public class BotiquinHospital extends javax.swing.JFrame {
 
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
         // TODO add your handling code here:
-        viewEnfemeros  = new VistaEnfermeros(medico);
+        viewEnfemeros  = new VistaEnfermeros(medico, enfermero);
         viewEnfemeros.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_atrasActionPerformed
+
+    private void findButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findButtonActionPerformed
+        // TODO add your handling code here:
+        
+        try{
+            
+            number = Integer.parseInt(txt_cantminima.getText());
+            System.out.println("El numero es: "+ number);
+            listaMedicamentosBotiquin = new DefaultListModel();
+            medicamentos = enfermero.consultarBotiquin(number);
+
+
+            for (Medicamento m: medicamentos)
+                listaMedicamentosBotiquin.addElement(m.toStringBotiquin());
+
+            lst_botiquin.setModel(listaMedicamentosBotiquin);
+        }
+        catch (NumberFormatException ex){
+            ex.printStackTrace();
+        }
+        
+        
+    }//GEN-LAST:event_findButtonActionPerformed
 
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_atras;
+    private javax.swing.JButton findButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

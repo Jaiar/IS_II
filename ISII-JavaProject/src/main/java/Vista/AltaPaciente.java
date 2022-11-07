@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Modelo.Enfermero;
 import Modelo.Medico;
 
 /**
@@ -13,12 +14,14 @@ import Modelo.Medico;
 public class AltaPaciente extends javax.swing.JFrame {
     private VistaMedico viewMedico;
     private Medico medico;
+    private Enfermero enfermero;
     /**
      * Creates new form DarAltaPaciente
      */
-    public AltaPaciente(Medico medico) {
+    public AltaPaciente(Medico medico, Enfermero enfermero) {
         initComponents();
         this.medico = medico;
+        this.enfermero = enfermero;
     }
 
     /**
@@ -214,7 +217,7 @@ public class AltaPaciente extends javax.swing.JFrame {
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         // TODO add your handling code here:
-        viewMedico = new VistaMedico(medico);
+        viewMedico = new VistaMedico(medico,enfermero);
         viewMedico.setVisible(true);
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed

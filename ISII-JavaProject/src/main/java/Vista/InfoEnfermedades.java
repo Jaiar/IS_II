@@ -4,6 +4,7 @@
  */
 package Vista;
 import Modelo.Enfermedad;
+import Modelo.Enfermero;
 import Modelo.Medico;
 import java.awt.Component;
 import javax.swing.event.DocumentEvent;
@@ -18,12 +19,14 @@ import javax.swing.text.BadLocationException;
 public class InfoEnfermedades extends javax.swing.JFrame {
     private VistaMedico viewMedico;
     private Medico medico;
+    private Enfermero enfermero;
     /**
      * Creates new form InfoEnfermedades
      */
-    public InfoEnfermedades(Medico medico) {
+    public InfoEnfermedades(Medico medico, Enfermero enfermero) {
         initComponents();
-        this.medico = medico ;
+        this.medico = medico;
+        this.enfermero = enfermero;
         Component editor = this.cbo_enfermedad.getEditor().getEditorComponent();
         if (editor instanceof JTextField) {
             ((JTextField) editor).getDocument().addDocumentListener(new DocumentListener() {
@@ -216,7 +219,7 @@ public class InfoEnfermedades extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
-        viewMedico = new VistaMedico(medico);
+        viewMedico = new VistaMedico(medico,enfermero);
         viewMedico.setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_salirActionPerformed

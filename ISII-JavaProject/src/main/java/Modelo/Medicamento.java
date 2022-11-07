@@ -11,6 +11,9 @@ import java.util.ArrayList;
  * @author ernes
  */
 public class Medicamento {
+    // id del medicamento
+    private int id;
+    
     // Nombre del medicamento
     private String nombre;
     
@@ -23,18 +26,26 @@ public class Medicamento {
     // Efectos secundarios que puede producir el medicamento
     private ArrayList<String> efecto_s;
     
+    // Cantidad del medicamento
+    private int cantidad;
+    
     /**
     * Constructor de Medicamento
+    * @param id ID del medicamento
     * @param nombre Nombre del medicamento
     * @param enfermedad_cura Enfermedades que trata el medicamento
     * @param alergia Alérgenos que contiene el medicamento
     * @param efecto_s Efectos secundarios que puede producir el medicamento
     */
-    public Medicamento(String nombre, ArrayList<String> enfermedad_cura, ArrayList<String> alergia, ArrayList<String> efecto_s) {
+    public Medicamento(int id, String nombre, ArrayList<String> enfermedad_cura,
+            ArrayList<String> alergia, ArrayList<String> efecto_s, int cantidad) {
+        this.id = id;
         this.nombre = nombre;
         this.enfermedad_cura = enfermedad_cura;
         this.alergia = alergia;
         this.efecto_s = efecto_s;
+        this.cantidad = cantidad;
+       
     }  
     
     /**
@@ -101,9 +112,14 @@ public class Medicamento {
     public void setEfecto_s(ArrayList<String> efecto_s) {
         this.efecto_s = efecto_s;
     }
-    
+    public int getCantidad(){
+        return cantidad;
+    }
     public String toSting(){
         return "Nombre: "+nombre+"\n"+"Enfermedades: "+enfermedad_cura+
             "\n"+"Alergias: "+alergia+"\n"+"Efectos secundarios: "+efecto_s+"\n";
+    }
+    public String toStringBotiquin(){
+        return "Nombre: "+nombre+" ----- Cantidad: " + cantidad;
     }
 }

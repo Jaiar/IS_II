@@ -57,7 +57,7 @@ public class Paciente {
     public String getEnfermedades(){
         String enfe="";
         for(String e: enfermedad)
-            enfe += e;
+               enfe += e;
         
         return enfe;
     }

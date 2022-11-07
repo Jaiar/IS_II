@@ -17,12 +17,12 @@ public class Enfermero {
     private String nombre;
     private String apellidos;
     private String dni;
-    private int telefono;
+    private String telefono;
     private Date incorporacion; //Es una fecha
     private ArrayList<Paciente> pacientes;
     private Botiquin botiquin;
     
-    public Enfermero(int code, String name, String sur, String dni, int telefono,
+    public Enfermero(int code, String name, String sur, String dni, String telefono,
             Date incorporacion, Botiquin boti){
         this.code=code;
         this.apellidos = sur;

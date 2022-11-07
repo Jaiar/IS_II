@@ -6,7 +6,9 @@ package Vista;
 
 import Vista.VistaMedico;
 import Modelo.Historial;
+import Modelo.Medico;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -15,11 +17,15 @@ import java.util.ArrayList;
 public class ConsultarHistorial extends javax.swing.JFrame {
 
     private VistaMedico viewMedico;
+    private DefaultListModel enfermedadList;
+    private DefaultListModel fechaList;
+    private Medico medico;
     /**
      * Creates new form ConsultarHistorial
      */
-    public ConsultarHistorial() {
+    public ConsultarHistorial(Medico medico) {
         initComponents();
+        this.medico = medico;
     }
 
     /**
@@ -151,20 +157,28 @@ public class ConsultarHistorial extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         DNI = jTextField1.getText();
-       size = vhistorialmedico.size();
-       for(int i = 0;i<size;i++)
-       {
-       if(DNI == vhistorialmedico.get(i.DNI)) 
+        DNI = jTextField1.getText();
+        size = vhistorialmedico.size();
+        
+        enfermedadList = new DefaultListModel();
+        fechaList = new DefaultListModel();
+        
+        for(int i = 0;i<size;i++)
         {
-         jList1.add(vhistorialmedico.get(i.fechas));
-         jList2.add(vhistorialmedico.get(i.enfermedades)) ;   
+            if(DNI == vhistorialmedico.get(i).geDNI()) 
+            {
+                enfermedadList.addElement(vhistorialmedico.get(i).getenfermedad());
+                fechaList.addElement(vhistorialmedico.get(i).getfecha());
+                 
+            }
         }
+        jList1.setModel(fechaList);
+        jList2.setModel(enfermedadList);  
     }//GEN-LAST:event_jButton1ActionPerformed
-    }
+
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        viewMedico = new VistaMedico();
+        viewMedico = new VistaMedico(medico);
         viewMedico.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed

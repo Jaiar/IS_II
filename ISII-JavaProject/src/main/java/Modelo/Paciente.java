@@ -47,7 +47,8 @@ public class Paciente {
             
             return true;
         }
-        return false;
+        else
+            return false;
         
     }
     public boolean comprobarFechaHistorial(String dni){
@@ -61,7 +62,10 @@ public class Paciente {
         
         return enfe;
     }
+    public int getDoctor(){
+        return doc;
+    }
     public String toString(){
-        return "DNI: "+ dni + " // ROOM: " + room + " -- Nombre: "+ nombre +", Apellidos: "+ apellidos;
+        return "DNI: "+ dni + "| ROOM: " + room + "| Nombre: "+ nombre +", Apellidos: "+ apellidos;
     }
 }

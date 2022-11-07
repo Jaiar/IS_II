@@ -4,6 +4,10 @@
  */
 package Vista;
 
+import Data.Hospital;
+import Modelo.Medico;
+import java.util.Date;
+
 /**
  *
  * @author algar
@@ -12,11 +16,13 @@ public class Login extends javax.swing.JFrame {
 
     private VistaMedico vistaMedico;
     private VistaEnfermeros vistaEnfermeros;
+    private Medico medico;
     
     /**
      * Creates new form Vista
      */
-    public Login() {
+    public Login(Medico medico) {
+        this.medico = medico;
         initComponents();
     }
 
@@ -84,14 +90,14 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_medicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_medicoActionPerformed
         // TODO add your handling code here:
-        vistaMedico = new VistaMedico();
+        vistaMedico = new VistaMedico(medico);
         vistaMedico.setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_medicoActionPerformed
 
     private void btn_enfermeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enfermeroActionPerformed
         // TODO add your handling code here:
-        vistaEnfermeros = new VistaEnfermeros();
+        vistaEnfermeros = new VistaEnfermeros(medico);
         vistaEnfermeros.setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_enfermeroActionPerformed
@@ -123,11 +129,13 @@ public class Login extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
+        System.out.print("ESTOY EN EL MAIN");
+        Hospital hospital = new Hospital();
+        Medico medico= new Medico(hospital,1,"Manolo","García","34567812F","546993455",new Date());
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new Login(medico).setVisible(true);
             }
         });
     }

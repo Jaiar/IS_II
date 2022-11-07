@@ -4,17 +4,21 @@
  */
 package Vista;
 
+import Modelo.Medico;
+
 /**
  *
  * @author algar
  */
 public class InfoMedicamentos extends javax.swing.JFrame {
     private VistaMedico viewMedico;
+    private Medico medico ;
     /**
      * Creates new form VistaMedicamento
      */
-    public InfoMedicamentos() {
+    public InfoMedicamentos(Medico medico) {
         initComponents();
+        this.medico = medico;
     }
 
     /**
@@ -140,7 +144,7 @@ public class InfoMedicamentos extends javax.swing.JFrame {
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
         // TODO add your handling code here:
-        viewMedico = new VistaMedico();
+        viewMedico = new VistaMedico(medico);
         viewMedico.setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_backActionPerformed

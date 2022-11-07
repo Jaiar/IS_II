@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Modelo;
+import Data.Enfermos;
+import Data.Hospital;
 import java.util.Date;
 import java.util.ArrayList;
 /**
@@ -14,23 +16,24 @@ public class Medico {
     private String nombre;
     private String apellidos;
     private String dni;
-    private int telefono;
+    private String telefono;
     private Date incorporacion; //Es una fehca
     private ArrayList<Paciente> pacientes;
+    private Hospital hospital; 
     
-    public Medico(int code, String name, String surname, String dni, int tele, Date anyo){
+    public Medico(Hospital hospital, int code, String name, String surname, String dni, String tele, Date anyo){
         this.code = code;
         this.nombre = name;
         this.apellidos = surname; 
         this.dni = dni;
         this.telefono=tele;
         this.incorporacion = anyo;
+        this.hospital = hospital;
         pacientes = new ArrayList<Paciente>();
-        listaDeEnfermos(code);
-     
+        listaDeEnfermos();
     }
-    public void listaDeEnfermos(int code){
-        //La consulta a la base de datos y almacenamos los pacientes en la lista de pacientes   
+    public void listaDeEnfermos(){
+        pacientes = hospital.getPacientes(code);
     }
     public ArrayList<Paciente> getPacientes(){
         return pacientes;

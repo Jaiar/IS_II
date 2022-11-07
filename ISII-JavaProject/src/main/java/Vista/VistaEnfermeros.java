@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Modelo.Medico;
+
 /**
  *
  * @author ernes
@@ -11,11 +13,13 @@ package Vista;
 public class VistaEnfermeros extends javax.swing.JFrame {
     private BotiquinHospital vistaBotiquin;
     private Login viewLogin ;
+    private Medico medico;
     /**
      * Creates new form EnfermerosVista
      */
-    public VistaEnfermeros() {
+    public VistaEnfermeros(Medico medico) {
         initComponents();
+        this.medico = medico;
     }
 
     /**
@@ -178,14 +182,14 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
     private void BotiquinHospitalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotiquinHospitalButtonActionPerformed
         // TODO add your handling code here:
-        vistaBotiquin = new BotiquinHospital ();
+        vistaBotiquin = new BotiquinHospital (medico);
         vistaBotiquin.setVisible(true);
         dispose();
     }//GEN-LAST:event_BotiquinHospitalButtonActionPerformed
 
     private void SalirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirButtonActionPerformed
         // TODO add your handling code here:
-        viewLogin = new Login();
+        viewLogin = new Login(medico);
         viewLogin.setVisible(true);
         dispose();
     }//GEN-LAST:event_SalirButtonActionPerformed

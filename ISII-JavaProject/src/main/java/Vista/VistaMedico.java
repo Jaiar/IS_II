@@ -5,6 +5,7 @@
 package Vista;
 
 import Modelo.Medico;
+import java.time.LocalDate;
 import Modelo.Paciente;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -22,22 +23,29 @@ public class VistaMedico extends javax.swing.JFrame {
     private Login viewLogin;
     private Medico medico;
     private ArrayList<Paciente> pacientes;
+     private LocalDate currentdate = LocalDate.now();
     
-    DefaultListModel listaEnfermosModel;
+    private DefaultListModel listaEnfermosModel;
     
     /**
      * Creates new form MedicoVista
      */
-    public VistaMedico() {
+    public VistaMedico(Medico medico) {
         initComponents();
-        this.medico = medico;
+        
+        this.diaText.setText(currentdate.getDayOfMonth()+"");
+        this.mesText.setText(currentdate.getMonth()+"");
+        this.anyoText.setText(currentdate.getYear()+"");
         listaEnfermosModel = new DefaultListModel();
         pacientes = medico.getPacientes();
-        
+       
+       
         for (Paciente p: pacientes)
             listaEnfermosModel.addElement(p.toString());
         
         listaEnfermos.setModel(listaEnfermosModel);
+        
+        this.medico = medico;
         
         
     }
@@ -51,14 +59,14 @@ public class VistaMedico extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dia = new javax.swing.JTextField();
+        diaText = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        txt_mes = new javax.swing.JTextField();
+        mesText = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txt_anyo = new javax.swing.JTextField();
+        anyoText = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        enfermedadText = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         DarAltaPacienteButton = new javax.swing.JButton();
         InfoEnfermedadButton = new javax.swing.JButton();
@@ -70,36 +78,39 @@ public class VistaMedico extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        dia.setText("jTextField1");
-        dia.addActionListener(new java.awt.event.ActionListener() {
+        diaText.setEditable(false);
+        diaText.setText("jTextField1");
+        diaText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                diaActionPerformed(evt);
+                diaTextActionPerformed(evt);
             }
         });
 
         jLabel1.setText("Dia:");
 
-        txt_mes.setText("jTextField1");
-        txt_mes.addActionListener(new java.awt.event.ActionListener() {
+        mesText.setEditable(false);
+        mesText.setText("jTextField1");
+        mesText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_mesActionPerformed(evt);
+                mesTextActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Mes:");
 
-        txt_anyo.setText("jTextField1");
-        txt_anyo.addActionListener(new java.awt.event.ActionListener() {
+        anyoText.setEditable(false);
+        anyoText.setText("jTextField1");
+        anyoText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_anyoActionPerformed(evt);
+                anyoTextActionPerformed(evt);
             }
         });
 
         jLabel3.setText("Año:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        enfermedadText.setColumns(20);
+        enfermedadText.setRows(5);
+        jScrollPane2.setViewportView(enfermedadText);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel4.setText("Médicos");
@@ -173,19 +184,19 @@ public class VistaMedico extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(dia, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(diaText, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txt_mes, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(mesText, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(12, 12, 12)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txt_anyo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(anyoText, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jScrollPane3))
                             .addGap(18, 18, 18)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(39, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(SalirButton)
@@ -198,11 +209,11 @@ public class VistaMedico extends javax.swing.JFrame {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(diaText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(txt_mes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(txt_anyo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(anyoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -222,49 +233,49 @@ public class VistaMedico extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void diaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diaActionPerformed
+    private void diaTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diaTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_diaActionPerformed
+    }//GEN-LAST:event_diaTextActionPerformed
 
-    private void txt_mesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_mesActionPerformed
+    private void mesTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_mesActionPerformed
+    }//GEN-LAST:event_mesTextActionPerformed
 
-    private void txt_anyoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_anyoActionPerformed
+    private void anyoTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anyoTextActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_anyoActionPerformed
+    }//GEN-LAST:event_anyoTextActionPerformed
 
     private void HistorialPacienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistorialPacienteButtonActionPerformed
         // TODO add your handling code here:
-        viewHistorialPaciente = new ConsultarHistorial();
+        viewHistorialPaciente = new ConsultarHistorial(medico);
         viewHistorialPaciente.setVisible(true);
         dispose();
     }//GEN-LAST:event_HistorialPacienteButtonActionPerformed
 
     private void InfoEnfermedadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoEnfermedadButtonActionPerformed
         // TODO add your handling code here:
-        viewInfoEfermedades = new InfoEnfermedades();
+        viewInfoEfermedades = new InfoEnfermedades(medico);
         viewInfoEfermedades.setVisible(true);
         dispose();
     }//GEN-LAST:event_InfoEnfermedadButtonActionPerformed
 
     private void DarAltaPacienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DarAltaPacienteButtonActionPerformed
         // TODO add your handling code here:
-        vistaDarAltaPaciente = new AltaPaciente();
+        vistaDarAltaPaciente = new AltaPaciente(medico);
         vistaDarAltaPaciente.setVisible(true);
         dispose();
     }//GEN-LAST:event_DarAltaPacienteButtonActionPerformed
 
     private void InfoMedicamenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoMedicamenteButtonActionPerformed
         // TODO add your handling code here:
-        vistaMedicamento = new InfoMedicamentos();
+        vistaMedicamento = new InfoMedicamentos(medico);
         vistaMedicamento.setVisible(true);
         dispose();
     }//GEN-LAST:event_InfoMedicamenteButtonActionPerformed
 
     private void SalirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirButtonActionPerformed
         // TODO add your handling code here:
-        viewLogin = new Login();
+        viewLogin = new Login(medico);
         viewLogin.setVisible(true);
         dispose();
     }//GEN-LAST:event_SalirButtonActionPerformed
@@ -273,7 +284,7 @@ public class VistaMedico extends javax.swing.JFrame {
         // TODO add your handling code here:
          if(listaEnfermos.getSelectedIndex() != -1)
         {
-            jTextArea1.setText(pacientes.get(listaEnfermos.getSelectedIndex()).getEnfermedades());
+            enfermedadText.setText(pacientes.get(listaEnfermos.getSelectedIndex()).getEnfermedades());
         }
     }//GEN-LAST:event_listaEnfermosMouseClicked
 
@@ -285,16 +296,16 @@ public class VistaMedico extends javax.swing.JFrame {
     private javax.swing.JButton InfoEnfermedadButton;
     private javax.swing.JButton InfoMedicamenteButton;
     private javax.swing.JButton SalirButton;
-    private javax.swing.JTextField dia;
+    private javax.swing.JTextField anyoText;
+    private javax.swing.JTextField diaText;
+    private javax.swing.JTextArea enfermedadText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JList<String> listaEnfermos;
-    private javax.swing.JTextField txt_anyo;
-    private javax.swing.JTextField txt_mes;
+    private javax.swing.JTextField mesText;
     // End of variables declaration//GEN-END:variables
 }

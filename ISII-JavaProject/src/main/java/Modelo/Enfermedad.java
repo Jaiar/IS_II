@@ -137,7 +137,7 @@ public class Enfermedad {
     * Asigna true si la enferemdad es contagiosa o false no.
     * @param contagiosa si la enferdad es contagiosa o no.
     */
-    public void setveces(boolean contagiosa) {
+    public void setcontagiosa(boolean contagiosa) {
         this.contagiosa = contagiosa;
       
         

@@ -22,6 +22,8 @@ public class InfoEnfermedades extends javax.swing.JFrame {
     private Medico medico;
     private Enfermero enfermero;
     private Gestor gestor;
+    private Enfermedad enf;
+    private boolean ok;
     /**
      * Creates new form InfoEnfermedades
      */
@@ -229,6 +231,16 @@ public class InfoEnfermedades extends javax.swing.JFrame {
 
     private void ch_contagiosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ch_contagiosaActionPerformed
         // TODO add your handling code here:
+      
+         ok = enf.getcontagiosa();
+       if(ok == true)
+       {
+           enf.setcontagiosa(false) ;
+       }
+       else
+       {
+           enf.setcontagiosa(true) ;
+       }
     }//GEN-LAST:event_ch_contagiosaActionPerformed
 
     private void cbo_enfermedadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_enfermedadItemStateChanged
@@ -236,7 +248,7 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         if ( evt.getStateChange() != java.awt.event.ItemEvent.SELECTED )
             return;
         
-        Enfermedad enf = (Enfermedad)evt.getItem();
+         enf = (Enfermedad)evt.getItem();
     }//GEN-LAST:event_cbo_enfermedadItemStateChanged
 
 

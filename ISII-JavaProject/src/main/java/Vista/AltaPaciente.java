@@ -4,19 +4,38 @@
  */
 package Vista;
 
+import java.util.Date;
 import Modelo.Enfermero;
 import Modelo.Gestor;
+import Modelo.Medicamento;
 import Modelo.Medico;
-
+import Modelo.Paciente;
+import java.time.Instant;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 /**
  *
- * @author jaumearnau
+ * @author roralo3
  */
 public class AltaPaciente extends javax.swing.JFrame {
     private VistaMedico viewMedico;
     private Medico medico;
     private Enfermero enfermero;
     private Gestor gestor;
+    
+    private String DNI;
+    private String Nombre;
+    private String Apellidos;
+    private String Enfermedad;
+    private String FechaS;
+    private Date Fecha;
+    private String Pacientenuevo;
+    
+    private Paciente Paciente;
+    
+    private ArrayList<Paciente> Pacientes;
+    private DefaultListModel listaPacientesActivos;
+    
     /**
      * Creates new form DarAltaPaciente
      */
@@ -215,7 +234,18 @@ public class AltaPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_AñoComboBoxActionPerformed
 
     private void addHistorialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHistorialButtonActionPerformed
-        // TODO add your handling code here:
+        this.DNI = textDNIPaciente.getText();
+        this.Nombre=textNombrePaciente.getText();
+        this.Apellidos=apellidosTextPaciente.getText();
+        this.Enfermedad=enfermedadText.getText();
+        this.FechaS = (DiaComboBox.toString()+"//"+MesComboBox.toString()+"//"+AñoComboBox.toString());
+
+        Pacientenuevo = (DNI + Nombre + Apellidos);
+        listaPacientesActivos = new DefaultListModel();
+        
+        listaPacientesActivos.addElement(Pacientenuevo);
+        
+        jList1.setModel(listaPacientesActivos);
     }//GEN-LAST:event_addHistorialButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed

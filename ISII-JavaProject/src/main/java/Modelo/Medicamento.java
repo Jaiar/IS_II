@@ -36,6 +36,7 @@ public class Medicamento {
     * @param enfermedad_cura Enfermedades que trata el medicamento
     * @param alergia Alérgenos que contiene el medicamento
     * @param efecto_s Efectos secundarios que puede producir el medicamento
+    * @param cantidad 
     */
     public Medicamento(int id, String nombre, ArrayList<String> enfermedad_cura,
             ArrayList<String> alergia, ArrayList<String> efecto_s, int cantidad) {
@@ -55,7 +56,6 @@ public class Medicamento {
     public ArrayList<String> getAlergia() {
       return alergia;
     }
-    
     /**
     * Asigna los alérgenos que contiene el medicamento.
     * @param alergia alérgenos que contiene el medicamento.
@@ -64,6 +64,7 @@ public class Medicamento {
       this.alergia = alergia;
     }
     
+    
     /**
     * Obtiene el nombre de las enfermedades que trata el medicamento.
     * @return nombre de las enfermedades que trata el medicamento.
@@ -71,7 +72,6 @@ public class Medicamento {
     public ArrayList<String> getEnfermedad_cura() {
       return enfermedad_cura;
     }
-    
     /**
     * Asigna los nombres de las enfermedades que trata el medicamento.
     * @param enfermedad_cura nombre de las enfermedades que trata el medicamento.
@@ -80,6 +80,7 @@ public class Medicamento {
       this.enfermedad_cura = enfermedad_cura;
     }
     
+    
     /**
     * Obtiene el nombre del medicamento.
     * @return  nombre del mediacmento.
@@ -87,7 +88,6 @@ public class Medicamento {
     public String getNombre() {
       return nombre;
     }
-    
     /**
     * Asigna el nombre del medicamento.
     * @param nombre nombre del medicamento.
@@ -104,7 +104,6 @@ public class Medicamento {
     public ArrayList<String> getEfecto_s(){
         return efecto_s;
     }    
-  
     /**
     * Asigna los efectos secundarios que puede producir el medicamento.
     * @param efecto_s efectos secundarios que puede producir el medicamento.
@@ -112,9 +111,24 @@ public class Medicamento {
     public void setEfecto_s(ArrayList<String> efecto_s) {
         this.efecto_s = efecto_s;
     }
+    
+    
+    /**
+    * Asigna la cantidad.
+    * @param cantidad.
+    */
+    public void setCantidad(int cantidad) {
+      this.cantidad = cantidad;
+    }
+    /**
+    * Obtiene la cantidad.
+    * @return  cantidad.
+    */
     public int getCantidad(){
         return cantidad;
     }
+    
+    
     public String toSting(){
         return "Nombre: "+nombre+"\n"+"Enfermedades: "+enfermedad_cura+
             "\n"+"Alergias: "+alergia+"\n"+"Efectos secundarios: "+efecto_s+"\n";

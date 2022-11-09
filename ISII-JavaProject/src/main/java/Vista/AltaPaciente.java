@@ -11,7 +11,9 @@ import Modelo.Medicamento;
 import Modelo.Medico;
 import Modelo.Paciente;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import javax.swing.DefaultListModel;
 /**
  *
@@ -29,23 +31,38 @@ public class AltaPaciente extends javax.swing.JFrame {
     private String Enfermedad;
     private String FechaS;
     private Date Fecha;
-    private String Pacientenuevo;
+    private String pacienteNuevo;
+    private LocalDate currentdate = LocalDate.now();
     
-    private Paciente Paciente;
+    private Paciente paciente;
     
-    private ArrayList<Paciente> Pacientes;
-    private DefaultListModel listaPacientesActivos;
+    private ArrayList<String> Pacientes;
+    private DefaultListModel listaHistorialPacientes;
     
     /**
      * Creates new form DarAltaPaciente
      */
-    public AltaPaciente(Medico medico, Enfermero enfermero, Gestor gestor) {
+    public AltaPaciente(Medico medico, Enfermero enfermero, Gestor gestor,Paciente paciente) {
         initComponents();
         this.medico = medico;
         this.enfermero = enfermero;
         this.gestor = gestor;
+        this.paciente = paciente;
+        
+        RellenarDatos();
     }
 
+    public void RellenarDatos()
+    {
+        this.textDNIPaciente.setText( paciente.getDNI());
+        this. textNombrePaciente.setText(paciente.getNombre());
+        this.apellidosTextPaciente.setText(paciente.getApellidos());
+        this.enfermedadText.setText(paciente.getEnfermedades());
+
+        this.DiaComboBox.addItem(currentdate.getDayOfMonth()+"");
+        this.MesComboBox.addItem(currentdate.getMonthValue()+"");
+        this.AñoComboBox.addItem(currentdate.getYear()+"");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,7 +94,7 @@ public class AltaPaciente extends javax.swing.JFrame {
 
         labelDNIPaciente.setText("DNI:");
 
-        textDNIPaciente.setText("12345678 X");
+        textDNIPaciente.setEditable(false);
         textDNIPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textDNIPacienteActionPerformed(evt);
@@ -88,31 +105,26 @@ public class AltaPaciente extends javax.swing.JFrame {
 
         labeApellidosPacientes.setText("Apellidos:");
 
-        textNombrePaciente.setText("Manolo");
+        textNombrePaciente.setEditable(false);
         textNombrePaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textNombrePacienteActionPerformed(evt);
             }
         });
 
-        apellidosTextPaciente.setText("García Hernandez");
+        apellidosTextPaciente.setEditable(false);
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(jList1);
 
         labelHistorialMedico.setText("Historial");
 
         labelFecha.setText("Fecha:");
 
-        DiaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "...." }));
+        DiaComboBox.setFocusable(false);
 
-        MesComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+        MesComboBox.setFocusable(false);
 
-        AñoComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2022" }));
+        AñoComboBox.setFocusable(false);
         AñoComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AñoComboBoxActionPerformed(evt);
@@ -121,7 +133,7 @@ public class AltaPaciente extends javax.swing.JFrame {
 
         labelEnferemedad.setText("Enfermedad:");
 
-        enfermedadText.setText("VIH");
+        enfermedadText.setEditable(false);
 
         addHistorialButton.setText("Añadir al Historial");
         addHistorialButton.addActionListener(new java.awt.event.ActionListener() {
@@ -167,11 +179,12 @@ public class AltaPaciente extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labelEnferemedad)
                         .addGap(18, 18, 18)
-                        .addComponent(enfermedadText, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(enfermedadText)
+                        .addGap(35, 35, 35))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(addHistorialButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addGap(85, 85, 85)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelHistorialMedico)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -212,7 +225,7 @@ public class AltaPaciente extends javax.swing.JFrame {
                             .addComponent(enfermedadText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
                         .addComponent(addHistorialButton))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(exitButton)
                 .addGap(58, 58, 58))
@@ -234,18 +247,17 @@ public class AltaPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_AñoComboBoxActionPerformed
 
     private void addHistorialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHistorialButtonActionPerformed
-        this.DNI = textDNIPaciente.getText();
-        this.Nombre=textNombrePaciente.getText();
-        this.Apellidos=apellidosTextPaciente.getText();
-        this.Enfermedad=enfermedadText.getText();
-        this.FechaS = (DiaComboBox.toString()+"//"+MesComboBox.toString()+"//"+AñoComboBox.toString());
-
-        Pacientenuevo = (DNI + Nombre + Apellidos);
-        listaPacientesActivos = new DefaultListModel();
+     
         
-        listaPacientesActivos.addElement(Pacientenuevo);
+        listaHistorialPacientes = new DefaultListModel();
         
-        jList1.setModel(listaPacientesActivos);
+        pacienteNuevo = (paciente.getEnfermedades() +" "+ currentdate);
+        //Pacientes.add(Pacientenuevo);
+        //for (String s : Pacientes) {
+            listaHistorialPacientes.addElement(pacienteNuevo);
+        //}
+        
+        jList1.setModel(listaHistorialPacientes);
     }//GEN-LAST:event_addHistorialButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed

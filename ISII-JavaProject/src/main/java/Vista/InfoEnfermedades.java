@@ -32,49 +32,55 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         this.medico = medico;
         this.enfermero = enfermero;
         this.gestor = gestor;
+        
+        //<editor-fold defaultstate="collapsed" desc="Buscador enfermedades progresivas -- setup">
         Component editor = this.cbo_enfermedad.getEditor().getEditorComponent();
-        if (editor instanceof JTextField) {
-            ((JTextField) editor).getDocument().addDocumentListener(new DocumentListener() {
-                @Override
-                public void insertUpdate(DocumentEvent documentEvent) {
-                    //To change body of implemented methods use File | Settings | File Templates.
-                    Document doc = documentEvent.getDocument();
-                    
-                    if ( doc.getLength() < 3 )
-                        return;
-                    
-                    try{
-                        String criterio = doc.getText(0, doc.getLength());
-                    }catch(BadLocationException ble){
-                        ble.printStackTrace();
-                        return;
-                    }
-                    
-                    // Buscar enfermedad que tenga criterio.
-                    /*
-                    ArrayList<Enfermedad> enfermedad = consultaSQL;
-                    
-                    Enfermedad[] enfermedades = consultaSQL;
-                    
-                    this.cbo_enfermedad.setModel(new DefaultComboBoxModel<Enfermedad>(enfermedades));
-                    
-                    */
-                    
+        
+        if ( !(editor instanceof JTextField) ) return;           // Guard clause
+        
+        ((JTextField)editor)
+                .getDocument()
+                .addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent documentEvent) {
+                //To change body of implemented methods use File | Settings | File Templates.
+                Document doc = documentEvent.getDocument();
+
+                if ( doc.getLength() < 3 )
+                    return;
+
+                try{
+                    String criterio = doc.getText(0, doc.getLength());
+                }catch(BadLocationException ble){
+                    ble.printStackTrace();
+                    return;
                 }
 
-                @Override
-                public void removeUpdate(DocumentEvent documentEvent) {
-                    //To change body of implemented methods use File | Settings | File Templates.
-                    Document doc = documentEvent.getDocument();
-                    try{
-                    System.out.println(doc.getText(0, doc.getLength()));
-                    }catch(Exception x){}
-                }
+                // Buscar enfermedad que tenga criterio.
+                /*
+                ArrayList<Enfermedad> enfermedad = consultaSQL;
 
-                @Override
-                public void changedUpdate(DocumentEvent documentEvent) {}
-            });                                      
-        }
+                Enfermedad[] enfermedades = consultaSQL;
+
+                this.cbo_enfermedad.setModel(new DefaultComboBoxModel<Enfermedad>(enfermedades));
+
+                */
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent documentEvent) {
+                //To change body of implemented methods use File | Settings | File Templates.
+                Document doc = documentEvent.getDocument();
+                try{
+                System.out.println(doc.getText(0, doc.getLength()));
+                }catch(Exception x){}
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent documentEvent) {}
+        });
+        //</editor-fold>
     }
 
     /**

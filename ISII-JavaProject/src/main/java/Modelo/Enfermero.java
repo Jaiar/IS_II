@@ -12,24 +12,15 @@ import java.util.Date;
  *
  * @author jaumearnau
  */
-public class Enfermero {
-    private int code;
-    private String nombre;
-    private String apellidos;
-    private String dni;
-    private String telefono;
-    private Date incorporacion; //Es una fecha
+public class Enfermero extends Usuario{
     private ArrayList<Paciente> pacientes;
     private Hospital hospital;
     
     public Enfermero(int code, String name, String sur, String dni, String telefono,
-            Date incorporacion, Hospital hospital){
-        this.code=code;
-        this.apellidos = sur;
-        this.nombre = name;
-        this.dni = dni;
-        this.telefono = telefono;
-        this.incorporacion = incorporacion;
+                     Date incorporacion, Hospital hospital)
+    {
+        super(code, name, sur, dni, telefono, incorporacion);
+        
         this.hospital = hospital;
         pacientes = new ArrayList<Paciente>();
         listaDeEnfermos(code);

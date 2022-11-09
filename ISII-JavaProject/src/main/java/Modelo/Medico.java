@@ -11,23 +11,12 @@ import java.util.ArrayList;
  *
  * @author jaumearnau
  */
-public class Medico {
-    private int code;
-    private String nombre;
-    private String apellidos;
-    private String dni;
-    private String telefono;
-    private Date incorporacion; //Es una fehca
+public class Medico extends Usuario{
     private ArrayList<Paciente> pacientes;
     private Hospital hospital; 
     
     public Medico(Hospital hospital, int code, String name, String surname, String dni, String tele, Date anyo){
-        this.code = code;
-        this.nombre = name;
-        this.apellidos = surname; 
-        this.dni = dni;
-        this.telefono=tele;
-        this.incorporacion = anyo;
+        super(code, name, surname, dni, tele, anyo);
         this.hospital = hospital;
         pacientes = new ArrayList<Paciente>();
         listaDeEnfermos();

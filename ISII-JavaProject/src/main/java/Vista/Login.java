@@ -9,6 +9,7 @@ import Data.Hospital;
 import Modelo.Enfermero;
 import Modelo.Medico;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,6 +47,11 @@ public class Login extends javax.swing.JFrame {
         btn_enfermero = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btn_gestor = new javax.swing.JButton();
+        txt_usuario = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btn_entrar = new javax.swing.JButton();
+        txt_password = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,35 +78,68 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Usuario:");
+
+        jLabel3.setText("Contraseña:");
+
+        btn_entrar.setText("Entrar");
+        btn_entrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_entrarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(btn_medico)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 99, Short.MAX_VALUE)
-                .addComponent(btn_enfermero)
-                .addGap(52, 52, 52))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btn_gestor)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(148, 148, 148))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(151, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btn_medico)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_gestor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_entrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(btn_enfermero)
+                .addGap(25, 25, 25))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txt_usuario)
+                    .addComponent(txt_password, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
+                .addGap(96, 96, 96))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btn_gestor)
+                    .addComponent(btn_enfermero)
                     .addComponent(btn_medico)
-                    .addComponent(btn_enfermero))
-                .addGap(18, 18, 18)
-                .addComponent(btn_gestor)
-                .addContainerGap(36, Short.MAX_VALUE))
+                    .addComponent(btn_entrar))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -118,6 +157,7 @@ public class Login extends javax.swing.JFrame {
         vistaEnfermeros = new VistaEnfermeros(medico,enfermero, gestor);
         vistaEnfermeros.setVisible(true);
         dispose();
+        
     }//GEN-LAST:event_btn_enfermeroActionPerformed
 
     private void btn_gestorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gestorActionPerformed
@@ -125,6 +165,39 @@ public class Login extends javax.swing.JFrame {
         vistaGestor.setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_gestorActionPerformed
+
+    private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed
+        // TODO add your handling code here:
+        /*
+        String usuario = this.txt_usuario.getText();
+        String password = this.txt_password.getText();
+        
+        Object user_obj = consultaSQL(usuario, password);
+        
+        if ( user_obj == null ){
+            JOptionPane.showInternalMessageDialog(this, "El usuario no existe", "Autenticación", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if ( user_obj instanceof Enfermero ){
+            new VistaEnfermeros(medico,enfermero, gestor).setVisible(true);
+            dispose();
+            return;
+        }
+        
+        if( user_obj instanceof Gestor ){
+            new VistaGestor(medico, enfermero, gestor).setVisible(true);
+            dispose();
+            return;
+        }
+        
+        if( user_obj instanceof Medico ){
+            new VistaMedico(medico,enfermero, gestor).setVisible(true);
+            dispose();
+            return;
+        }
+        */
+    }//GEN-LAST:event_btn_entrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -168,8 +241,13 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_enfermero;
+    private javax.swing.JButton btn_entrar;
     private javax.swing.JButton btn_gestor;
     private javax.swing.JButton btn_medico;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField txt_password;
+    private javax.swing.JTextField txt_usuario;
     // End of variables declaration//GEN-END:variables
 }

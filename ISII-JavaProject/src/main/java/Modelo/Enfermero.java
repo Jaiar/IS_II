@@ -34,4 +34,8 @@ public class Enfermero extends Usuario{
     public ArrayList consultarBotiquin(int num){
         return hospital.consultarBotiquin(num);
     }
+    
+    public String getName(){
+        return this.nombre;
+    }
 }

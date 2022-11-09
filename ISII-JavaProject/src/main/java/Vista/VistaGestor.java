@@ -35,6 +35,8 @@ public class VistaGestor extends javax.swing.JFrame {
         initComponents();
         enfermerosList = new DefaultListModel();
         medicosList = new DefaultListModel();
+        list_medicos.setModel(medicosList);
+        list_enfermeros.setModel(enfermerosList);
     }
 
     /**
@@ -172,8 +174,7 @@ public class VistaGestor extends javax.swing.JFrame {
         medicosList.addElement(medico.getName());
         enfermerosList.addElement(enfermero.getName());
         
-        list_medicos.setModel(medicosList);
-        list_enfermeros.setModel(enfermerosList);
+        
     }//GEN-LAST:event_btn_consultarActionPerformed
 
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed

@@ -33,6 +33,8 @@ public class VistaGestor extends javax.swing.JFrame {
         this.enfermero = enfermero;
         this.gestor = gestor;
         initComponents();
+        enfermerosList = new DefaultListModel();
+        medicosList = new DefaultListModel();
     }
 
     /**
@@ -146,8 +148,7 @@ public class VistaGestor extends javax.swing.JFrame {
     private void btn_consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultarActionPerformed
         int tam_enfermeros, tam_medicos;
         
-        enfermerosList = new DefaultListModel();
-        medicosList = new DefaultListModel();
+        
         
         /*
             venfermeros = SELECT...
@@ -168,8 +169,8 @@ public class VistaGestor extends javax.swing.JFrame {
         Medico medico= new Medico(hospital,1,"Manolo","García","34567812F","546993455",new Date());
         Enfermero enfermero= new Enfermero(1,"Pedro","Garcés","34567812F","546993455",new Date(),hospital);
         
-        medicosList.addElement(medico);
-        enfermerosList.addElement(enfermero);
+        medicosList.addElement(medico.getName());
+        enfermerosList.addElement(enfermero.getName());
         
         list_medicos.setModel(medicosList);
         list_enfermeros.setModel(enfermerosList);

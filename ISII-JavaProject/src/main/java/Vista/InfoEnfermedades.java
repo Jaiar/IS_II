@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Vista;
+
+import Modelo.Medicamento;
 import Modelo.Enfermedad;
 import Modelo.Enfermero;
 import Modelo.Gestor;
@@ -13,6 +15,9 @@ import javax.swing.event.DocumentListener;
 import javax.swing.JTextField;
 import javax.swing.text.Document;
 import javax.swing.text.BadLocationException;
+
+import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 /**
  *
  * @author Bobby
@@ -255,6 +260,18 @@ public class InfoEnfermedades extends javax.swing.JFrame {
             return;
         
          enf = (Enfermedad)evt.getItem();
+         
+         DefaultListModel<Medicamento> list_model_medicamentos = new DefaultListModel<Medicamento>();
+         for( Medicamento m: enf.getMedicamentos() ){
+             list_model_medicamentos.addElement(m);
+         }
+         this.lst_medicamentos.setModel((ListModel)list_model_medicamentos);
+         
+         DefaultListModel<Enfermedad> list_model_enfermedades = new DefaultListModel<Enfermedad>();
+         for ( Enfermedad enf_r: enf.getEnfermedadesRelacionadas() ){
+             list_model_enfermedades.addElement(enf_r);
+         }
+         this.lst_enfermedades.setModel((ListModel) list_model_enfermedades);
     }//GEN-LAST:event_cbo_enfermedadItemStateChanged
 
 

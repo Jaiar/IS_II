@@ -4,10 +4,12 @@
  */
 package Vista;
 
+import Data.Hospital;
 import Modelo.Enfermero;
 import Modelo.Gestor;
 import Modelo.Medico;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.DefaultListModel;
 
 /**
@@ -21,8 +23,8 @@ public class VistaGestor extends javax.swing.JFrame {
     private Medico medico;
     private Enfermero enfermero;
     private Gestor gestor;
-    private ArrayList<Enfermero> venfermeros;
-    private ArrayList<Medico> vmedicos;
+    private ArrayList<String> venfermeros;
+    private ArrayList<String> vmedicos;
     /**
      * Creates new form VistaGestor
      */
@@ -150,7 +152,7 @@ public class VistaGestor extends javax.swing.JFrame {
         /*
             venfermeros = SELECT...
             vmedicosos = SELECT...   
-        */
+        
         
         tam_enfermeros = venfermeros.size();
         tam_medicos = vmedicos.size();
@@ -160,7 +162,15 @@ public class VistaGestor extends javax.swing.JFrame {
         
         for(int i=0; i<tam_medicos; i++)
             medicosList.addElement(vmedicos.get(i));
-             
+         
+        */
+        Hospital hospital = new Hospital();
+        Medico medico= new Medico(hospital,1,"Manolo","García","34567812F","546993455",new Date());
+        Enfermero enfermero= new Enfermero(1,"Pedro","Garcés","34567812F","546993455",new Date(),hospital);
+        
+        medicosList.addElement(medico);
+        enfermerosList.addElement(enfermero);
+        
         list_medicos.setModel(medicosList);
         list_enfermeros.setModel(enfermerosList);
     }//GEN-LAST:event_btn_consultarActionPerformed

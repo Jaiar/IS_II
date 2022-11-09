@@ -27,5 +27,9 @@ public class Medico extends Usuario{
     public ArrayList<Paciente> getPacientes(){
         return pacientes;
     }
+    
+    public String getName(){
+        return this.nombre;
+    }
 }
 

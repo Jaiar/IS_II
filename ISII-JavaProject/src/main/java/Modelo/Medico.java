@@ -31,5 +31,11 @@ public class Medico extends Usuario{
     public String getName(){
         return this.nombre;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+    
 }
 

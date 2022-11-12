@@ -38,4 +38,8 @@ public class Enfermero extends Usuario{
     public String getName(){
         return this.nombre;
     }
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

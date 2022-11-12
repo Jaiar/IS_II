@@ -11,6 +11,7 @@ import Modelo.Medico;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 
 /**
  *
@@ -38,6 +39,7 @@ public class VistaGestor extends javax.swing.JFrame {
         list_medicos.setModel(medicosList);
         list_enfermeros.setModel(enfermerosList);
         
+        
         /*int tam_enfermeros, tam_medicos;
 
         venfermeros = SELECT...
@@ -59,8 +61,8 @@ public class VistaGestor extends javax.swing.JFrame {
         m= new Medico(hospital,1,"Manolo","García","12345678F","656565653",new Date());
         e= new Enfermero(1,"Pedro","Garcés","87654321F","666999333",new Date(),hospital);
        
-        medicosList.addElement(m.getName());
-        enfermerosList.addElement(e.getName());
+        medicosList.addElement(m);
+        enfermerosList.addElement(e);
     }
 
     /**
@@ -73,7 +75,7 @@ public class VistaGestor extends javax.swing.JFrame {
     private void initComponents() {
 
         btn_salir = new javax.swing.JButton();
-        btn_consultar = new javax.swing.JButton();
+        btn_consultar_medico = new javax.swing.JButton();
         lbl_gestor = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         list_medicos = new javax.swing.JList<>();
@@ -91,6 +93,7 @@ public class VistaGestor extends javax.swing.JFrame {
         jtf_tel = new javax.swing.JTextField();
         lbl_apellidos = new javax.swing.JLabel();
         jtf_fecha = new javax.swing.JTextField();
+        btn_consultar_enfermero = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,10 +104,10 @@ public class VistaGestor extends javax.swing.JFrame {
             }
         });
 
-        btn_consultar.setText("Consultar Médico/Enfermero");
-        btn_consultar.addActionListener(new java.awt.event.ActionListener() {
+        btn_consultar_medico.setText("Consultar Médico");
+        btn_consultar_medico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_consultarActionPerformed(evt);
+                btn_consultar_medicoActionPerformed(evt);
             }
         });
 
@@ -145,34 +148,33 @@ public class VistaGestor extends javax.swing.JFrame {
 
         lbl_apellidos.setText("Apellidos");
 
+        btn_consultar_enfermero.setText("Consultar Enfermero");
+        btn_consultar_enfermero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_consultar_enfermeroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(btn_consultar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(103, 103, 103)
-                        .addComponent(lbl_gestor)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_salir))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
+                                .addGap(40, 40, 40)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(54, 54, 54)
                                 .addComponent(lbl_medicos)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
-                                .addComponent(lbl_enfermeros))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,9 +195,23 @@ public class VistaGestor extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jtf_apellidos)
                                             .addComponent(jtf_dni)
-                                            .addComponent(jtf_tel)))))))
-                    .addComponent(btn_salir))
+                                            .addComponent(jtf_tel)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addComponent(lbl_enfermeros)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(21, 21, 21))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(lbl_gestor))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(btn_consultar_medico)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_consultar_enfermero)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,9 +228,11 @@ public class VistaGestor extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                        .addComponent(btn_consultar)
-                        .addGap(8, 8, 8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_consultar_medico, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_consultar_enfermero))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addComponent(btn_salir)
                         .addGap(21, 21, 21))
                     .addGroup(layout.createSequentialGroup()
@@ -244,7 +262,15 @@ public class VistaGestor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultarActionPerformed
+    private void btn_consultar_medicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultar_medicoActionPerformed
+        
+        
+       int x = list_medicos.getSelectedIndex();
+    
+        
+        
+        
+        
         /*
         this.jtf_nombre.setText(t);
         this.jtf_apellidos.setText(t);
@@ -252,7 +278,7 @@ public class VistaGestor extends javax.swing.JFrame {
         this.jtf_tel.setText(t);
         this.jtf_fecha.setText(t);
         */
-    }//GEN-LAST:event_btn_consultarActionPerformed
+    }//GEN-LAST:event_btn_consultar_medicoActionPerformed
 
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
         viewLogin = new Login (medico,enfermero, gestor);
@@ -264,10 +290,15 @@ public class VistaGestor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtf_dniActionPerformed
 
+    private void btn_consultar_enfermeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultar_enfermeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_consultar_enfermeroActionPerformed
+
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_consultar;
+    private javax.swing.JButton btn_consultar_enfermero;
+    private javax.swing.JButton btn_consultar_medico;
     private javax.swing.JButton btn_salir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

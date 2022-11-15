@@ -29,6 +29,7 @@ public class InfoEnfermedades extends javax.swing.JFrame {
     private Gestor gestor;
     private Enfermedad enf;
     private boolean ok;
+    
     /**
      * Creates new form InfoEnfermedades
      */

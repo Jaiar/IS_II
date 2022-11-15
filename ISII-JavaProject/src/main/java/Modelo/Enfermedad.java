@@ -15,10 +15,10 @@ public class Enfermedad {
     private String nombre;
     
     // Medicamentos que tratan la enfermedad
-    private ArrayList<String> medicamento;
+    private ArrayList<Medicamento> medicamento;
     
     // Enfermedades relacionadas
-    private ArrayList<String> enfermedad_relacionada;
+    private ArrayList<Enfermedad> enfermedad_relacionada;
     
     // Dósis recomendada del medicamento en mg
     private float dosis;
@@ -37,7 +37,7 @@ public class Enfermedad {
     * @param veces Veces al día que se toma la dósis
     * @param contagiosa Enfermedad contagiosa o no
     */
-    public Enfermedad(String nombre, ArrayList<String> medicamento, ArrayList<String> enfermedad_relacionada, float dosis, int veces, boolean contagiosa) {
+    public Enfermedad(String nombre, ArrayList<Medicamento> medicamento, ArrayList<Enfermedad> enfermedad_relacionada, float dosis, int veces, boolean contagiosa) {
         this.nombre = nombre;
         this.medicamento = medicamento;
         this.enfermedad_relacionada = enfermedad_relacionada;
@@ -66,14 +66,14 @@ public class Enfermedad {
     * Obtiene los medicamentos que tratan la enfermedad.
     * @return medicamentos que tratan la enfermedad.
     */
-    public ArrayList<String> getMedicamento() {
+    public ArrayList<Medicamento> getMedicamento() {
       return medicamento;
     }
     /**
     * Asigna los medicamentos que tratan la enfermedad.
     * @param medicamento medicamentos que tratan la enfermedad.
     */
-    public void setMedicamento(ArrayList<String> medicamento) {
+    public void setMedicamento(ArrayList<Medicamento> medicamento) {
       this.medicamento = medicamento;
     }
     
@@ -82,14 +82,14 @@ public class Enfermedad {
     * Obtiene los nombres de las enfermedades relacionadas.
     * @return enfermedades relacionadas.
     */
-    public ArrayList<String> getenfermedad_relacionada() {
+    public ArrayList<Enfermedad> getenfermedad_relacionada() {
       return enfermedad_relacionada;
     }
     /**
     * Asigna los nombres de las enfermedades relacionadas.
     * @param enfermedad_relacionada los nombres de las enfermedades relacionadas.
     */
-    public void setenfermedad_relacionada(ArrayList<String> enfermedad_relacionada) {
+    public void setenfermedad_relacionada(ArrayList<Enfermedad> enfermedad_relacionada) {
       this.enfermedad_relacionada = enfermedad_relacionada;
     }
     

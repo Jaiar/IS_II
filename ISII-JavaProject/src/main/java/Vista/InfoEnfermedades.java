@@ -262,13 +262,13 @@ public class InfoEnfermedades extends javax.swing.JFrame {
          enf = (Enfermedad)evt.getItem();
          
          DefaultListModel<Medicamento> list_model_medicamentos = new DefaultListModel<Medicamento>();
-         for( Medicamento m: enf.getMedicamentos() ){
+         for( Medicamento m: enf.getMedicamento() ){
              list_model_medicamentos.addElement(m);
          }
          this.lst_medicamentos.setModel((ListModel)list_model_medicamentos);
          
          DefaultListModel<Enfermedad> list_model_enfermedades = new DefaultListModel<Enfermedad>();
-         for ( Enfermedad enf_r: enf.getEnfermedadesRelacionadas() ){
+         for ( Enfermedad enf_r: enf.getenfermedad_relacionada() ){
              list_model_enfermedades.addElement(enf_r);
          }
          this.lst_enfermedades.setModel((ListModel) list_model_enfermedades);

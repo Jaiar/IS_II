@@ -27,7 +27,7 @@ public class VistaMedico extends javax.swing.JFrame {
     private Enfermero enfermero;
     private Gestor gestor;
     private ArrayList<Paciente> pacientes;
-     private LocalDate currentdate = LocalDate.now();
+    private LocalDate currentdate = LocalDate.now();
     
     private DefaultListModel listaEnfermosModel;
     
@@ -268,7 +268,7 @@ public class VistaMedico extends javax.swing.JFrame {
 
     private void DarAltaPacienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DarAltaPacienteButtonActionPerformed
         // TODO add your handling code here:
-        vistaDarAltaPaciente = new AltaPaciente(medico,enfermero,gestor);
+        vistaDarAltaPaciente = new AltaPaciente(medico,enfermero,gestor,pacientes.get(listaEnfermos.getSelectedIndex()));
         vistaDarAltaPaciente.setVisible(true);
         dispose();
     }//GEN-LAST:event_DarAltaPacienteButtonActionPerformed

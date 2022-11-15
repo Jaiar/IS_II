@@ -65,6 +65,15 @@ public class Paciente {
     public int getDoctor(){
         return doc;
     }
+    public String getDNI(){
+        return this.dni;
+    }
+    public String getNombre(){
+        return this.nombre;
+    }
+    public String getApellidos(){
+        return this.apellidos;
+    }
     public String toString(){
         return "DNI: "+ dni + "| ROOM: " + room + "| Nombre: "+ nombre +", Apellidos: "+ apellidos;
     }

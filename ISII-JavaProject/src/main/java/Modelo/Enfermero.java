@@ -35,11 +35,23 @@ public class Enfermero extends Usuario{
         return hospital.consultarBotiquin(num);
     }
     
-    public String getName(){
-        return this.nombre;
-    }
-    @Override
-    public String toString() {
+       public String getNombre() {
         return nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+    
+    public Date getFecha(){
+        return this.incorporacion;
     }
 }

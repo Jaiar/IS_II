@@ -16,7 +16,7 @@ public class Usuario {
     protected String apellidos;
     protected String dni;
     protected String telefono;
-    private Date incorporacion; //Es una fecha
+    protected Date incorporacion; //Es una fecha
     
     public Usuario (int code, String nombre, String apellidos, String dni, String telefono, Date incorporacion){
         this.code = code;

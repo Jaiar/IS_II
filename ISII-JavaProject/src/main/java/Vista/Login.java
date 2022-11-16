@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Vista;
 
 import Modelo.Gestor;
@@ -172,7 +169,7 @@ public class Login extends javax.swing.JFrame {
         String usuario = this.txt_usuario.getText();
         String password = this.txt_password.getText();
         
-        Object user_obj = consultaSQL(usuario, password);
+        Object user_obj = DAO.autenticarUsuario(usuario, password);
         
         if ( user_obj == null ){
             JOptionPane.showInternalMessageDialog(this, "El usuario no existe", "Autenticación", JOptionPane.ERROR_MESSAGE);

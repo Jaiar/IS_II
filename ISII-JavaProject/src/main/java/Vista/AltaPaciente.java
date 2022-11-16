@@ -55,7 +55,7 @@ public class AltaPaciente extends javax.swing.JFrame {
     public void RellenarDatos()
     {
         this.textDNIPaciente.setText( paciente.getDNI());
-        this. textNombrePaciente.setText(paciente.getNombre());
+        this.textNombrePaciente.setText(paciente.getNombre());
         this.apellidosTextPaciente.setText(paciente.getApellidos());
         this.enfermedadText.setText(paciente.getEnfermedades());
 
@@ -184,11 +184,14 @@ public class AltaPaciente extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(addHistorialButton)))
-                .addGap(85, 85, 85)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelHistorialMedico)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(85, 85, 85))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(labelHistorialMedico)
+                        .addGap(338, 338, 338))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(104, 104, 104))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(301, 301, 301)
                 .addComponent(exitButton)

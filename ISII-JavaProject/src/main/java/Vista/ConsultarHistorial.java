@@ -121,6 +121,11 @@ public class ConsultarHistorial extends javax.swing.JFrame {
         jLabel8.setText("Dosis recomendada:");
 
         txt_dosis_recom.setEditable(false);
+        txt_dosis_recom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_dosis_recomActionPerformed(evt);
+            }
+        });
 
         ch_contagiosa.setText("Contagiosa");
         ch_contagiosa.setEnabled(false);
@@ -259,6 +264,10 @@ public class ConsultarHistorial extends javax.swing.JFrame {
             enf.setcontagiosa(true) ;
         }
     }//GEN-LAST:event_ch_contagiosaActionPerformed
+
+    private void txt_dosis_recomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_dosis_recomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_dosis_recomActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -270,6 +270,9 @@
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txt_dosis_recomActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="ch_contagiosa">
       <Properties>

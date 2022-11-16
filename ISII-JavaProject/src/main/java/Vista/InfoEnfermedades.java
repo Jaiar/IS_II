@@ -261,7 +261,8 @@ public class InfoEnfermedades extends javax.swing.JFrame {
             return;
         
          enf = (Enfermedad)evt.getItem();
-         
+         txt_dosis_dia.setText(String.valueOf(enf.getveces()));
+         txt_dosis_recom.setText(String.valueOf(enf.getDosis()));
          DefaultListModel<Medicamento> list_model_medicamentos = new DefaultListModel<Medicamento>();
          for( Medicamento m: enf.getMedicamento() ){
              list_model_medicamentos.addElement(m);

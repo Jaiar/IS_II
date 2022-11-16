@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Controlador.DAO;
 import Modelo.Gestor;
 import Data.Hospital;
 import Modelo.Enfermero;
@@ -32,6 +33,10 @@ public class Login extends javax.swing.JFrame {
         this.enfermero = enfermero;
         this.gestor = gestor;
         initComponents();
+        
+        DAO dao = new DAO();
+        dao.Conectar();
+        dao.Probar();
     }
 
     /**

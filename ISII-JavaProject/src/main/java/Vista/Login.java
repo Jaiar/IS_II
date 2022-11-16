@@ -21,6 +21,7 @@ public class Login extends javax.swing.JFrame {
     private Medico medico;
     private Enfermero enfermero;
     private Gestor gestor;
+    private MedicamentoEnfermo medicamentoEnfermo;
     
     /**
      * Creates new form Vista
@@ -54,6 +55,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btn_entrar = new javax.swing.JButton();
         txt_password = new javax.swing.JTextField();
+        btn_entrar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,6 +93,13 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        btn_entrar1.setText("Medicamento Enfermo prueba");
+        btn_entrar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_entrar1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,6 +130,10 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(txt_usuario)
                     .addComponent(txt_password, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
                 .addGap(96, 96, 96))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(btn_entrar1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +154,9 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(btn_enfermero)
                     .addComponent(btn_medico)
                     .addComponent(btn_entrar))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btn_entrar1)
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -201,6 +216,13 @@ public class Login extends javax.swing.JFrame {
         */
     }//GEN-LAST:event_btn_entrarActionPerformed
 
+    private void btn_entrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrar1ActionPerformed
+        // TODO add your handling code here:
+        medicamentoEnfermo = new MedicamentoEnfermo();
+        medicamentoEnfermo.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btn_entrar1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -244,6 +266,7 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_enfermero;
     private javax.swing.JButton btn_entrar;
+    private javax.swing.JButton btn_entrar1;
     private javax.swing.JButton btn_gestor;
     private javax.swing.JButton btn_medico;
     private javax.swing.JLabel jLabel1;

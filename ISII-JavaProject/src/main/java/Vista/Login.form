@@ -56,6 +56,11 @@
               </Group>
               <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
           </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
+              <Component id="btn_entrar1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -80,7 +85,9 @@
                   <Component id="btn_medico" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btn_entrar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="33" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="btn_entrar1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="24" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -136,6 +143,14 @@
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txt_password">
+    </Component>
+    <Component class="javax.swing.JButton" name="btn_entrar1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Medicamento Enfermo prueba"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_entrar1ActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

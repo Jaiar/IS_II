@@ -30,10 +30,6 @@ public class Login extends javax.swing.JFrame {
         this.enfermero = enfermero;
         this.gestor = gestor;
         initComponents();
-        
-        DAO dao = new DAO();
-        dao.Conectar();
-        dao.Probar();
     }
 
     /**

@@ -24,9 +24,9 @@ public class DAO {
         public static final short GESTOR = 3;
     }
     
-    private DAO(){}
+    protected DAO(){}
     
-    private final static Connection getConnection(){
+    protected final static Connection getConnection(){
         if(conexionBD == null)
             DAO.conectarDB();
         

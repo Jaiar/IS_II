@@ -1,5 +1,9 @@
 package Controlador;
 
+import Modelo.Medico;
+import Modelo.Enfermero;
+import Modelo.Gestor;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -22,14 +26,14 @@ public class DAO {
     
     private DAO(){}
     
-    private static Connection getConnection(){
+    private final static Connection getConnection(){
         if(conexionBD == null)
             DAO.conectarDB();
         
         return DAO.conexionBD;
     }
     
-    private static void conectarDB(){
+    private final static void conectarDB(){
     
         String bd = "jdbc:mysql://localhost/hospitalito?serverTimezone=" + TimeZone.getDefault().getID();
         try {
@@ -43,7 +47,7 @@ public class DAO {
         }
     }
     
-    public static Object autenticarUsuario(String usuario, String contraseña){
+    public final static Object autenticarUsuario(String usuario, String contraseña){
         ResultSet resultados = null;
         try {
          String con;
@@ -66,20 +70,26 @@ public class DAO {
         Date fecha_incorporacion;
         try{
             rol = resultados.getShort(5);
+            id = resultados.getInt(1);
+            dni_usuario = resultados.getNString(2);
+            nombre = resultados.getNString(3);
+            apellidos = resultados.getNString(4);
+            fecha_incorporacion = resultados.getDate(6);
         }catch(SQLException e){
-            System.out.println("Error en la consulta -- rol no encontrado");
+            // No existe el usuario
+            System.out.println("Consulta SQL: " + e.getMessage());
             return null;
         }
         
         switch(rol){
             case UsuariosDB.MEDICO:
-                usuario_devuelto = new Medico();
+                usuario_devuelto = new Medico(null, id, nombre, apellidos, dni_usuario, null, fecha_incorporacion);
                 break;
             case UsuariosDB.ENFERMERO:
-                usuario_devuelto = new Enfermero();
+                usuario_devuelto = new Enfermero(id, nombre, apellidos, dni_usuario, null, fecha_incorporacion, null);
                 break;
             case UsuariosDB.GESTOR:
-                usuario_devuelto = new Gestor();
+                usuario_devuelto = new Gestor(null, id, nombre, apellidos, dni_usuario, null, fecha_incorporacion);
                 break;
             default:
                 return null;

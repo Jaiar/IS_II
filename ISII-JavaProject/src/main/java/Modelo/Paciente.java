@@ -21,6 +21,16 @@ public class Paciente {
     private int enfer;
     private int room;
     
+    public Paciente(String dni, String nombre, String apellidos, ArrayList enfermedad, int doc, int enfer, int room){
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.doc= doc;
+        this.enfer = enfer;
+        this.enfermedad = enfermedad;
+        this.room = room;
+    }
+    
     /**
      * Si tenemos una coinciendencia en fecha y DNI en una entrada en el historial 
      * del enfermo, el sistema debe lanzar una excepción.

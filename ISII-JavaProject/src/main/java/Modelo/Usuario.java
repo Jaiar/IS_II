@@ -4,6 +4,7 @@
  */
 package Modelo;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -26,4 +27,5 @@ public class Usuario {
         this.telefono = telefono;
         this.incorporacion = incorporacion;
     }
+
 }

@@ -20,9 +20,9 @@ public class Enfermos {
      */
     public Enfermos(){
         pacientes = new ArrayList<Paciente>();
-        Paciente p1 = new Paciente ();
+        /*Paciente p1 = new Paciente ();
         p1.newPaciente("34567890B","Yoshef","Mikael","Resfriado Común",1,2,200);
-        pacientes.add(p1);
+        pacientes.add(p1);*/
     }
     public ArrayList<Paciente> getPacientes(int num){
         ArrayList<Paciente>   p = new ArrayList<Paciente>();

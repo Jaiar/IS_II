@@ -16,10 +16,9 @@ public class Enfermero extends Usuario{
     private ArrayList<Paciente> pacientes;
     private Hospital hospital;
     
-    public Enfermero(int code, String name, String sur, String dni, String telefono,
-                     Date incorporacion, Hospital hospital)
+    public Enfermero(int code, String name, String sur, String dni, String tel, Date incorporacion, Hospital hospital)
     {
-        super(code, name, sur, dni, telefono, incorporacion);
+        super(code, name, sur, dni, tel, incorporacion);
         
         this.hospital = hospital;
         pacientes = new ArrayList<Paciente>();

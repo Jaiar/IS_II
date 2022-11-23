@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.DAOenfermero;
+import Controlador.DAO;
 import Data.Hospital;
 import Modelo.Enfermero;
 import Modelo.Gestor;
@@ -11,7 +13,6 @@ import Modelo.Medico;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
 
 /**
  *
@@ -43,15 +44,13 @@ public class VistaGestor extends javax.swing.JFrame {
         venfermeros = new ArrayList<Enfermero>();
         vmedicos = new ArrayList<Medico>();
         
+        //DAOenfermero.ConectarDB();
+        venfermeros = DAOenfermero.getAllEnfermeros();
         
         /*int tam_enfermeros, tam_medicos;
 
         venfermeros = SELECT...
         vmedicosos = SELECT...   
-        
-        
-        tam_enfermeros = venfermeros.size();
-        tam_medicos = vmedicos.size();
         
         for(int i=0; i<tam_enfermeros; i++)
             enfermerosList.addElement(venfermeros.get(i));
@@ -63,12 +62,15 @@ public class VistaGestor extends javax.swing.JFrame {
         
         Hospital h = new Hospital();
         m= new Medico(h,1,"Manolo","García","12345678F","656565653",new Date());
-        e= new Enfermero(1,"Pedro","Garcés","87654321F","666999333",new Date(),h);
+        //e= new Enfermero(1,"Pedro","Garcés","87654321F","666999333",new Date(),h);
         
         medicosList.addElement(m.getNombre());
-        enfermerosList.addElement(e.getNombre());
+        //enfermerosList.addElement(e.getNombre());
         
-        venfermeros.add(e);
+        for(int i=0; i<venfermeros.size(); i++)
+            enfermerosList.addElement(venfermeros.get(i).getNombre());
+        
+        //venfermeros.add(e);
         vmedicos.add(m);
     }
 

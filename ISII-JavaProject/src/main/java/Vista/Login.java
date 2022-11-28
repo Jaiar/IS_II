@@ -26,10 +26,7 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Vista
      */
-    public Login(Medico medico, Enfermero enfermero, Gestor gestor) {
-        this.medico = medico;
-        this.enfermero = enfermero;
-        this.gestor = gestor;
+    public Login() {
         initComponents();
     }
 
@@ -42,41 +39,16 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btn_medico = new javax.swing.JButton();
-        btn_enfermero = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        btn_gestor = new javax.swing.JButton();
         txt_usuario = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btn_entrar = new javax.swing.JButton();
         txt_password = new javax.swing.JTextField();
-        btn_entrar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        btn_medico.setText("Médico");
-        btn_medico.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_medicoActionPerformed(evt);
-            }
-        });
-
-        btn_enfermero.setText("Enfermero");
-        btn_enfermero.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_enfermeroActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Hospitalito");
-
-        btn_gestor.setText("Gestor");
-        btn_gestor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_gestorActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Usuario:");
 
@@ -89,52 +61,28 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        btn_entrar1.setText("Medicamento Enfermo prueba");
-        btn_entrar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_entrar1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(151, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btn_medico)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_gestor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_entrar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(btn_enfermero)
-                .addGap(25, 25, 25))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(74, 74, 74)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txt_usuario)
-                    .addComponent(txt_password, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE))
-                .addGap(96, 96, 96))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(btn_entrar1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_entrar)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txt_usuario)
+                        .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(37, 37, 37)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -144,44 +92,17 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txt_password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_gestor)
-                    .addComponent(btn_enfermero)
-                    .addComponent(btn_medico)
-                    .addComponent(btn_entrar))
-                .addGap(18, 18, 18)
-                .addComponent(btn_entrar1)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(btn_entrar)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_medicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_medicoActionPerformed
-        // TODO add your handling code here:
-        vistaMedico = new VistaMedico(medico,enfermero, gestor);
-        vistaMedico.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btn_medicoActionPerformed
-
-    private void btn_enfermeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enfermeroActionPerformed
-        // TODO add your handling code here:
-        vistaEnfermeros = new VistaEnfermeros(medico,enfermero, gestor);
-        vistaEnfermeros.setVisible(true);
-        dispose();
-        
-    }//GEN-LAST:event_btn_enfermeroActionPerformed
-
-    private void btn_gestorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_gestorActionPerformed
-        vistaGestor = new VistaGestor(medico, enfermero, gestor);
-        vistaGestor.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btn_gestorActionPerformed
-
     private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed
         // TODO add your handling code here:
-        /*
+        
         String usuario = this.txt_usuario.getText();
         String password = this.txt_password.getText();
         
@@ -209,15 +130,7 @@ public class Login extends javax.swing.JFrame {
             dispose();
             return;
         }
-        */
     }//GEN-LAST:event_btn_entrarActionPerformed
-
-    private void btn_entrar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrar1ActionPerformed
-        // TODO add your handling code here:
-        medicamentoEnfermo = new MedicamentoEnfermo();
-        medicamentoEnfermo.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btn_entrar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,25 +159,17 @@ public class Login extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        System.out.print("ESTOY EN EL MAIN");
-        Hospital hospital = new Hospital();
-        Medico medico= new Medico(hospital,1,"Manolo","García","34567812F","546993455",new Date());
-        Enfermero enfermero= new Enfermero(1,"Manolo","García","34567812F","546993455",new Date(),hospital);
-        Gestor gestor = new Gestor(hospital,1,"Manolo","García","34567812F","546993455",new Date());
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login(medico, enfermero, gestor).setVisible(true);
+                new Login().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_enfermero;
     private javax.swing.JButton btn_entrar;
-    private javax.swing.JButton btn_entrar1;
-    private javax.swing.JButton btn_gestor;
-    private javax.swing.JButton btn_medico;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

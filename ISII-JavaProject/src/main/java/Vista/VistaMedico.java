@@ -34,7 +34,7 @@ public class VistaMedico extends javax.swing.JFrame {
     /**
      * Creates new form MedicoVista
      */
-    public VistaMedico(Medico medico, Enfermero enfermero, Gestor gestor) {
+    public VistaMedico(Medico medico) {
         initComponents();
         
         this.diaText.setText(currentdate.getDayOfMonth()+"");
@@ -50,10 +50,6 @@ public class VistaMedico extends javax.swing.JFrame {
         listaEnfermos.setModel(listaEnfermosModel);
         
         this.medico = medico;
-        this.enfermero = enfermero;
-        this.gestor = gestor;
-        
-        
     }
 
     /**

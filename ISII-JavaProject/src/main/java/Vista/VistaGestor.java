@@ -30,9 +30,7 @@ public class VistaGestor extends javax.swing.JFrame {
     /**
      * Creates new form VistaGestor
      */
-    public VistaGestor(Medico medico, Enfermero enfermero, Gestor gestor) {
-        this.medico = medico;
-        this.enfermero = enfermero;
+    public VistaGestor(Gestor gestor) {
         this.gestor = gestor;
         initComponents();
         enfermerosList = new DefaultListModel();

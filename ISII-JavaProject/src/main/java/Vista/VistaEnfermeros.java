@@ -12,7 +12,6 @@ import Modelo.Paciente;
 public class VistaEnfermeros extends javax.swing.JFrame {
     private BotiquinHospital vistaBotiquin;
     private Login viewLogin ;
-    private Medico medico;
     private Enfermero enfermero;
     private Gestor gestor;
     private Paciente paciente;
@@ -20,11 +19,9 @@ public class VistaEnfermeros extends javax.swing.JFrame {
     /**
      * Creates new form EnfermerosVista
      */
-    public VistaEnfermeros(Medico medico, Enfermero enfermero, Gestor gestor) {
+    public VistaEnfermeros(Enfermero enfermero) {
         initComponents();
-        this.medico = medico;
         this.enfermero = enfermero;
-        this.gestor = gestor;
     }
 
     /**
@@ -201,7 +198,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
     private void BotiquinHospitalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotiquinHospitalButtonActionPerformed
         // TODO add your handling code here:
-        vistaBotiquin = new BotiquinHospital (medico,enfermero, gestor);
+        vistaBotiquin = new BotiquinHospital (enfermero);
         vistaBotiquin.setVisible(true);
         dispose();
     }//GEN-LAST:event_BotiquinHospitalButtonActionPerformed

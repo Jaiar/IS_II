@@ -14,15 +14,6 @@ import javax.swing.JOptionPane;
  * @author algar
  */
 public class Login extends javax.swing.JFrame {
-
-    private VistaMedico vistaMedico;
-    private VistaEnfermeros vistaEnfermeros;
-    private VistaGestor vistaGestor;
-    private Medico medico;
-    private Enfermero enfermero;
-    private Gestor gestor;
-    private MedicamentoEnfermo medicamentoEnfermo;
-    
     /**
      * Creates new form Vista
      */
@@ -114,19 +105,19 @@ public class Login extends javax.swing.JFrame {
         }
         
         if ( user_obj instanceof Enfermero ){
-            new VistaEnfermeros(medico,enfermero, gestor).setVisible(true);
+            new VistaEnfermeros((Enfermero)user_obj).setVisible(true);
             dispose();
             return;
         }
         
         if( user_obj instanceof Gestor ){
-            new VistaGestor(medico, enfermero, gestor).setVisible(true);
+            new VistaGestor((Gestor)user_obj).setVisible(true);
             dispose();
             return;
         }
         
         if( user_obj instanceof Medico ){
-            new VistaMedico(medico,enfermero, gestor).setVisible(true);
+            new VistaMedico((Medico)user_obj).setVisible(true);
             dispose();
             return;
         }

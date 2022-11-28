@@ -282,7 +282,7 @@ public class VistaMedico extends javax.swing.JFrame {
 
     private void SalirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirButtonActionPerformed
         // TODO add your handling code here:
-        viewLogin = new Login(medico,enfermero, gestor);
+        viewLogin = new Login();
         viewLogin.setVisible(true);
         dispose();
     }//GEN-LAST:event_SalirButtonActionPerformed

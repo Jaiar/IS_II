@@ -262,7 +262,7 @@ public class VistaGestor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
-        viewLogin = new Login (medico,enfermero, gestor);
+        viewLogin = new Login ();
         viewLogin.setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_salirActionPerformed

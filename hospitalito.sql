@@ -119,7 +119,9 @@ CREATE TABLE `usuario` (
   `nombre` varchar(30) NOT NULL,
   `apellidos` varchar(50) NOT NULL,
   `rol` smallint(3) NOT NULL,
-  `fecha_incorporacion` date NOT NULL
+  `fecha_incorporacion` date NOT NULL,
+  `user` varchar(20) NOT NULL,
+  `pass` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -219,19 +221,19 @@ ALTER TABLE `tratamiento`
 COMMIT;
 
 INSERT INTO usuario
-VALUES (1, "A000000", "DON VICENTE", "CERVERON", 1, 01/01/2001);
+VALUES (1, "A000000", "DON VICENTE", "CERVERON", 1, 01/01/2001, "don", "vicente");
 
 INSERT INTO usuario
-VALUES (11, "A000001", "ARMANCIO", "ORTEGA", 1, 01/01/2011);
+VALUES (11, "A000001", "ARMANCIO", "ORTEGA", 1, 01/01/2011, "armancio", "ortega");
 
 INSERT INTO usuario
-VALUES (2, "B000000", "ANTONIO", "BOLUDA", 2, 02/02/2002);
+VALUES (2, "B000000", "ANTONIO", "BOLUDA", 2, 02/02/2002, "antonio", "boluda");
 
 INSERT INTO usuario
-VALUES (22, "B000001", "MEHDI", "FRANCES", 2, 02/02/2003);
+VALUES (22, "B000001", "MEHDI", "FRANCES", 2, 02/02/2003, "mehdi", "frances");
 
 INSERT INTO usuario
-VALUES (3, "C00000", "RICARDO", "FERRIS", 3, 01/01/2001);
+VALUES (3, "C00000", "RICARDO", "FERRIS", 3, 01/01/2001, "ricardo", "ferris");
 
 INSERT INTO paciente
 VALUES (1, "D000000", "ERNESTO", "FASCISTA", 611111111, 1, 1, 1);

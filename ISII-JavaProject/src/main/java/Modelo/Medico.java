@@ -4,8 +4,6 @@
  */
 package Modelo;
 import Controlador.DAOmedico;
-import Data.Enfermos;
-import Data.Hospital;
 import java.util.Date;
 import java.util.ArrayList;
 /**
@@ -14,17 +12,11 @@ import java.util.ArrayList;
  */
 public class Medico extends Usuario{
     private ArrayList<Paciente> pacientes;
-    private Hospital hospital;
     
-    public Medico(Hospital hospital, int code, String name, String surname, String dni, String tele, Date anyo){
+    public Medico( int code, String name, String surname, String dni, String tele, Date anyo){
         super(code, name, surname, dni, tele, anyo);
-        this.hospital = hospital;
         pacientes = DAOmedico.getPacientes(code);
-        listaDeEnfermos();
-    }
-    public void listaDeEnfermos(){
-        pacientes = hospital.getPacientes(code);
-    }
+    } 
     public ArrayList<Paciente> getPacientes(){
         return pacientes;
     }

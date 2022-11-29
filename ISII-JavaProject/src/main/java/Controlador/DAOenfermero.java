@@ -1,6 +1,7 @@
 package Controlador;
 
 import Modelo.Enfermero;
+import Modelo.Medicamento;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -48,5 +49,55 @@ public class DAOenfermero extends DAO{
         }
         
         return enfermeros;
+    }
+    public static ArrayList getMedicamentosHospital(int cantidad){
+        ResultSet resultados = null;
+        ArrayList medicamentos = new ArrayList();
+        try {
+         String con;
+         Statement s = DAOmedico.getConnection().createStatement();
+         // Consulta SQL
+         con = "SELECT m.id_medicamento, m.nombre, m.alergias, "
+                 + "m.efectos_secundarios, m.cantidad, e.nombre FROM "
+                 + "(medicamento m JOIN tratamiento t "
+                 + "ON m.id_medicamento = t.id_medicamento ) JOIN enfermedad e "
+                 + "ON e.id_enfermedad = t.id_enfermedad WHERE cantidad = " + cantidad;
+         resultados = s.executeQuery(con);
+         }
+        catch (Exception e) { // Error en al realizar la consulta
+            System.out.println("Error en la petición a la BD");
+        }
+        
+        try{
+            int id=0;
+            int cant_med=0;
+            String nombre = null;
+            String a = null;
+            String e = null;
+            String enf = null;
+            ArrayList<String> alergias = new ArrayList<String> ();
+            ArrayList<String> e_secundarios = new ArrayList<String> ();
+            ArrayList<String> enfermedad = new ArrayList<String> ();
+            
+            while(resultados.next()){
+                id = resultados.getInt(1);
+                nombre = resultados.getNString(2);
+                
+                a = resultados.getNString(3);
+                alergias.add(a);
+                e = resultados.getNString(4);
+                e_secundarios.add(e);                
+                cant_med = resultados.getInt(5);
+                enf = resultados.getNString(6);
+                enfermedad.add(enf);
+            }
+            medicamentos.add(new Medicamento( id, nombre, enfermedad, alergias, e_secundarios, cant_med));
+        }
+        catch(SQLException sqle){
+            System.out.println("Error en la retirada de datos: " + sqle.getMessage());
+            return null;
+        }
+        
+        return medicamentos;
     }
 }

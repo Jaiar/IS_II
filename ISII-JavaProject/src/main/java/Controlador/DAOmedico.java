@@ -1,5 +1,6 @@
 package Controlador;
 
+import Modelo.Medicamento;
 import Modelo.Paciente;
 
 import java.sql.ResultSet;

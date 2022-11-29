@@ -4,6 +4,7 @@
  */
 package Modelo;
 
+import Controlador.DAOenfermero;
 import Data.Hospital;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,7 +32,7 @@ public class Enfermero extends Usuario{
     }
     
     public ArrayList consultarBotiquin(int num){
-        return hospital.consultarBotiquin(num);
+        return DAOenfermero.getMedicamentosHospital(num);
     }
     
     public String getNombre() {

@@ -21,7 +21,12 @@ public class DAOmedico extends DAO{
          String con;
          Statement s = DAOmedico.getConnection().createStatement();
          // Consulta SQL
-         con = "SELECT * FROM paciente WHERE medico = " + medico_id;
+         con = "SELECT p.id_paciente, p.dni_paciente, p.nombre, p.apellidos, "
+                 + "p.telefono, p.habitacion, p.medico, p.enfermero, e.nombre "
+                 + "FROM (paciente p JOIN paciente_enfermedades pe ON "
+                 + "p.id_paciente = pe.id_paciente ) JOIN enfermedad e "
+                 + "ON e.id_enfermedad = pe.id_enfermedad "
+                 + "WHERE p.medico = " + medico_id;
          resultados = s.executeQuery(con);
          }
         catch (Exception e) { // Error en al realizar la consulta
@@ -29,6 +34,7 @@ public class DAOmedico extends DAO{
         }
         
         try{
+            ArrayList<String>  enfermedades = new ArrayList<String> ();
             while(resultados.next()){
                 String dni = resultados.getNString(2);
                 String nombre = resultados.getNString(3);
@@ -36,7 +42,11 @@ public class DAOmedico extends DAO{
                 int habitacion = resultados.getInt(6);
                 int medico_p_id = resultados.getInt(7);
                 int enfermero_id = resultados.getInt(8);
-                pacientes.add(new Paciente(dni, nombre, apellidos, (ArrayList)null, medico_p_id, enfermero_id, habitacion));
+                while(resultados.next()){
+                    if(resultados.getNString(2) == dni)
+                        enfermedades.add(resultados.getNString(9));
+                }
+                pacientes.add(new Paciente(dni, nombre, apellidos, enfermedades, medico_p_id, enfermero_id, habitacion));
             }
         }
         catch(SQLException sqle){

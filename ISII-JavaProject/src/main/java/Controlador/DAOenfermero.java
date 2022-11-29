@@ -72,9 +72,6 @@ public class DAOenfermero extends DAO{
             int id=0;
             int cant_med=0;
             String nombre = null;
-            String a = null;
-            String e = null;
-            String enf = null;
             ArrayList<String> alergias = new ArrayList<String> ();
             ArrayList<String> e_secundarios = new ArrayList<String> ();
             ArrayList<String> enfermedad = new ArrayList<String> ();
@@ -82,14 +79,18 @@ public class DAOenfermero extends DAO{
             while(resultados.next()){
                 id = resultados.getInt(1);
                 nombre = resultados.getNString(2);
+                if(!alergias.contains(resultados.getNString(3)))
+                    alergias.add(resultados.getNString(3));
                 
-                a = resultados.getNString(3);
-                alergias.add(a);
-                e = resultados.getNString(4);
-                e_secundarios.add(e);                
+                if(!e_secundarios.contains(resultados.getNString(4)))
+                    e_secundarios.add(resultados.getNString(4));            
+                
+                
                 cant_med = resultados.getInt(5);
-                enf = resultados.getNString(6);
-                enfermedad.add(enf);
+                
+                if(!enfermedad.contains(resultados.getNString(6)))
+                    enfermedad.add(resultados.getNString(6));
+                
             }
             medicamentos.add(new Medicamento( id, nombre, enfermedad, alergias, e_secundarios, cant_med));
         }

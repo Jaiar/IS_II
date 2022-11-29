@@ -20,12 +20,14 @@ public class Enfermos {
      */
     public Enfermos(){
         pacientes = new ArrayList<Paciente>();
-        /*Paciente p1 = new Paciente ();
-        p1.newPaciente("34567890B","Yoshef","Mikael","Resfriado Común",1,2,200);
+        
+        /*ArrayList<String> s = new ArrayList<String>();
+        s.add("Resfriado Común");
+        Paciente p1 = new Paciente ("34567890B","Yoshef","Mikael",s,1,2,200);
         pacientes.add(p1);*/
     }
     public ArrayList<Paciente> getPacientes(int num){
-        ArrayList<Paciente>   p = new ArrayList<Paciente>();
+        ArrayList<Paciente>  p = new ArrayList<Paciente>();
         for (Paciente pac: pacientes){
             if(pac.getDoctor()==num)
                 p.add(pac);

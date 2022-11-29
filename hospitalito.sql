@@ -119,7 +119,9 @@ CREATE TABLE `usuario` (
   `nombre` varchar(30) NOT NULL,
   `apellidos` varchar(50) NOT NULL,
   `rol` smallint(3) NOT NULL,
-  `fecha_incorporacion` date NOT NULL
+  `fecha_incorporacion` date NOT NULL,
+  `user` varchar(20) NOT NULL,
+  `pass` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

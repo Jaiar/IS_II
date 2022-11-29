@@ -21,7 +21,7 @@ public class DAOenfermedad extends DAO {
         ArrayList<Enfermedad> enfermedades = new ArrayList<Enfermedad>();
         try {
          String con;
-         Statement s = DAOmedico.getConnection().createStatement();
+         Statement s = DAOenfermedad.getConnection().createStatement();
          // Consulta SQL
          con = "SELECT * FROM enfermedad WHERE medico = " + medico_id;
          resultados = s.executeQuery(con);

@@ -22,7 +22,7 @@ public class DAOpacientes extends DAO{
         ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
         try {
          String con;
-         Statement s = DAOmedico.getConnection().createStatement();
+         Statement s = DAO.getConnection().createStatement();
          // Consulta SQL
          con = "SELECT * FROM paciente";
          resultados = s.executeQuery(con);

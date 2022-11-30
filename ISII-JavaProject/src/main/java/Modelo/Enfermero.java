@@ -19,8 +19,7 @@ public class Enfermero extends Usuario{
     {
         super(code, name, sur, dni, tel, incorporacion);
         
-        pacientes = new ArrayList<Paciente>();
-        listaDeEnfermos(code);
+        pacientes = null;
         
     }
     
@@ -30,6 +29,13 @@ public class Enfermero extends Usuario{
     
     public ArrayList consultarBotiquin(int num){
         return DAOenfermero.getMedicamentosHospital(num);
+    }
+    
+    public ArrayList<Paciente> getPaciente(int id){
+        if ( pacientes == null )
+            pacientes = DAOenfermero.getPacientes(id);
+        
+        return pacientes;
     }
     
     public String getNombre() {

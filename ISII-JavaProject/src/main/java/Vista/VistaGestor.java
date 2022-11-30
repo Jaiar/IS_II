@@ -6,6 +6,7 @@ package Vista;
 
 import Controlador.DAOenfermero;
 import Controlador.DAO;
+import Controlador.DAOmedico;
 import Data.Hospital;
 import Modelo.Enfermero;
 import Modelo.Gestor;
@@ -42,34 +43,14 @@ public class VistaGestor extends javax.swing.JFrame {
         venfermeros = new ArrayList<Enfermero>();
         vmedicos = new ArrayList<Medico>();
         
-        //DAOenfermero.ConectarDB();
         venfermeros = DAOenfermero.getAllEnfermeros();
-        
-        /*int tam_enfermeros, tam_medicos;
-
-        venfermeros = SELECT...
-        vmedicosos = SELECT...   
-        
-        for(int i=0; i<tam_enfermeros; i++)
-            enfermerosList.addElement(venfermeros.get(i));
-        
-        for(int i=0; i<tam_medicos; i++)
-            medicosList.addElement(vmedicos.get(i));
-         
-        */
-        
-        Hospital h = new Hospital();
-        // m= new Medico(h,1,"Manolo","García","12345678F","656565653",new Date());
-        // e= new Enfermero(1,"Pedro","Garcés","87654321F","666999333",new Date(),h);
-        
-        // medicosList.addElement(m.getNombre());
-        // enfermerosList.addElement(e.getNombre());
+        vmedicos = DAOmedico.getAllMedicos();
         
         for(int i=0; i<venfermeros.size(); i++)
             enfermerosList.addElement(venfermeros.get(i).getNombre());
         
-        //venfermeros.add(e);
-        //vmedicos.add(m);
+        for(int i=0; i<vmedicos.size(); i++)
+            medicosList.addElement(vmedicos.get(i).getNombre());
     }
 
     /**
@@ -291,7 +272,6 @@ public class VistaGestor extends javax.swing.JFrame {
         this.jtf_dni.setText(enferaux.getDni());
         this.jtf_tel.setText(enferaux.getTelefono());
         this.jtf_fecha.setText(enferaux.getFecha().toString());
-        // TODO add your handling code here:
     }//GEN-LAST:event_list_enfermerosValueChanged
 
   

@@ -16,8 +16,8 @@ import java.util.Date;
  */
 
 public class DAOenfermero extends DAO{
-    
     public static ArrayList getAllEnfermeros(){
+        DAO.conectarDB();
         ResultSet resultados = null;
         ArrayList<Enfermero> enfermeros = new ArrayList<Enfermero>();
         try {

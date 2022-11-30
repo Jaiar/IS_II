@@ -1,6 +1,6 @@
 package Controlador;
 
-import Modelo.Medicamento;
+import Modelo.Medico;
 import Modelo.Paciente;
 
 import java.sql.ResultSet;
@@ -8,11 +8,47 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import java.sql.SQLException;
+import java.util.Date;
 /**
  *
  * @author algar
  */
 public class DAOmedico extends DAO{
+    
+     public static ArrayList getAllMedicos(){
+        DAO.conectarDB();
+        ResultSet resultados = null;
+        ArrayList<Medico> medicos = new ArrayList<Medico>();
+        try {
+            String con;
+            Statement s = DAOenfermero.getConnection().createStatement();
+            // Consulta SQL
+            con = "SELECT * FROM usuario WHERE rol = 1";
+            resultados = s.executeQuery(con);
+            }
+        catch (Exception e) { // Error en al realizar la consulta
+            System.out.println("Error en la petición a la BD");
+        }
+        
+        try{
+            while(resultados.next()){
+                int code = resultados.getInt(1);
+                String dni = resultados.getNString(2);
+                String nombre = resultados.getNString(3);
+                String apellidos = resultados.getNString(4);
+                int rol = resultados.getInt(5);
+                Date fecha = resultados.getDate(6);
+                Medico med = new Modelo.Medico(code, nombre, apellidos, dni, "", fecha);
+                medicos.add(med);
+            }
+        }
+        catch(SQLException sqle){
+            System.out.println("Error en la retirada de datos: " + sqle.getMessage());
+            return null;
+        }
+        
+        return medicos;
+    }
     
     public static ArrayList getPacientes(int medico_id){
         ResultSet resultados = null;

@@ -33,7 +33,7 @@ public class DAO {
         return DAO.conexionBD;
     }
     
-    private final static void conectarDB(){
+    protected final static void conectarDB(){
     
         String bd = "jdbc:mysql://localhost/hospitalito?serverTimezone=" + TimeZone.getDefault().getID();
         try {

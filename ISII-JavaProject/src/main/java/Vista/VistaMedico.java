@@ -7,7 +7,7 @@ package Vista;
 import Modelo.Gestor;
 import Modelo.Enfermero;
 import Modelo.Medico;
-import Modelo.Enfermedad;
+import Controlador.DAOmedico;
 
 import java.time.LocalDate;
 import Modelo.Paciente;

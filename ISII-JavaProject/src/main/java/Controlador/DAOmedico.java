@@ -49,10 +49,49 @@ public class DAOmedico extends DAO{
         
         return medicos;
     }
-    
-    public static ArrayList getPacientes(int medico_id){
+     
+     public static ArrayList getPacientes(int medico_id){
         ResultSet resultados = null;
-        ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
+        ArrayList<Paciente> pacientes = new ArrayList<>();
+        
+        try {
+            String con;
+            Statement s = DAOmedico.getConnection().createStatement();
+            // Consulta SQL
+            con = "SELECT * FROM paciente WHERE medico = " + medico_id;
+            resultados = s.executeQuery(con);
+        }
+        catch (Exception e) { // Error en al realizar la consulta
+            System.out.println("DAOmedico @ getPacientes -- Error en la petición a la BD");
+        }
+        
+        try{
+            while(resultados.next()){
+                int id = resultados.getInt(1);
+                String dni = resultados.getNString(2);
+                String nombre = resultados.getNString(3);
+                String apellidos = resultados.getNString(4);
+                int habitacion = resultados.getInt(6);
+                int medico_p_id = resultados.getInt(7);
+                int enfermero_id = resultados.getInt(8);
+                
+                pacientes.add(new Paciente(id, dni, nombre, apellidos, medico_p_id, enfermero_id, habitacion));
+            }
+        }catch(SQLException sqle){
+            System.out.println("DAOmedico @ getPacientes -- Error en retirar datos: " + sqle.getMessage());
+            return null;
+        }
+        catch(NullPointerException npe){
+            System.out.println("DAOmedico @ getPacientes -- Resultados nulo: " + npe.getMessage());
+            return null;
+        }
+        
+        return pacientes;
+     }
+    
+    public static ArrayList getPacientes2(int medico_id){
+        ResultSet resultados = null;
+        ArrayList<Paciente> pacientes = new ArrayList<>();
         System.out.print("ESTOY EN GET PACIENTES\n");
         try {
             String con;

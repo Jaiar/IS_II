@@ -15,9 +15,12 @@ public class Medico extends Usuario{
     
     public Medico( int code, String name, String surname, String dni, String tele, Date anyo){
         super(code, name, surname, dni, tele, anyo);
-        pacientes = DAOmedico.getPacientes(code);
+        this.pacientes = null;
     } 
     public ArrayList<Paciente> getPacientes(){
+        if (pacientes == null )
+            pacientes = DAOmedico.getPacientes(this.code);
+        
         return pacientes;
     }
 

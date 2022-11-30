@@ -27,5 +27,8 @@ public class Usuario {
         this.telefono = telefono;
         this.incorporacion = incorporacion;
     }
-
+    
+    public int getId(){
+        return this.code;
+    }
 }

@@ -17,7 +17,7 @@ public class Paciente {
     private String dni;
     private String nombre;
     private String apellidos;
-    private ArrayList<Enfermedad> enfermedad;
+    private ArrayList<Enfermedad> enfermedades;
     private int doc_id;
     private int enfer_id;
     private int room_id;
@@ -31,8 +31,7 @@ public class Paciente {
         this.doc_id= doc;
         this.enfer_id = enfer;
         this.room_id = room;
-        
-        this.enfermedad = DAOpacientes.getEnfermedades(this.id);
+        this.enfermedades = null;
     }
     
     /**
@@ -55,7 +54,7 @@ public class Paciente {
             this.apellidos = apellidos;
             this.doc_id= doc;
             this.enfer_id = enfer;
-            this.enfermedad = new ArrayList<Enfermedad>();
+            this.enfermedades = new ArrayList<Enfermedad>();
             //this.enfermedad.add(enfermedad);
             this.room_id = room;
             
@@ -69,7 +68,8 @@ public class Paciente {
         //Hay que hacer una conslta a la base de datos con la fecha actual y el dni del paciente
         return true;//Si hay una igualdad será falso y sino verdad
     }
-    public String getEnfermedades(){
+    public ArrayList<Enfermedad> getEnfermedades(){
+        /*
         String enfe="";
         System.out.print("\n length 3-->" + enfermedad.size());
         
@@ -80,8 +80,11 @@ public class Paciente {
             System.out.print("\n ccc-->" + e.toSting());
             
         }
+        */
+        if ( this.enfermedades == null )
+            this.enfermedades = DAOpacientes.getEnfermedades(this.id);
         
-        return enfe;
+        return enfermedades;
     }
     public int getDoctor(){
         return doc_id;
@@ -103,10 +106,8 @@ public class Paciente {
         return room_id;
     }
     
-    
-    
     @Override
     public String toString(){
-        return "DNI: "+ dni + "| ROOM: " + room_id + "| Nombre: "+ nombre +", Apellidos: "+ apellidos;
+        return "Nombre: " + nombre + " " + apellidos + " -- DNI: "+ dni + "| ROOM: " + room_id;
     }
 }

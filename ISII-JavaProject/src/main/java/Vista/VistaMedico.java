@@ -7,6 +7,8 @@ package Vista;
 import Modelo.Gestor;
 import Modelo.Enfermero;
 import Modelo.Medico;
+import Modelo.Enfermedad;
+
 import java.time.LocalDate;
 import Modelo.Paciente;
 import java.util.ArrayList;
@@ -288,7 +290,11 @@ public class VistaMedico extends javax.swing.JFrame {
          if(listaEnfermos.getSelectedIndex() != -1)
         {
             System.out.print("YYYYYY");
-            enfermedadText.setText(pacientes.get(listaEnfermos.getSelectedIndex()).getEnfermedades());
+            String text = "";
+            for(Enfermedad e: pacientes.get(listaEnfermos.getSelectedIndex()).getEnfermedades())
+                text += e.toString() + "\n";
+                
+            enfermedadText.setText(text);
         }
     }//GEN-LAST:event_listaEnfermosMouseClicked
 

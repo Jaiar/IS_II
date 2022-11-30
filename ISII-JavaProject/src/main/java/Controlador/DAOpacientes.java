@@ -32,20 +32,42 @@ public class DAOpacientes extends DAO{
         
         try{
             ArrayList<String>  enfermedades = new ArrayList<String> ();
+            resultados.next();
+                    
+            int id = resultados.getInt(1);
+            String dni = resultados.getNString(2);
+            String nombre = resultados.getNString(3);
+            String apellidos = resultados.getNString(4);
+            int habitacion = resultados.getInt(6);
+            int medico_p_id = resultados.getInt(7);
+            int enfermero_id = resultados.getInt(8);
+
+            if(!enfermedades.contains(resultados.getNString(9)))
+                enfermedades.add(resultados.getNString(9));
+                
             while(resultados.next()){
-                int id = resultados.getInt(1);
-                String dni = resultados.getNString(2);
-                String nombre = resultados.getNString(3);
-                String apellidos = resultados.getNString(4);
-                int habitacion = resultados.getInt(6);
-                int medico_p_id = resultados.getInt(7);
-                int enfermero_id = resultados.getInt(8);
-                while(resultados.next()){
-                    if(resultados.getNString(2) == dni)
+                if(id == resultados.getInt(1))
+                {
+                    if(!enfermedades.contains(resultados.getNString(9)))
                         enfermedades.add(resultados.getNString(9));
                 }
-                pacientes.add(new Paciente(id, dni, nombre, apellidos, enfermedades, medico_p_id, enfermero_id, habitacion));
+                else
+                {
+                    pacientes.add(new Paciente(id, dni, nombre, apellidos, enfermedades, medico_p_id, enfermero_id, habitacion));
+                    enfermedades = new ArrayList<String> ();
+                    
+                    id = resultados.getInt(1);
+                    dni = resultados.getNString(2);
+                    nombre = resultados.getNString(3);
+                    apellidos = resultados.getNString(4);
+                    habitacion = resultados.getInt(6);
+                    medico_p_id = resultados.getInt(7);
+                    enfermero_id = resultados.getInt(8);
+                    if(!enfermedades.contains(resultados.getNString(9)))
+                        enfermedades.add(resultados.getNString(9));
+                }
             }
+            pacientes.add(new Paciente(id, dni, nombre, apellidos, enfermedades, medico_p_id, enfermero_id, habitacion));
         }
         catch(SQLException sqle){
             System.out.println("Error en la retirada de datos: " + sqle.getMessage());

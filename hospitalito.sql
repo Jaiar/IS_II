@@ -6,7 +6,7 @@
 -- Tiempo de generación: 16-11-2022 a las 12:19:47
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
-DROP DATABASE hospitalito;
+-- DROP DATABASE hospitalito;
 CREATE DATABASE hospitalito;
 USE hospitalito;
 
@@ -220,52 +220,72 @@ ALTER TABLE `tratamiento`
   ADD CONSTRAINT `fk_tratamiento_medicamento` FOREIGN KEY (`id_medicamento`) REFERENCES `medicamento` (`id_medicamento`);
 COMMIT;
 
+-- MEDICOS --
 INSERT INTO usuario
-VALUES (1, "A000000", "DON VICENTE", "CERVERON", 1, '2001/01/01', "don", "vicente");
+VALUES (01, "M000000", "MEDICO", "PRUEBA", 1, '2001/01/01', "medico", "medico");
 
 INSERT INTO usuario
-VALUES (11, "A000001", "ARMANCIO", "ORTEGA", 1, '2011/01/01', "armancio", "ortega");
+VALUES (10, "M000001", "DON VICENTE", "CERVERON", 1, '2001/01/01', "don", "vicente");
 
 INSERT INTO usuario
-VALUES (2, "B000000", "ANTONIO", "BOLUDA", 2, '2002/02/02', "antonio", "boluda");
+VALUES (11, "M000002", "ARMANCIO", "ORTEGA", 1, '2011/01/01', "armancio", "ortega");
+
+-- ENFERMEROS --
+INSERT INTO usuario
+VALUES (02, "E000000", "ENFERMERO", "PRUEBA", 2, '2001/01/01', "enfermero", "enfermero");
 
 INSERT INTO usuario
-VALUES (22, "B000001", "MEHDI", "FRANCES", 2, '2003/03/03', "mehdi", "frances");
+VALUES (20, "E000001", "ANTONIO", "BOLUDA", 2, '2002/02/02', "antonio", "boluda");
 
 INSERT INTO usuario
-VALUES (3, "C00000", "RICARDO", "FERRIS", 3, '2005/08/06', "ricardo", "ferris");
+VALUES (21, "E000002", "MEHDI", "FRANCES", 2, '2003/03/03', "mehdi", "frances");
 
+-- GESTORES --
+INSERT INTO usuario
+VALUES (03, "G000000", "GESTOR", "PRUEBA", 3, '2001/01/01', "gestor", "gestor");
+
+INSERT INTO usuario
+VALUES (30, "G000001", "RICARDO", "FERRIS", 3, '2005/08/06', "ricardo", "ferris");
+
+INSERT INTO usuario
+VALUES (31, "G000002", "MARIANO", "RAHOY", 3, '1960/08/06', "mariano", "rahoy");
+
+-- PACIENTES --
+INSERT INTO paciente
+VALUES (1, "P000000", "ERNESTO", "FASCISTA", 611111111, 1, 1, 1);
 
 INSERT INTO paciente
-VALUES (1, "D000000", "ERNESTO", "FASCISTA", 611111111, 1, 1, 1);
+VALUES (2, "P000001", "ROBERTO", "INIESTA", 622222222, 1, 2, 2);
 
-INSERT INTO paciente
-VALUES (2, "E000000", "ROBERTO", "INIESTA", 622222222, 1, 2, 2);
-
+-- MEDICAMENTOS --
 INSERT INTO medicamento
 VALUES (1, "aspirina", "sin alergias", "eres plata en el lol", 5);
 
 INSERT INTO medicamento
 VALUES (2, "dalsy", "Te matriculas en la UV", "Tienes depresion", 10);
 
+-- ENFERMEDADES --
 INSERT INTO enfermedad
 VALUES(1, "juegas al lol", null, true);
 
 INSERT INTO enfermedad
 VALUES(2, "hueles mal", 1, false);
 
+-- TRATAMIENTOS --
 INSERT INTO tratamiento
 VALUES(1, 1, 1, 20, 2);
 
 INSERT INTO tratamiento
 VALUES(2, 2, 2, 40, 1);
 
+-- HISTORIALES MEDICOS --
 INSERT INTO historialmedico
 VALUES(1, 1, 1, 12/12/2020);
 
 INSERT INTO historialmedico
 VALUES(2, 2, 2, 10/10/2010);
 
+-- PACIENTES ENFERMEDADES --
 INSERT INTO paciente_enfermedades
 VALUES(1, 1, 1);
 

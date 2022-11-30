@@ -8,7 +8,6 @@ import Modelo.Enfermero;
 import Modelo.Gestor;
 import Modelo.Medicamento;
 import Modelo.Medico;
-import Modelo.Paciente;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
@@ -18,9 +17,7 @@ import javax.swing.DefaultListModel;
  */
 public class BotiquinHospital extends javax.swing.JFrame {
     private VistaEnfermeros viewEnfemeros;
-    private Medico medico;
     private Enfermero enfermero;
-    private Gestor gestor;
     private DefaultListModel listaMedicamentosBotiquin;
     private ArrayList<Medicamento> medicamentos;
     
@@ -29,12 +26,9 @@ public class BotiquinHospital extends javax.swing.JFrame {
     /**
      * Creates new form VistaBotiquin
      */
-    public BotiquinHospital(Medico medico, Enfermero enfermero, Gestor gestor) {
+    public BotiquinHospital(Enfermero enfermero) {
         initComponents();
-        
-        this.medico = medico;
         this.enfermero = enfermero;
-        this.gestor = gestor;
     }
 
     /**

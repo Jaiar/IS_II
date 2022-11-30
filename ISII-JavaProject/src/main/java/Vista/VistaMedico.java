@@ -43,9 +43,9 @@ public class VistaMedico extends javax.swing.JFrame {
         listaEnfermosModel = new DefaultListModel();
         pacientes = medico.getPacientes();
        
-       
-        for (Paciente p: pacientes)
-            listaEnfermosModel.addElement(p.toString());
+        if(pacientes.size()!=0)
+            for (Paciente p: pacientes)
+                listaEnfermosModel.addElement(p.toString());
         
         listaEnfermos.setModel(listaEnfermosModel);
         

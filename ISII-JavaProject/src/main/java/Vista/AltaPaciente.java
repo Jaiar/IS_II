@@ -7,13 +7,10 @@ package Vista;
 import java.util.Date;
 import Modelo.Enfermero;
 import Modelo.Gestor;
-import Modelo.Medicamento;
 import Modelo.Medico;
 import Modelo.Paciente;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
 import javax.swing.DefaultListModel;
 /**
  *
@@ -25,12 +22,6 @@ public class AltaPaciente extends javax.swing.JFrame {
     private Enfermero enfermero;
     private Gestor gestor;
     
-    private String DNI;
-    private String Nombre;
-    private String Apellidos;
-    private String Enfermedad;
-    private String FechaS;
-    private Date Fecha;
     private String pacienteNuevo;
     private LocalDate currentdate = LocalDate.now();
     
@@ -42,7 +33,7 @@ public class AltaPaciente extends javax.swing.JFrame {
     /**
      * Creates new form DarAltaPaciente
      */
-    public AltaPaciente(Medico medico, Enfermero enfermero, Gestor gestor,Paciente paciente) {
+    public AltaPaciente(Medico medico, Enfermero enfermero, Gestor gestor, Paciente paciente) {
         initComponents();
         this.medico = medico;
         this.enfermero = enfermero;

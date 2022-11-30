@@ -3,7 +3,6 @@ package Vista;
 
 import Controlador.DAO;
 import Modelo.Gestor;
-import Data.Hospital;
 import Modelo.Enfermero;
 import Modelo.Medico;
 import java.sql.Connection;

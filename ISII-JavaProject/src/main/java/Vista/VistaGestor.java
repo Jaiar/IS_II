@@ -7,7 +7,6 @@ package Vista;
 import Controlador.DAOenfermero;
 import Controlador.DAO;
 import Controlador.DAOmedico;
-import Data.Hospital;
 import Modelo.Enfermero;
 import Modelo.Gestor;
 import Modelo.Medico;

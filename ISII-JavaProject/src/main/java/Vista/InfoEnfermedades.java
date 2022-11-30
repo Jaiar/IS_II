@@ -4,12 +4,14 @@
  */
 package Vista;
 
+import Controlador.DAOenfermedad;
 import Modelo.Medicamento;
 import Modelo.Enfermedad;
 import Modelo.Enfermero;
 import Modelo.Gestor;
 import Modelo.Medico;
 import java.awt.Component;
+import java.util.ArrayList;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.JTextField;
@@ -29,7 +31,8 @@ public class InfoEnfermedades extends javax.swing.JFrame {
     private Gestor gestor;
     private Enfermedad enf;
     private boolean ok;
-    
+    private ArrayList <Enfermedad> venfermedades;
+    private String nom;
     /**
      * Creates new form InfoEnfermedades
      */
@@ -240,7 +243,12 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         viewMedico.setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_salirActionPerformed
-
+ private void PrepararListas(){
+     venfermedades = new ArrayList <Enfermedad>();
+     venfermedades = DAOenfermedad.getEnfermedades();
+     for(int i=0; i<venfermedades.size(); i++)
+            cbo_enfermedad.addItem(venfermedades.get(i).getNombre());
+ }
     private void ch_contagiosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ch_contagiosaActionPerformed
         // TODO add your handling code here:
       
@@ -260,7 +268,10 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         if ( evt.getStateChange() != java.awt.event.ItemEvent.SELECTED )
             return;
         
-         enf = (Enfermedad)evt.getItem();
+         nom = (String) evt.getItem();
+          for(int i=0; i<venfermedades.size(); i++)
+              if(venfermedades.get(i).getNombre() == nom)
+                enf =(venfermedades.get(i));
          txt_dosis_dia.setText(String.valueOf(enf.getveces()));
          txt_dosis_recom.setText(String.valueOf(enf.getDosis()));
          DefaultListModel<Medicamento> list_model_medicamentos = new DefaultListModel<Medicamento>();

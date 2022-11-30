@@ -5,6 +5,9 @@ import Modelo.Enfermero;
 import Modelo.Medico;
 import Modelo.Paciente;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import Controlador.DAOpacientes;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -19,6 +22,8 @@ public class VistaEnfermeros extends javax.swing.JFrame {
     private Paciente paciente;
     private AñadirPaciente añadirPaciente;
     private LocalDate currentdate = LocalDate.now();
+    private DefaultListModel<String> pacientesList;
+
     /**
      * Creates new form EnfermerosVista
      */
@@ -28,6 +33,16 @@ public class VistaEnfermeros extends javax.swing.JFrame {
         this.dia.setText(currentdate.getDayOfMonth()+"");
         this.txt_mes.setText(currentdate.getMonth()+"");
         this.txt_anyo.setText(currentdate.getYear()+"");
+        pacientesList = new DefaultListModel<String>();
+        
+        ArrayList<Paciente> vpacientes = new ArrayList<Paciente>();   
+        vpacientes = DAOpacientes.getPacientes();
+        
+                
+        for(int i=0; i<vpacientes.size(); i++)
+            pacientesList.addElement(vpacientes.get(i).getNombre());
+        
+        l_pacientes.setModel(pacientesList);
     }
 
     /**
@@ -47,7 +62,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txt_anyo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        l_pacientes = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
@@ -66,7 +81,6 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
         jLabel1.setText("Dia:");
 
-        dia.setText("jTextField1");
         dia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 diaActionPerformed(evt);
@@ -75,7 +89,6 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
         jLabel2.setText("Mes:");
 
-        txt_mes.setText("jTextField1");
         txt_mes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_mesActionPerformed(evt);
@@ -84,19 +97,13 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
         jLabel3.setText("Año:");
 
-        txt_anyo.setText("jTextField1");
         txt_anyo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_anyoActionPerformed(evt);
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(l_pacientes);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -278,13 +285,13 @@ public class VistaEnfermeros extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jtf_apellidos;
     private javax.swing.JTextField jtf_hab;
+    private javax.swing.JList<String> l_pacientes;
     private javax.swing.JLabel lbl_apellidos;
     private javax.swing.JLabel lbl_hab;
     private javax.swing.JTextField txt_anyo;

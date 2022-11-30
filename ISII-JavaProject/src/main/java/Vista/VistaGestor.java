@@ -34,12 +34,15 @@ public class VistaGestor extends javax.swing.JFrame {
     public VistaGestor(Gestor gestor) {
         this.gestor = gestor;
         initComponents();
+        PrepararListas();
+    }
+    
+    private void PrepararListas(){
         enfermerosList = new DefaultListModel();
         medicosList = new DefaultListModel();
         list_medicos.setModel(medicosList);
         list_enfermeros.setModel(enfermerosList);
-        Medico m;
-        Enfermero e;
+
         venfermeros = new ArrayList<Enfermero>();
         vmedicos = new ArrayList<Medico>();
         

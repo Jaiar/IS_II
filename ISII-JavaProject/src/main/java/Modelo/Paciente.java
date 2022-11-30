@@ -17,7 +17,7 @@ public class Paciente {
     private String dni;
     private String nombre;
     private String apellidos;
-    private ArrayList<String> enfermedad;
+    private ArrayList<Enfermedad> enfermedad;
     private int doc_id;
     private int enfer_id;
     private int room_id;
@@ -55,8 +55,8 @@ public class Paciente {
             this.apellidos = apellidos;
             this.doc_id= doc;
             this.enfer_id = enfer;
-            this.enfermedad = new ArrayList<String>();
-            this.enfermedad.add(enfermedad);
+            this.enfermedad = new ArrayList<Enfermedad>();
+            //this.enfermedad.add(enfermedad);
             this.room_id = room;
             
             return true;
@@ -72,8 +72,14 @@ public class Paciente {
     public String getEnfermedades(){
         String enfe="";
         System.out.print("\n length 3-->" + enfermedad.size());
-        for(String e: enfermedad)
-            enfe += e;
+        
+        for(Enfermedad e: enfermedad)
+        {
+            enfe += e.toSting() ;
+            enfe += "\n.............................\n";
+            System.out.print("\n ccc-->" + e.toSting());
+            
+        }
         
         return enfe;
     }

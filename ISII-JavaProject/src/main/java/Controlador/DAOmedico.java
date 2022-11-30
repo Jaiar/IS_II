@@ -42,9 +42,8 @@ public class DAOmedico extends DAO{
                 int habitacion = resultados.getInt(6);
                 int medico_p_id = resultados.getInt(7);
                 int enfermero_id = resultados.getInt(8);
-                while(resultados.next()){
-                    if(resultados.getNString(2) == dni)
-                        enfermedades.add(resultados.getNString(9));
+                while(resultados.next() && resultados.getNString(2) == dni){
+                    enfermedades.add(resultados.getNString(9));
                 }
                 pacientes.add(new Paciente(dni, nombre, apellidos, enfermedades, medico_p_id, enfermero_id, habitacion));
             }

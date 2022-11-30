@@ -78,10 +78,10 @@ public class ConsultarHistorial extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(lst_fecha);
 
-        lst_enfermedades.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        lst_enfermedades.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lst_enfermedadesValueChanged(evt);
+            }
         });
         jScrollPane2.setViewportView(lst_enfermedades);
 
@@ -235,6 +235,14 @@ public class ConsultarHistorial extends javax.swing.JFrame {
         this.ch_contagiosa.setSelected(this.contagiosa);
     }//GEN-LAST:event_ch_contagiosaActionPerformed
 
+    private void lst_enfermedadesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lst_enfermedadesValueChanged
+        // Usuario selecciona una enfermedad -- mostrar informacion
+        Enfermedad enf = this.lst_enfermedades.getSelectedValue();
+        
+        this.contagiosa = enf.getcontagiosa();
+        this.ch_contagiosa.setSelected(this.contagiosa);
+    }//GEN-LAST:event_lst_enfermedadesValueChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_atras;
@@ -251,7 +259,7 @@ public class ConsultarHistorial extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JList<String> lst_enfermedades;
+    private javax.swing.JList<Enfermedad> lst_enfermedades;
     private javax.swing.JList<String> lst_fecha;
     private javax.swing.JList<String> lst_medicamentos;
     private javax.swing.JTextField txt_dni;

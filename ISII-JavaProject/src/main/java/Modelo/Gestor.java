@@ -4,7 +4,6 @@
  */
 package Modelo;
 
-import Data.Hospital;
 import java.util.Date;
 
 /**
@@ -14,11 +13,9 @@ import java.util.Date;
 public class Gestor extends Usuario{
     // Este usuario no interviene en el funcionamiento de la aplicación
     // tan solo se emplea para entrar al login para el metodo Consultar Medicos y Pacientes
-    private Hospital hospital;
 
-    public Gestor(Hospital hospital, int code, String nombre, String apellidos, String dni, String telefono, Date incorporacion) {
+    public Gestor( int code, String nombre, String apellidos, String dni, String telefono, Date incorporacion) {
         super(code, nombre, apellidos, dni, telefono, incorporacion);
-        this.hospital = hospital;
     }
 
     

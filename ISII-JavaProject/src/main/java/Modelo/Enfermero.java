@@ -5,7 +5,6 @@
 package Modelo;
 
 import Controlador.DAOenfermero;
-import Data.Hospital;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,13 +14,11 @@ import java.util.Date;
  */
 public class Enfermero extends Usuario{
     private ArrayList<Paciente> pacientes;
-    private Hospital hospital;
     
-    public Enfermero(int code, String name, String sur, String dni, String tel, Date incorporacion, Hospital hospital)
+    public Enfermero(int code, String name, String sur, String dni, String tel, Date incorporacion)
     {
         super(code, name, sur, dni, tel, incorporacion);
         
-        this.hospital = hospital;
         pacientes = new ArrayList<Paciente>();
         listaDeEnfermos(code);
         

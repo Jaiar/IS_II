@@ -87,10 +87,10 @@ public class DAO {
                 usuario_devuelto = new Medico( id, nombre, apellidos, dni_usuario, null, fecha_incorporacion);
                 break;
             case UsuariosDB.ENFERMERO:
-                usuario_devuelto = new Enfermero(id, nombre, apellidos, dni_usuario, null, fecha_incorporacion, null);
+                usuario_devuelto = new Enfermero(id, nombre, apellidos, dni_usuario, null, fecha_incorporacion);
                 break;
             case UsuariosDB.GESTOR:
-                usuario_devuelto = new Gestor(null, id, nombre, apellidos, dni_usuario, null, fecha_incorporacion);
+                usuario_devuelto = new Gestor( id, nombre, apellidos, dni_usuario, null, fecha_incorporacion);
                 break;
             default:
                 return null;

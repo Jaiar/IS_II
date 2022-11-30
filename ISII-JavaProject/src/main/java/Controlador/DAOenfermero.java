@@ -39,7 +39,7 @@ public class DAOenfermero extends DAO{
                 String apellidos = resultados.getNString(4);
                 int rol = resultados.getInt(5);
                 Date fecha = resultados.getDate(6);
-                Enfermero enf = new Modelo.Enfermero(code, nombre, apellidos, dni, null, fecha, null);
+                Enfermero enf = new Modelo.Enfermero(code, nombre, apellidos, dni, null, fecha);
                 enfermeros.add(enf);
             }
         }

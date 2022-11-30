@@ -5,12 +5,6 @@ import Controlador.DAO;
 import Modelo.Gestor;
 import Modelo.Enfermero;
 import Modelo.Medico;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.Date;
-import java.util.TimeZone;
 import javax.swing.JOptionPane;
 
 /**
@@ -104,7 +98,7 @@ public class Login extends javax.swing.JFrame {
         Object user_obj = DAO.autenticarUsuario(usuario, password);
         
         if ( user_obj == null ){
-            JOptionPane.showInternalMessageDialog(this, "El usuario no existe", "Autenticación", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "El usuario no existe", "Autenticación", JOptionPane.ERROR_MESSAGE);
             return;
         }
         

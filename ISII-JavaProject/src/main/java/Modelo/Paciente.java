@@ -6,6 +6,7 @@ package Modelo;
 
 import java.util.ArrayList;
 
+import Controlador.DAOpacientes;
 import java.util.ArrayList;
 
 /**
@@ -17,20 +18,21 @@ public class Paciente {
     private String nombre;
     private String apellidos;
     private ArrayList<String> enfermedad;
-    private int doc;
-    private int enfer;
-    private int room;
+    private int doc_id;
+    private int enfer_id;
+    private int room_id;
     private int id;
     
-    public Paciente(int id, String dni, String nombre, String apellidos, ArrayList enfermedad, int doc, int enfer, int room){
+    public Paciente(int id, String dni, String nombre, String apellidos, int doc, int enfer, int room){
         this.id = id;
         this.dni = dni;
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.doc= doc;
-        this.enfer = enfer;
-        this.enfermedad = enfermedad;
-        this.room = room;
+        this.doc_id= doc;
+        this.enfer_id = enfer;
+        this.room_id = room;
+        
+        this.enfermedad = DAOpacientes.getEnfermedades(this.id);
     }
     
     /**
@@ -51,11 +53,11 @@ public class Paciente {
             this.dni = dni;
             this.nombre = nombre;
             this.apellidos = apellidos;
-            this.doc= doc;
-            this.enfer = enfer;
+            this.doc_id= doc;
+            this.enfer_id = enfer;
             this.enfermedad = new ArrayList<String>();
             this.enfermedad.add(enfermedad);
-            this.room = room;
+            this.room_id = room;
             
             return true;
         }
@@ -76,7 +78,7 @@ public class Paciente {
         return enfe;
     }
     public int getDoctor(){
-        return doc;
+        return doc_id;
     }
     public int getID(){
         return id;
@@ -90,7 +92,9 @@ public class Paciente {
     public String getApellidos(){
         return this.apellidos;
     }
+    
+    @Override
     public String toString(){
-        return "DNI: "+ dni + "| ROOM: " + room + "| Nombre: "+ nombre +", Apellidos: "+ apellidos;
+        return "DNI: "+ dni + "| ROOM: " + room_id + "| Nombre: "+ nombre +", Apellidos: "+ apellidos;
     }
 }

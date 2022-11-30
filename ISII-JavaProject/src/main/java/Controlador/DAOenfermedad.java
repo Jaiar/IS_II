@@ -16,14 +16,14 @@ import java.sql.SQLException;
  * @author Mehdi
  */
 public class DAOenfermedad extends DAO {
-     public static ArrayList getEnfermedades(String nom){
+     public static ArrayList getEnfermedades(){
         ResultSet resultados = null;
         ArrayList<Enfermedad> enfermedades = new ArrayList<Enfermedad>();
         try {
          String con;
          Statement s = DAOenfermedad.getConnection().createStatement();
          // Consulta SQL
-         con = "SELECT * FROM enfermedad WHERE enfermedad = " + nom;
+         con = "SELECT * FROM enfermedad  " ;
          resultados = s.executeQuery(con);
          }
         catch (Exception e) { // Error en al realizar la consulta

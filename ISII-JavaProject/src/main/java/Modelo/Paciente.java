@@ -98,6 +98,12 @@ public class Paciente {
     public String getApellidos(){
         return this.apellidos;
     }
+
+    public int getHabitacion() {
+        return room_id;
+    }
+    
+    
     
     @Override
     public String toString(){

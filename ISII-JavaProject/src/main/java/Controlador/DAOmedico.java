@@ -92,7 +92,7 @@ public class DAOmedico extends DAO{
                         enfermedades.add(resultados.getNString(9));
                 }
                 else{
-                    pacientes.add(new Paciente(id, dni, nombre, apellidos, enfermedades, medico_p_id, enfermero_id, habitacion));
+                    pacientes.add(new Paciente(id, dni, nombre, apellidos, medico_p_id, enfermero_id, habitacion));
                     enfermedades = new ArrayList<String> ();
                 
                     id = resultados.getInt(1);
@@ -106,13 +106,8 @@ public class DAOmedico extends DAO{
                     if(!enfermedades.contains(resultados.getNString(9)))
                         enfermedades.add(resultados.getNString(9));
                 }
-<<<<<<< HEAD
-                pacientes.add(new Paciente(id, dni, nombre, apellidos, medico_p_id, enfermero_id, habitacion));
-                enfermedades = new ArrayList<String> ();
-=======
->>>>>>> b84e049e2fa9c99a698ee024e328098724eafc52
             }
-            pacientes.add(new Paciente(id, dni, nombre, apellidos, enfermedades, medico_p_id, enfermero_id, habitacion)); 
+            pacientes.add(new Paciente(id, dni, nombre, apellidos, medico_p_id, enfermero_id, habitacion)); 
         }
         catch(SQLException sqle){
             System.out.println("Error en la retirada de datos: " + sqle.getMessage());

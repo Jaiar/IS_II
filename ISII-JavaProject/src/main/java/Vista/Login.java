@@ -123,6 +123,7 @@ public class Login extends javax.swing.JFrame {
         if( user_obj instanceof Medico ){
             new VistaMedico((Medico)user_obj).setVisible(true);
             dispose();
+            System.out.print("FFFFFF\n");
             return;
         }
     }//GEN-LAST:event_btn_entrarActionPerformed

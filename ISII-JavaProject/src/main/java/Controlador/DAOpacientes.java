@@ -75,7 +75,7 @@ public class DAOpacientes extends DAO{
         
         try {
          String con;
-         Statement s = DAOmedico.getConnection().createStatement();
+         Statement s = DAO.getConnection().createStatement();
          // Consulta SQL
          con = "SELECT e.id_enfermedad, e.nombre, e.enfermedades_relacionadas, e.contagiosa "
                  + " FROM paciente_enfermedades pe JOIN enfermedad e ON (pe.id_enfermedad = e.id_enfermedad)"
@@ -107,5 +107,34 @@ public class DAOpacientes extends DAO{
         }
         
         return enfermedades;
+    }
+    
+    public static ArrayList getEnfermedadesByDNI(String dni){
+        ResultSet resultados = null;
+        
+        try {
+            String con;
+            Statement s = DAO.getConnection().createStatement();
+            // Consulta SQL
+            con = "SELECT id_paciente FROM paciente WHERE dni_paciente = '" + dni + "'";
+            resultados = s.executeQuery(con);
+        }
+        catch (Exception e) { // Error en al realizar la consulta
+            System.out.println("Error en la petición a la BD: get enfermedades");
+            e.printStackTrace();
+        }
+        
+        try{
+            resultados.next();
+            return DAOpacientes.getEnfermedades(resultados.getInt(1));
+        }
+        catch(SQLException sqle){
+            System.out.println("Error en la retirada de datos: " + sqle.getMessage());
+            return null;
+        }
+        catch(NullPointerException npe){
+            System.out.println("Error: Null Pointer");
+            return null;
+        }
     }
 }

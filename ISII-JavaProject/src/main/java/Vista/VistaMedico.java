@@ -291,6 +291,7 @@ public class VistaMedico extends javax.swing.JFrame {
 
         System.out.print("YYYYYY");
         
+        // Crea el texto que se pondrá en el JTextArea que tiene el historial de enfermedades.
         String text = pacientes.get(listaEnfermos.getSelectedIndex()).getEnfermedades().stream().map(e -> e.toString() + "\n").reduce("", String::concat);
 
         enfermedadText.setText(text);

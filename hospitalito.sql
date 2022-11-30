@@ -1,12 +1,12 @@
 -- phpMyAdmin SQL Dump
 -- version 5.2.0
--- https://www.phpmyadmin.net/
+-- https:--www.phpmyadmin.net-
 --
 -- Servidor: 127.0.0.1
 -- Tiempo de generación: 16-11-2022 a las 12:19:47
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
--- DROP DATABASE hospitalito;
+DROP DATABASE hospitalito;
 CREATE DATABASE hospitalito;
 USE hospitalito;
 
@@ -222,33 +222,33 @@ COMMIT;
 
 -- MEDICOS --
 INSERT INTO usuario
-VALUES (01, "M000000", "MEDICO", "PRUEBA", 1, '2001/01/01', "medico", "medico");
+VALUES (01, "M000000", "MEDICO", "PRUEBA", 1, '2001-01-01', "medico", "medico");
 
 INSERT INTO usuario
-VALUES (10, "M000001", "DON VICENTE", "CERVERON", 1, '2001/01/01', "don", "vicente");
+VALUES (10, "M000001", "DON VICENTE", "CERVERON", 1, '2001-01-01', "don", "vicente");
 
 INSERT INTO usuario
-VALUES (11, "M000002", "ARMANCIO", "ORTEGA", 1, '2011/01/01', "armancio", "ortega");
+VALUES (11, "M000002", "ARMANCIO", "ORTEGA", 1, '2011-01-01', "armancio", "ortega");
 
 -- ENFERMEROS --
 INSERT INTO usuario
-VALUES (02, "E000000", "ENFERMERO", "PRUEBA", 2, '2001/01/01', "enfermero", "enfermero");
+VALUES (02, "E000000", "ENFERMERO", "PRUEBA", 2, '2001-01-01', "enfermero", "enfermero");
 
 INSERT INTO usuario
-VALUES (20, "E000001", "ANTONIO", "BOLUDA", 2, '2002/02/02', "antonio", "boluda");
+VALUES (20, "E000001", "ANTONIO", "BOLUDA", 2, '2002-02-02', "antonio", "boluda");
 
 INSERT INTO usuario
-VALUES (21, "E000002", "MEHDI", "FRANCES", 2, '2003/03/03', "mehdi", "frances");
+VALUES (21, "E000002", "MEHDI", "FRANCES", 2, '2003-03-03', "mehdi", "frances");
 
 -- GESTORES --
 INSERT INTO usuario
-VALUES (03, "G000000", "GESTOR", "PRUEBA", 3, '2001/01/01', "gestor", "gestor");
+VALUES (03, "G000000", "GESTOR", "PRUEBA", 3, '2001-01-01', "gestor", "gestor");
 
 INSERT INTO usuario
-VALUES (30, "G000001", "RICARDO", "FERRIS", 3, '2005/08/06', "ricardo", "ferris");
+VALUES (30, "G000001", "RICARDO", "FERRIS", 3, '2005-08-06', "ricardo", "ferris");
 
 INSERT INTO usuario
-VALUES (31, "G000002", "MARIANO", "RAHOY", 3, '1960/08/06', "mariano", "rahoy");
+VALUES (31, "G000002", "MARIANO", "RAHOY", 3, '1960-08-06', "mariano", "rahoy");
 
 -- PACIENTES --
 INSERT INTO paciente
@@ -280,10 +280,10 @@ VALUES(2, 2, 2, 40, 1);
 
 -- HISTORIALES MEDICOS --
 INSERT INTO historialmedico
-VALUES(1, 1, 1, 12/12/2020);
+VALUES(1, 1, 1, 12-12-2020);
 
 INSERT INTO historialmedico
-VALUES(2, 2, 2, 10/10/2010);
+VALUES(2, 2, 2, 10-10-2010);
 
 -- PACIENTES ENFERMEDADES --
 INSERT INTO paciente_enfermedades

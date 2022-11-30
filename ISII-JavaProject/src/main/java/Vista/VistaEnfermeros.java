@@ -204,7 +204,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
     private void BotiquinHospitalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotiquinHospitalButtonActionPerformed
         // TODO add your handling code here:
-        vistaBotiquin = new BotiquinHospital (medico, enfermero, gestor);
+        vistaBotiquin = new BotiquinHospital (enfermero);
         vistaBotiquin.setVisible(true);
         dispose();
     }//GEN-LAST:event_BotiquinHospitalButtonActionPerformed

@@ -9,7 +9,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
+import java.sql.Date;
 import java.util.TimeZone;
 
 /**
@@ -49,11 +49,12 @@ public class DAO {
     
     public final static Object autenticarUsuario(String usuario, String contraseña){
         ResultSet resultados = null;
+        conectarDB();
         try {
          String con;
          Statement s = conexionBD.createStatement();
          // Consulta SQL
-         con = "SELECT * FROM usuario WHERE ";
+         con = "SELECT * FROM usuario WHERE user = '"+usuario+"' AND pass = '"+contraseña+"'";
          resultados = s.executeQuery(con);
          }
         catch (Exception e) { // Error en al realizar la consulta
@@ -62,19 +63,19 @@ public class DAO {
         
         Object usuario_devuelto;
         // Recoger todos los datos de la consulta.
-        int id;
-        short rol;
-        String dni_usuario;
-        String nombre;
-        String apellidos;
-        Date fecha_incorporacion;
+        int id=0, rol=0;
+        String dni_usuario="undefined", nombre="undefined", apellidos="undefined";
+        Date fecha_incorporacion = new Date(1900/01/01);
         try{
-            rol = resultados.getShort(5);
+            while (resultados.next())
+            {
+            rol = resultados.getInt(5);  
             id = resultados.getInt(1);
             dni_usuario = resultados.getNString(2);
             nombre = resultados.getNString(3);
             apellidos = resultados.getNString(4);
             fecha_incorporacion = resultados.getDate(6);
+            }
         }catch(SQLException e){
             // No existe el usuario
             System.out.println("Consulta SQL: " + e.getMessage());

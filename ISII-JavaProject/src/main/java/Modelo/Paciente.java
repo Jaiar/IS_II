@@ -77,6 +77,9 @@ public class Paciente {
     public int getDoctor(){
         return doc;
     }
+    public int getID(){
+        return id;
+    }
     public String getDNI(){
         return this.dni;
     }

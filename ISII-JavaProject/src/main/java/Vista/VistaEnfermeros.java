@@ -4,6 +4,7 @@ import Modelo.Gestor;
 import Modelo.Enfermero;
 import Modelo.Medico;
 import Modelo.Paciente;
+import java.time.LocalDate;
 
 /**
  *
@@ -17,12 +18,16 @@ public class VistaEnfermeros extends javax.swing.JFrame {
     private Gestor gestor;
     private Paciente paciente;
     private AñadirPaciente añadirPaciente;
+    private LocalDate currentdate = LocalDate.now();
     /**
      * Creates new form EnfermerosVista
      */
     public VistaEnfermeros(Enfermero enfermero) {
         initComponents();
         this.enfermero = enfermero;
+        this.dia.setText(currentdate.getDayOfMonth()+"");
+        this.txt_mes.setText(currentdate.getMonth()+"");
+        this.txt_anyo.setText(currentdate.getYear()+"");
     }
 
     /**

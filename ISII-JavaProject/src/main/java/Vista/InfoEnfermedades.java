@@ -236,7 +236,7 @@ public class InfoEnfermedades extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
-        viewMedico = new VistaMedico(medico,enfermero,gestor);
+        viewMedico = new VistaMedico(medico);
         viewMedico.setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_salirActionPerformed

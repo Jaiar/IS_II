@@ -242,7 +242,7 @@ public class AñadirPaciente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonExitMouseClicked
-        viewMedico = new VistaMedico(medico,enfermero, gestor);
+        viewMedico = new VistaMedico(medico);
         viewMedico.setVisible(true);
         dispose();        
     }//GEN-LAST:event_botonExitMouseClicked

@@ -59,17 +59,17 @@ public class VistaGestor extends javax.swing.JFrame {
         */
         
         Hospital h = new Hospital();
-        m= new Medico(h,1,"Manolo","García","12345678F","656565653",new Date());
-        //e= new Enfermero(1,"Pedro","Garcés","87654321F","666999333",new Date(),h);
+        // m= new Medico(h,1,"Manolo","García","12345678F","656565653",new Date());
+        // e= new Enfermero(1,"Pedro","Garcés","87654321F","666999333",new Date(),h);
         
-        medicosList.addElement(m.getNombre());
-        //enfermerosList.addElement(e.getNombre());
+        // medicosList.addElement(m.getNombre());
+        // enfermerosList.addElement(e.getNombre());
         
         for(int i=0; i<venfermeros.size(); i++)
             enfermerosList.addElement(venfermeros.get(i).getNombre());
         
         //venfermeros.add(e);
-        vmedicos.add(m);
+        //vmedicos.add(m);
     }
 
     /**

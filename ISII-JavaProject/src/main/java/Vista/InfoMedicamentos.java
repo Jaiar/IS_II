@@ -257,7 +257,7 @@ public class InfoMedicamentos extends javax.swing.JFrame {
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        viewMedico = new VistaMedico(medico,enfermero, gestor);
+        viewMedico = new VistaMedico(medico);
         viewMedico.setVisible(true);
         dispose();
     }                                        

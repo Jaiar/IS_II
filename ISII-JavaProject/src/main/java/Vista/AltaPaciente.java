@@ -9,6 +9,7 @@ import Modelo.Enfermero;
 import Modelo.Gestor;
 import Modelo.Medico;
 import Modelo.Paciente;
+import Modelo.Enfermedad;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -48,7 +49,9 @@ public class AltaPaciente extends javax.swing.JFrame {
         this.textDNIPaciente.setText( paciente.getDNI());
         this.textNombrePaciente.setText(paciente.getNombre());
         this.apellidosTextPaciente.setText(paciente.getApellidos());
-        this.enfermedadText.setText(paciente.getEnfermedades());
+        
+        String text = paciente.getEnfermedades().stream().map(e -> e.toString() + "\n").reduce("", String::concat);
+        this.enfermedadText.setText(text);
 
         this.DiaComboBox.addItem(currentdate.getDayOfMonth()+"");
         this.MesComboBox.addItem(currentdate.getMonthValue()+"");

@@ -69,8 +69,9 @@ public class Paciente {
     }
     public String getEnfermedades(){
         String enfe="";
+        System.out.print("\n length 3-->" + enfermedad.size());
         for(String e: enfermedad)
-               enfe += e;
+            enfe += e;
         
         return enfe;
     }

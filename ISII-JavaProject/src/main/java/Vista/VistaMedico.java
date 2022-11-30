@@ -287,6 +287,7 @@ public class VistaMedico extends javax.swing.JFrame {
         // TODO add your handling code here:
          if(listaEnfermos.getSelectedIndex() != -1)
         {
+            System.out.print("YYYYYY");
             enfermedadText.setText(pacientes.get(listaEnfermos.getSelectedIndex()).getEnfermedades());
         }
     }//GEN-LAST:event_listaEnfermosMouseClicked

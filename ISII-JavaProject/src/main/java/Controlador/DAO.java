@@ -85,6 +85,7 @@ public class DAO {
         switch(rol){
             case UsuariosDB.MEDICO:
                 usuario_devuelto = new Medico( id, nombre, apellidos, dni_usuario, null, fecha_incorporacion);
+                System.out.println("HOLLLLLA________1>");
                 break;
             case UsuariosDB.ENFERMERO:
                 usuario_devuelto = new Enfermero(id, nombre, apellidos, dni_usuario, null, fecha_incorporacion);

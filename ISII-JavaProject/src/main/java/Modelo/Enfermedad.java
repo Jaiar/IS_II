@@ -142,9 +142,9 @@ public class Enfermedad {
       
         
     }
-    public String toSting(){
-        return "Nombre: "+nombre+"\n"+"Enfermedades: "+enfermedad_relacionada+
-            "\n"+"dosis: "+dosis+"\n"+"Efectos secundarios: "+veces+"\n"+"Contagiosa: "+contagiosa+"\n";
+    @Override
+    public String toString(){
+        return "Nombre: " + nombre + "\n" + "Contagiosa: " + (contagiosa ? "Si":"No") + "\n\n";
     }
 }
 

@@ -287,15 +287,15 @@ public class VistaMedico extends javax.swing.JFrame {
 
     private void listaEnfermosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaEnfermosMouseClicked
         // TODO add your handling code here:
-         if(listaEnfermos.getSelectedIndex() != -1)
-        {
-            System.out.print("YYYYYY");
-            String text = "";
-            for(Enfermedad e: pacientes.get(listaEnfermos.getSelectedIndex()).getEnfermedades())
-                text += e.toString() + "\n";
-                
-            enfermedadText.setText(text);
-        }
+        if(listaEnfermos.getSelectedIndex() == -1)
+            return;
+
+        System.out.print("YYYYYY");
+        
+        String text = pacientes.get(listaEnfermos.getSelectedIndex()).getEnfermedades().stream().map(e -> e.toString() + "\n").reduce("", String::concat);
+
+        enfermedadText.setText(text);
+
     }//GEN-LAST:event_listaEnfermosMouseClicked
 
 

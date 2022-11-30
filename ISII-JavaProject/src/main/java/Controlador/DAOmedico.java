@@ -72,6 +72,7 @@ public class DAOmedico extends DAO{
         try{
             ArrayList<String>  enfermedades = new ArrayList<String> ();
             while(resultados.next()){
+                int id = resultados.getInt(1);
                 String dni = resultados.getNString(2);
                 String nombre = resultados.getNString(3);
                 String apellidos = resultados.getNString(4);
@@ -81,7 +82,7 @@ public class DAOmedico extends DAO{
                 while(resultados.next() && resultados.getNString(2) == dni){
                     enfermedades.add(resultados.getNString(9));
                 }
-                pacientes.add(new Paciente(dni, nombre, apellidos, enfermedades, medico_p_id, enfermero_id, habitacion));
+                pacientes.add(new Paciente(id, dni, nombre, apellidos, enfermedades, medico_p_id, enfermero_id, habitacion));
             }
         }
         catch(SQLException sqle){
@@ -90,5 +91,44 @@ public class DAOmedico extends DAO{
         }
         
         return pacientes;
+    }
+    
+    public static void setHistorialPaciente(int id){
+        ResultSet resultados = null;
+        int historial=0;
+        int paciente=0;
+        int enfermedad=0;
+        try {
+            String con;
+            Statement s = DAOmedico.getConnection().createStatement();
+            // Consulta SQL
+            con = "SELECT * INTO " +historial+","+paciente+","+enfermedad +"FROM pacientes_enfermedades WHERE id_paciente = " + id;
+            resultados = s.executeQuery(con);
+         }
+        catch (Exception e) { // Error en al realizar la consulta
+            System.out.println("Error en la petición a la BD");
+        }
+        try {
+            String con;
+            Statement s = DAOmedico.getConnection().createStatement();
+            // Consulta SQL
+            con = "DELETE FROM pacientes_enfermedades WHERE id_paciente =" + id;
+            resultados = s.executeQuery(con);
+         }
+        catch (Exception e) { // Error en al realizar la consulta
+            System.out.println("Error en la petición a la BD");
+        }
+        
+        try {
+            String con;
+            Statement s = DAOmedico.getConnection().createStatement();
+            // Consulta SQL
+            con = "INSERT INTO historialmedico (id_historial, id_paciente, id_enfermedad, fecha_alta) VALUES (" + historial +","+paciente+","+enfermedad+",SYSDATE()";
+            resultados = s.executeQuery(con);
+         }
+        catch (Exception e) { // Error en al realizar la consulta
+            System.out.println("Error en la petición a la BD");
+        }
+        
     }
 }

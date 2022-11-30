@@ -253,6 +253,7 @@ public class AltaPaciente extends javax.swing.JFrame {
      
         
         listaHistorialPacientes = new DefaultListModel();
+        medico.setAltaPaciente(paciente.getID());
         
         pacienteNuevo = (paciente.getEnfermedades() +" "+ currentdate);
         //Pacientes.add(Pacientenuevo);

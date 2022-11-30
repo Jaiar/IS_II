@@ -40,6 +40,11 @@ public class Medico extends Usuario{
     public Date getFecha(){
         return this.incorporacion;
     }
+    public ArrayList<Paciente> setAltaPaciente(int num){
+        DAOmedico.setHistorialPaciente(num);
+        pacientes = DAOmedico.getPacientes(code);
+        return pacientes;
+    }
 }
 
 

@@ -20,8 +20,10 @@ public class Paciente {
     private int doc;
     private int enfer;
     private int room;
+    private int id;
     
-    public Paciente(String dni, String nombre, String apellidos, ArrayList enfermedad, int doc, int enfer, int room){
+    public Paciente(int id, String dni, String nombre, String apellidos, ArrayList enfermedad, int doc, int enfer, int room){
+        this.id = id;
         this.dni = dni;
         this.nombre = nombre;
         this.apellidos = apellidos;

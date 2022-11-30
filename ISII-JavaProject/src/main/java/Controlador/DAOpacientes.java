@@ -33,6 +33,7 @@ public class DAOpacientes extends DAO{
         try{
             ArrayList<String>  enfermedades = new ArrayList<String> ();
             while(resultados.next()){
+                int id = resultados.getInt(1);
                 String dni = resultados.getNString(2);
                 String nombre = resultados.getNString(3);
                 String apellidos = resultados.getNString(4);
@@ -43,7 +44,7 @@ public class DAOpacientes extends DAO{
                     if(resultados.getNString(2) == dni)
                         enfermedades.add(resultados.getNString(9));
                 }
-                pacientes.add(new Paciente(dni, nombre, apellidos, enfermedades, medico_p_id, enfermero_id, habitacion));
+                pacientes.add(new Paciente(id, dni, nombre, apellidos, enfermedades, medico_p_id, enfermero_id, habitacion));
             }
         }
         catch(SQLException sqle){

@@ -52,7 +52,7 @@ public class DAOenfermero extends DAO{
     }
     public static ArrayList getMedicamentosHospital(int cantidad){
         ResultSet resultados = null;
-        ArrayList medicamentos = new ArrayList();
+        ArrayList<Medicamento> medicamentos = new ArrayList();
         try {
          String con;
          Statement s = DAOmedico.getConnection().createStatement();
@@ -61,7 +61,8 @@ public class DAOenfermero extends DAO{
                  + "m.efectos_secundarios, m.cantidad, e.nombre FROM "
                  + "(medicamento m JOIN tratamiento t "
                  + "ON m.id_medicamento = t.id_medicamento ) JOIN enfermedad e "
-                 + "ON e.id_enfermedad = t.id_enfermedad WHERE cantidad = " + cantidad;
+                 + "ON e.id_enfermedad = t.id_enfermedad WHERE cantidad <= " + cantidad;
+         
          resultados = s.executeQuery(con);
          }
         catch (Exception e) { // Error en al realizar la consulta
@@ -76,25 +77,59 @@ public class DAOenfermero extends DAO{
             ArrayList<String> e_secundarios = new ArrayList<String> ();
             ArrayList<String> enfermedad = new ArrayList<String> ();
             
+            resultados.next();
+            id = resultados.getInt(1);
+            nombre = resultados.getNString(2);
+            cant_med = resultados.getInt(5);   
+            if(!alergias.contains(resultados.getNString(3)))
+                        alergias.add(resultados.getNString(3));
+            if(!e_secundarios.contains(resultados.getNString(4)))
+                e_secundarios.add(resultados.getNString(4));           
+
+            if(!enfermedad.contains(resultados.getNString(6)))
+                enfermedad.add(resultados.getNString(6));
+            
             while(resultados.next()){
-                if(resultados.getInt(5)<cantidad)
+                
+                
+                if(id == resultados.getInt(1))
                 {
-                    id = resultados.getInt(1);
-                    nombre = resultados.getNString(2);
                     if(!alergias.contains(resultados.getNString(3)))
                         alergias.add(resultados.getNString(3));
 
                     if(!e_secundarios.contains(resultados.getNString(4)))
-                        e_secundarios.add(resultados.getNString(4));            
-
-
-                    cant_med = resultados.getInt(5);
+                        e_secundarios.add(resultados.getNString(4));           
 
                     if(!enfermedad.contains(resultados.getNString(6)))
                         enfermedad.add(resultados.getNString(6));
                 }
+                else
+                {
+                    medicamentos.add(new Medicamento( id, nombre, enfermedad, alergias, e_secundarios, cant_med));
+                    System.out.print(":__>_>_>_>_\n");
+                    alergias = new ArrayList<String> ();
+                    e_secundarios = new ArrayList<String> ();
+                    enfermedad = new ArrayList<String> ();
+                    
+                    id = resultados.getInt(1);
+                    nombre = resultados.getNString(2);
+                    cant_med = resultados.getInt(5);
+                    if(!alergias.contains(resultados.getNString(3)))
+                        alergias.add(resultados.getNString(3));
+
+                    if(!e_secundarios.contains(resultados.getNString(4)))
+                        e_secundarios.add(resultados.getNString(4));           
+
+                    if(!enfermedad.contains(resultados.getNString(6)))
+                        enfermedad.add(resultados.getNString(6));
+                    
+                    
+                    
+                }
+                medicamentos.add(new Medicamento( id, nombre, enfermedad, alergias, e_secundarios, cant_med));
+                System.out.print("UNO PILLADO\n");
             }
-            medicamentos.add(new Medicamento( id, nombre, enfermedad, alergias, e_secundarios, cant_med));
+            
         }
         catch(SQLException sqle){
             System.out.println("Error en la retirada de datos: " + sqle.getMessage());

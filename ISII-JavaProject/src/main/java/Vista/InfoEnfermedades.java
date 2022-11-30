@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Controlador.DAOenfermedad;
 import Modelo.Medicamento;
 import Modelo.Enfermedad;
 import Modelo.Enfermero;
@@ -244,7 +245,7 @@ public class InfoEnfermedades extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_salirActionPerformed
  private void PrepararListas(){
      venfermedades = new ArrayList <Enfermedad>();
-     
+     venfermedades = DAOenfermedad.getEnfermedades();
      for(int i=0; i<venfermedades.size(); i++)
             cbo_enfermedad.addItem(venfermedades.get(i).getNombre());
  }

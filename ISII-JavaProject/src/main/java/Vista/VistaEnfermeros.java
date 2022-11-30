@@ -23,6 +23,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
     private AñadirPaciente añadirPaciente;
     private LocalDate currentdate = LocalDate.now();
     private DefaultListModel<String> pacientesList;
+    private ArrayList<Paciente> vpacientes;
 
     /**
      * Creates new form EnfermerosVista
@@ -35,7 +36,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
         this.txt_anyo.setText(currentdate.getYear()+"");
         pacientesList = new DefaultListModel<String>();
         
-        ArrayList<Paciente> vpacientes = new ArrayList<Paciente>();   
+        vpacientes = new ArrayList<Paciente>();   
         vpacientes = DAOpacientes.getPacientes();
         
                 
@@ -103,6 +104,11 @@ public class VistaEnfermeros extends javax.swing.JFrame {
             }
         });
 
+        l_pacientes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                l_pacientesValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(l_pacientes);
 
         jTextArea1.setColumns(20);
@@ -141,11 +147,14 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
         lbl_hab.setText("Habitación:");
 
+        jtf_apellidos.setText("                     ");
         jtf_apellidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtf_apellidosActionPerformed(evt);
             }
         });
+
+        jtf_hab.setText("                     ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -194,7 +203,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
                                         .addGap(102, 102, 102)
                                         .addComponent(jLabel5)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtf_hab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jtf_hab)))
                         .addGap(49, 49, 49))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -272,6 +281,17 @@ public class VistaEnfermeros extends javax.swing.JFrame {
     private void jtf_apellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_apellidosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtf_apellidosActionPerformed
+
+    private void l_pacientesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_l_pacientesValueChanged
+        int x = l_pacientes.getSelectedIndex();
+        Paciente paciente = vpacientes.get(x);
+
+        this.jtf_apellidos.setText(paciente.getApellidos());
+        this.jtf_hab.setText(""+paciente.getHabitacion());
+
+            
+            // TODO add your handling code here:
+    }//GEN-LAST:event_l_pacientesValueChanged
 
 
 

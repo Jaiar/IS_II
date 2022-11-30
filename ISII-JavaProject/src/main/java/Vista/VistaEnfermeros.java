@@ -289,8 +289,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
         this.jtf_apellidos.setText(paciente.getApellidos());
         this.jtf_hab.setText(""+paciente.getHabitacion());
 
-            
-            // TODO add your handling code here:
+        
     }//GEN-LAST:event_l_pacientesValueChanged
 
 

@@ -221,19 +221,20 @@ ALTER TABLE `tratamiento`
 COMMIT;
 
 INSERT INTO usuario
-VALUES (1, "A000000", "DON VICENTE", "CERVERON", 1, 01/01/2001, "don", "vicente");
+VALUES (1, "A000000", "DON VICENTE", "CERVERON", 1, '2001/01/01', "don", "vicente");
 
 INSERT INTO usuario
-VALUES (11, "A000001", "ARMANCIO", "ORTEGA", 1, 01/01/2011, "armancio", "ortega");
+VALUES (11, "A000001", "ARMANCIO", "ORTEGA", 1, '2011/01/01', "armancio", "ortega");
 
 INSERT INTO usuario
-VALUES (2, "B000000", "ANTONIO", "BOLUDA", 2, 02/02/2002, "antonio", "boluda");
+VALUES (2, "B000000", "ANTONIO", "BOLUDA", 2, '2002/02/02', "antonio", "boluda");
 
 INSERT INTO usuario
-VALUES (22, "B000001", "MEHDI", "FRANCES", 2, 02/02/2003, "mehdi", "frances");
+VALUES (22, "B000001", "MEHDI", "FRANCES", 2, '2003/03/03', "mehdi", "frances");
 
 INSERT INTO usuario
-VALUES (3, "C00000", "RICARDO", "FERRIS", 3, 01/01/2001, "ricardo", "ferris");
+VALUES (3, "C00000", "RICARDO", "FERRIS", 3, '2005/08/06', "ricardo", "ferris");
+
 
 INSERT INTO paciente
 VALUES (1, "D000000", "ERNESTO", "FASCISTA", 611111111, 1, 1, 1);

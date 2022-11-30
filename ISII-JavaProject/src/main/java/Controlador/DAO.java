@@ -4,6 +4,8 @@ import Modelo.Medico;
 import Modelo.Enfermero;
 import Modelo.Gestor;
 
+import Controlador.UserFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -18,11 +20,6 @@ import java.util.TimeZone;
  */
 public class DAO {
     private static Connection conexionBD;
-    private static class UsuariosDB {
-        public static final short MEDICO = 1;
-        public static final short ENFERMERO = 2;
-        public static final short GESTOR = 3;
-    }
     
     protected DAO(){}
     
@@ -82,20 +79,7 @@ public class DAO {
             return null;
         }
         
-        switch(rol){
-            case UsuariosDB.MEDICO:
-                usuario_devuelto = new Medico( id, nombre, apellidos, dni_usuario, null, fecha_incorporacion);
-                break;
-            case UsuariosDB.ENFERMERO:
-                usuario_devuelto = new Enfermero(id, nombre, apellidos, dni_usuario, null, fecha_incorporacion);
-                break;
-            case UsuariosDB.GESTOR:
-                usuario_devuelto = new Gestor( id, nombre, apellidos, dni_usuario, null, fecha_incorporacion);
-                break;
-            default:
-                return null;
-        }
-        
-        return usuario_devuelto;
+        return UserFactory.hacerUsuario(UserFactory.Usuario_Tipo.getTipo(rol), 
+                  id, nombre, apellidos, dni_usuario, rol, fecha_incorporacion);
     }
 }

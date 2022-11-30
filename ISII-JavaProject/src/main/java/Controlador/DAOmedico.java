@@ -89,7 +89,7 @@ public class DAOmedico extends DAO{
                 while(resultados.next() && resultados.getInt(1) == id){
                     enfermedades.add(resultados.getNString(9));
                 }
-                pacientes.add(new Paciente(id, dni, nombre, apellidos, enfermedades, medico_p_id, enfermero_id, habitacion));
+                pacientes.add(new Paciente(id, dni, nombre, apellidos, medico_p_id, enfermero_id, habitacion));
                 enfermedades = new ArrayList<String> ();
             }
         }

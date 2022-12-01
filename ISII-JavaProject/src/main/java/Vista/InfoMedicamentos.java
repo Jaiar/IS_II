@@ -53,7 +53,7 @@ public class InfoMedicamentos extends javax.swing.JPanel {
                     
                     Medicamento[] medicamentos = (Medicamento[]) DAOmedico.getMedicamentosByNombre(criterio).toArray();
                     
-                    cbo_medicamentos.setModel(new DefaultComboBoxModel<Medicamento>(medicamentos));                    
+                    cbo_medicamentos.setModel(new DefaultComboBoxModel<>(medicamentos));                    
                 }
 
                 @Override

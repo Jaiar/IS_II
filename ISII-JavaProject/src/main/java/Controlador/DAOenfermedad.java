@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * @author Mehdi
  */
 public class DAOenfermedad {
-     public static ArrayList getEnfermedades(){
+     public static ArrayList<Enfermedad> getEnfermedades(){
         ResultSet resultados = null;
         ArrayList<Enfermedad> enfermedades = new ArrayList<Enfermedad>();
         try {

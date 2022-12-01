@@ -63,6 +63,7 @@ public class InfoEnfermedades extends javax.swing.JFrame {
                 // Buscar enfermedad que tenga criterio.
 
                 Enfermedad[] enfermedades = (Enfermedad[]) DAOenfermedad.getEnfermedades().toArray();
+                System.out.println(enfermedades);
 
                 cbo_enfermedad.setModel(new DefaultComboBoxModel<Enfermedad>(enfermedades));
 

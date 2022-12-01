@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class DAOpacientes {
     
-    public static ArrayList getPacientes(){
+    public static ArrayList getAllPacientes(){
         ResultSet resultados = null;
         ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
         try {

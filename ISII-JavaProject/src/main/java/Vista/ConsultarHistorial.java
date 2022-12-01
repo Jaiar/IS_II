@@ -7,14 +7,8 @@ package Vista;
 
 import Controlador.DAOpacientes;
 import java.util.List;
-import javax.swing.DefaultListModel;
 import Modelo.Enfermedad;
-import Modelo.Enfermero;
-import Modelo.Gestor;
-import Vista.VistaMedico;
-import Modelo.Historial;
 import Modelo.Medico;
-import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 
 /**

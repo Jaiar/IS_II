@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *
  * @author rrajo
  */
-public class DAOpacientes extends DAO{
+public class DAOpacientes {
     
     public static ArrayList getPacientes(){
         ResultSet resultados = null;

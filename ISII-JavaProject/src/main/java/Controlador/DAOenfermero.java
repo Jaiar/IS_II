@@ -15,7 +15,7 @@ import java.util.Date;
  * @author algar
  */
 
-public class DAOenfermero extends DAO{
+public class DAOenfermero {
     
     public static ArrayList getPacientes(int id_enfermero){return null;} // Falta implementar
     
@@ -25,7 +25,7 @@ public class DAOenfermero extends DAO{
         ArrayList<Enfermero> enfermeros = new ArrayList<Enfermero>();
         try {
             String con;
-            Statement s = DAOenfermero.getConnection().createStatement();
+            Statement s = DAO.getConnection().createStatement();
             // Consulta SQL
             con = "SELECT * FROM usuario WHERE rol = 2";
             resultados = s.executeQuery(con);
@@ -58,7 +58,7 @@ public class DAOenfermero extends DAO{
         ArrayList<Medicamento> medicamentos = new ArrayList();
         try {
          String con;
-         Statement s = DAOmedico.getConnection().createStatement();
+         Statement s = DAO.getConnection().createStatement();
          // Consulta SQL
          con = "SELECT m.id_medicamento, m.nombre, m.alergias, "
                  + "m.efectos_secundarios, m.cantidad, e.nombre FROM "
@@ -108,7 +108,7 @@ public class DAOenfermero extends DAO{
                 }
                 else
                 {
-                    medicamentos.add(new Medicamento( id, nombre, enfermedad, alergias, e_secundarios, cant_med));
+                    medicamentos.add(new Medicamento( id, nombre, alergias, e_secundarios, cant_med));
                     System.out.print(":__>_>_>_>_\n");
                     alergias = new ArrayList<String> ();
                     e_secundarios = new ArrayList<String> ();

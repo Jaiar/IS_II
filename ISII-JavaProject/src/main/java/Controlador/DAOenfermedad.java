@@ -12,13 +12,13 @@ import java.sql.SQLException;
  *
  * @author Mehdi
  */
-public class DAOenfermedad extends DAO {
+public class DAOenfermedad {
      public static ArrayList getEnfermedades(){
         ResultSet resultados = null;
         ArrayList<Enfermedad> enfermedades = new ArrayList<Enfermedad>();
         try {
          String con;
-         Statement s = DAOenfermedad.getConnection().createStatement();
+         Statement s = DAO.getConnection().createStatement();
          // Consulta SQL
          con = "SELECT * FROM enfermedad  " ;
          resultados = s.executeQuery(con);

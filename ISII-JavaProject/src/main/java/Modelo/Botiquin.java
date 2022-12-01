@@ -12,17 +12,17 @@ import java.util.ArrayList;
  */
 public class Botiquin {
     private ArrayList<Medicamento> medicamentos;
-    private boolean pertenece=false;
     
     public Botiquin(){
         
-        medicamentos = new ArrayList<Medicamento>();
+        medicamentos = null;
        
     }
     
-    public ArrayList<Medicamento> consultarBotiquin(int num){
-        medicamentos = DAOenfermero.getMedicamentosHospital(num);        
+    public ArrayList consultar(){
+        if ( medicamentos == null )
+            ;//Consulta SQL para obtener todos los medicamentos
+        
         return medicamentos;
     }
-    
 }

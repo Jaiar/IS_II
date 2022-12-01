@@ -132,10 +132,6 @@ public class BotiquinHospital extends javax.swing.JFrame {
             listaMedicamentosBotiquin = new DefaultListModel();
             medicamentos = enfermero.consultarBotiquin(number);
 
-
-            for (Medicamento m: medicamentos)
-                listaMedicamentosBotiquin.addElement(m.toStringBotiquin());
-
             lst_botiquin.setModel(listaMedicamentosBotiquin);
         }
         catch (NumberFormatException ex){

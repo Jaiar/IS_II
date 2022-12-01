@@ -2,6 +2,7 @@ package Controlador;
 
 import Modelo.Medico;
 import Modelo.Paciente;
+import Modelo.Medicamento;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -13,7 +14,7 @@ import java.util.Date;
  *
  * @author algar
  */
-public class DAOmedico extends DAO{
+public class DAOmedico {
     
      public static ArrayList getAllMedicos(){
         DAO.conectarDB();
@@ -21,7 +22,7 @@ public class DAOmedico extends DAO{
         ArrayList<Medico> medicos = new ArrayList<Medico>();
         try {
             String con;
-            Statement s = DAOenfermero.getConnection().createStatement();
+            Statement s = DAO.getConnection().createStatement();
             // Consulta SQL
             con = "SELECT * FROM usuario WHERE rol = 1";
             resultados = s.executeQuery(con);
@@ -56,7 +57,7 @@ public class DAOmedico extends DAO{
         
         try {
             String con;
-            Statement s = DAOmedico.getConnection().createStatement();
+            Statement s = DAO.getConnection().createStatement();
             // Consulta SQL
             con = "SELECT * FROM paciente WHERE medico = " + medico_id;
             resultados = s.executeQuery(con);
@@ -95,7 +96,7 @@ public class DAOmedico extends DAO{
         System.out.print("ESTOY EN GET PACIENTES\n");
         try {
             String con;
-            Statement s = DAOmedico.getConnection().createStatement();
+            Statement s = DAO.getConnection().createStatement();
             // Consulta SQL
             con = "SELECT p.id_paciente, p.dni_paciente, p.nombre, p.apellidos, "
                     + "p.telefono, p.habitacion, p.medico, p.enfermero, e.nombre "   
@@ -156,6 +157,41 @@ public class DAOmedico extends DAO{
         return pacientes;
     }
     
+    public static ArrayList getMedicamentosByNombre(String nombre_medicamento){
+        ResultSet resultados = null;
+        
+        try {
+            String con;
+            Statement s = DAO.getConnection().createStatement();
+            // Consulta SQL
+            con = "SELECT * FROM medicamentos WHERE LOWER(nombre) LIKE '" + nombre_medicamento.toLowerCase() + "%';";
+            resultados = s.executeQuery(con);
+        }
+        catch (SQLException e) { // Error en al realizar la consulta
+            System.out.println("Error en la petición a la BD");
+        }
+        
+        ArrayList<Medicamento> medicamentos = new ArrayList<>();
+        
+        try{
+            while(resultados.next()){
+                int id = resultados.getInt(1);
+                String nombre = resultados.getNString(2);
+                String alergias = resultados.getNString(3);
+                String efectos_secundarios = resultados.getNString(4);
+                int cantidad = resultados.getInt(5);
+                
+                medicamentos.add(new Medicamento(id, nombre, alergias, efectos_secundarios, cantidad));
+            }
+        }
+        catch(SQLException sqle){
+            System.out.println("Error en la retirada de datos: " + sqle.getMessage());
+            return null;
+        }
+        
+        return medicamentos;
+    }
+    
     public static void setHistorialPaciente(int id){
         ResultSet resultados = null;
         int historial=0;
@@ -163,7 +199,7 @@ public class DAOmedico extends DAO{
         int enfermedad=0;
         try {
             String con;
-            Statement s = DAOmedico.getConnection().createStatement();
+            Statement s = DAO.getConnection().createStatement();
             // Consulta SQL
             con = "SELECT * INTO " +historial+","+paciente+","+enfermedad +"FROM pacientes_enfermedades WHERE id_paciente = " + id;
             resultados = s.executeQuery(con);
@@ -173,7 +209,7 @@ public class DAOmedico extends DAO{
         }
         try {
             String con;
-            Statement s = DAOmedico.getConnection().createStatement();
+            Statement s = DAO.getConnection().createStatement();
             // Consulta SQL
             con = "DELETE FROM pacientes_enfermedades WHERE id_paciente =" + id;
             resultados = s.executeQuery(con);
@@ -184,7 +220,7 @@ public class DAOmedico extends DAO{
         
         try {
             String con;
-            Statement s = DAOmedico.getConnection().createStatement();
+            Statement s = DAO.getConnection().createStatement();
             // Consulta SQL
             con = "INSERT INTO historialmedico (id_historial, id_paciente, id_enfermedad, fecha_alta) VALUES (" + historial +","+paciente+","+enfermedad+",SYSDATE()";
             resultados = s.executeQuery(con);

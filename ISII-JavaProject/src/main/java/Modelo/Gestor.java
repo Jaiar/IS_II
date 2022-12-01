@@ -17,10 +17,9 @@ public class Gestor extends Usuario{
     public Gestor( int code, String nombre, String apellidos, String dni, String telefono, Date incorporacion) {
         super(code, nombre, apellidos, dni, telefono, incorporacion);
     }
-
     
-     
-    
-
-    
+    @Override
+    public void launchMenu(){
+        new Vista.VistaGestor(this).setVisible(true);
+    }
 }

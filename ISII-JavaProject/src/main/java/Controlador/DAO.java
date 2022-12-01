@@ -3,6 +3,7 @@ package Controlador;
 import Modelo.Medico;
 import Modelo.Enfermero;
 import Modelo.Gestor;
+import Modelo.Usuario;
 
 import Controlador.UserFactory;
 
@@ -44,7 +45,7 @@ public class DAO {
         }
     }
     
-    public final static Object autenticarUsuario(String usuario, String contraseña){
+    public final static Usuario autenticarUsuario(String usuario, String contraseña){
         ResultSet resultados = null;
         conectarDB();
         try {

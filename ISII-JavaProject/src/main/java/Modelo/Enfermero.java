@@ -57,4 +57,9 @@ public class Enfermero extends Usuario{
     public Date getFecha(){
         return this.incorporacion;
     }
+    
+    @Override
+    public void launchMenu(){
+        new Vista.VistaEnfermeros(this).setVisible(true);
+    }
 }

@@ -2,9 +2,7 @@
 package Vista;
 
 import Controlador.DAO;
-import Modelo.Gestor;
-import Modelo.Enfermero;
-import Modelo.Medico;
+import Modelo.Usuario;
 import javax.swing.JOptionPane;
 
 /**
@@ -95,30 +93,16 @@ public class Login extends javax.swing.JFrame {
         String usuario = this.txt_usuario.getText();
         String password = this.txt_password.getText();
         
-        Object user_obj = DAO.autenticarUsuario(usuario, password);
+        Usuario user_obj = DAO.autenticarUsuario(usuario, password);
         
         if ( user_obj == null ){
             JOptionPane.showMessageDialog(this, "El usuario no existe", "Autenticación", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        if ( user_obj instanceof Enfermero ){
-            new VistaEnfermeros((Enfermero)user_obj).setVisible(true);
-            dispose();
-            return;
-        }
+        user_obj.launchMenu();
         
-        if( user_obj instanceof Gestor ){
-            new VistaGestor((Gestor)user_obj).setVisible(true);
-            dispose();
-            return;
-        }
-        
-        if( user_obj instanceof Medico ){
-            new VistaMedico((Medico)user_obj).setVisible(true);
-            dispose();
-            return;
-        }
+        dispose();
     }//GEN-LAST:event_btn_entrarActionPerformed
 
     /**

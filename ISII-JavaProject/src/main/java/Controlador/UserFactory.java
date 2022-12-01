@@ -4,6 +4,7 @@ package Controlador;
 import Modelo.Enfermero;
 import Modelo.Gestor;
 import Modelo.Medico;
+import Modelo.Usuario;
 
 import java.util.Date;
 
@@ -26,7 +27,7 @@ public class UserFactory {
         }
     }
     
-    public static Object hacerUsuario(Usuario_Tipo u_t, int id, String nombre, String apellidos, String dni_usuario, int telefono, Date fecha_incorporacion){
+    public static Usuario hacerUsuario(Usuario_Tipo u_t, int id, String nombre, String apellidos, String dni_usuario, int telefono, Date fecha_incorporacion){
         switch(u_t){
             case MEDICO:
                 return new Medico( id, nombre, apellidos, dni_usuario, null, fecha_incorporacion);

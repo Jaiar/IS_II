@@ -48,6 +48,11 @@ public class Medico extends Usuario{
         pacientes = DAOmedico.getPacientes(code);
         return pacientes;
     }
+    
+    @Override
+    public void launchMenu(){
+        new Vista.VistaMedico(this).setVisible(true);
+    }
 }
 
 

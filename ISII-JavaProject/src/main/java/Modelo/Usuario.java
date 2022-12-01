@@ -11,7 +11,7 @@ import java.util.Date;
  *
  * @author algar
  */
-public class Usuario {
+public abstract class Usuario {
     protected int code;
     protected String nombre;
     protected String apellidos;
@@ -31,4 +31,6 @@ public class Usuario {
     public int getId(){
         return this.code;
     }
+    
+    public abstract void launchMenu();
 }

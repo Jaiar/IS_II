@@ -7,9 +7,8 @@ package Vista;
 import Controlador.DAOenfermedad;
 import Modelo.Medicamento;
 import Modelo.Enfermedad;
-import Modelo.Enfermero;
-import Modelo.Gestor;
 import Modelo.Medico;
+
 import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.event.DocumentEvent;
@@ -18,6 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.text.Document;
 import javax.swing.text.BadLocationException;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
 /**
@@ -26,21 +26,16 @@ import javax.swing.ListModel;
  */
 public class InfoEnfermedades extends javax.swing.JFrame {
     private VistaMedico viewMedico;
-    private Medico medico;
-    private Enfermero enfermero;
-    private Gestor gestor;
-    private Enfermedad enf;
-    private boolean ok;
-    private ArrayList <Enfermedad> venfermedades;
-    private String nom;
+    private Object user;
+    
+    private Enfermedad enf_select;
     /**
      * Creates new form InfoEnfermedades
      */
-    public InfoEnfermedades(Medico medico, Enfermero enfermero, Gestor gestor) {
+    public InfoEnfermedades(Object user) {
         initComponents();
-        this.medico = medico;
-        this.enfermero = enfermero;
-        this.gestor = gestor;
+        
+        this.enf_select = null;
         
         //<editor-fold defaultstate="collapsed" desc="Buscador enfermedades progresivas -- setup">
         Component editor = this.cbo_enfermedad.getEditor().getEditorComponent();
@@ -66,14 +61,10 @@ public class InfoEnfermedades extends javax.swing.JFrame {
                 }
 
                 // Buscar enfermedad que tenga criterio.
-                /*
-                ArrayList<Enfermedad> enfermedad = consultaSQL;
 
-                Enfermedad[] enfermedades = consultaSQL;
+                Enfermedad[] enfermedades = (Enfermedad[]) DAOenfermedad.getEnfermedades().toArray();
 
-                this.cbo_enfermedad.setModel(new DefaultComboBoxModel<Enfermedad>(enfermedades));
-
-                */
+                cbo_enfermedad.setModel(new DefaultComboBoxModel<Enfermedad>(enfermedades));
 
             }
 
@@ -151,7 +142,6 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         jLabel6.setText("Veces al día:");
 
         ch_contagiosa.setText("Contagiosa");
-        ch_contagiosa.setEnabled(false);
         ch_contagiosa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ch_contagiosaActionPerformed(evt);
@@ -239,28 +229,15 @@ public class InfoEnfermedades extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
-        viewMedico = new VistaMedico(medico);
-        viewMedico.setVisible(true);
+        new VistaMedico((Medico)user).setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_salirActionPerformed
- private void PrepararListas(){
-     venfermedades = new ArrayList <Enfermedad>();
-     venfermedades = DAOenfermedad.getEnfermedades();
-     for(int i=0; i<venfermedades.size(); i++)
-            cbo_enfermedad.addItem(venfermedades.get(i).getNombre());
- }
+
     private void ch_contagiosaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ch_contagiosaActionPerformed
         // TODO add your handling code here:
-      
-         ok = enf.getcontagiosa();
-       if(ok == true)
-       {
-           enf.setcontagiosa(false) ;
-       }
-       else
-       {
-           enf.setcontagiosa(true) ;
-       }
+        try{
+            this.ch_contagiosa.setSelected(this.enf_select.getContagiosa());
+        }catch(NullPointerException npe){}
     }//GEN-LAST:event_ch_contagiosaActionPerformed
 
     private void cbo_enfermedadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_enfermedadItemStateChanged
@@ -268,29 +245,13 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         if ( evt.getStateChange() != java.awt.event.ItemEvent.SELECTED )
             return;
         
-         nom = (String) evt.getItem();
-          for(int i=0; i<venfermedades.size(); i++)
-              if(venfermedades.get(i).getNombre() == nom)
-                enf =(venfermedades.get(i));
-         txt_dosis_dia.setText(String.valueOf(enf.getveces()));
-         txt_dosis_recom.setText(String.valueOf(enf.getDosis()));
-         DefaultListModel<Medicamento> list_model_medicamentos = new DefaultListModel<Medicamento>();
-         for( Medicamento m: enf.getMedicamento() ){
-             list_model_medicamentos.addElement(m);
-         }
-         this.lst_medicamentos.setModel((ListModel)list_model_medicamentos);
-         
-         DefaultListModel<Enfermedad> list_model_enfermedades = new DefaultListModel<Enfermedad>();
-         for ( Enfermedad enf_r: enf.getenfermedad_relacionada() ){
-             list_model_enfermedades.addElement(enf_r);
-         }
-         this.lst_enfermedades.setModel((ListModel) list_model_enfermedades);
+        this.enf_select = (Enfermedad) this.cbo_enfermedad.getSelectedItem();
     }//GEN-LAST:event_cbo_enfermedadItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_salir;
-    private javax.swing.JComboBox<String> cbo_enfermedad;
+    private javax.swing.JComboBox<Enfermedad> cbo_enfermedad;
     private javax.swing.JCheckBox ch_contagiosa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -305,5 +266,4 @@ public class InfoEnfermedades extends javax.swing.JFrame {
     private javax.swing.JTextField txt_dosis_dia;
     private javax.swing.JTextField txt_dosis_recom;
     // End of variables declaration//GEN-END:variables
-    private String enfermedad;
 }

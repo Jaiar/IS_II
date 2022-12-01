@@ -32,23 +32,15 @@ public class DAOpacientes extends DAO{
         }
         
         try{
-            
-            resultados.next();
-                    
-            int id = resultados.getInt(1);
-            String dni = resultados.getNString(2);
-            String nombre = resultados.getNString(3);
-            String apellidos = resultados.getNString(4);
-            int habitacion = resultados.getInt(6);
-            int medico_p_id = resultados.getInt(7);
-            int enfermero_id = resultados.getInt(8);
+            int id;
+            String dni;
+            String nombre;
+            String apellidos;
+            int habitacion;
+            int medico_p_id;
+            int enfermero_id;
 
-            
-                
             while(resultados.next()){
-                pacientes.add(new Paciente(id, dni, nombre, apellidos, medico_p_id, enfermero_id, habitacion));
-
-
                 id = resultados.getInt(1);
                 dni = resultados.getNString(2);
                 nombre = resultados.getNString(3);
@@ -60,7 +52,6 @@ public class DAOpacientes extends DAO{
                 pacientes.add(new Paciente(id, dni, nombre, apellidos, medico_p_id, enfermero_id, habitacion));
 
             }
-            pacientes.add(new Paciente(id, dni, nombre, apellidos, medico_p_id, enfermero_id, habitacion));
         }
         catch(SQLException sqle){
             System.out.println("Error en la retirada de datos: " + sqle.getMessage());
@@ -81,7 +72,7 @@ public class DAOpacientes extends DAO{
                  + " FROM paciente_enfermedades pe JOIN enfermedad e ON (pe.id_enfermedad = e.id_enfermedad)"
                  + " WHERE pe.id_paciente = " + id;
          resultados = s.executeQuery(con);
-         }
+        }
         catch (Exception e) { // Error en al realizar la consulta
             System.out.println("Error en la petición a la BD: get enfermedades");
             e.printStackTrace();
@@ -94,7 +85,7 @@ public class DAOpacientes extends DAO{
                 int e_rel = resultados.getInt(3);
                 boolean contagiosa = resultados.getInt(4) == 1;
                 
-                enfermedades.add(new Enfermedad(nombre, null, null, 0.0f, 0, contagiosa));
+                enfermedades.add(new Enfermedad(id_e, nombre, contagiosa));
             }
         }
         catch(SQLException sqle){

@@ -29,13 +29,11 @@ public class DAOenfermedad extends DAO {
         
         try{
             while(resultados.next()){
+                int id = resultados.getInt(1);
                 String nombre = resultados.getNString(2);
-                ArrayList<Medicamento> medicamento = (ArrayList<Medicamento>) resultados.getArray(3);
-                ArrayList<Enfermedad> enfermedad_relacionada = (ArrayList<Enfermedad>) resultados.getArray(4);
-                float dosis = resultados.getFloat(6);
-                int veces= resultados.getInt(7);
-                boolean contagiosa = resultados.getBoolean(8);
-                enfermedades.add(new Enfermedad( nombre, medicamento,enfermedad_relacionada,dosis,veces,contagiosa));
+                int enfer_rel = resultados.getInt(3);
+                boolean contagiosa = resultados.getBoolean(4);
+                enfermedades.add(new Enfermedad( id, nombre, contagiosa ));
             }
         }
         catch(SQLException sqle){
@@ -45,6 +43,8 @@ public class DAOenfermedad extends DAO {
         
         return enfermedades;
     }
+     
+     public static ArrayList getEnfermedadesRelacionadas(int id){return null;}
 }
 
 

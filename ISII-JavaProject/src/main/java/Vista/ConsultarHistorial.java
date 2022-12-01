@@ -239,7 +239,7 @@ public class ConsultarHistorial extends javax.swing.JFrame {
         // Usuario selecciona una enfermedad -- mostrar informacion
         Enfermedad enf = this.lst_enfermedades.getSelectedValue();
         
-        this.contagiosa = enf.getcontagiosa();
+        this.contagiosa = enf.getContagiosa();
         this.ch_contagiosa.setSelected(this.contagiosa);
     }//GEN-LAST:event_lst_enfermedadesValueChanged
 

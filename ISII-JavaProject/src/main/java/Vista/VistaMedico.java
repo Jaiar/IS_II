@@ -271,7 +271,7 @@ public class VistaMedico extends javax.swing.JFrame {
 
     private void InfoMedicamenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoMedicamenteButtonActionPerformed
         // TODO add your handling code here:
-        new InfoMedicamentos(medico).setVisible(true);
+        new InfoMedicamentos(this.medico).setVisible(true);
         dispose();
     }//GEN-LAST:event_InfoMedicamenteButtonActionPerformed
 

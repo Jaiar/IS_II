@@ -36,52 +36,6 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         initComponents();
         
         this.enf_select = null;
-        
-        //<editor-fold defaultstate="collapsed" desc="Buscador enfermedades progresivas -- setup">
-        Component editor = this.cbo_enfermedad.getEditor().getEditorComponent();
-        
-        if ( !(editor instanceof JTextField) ) return;           // Guard clause
-        
-        ((JTextField)editor)
-                .getDocument()
-                .addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent documentEvent) {
-                //To change body of implemented methods use File | Settings | File Templates.
-                Document doc = documentEvent.getDocument();
-
-                if ( doc.getLength() < 3 )
-                    return;
-
-                try{
-                    String criterio = doc.getText(0, doc.getLength());
-                }catch(BadLocationException ble){
-                    ble.printStackTrace();
-                    return;
-                }
-
-                // Buscar enfermedad que tenga criterio.
-
-                Enfermedad[] enfermedades = (Enfermedad[]) DAOenfermedad.getEnfermedades().toArray();
-                System.out.println(enfermedades);
-
-                cbo_enfermedad.setModel(new DefaultComboBoxModel<Enfermedad>(enfermedades));
-
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent documentEvent) {
-                //To change body of implemented methods use File | Settings | File Templates.
-                Document doc = documentEvent.getDocument();
-                try{
-                System.out.println(doc.getText(0, doc.getLength()));
-                }catch(Exception x){}
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent documentEvent) {}
-        });
-        //</editor-fold>
     }
 
     /**
@@ -108,6 +62,7 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         ch_contagiosa = new javax.swing.JCheckBox();
         txt_dosis_recom = new javax.swing.JTextField();
         txt_dosis_dia = new javax.swing.JTextField();
+        btn_buscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -153,6 +108,13 @@ public class InfoEnfermedades extends javax.swing.JFrame {
 
         txt_dosis_dia.setEditable(false);
 
+        btn_buscar.setText("Buscar");
+        btn_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_buscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,13 +127,15 @@ public class InfoEnfermedades extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbo_enfermedad, 0, 296, Short.MAX_VALUE))
+                                .addComponent(cbo_enfermedad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_buscar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addGap(0, 9, Short.MAX_VALUE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,7 +166,8 @@ public class InfoEnfermedades extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(cbo_enfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbo_enfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_buscar))
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -249,8 +214,13 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         this.enf_select = (Enfermedad) this.cbo_enfermedad.getSelectedItem();
     }//GEN-LAST:event_cbo_enfermedadItemStateChanged
 
+    private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
+        
+    }//GEN-LAST:event_btn_buscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_buscar;
     private javax.swing.JButton btn_salir;
     private javax.swing.JComboBox<Enfermedad> cbo_enfermedad;
     private javax.swing.JCheckBox ch_contagiosa;

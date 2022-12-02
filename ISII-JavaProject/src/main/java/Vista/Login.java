@@ -48,6 +48,12 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        txt_password.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_passwordKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,7 +95,7 @@ public class Login extends javax.swing.JFrame {
 
     private void btn_entrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_entrarActionPerformed
         // TODO add your handling code here:
-        
+        this.setEnabled(false);
         String usuario = this.txt_usuario.getText();
         String password = this.txt_password.getText();
         
@@ -97,6 +103,7 @@ public class Login extends javax.swing.JFrame {
         
         if ( user_obj == null ){
             JOptionPane.showMessageDialog(this, "El usuario no existe", "Autenticación", JOptionPane.ERROR_MESSAGE);
+            this.setEnabled(true);
             return;
         }
         
@@ -104,6 +111,11 @@ public class Login extends javax.swing.JFrame {
         
         dispose();
     }//GEN-LAST:event_btn_entrarActionPerformed
+
+    private void txt_passwordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_passwordKeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER)
+            this.btn_entrarActionPerformed(null);
+    }//GEN-LAST:event_txt_passwordKeyPressed
 
     /**
      * @param args the command line arguments

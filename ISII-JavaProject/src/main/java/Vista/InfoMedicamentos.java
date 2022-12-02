@@ -31,44 +31,6 @@ public class InfoMedicamentos extends javax.swing.JPanel {
         initComponents();
         
         this.user = user;
-        
-        Component editor = this.cbo_medicamentos.getEditor().getEditorComponent();
-        if (editor instanceof javax.swing.JTextField) {
-            ((javax.swing.JTextField) editor).getDocument().addDocumentListener(new DocumentListener() {
-                @Override
-                public void insertUpdate(DocumentEvent documentEvent) {
-                    //To change body of implemented methods use File | Settings | File Templates.
-                    Document doc = documentEvent.getDocument();
-                    
-                    if ( doc.getLength() < 3 )
-                        return;
-                    
-                    String criterio;
-                    try{
-                        criterio = doc.getText(0, doc.getLength());
-                    }catch(BadLocationException ble){
-                        ble.printStackTrace();
-                        return;
-                    }
-                    
-                    Medicamento[] medicamentos = (Medicamento[]) DAOmedico.getMedicamentosByNombre(criterio).toArray();
-                    
-                    cbo_medicamentos.setModel(new DefaultComboBoxModel<>(medicamentos));                    
-                }
-
-                @Override
-                public void removeUpdate(DocumentEvent documentEvent) {
-                    //To change body of implemented methods use File | Settings | File Templates.
-                    Document doc = documentEvent.getDocument();
-                    try{
-                    System.out.println(doc.getText(0, doc.getLength()));
-                    }catch(Exception x){}
-                }
-
-                @Override
-                public void changedUpdate(DocumentEvent documentEvent) {}
-            });                                      
-        }
     }
 
     /**

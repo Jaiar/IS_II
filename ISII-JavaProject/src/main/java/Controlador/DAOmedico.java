@@ -16,7 +16,7 @@ import java.util.Date;
  */
 public class DAOmedico {
     
-     public static ArrayList getAllMedicos(){
+    public static ArrayList getAllMedicos(){
         DAO.conectarDB();
         ResultSet resultados = null;
         ArrayList<Medico> medicos = new ArrayList<Medico>();
@@ -50,8 +50,8 @@ public class DAOmedico {
         
         return medicos;
     }
-     
-     public static ArrayList getPacientes(int medico_id){
+    
+    public static ArrayList getPacientes(int medico_id){
         ResultSet resultados = null;
         ArrayList<Paciente> pacientes = new ArrayList<>();
         
@@ -87,73 +87,6 @@ public class DAOmedico {
             return null;
         }
         
-        return pacientes;
-     }
-    
-    public static ArrayList getPacientes2(int medico_id){
-        ResultSet resultados = null;
-        ArrayList<Paciente> pacientes = new ArrayList<>();
-        System.out.print("ESTOY EN GET PACIENTES\n");
-        try {
-            String con;
-            Statement s = DAO.getConnection().createStatement();
-            // Consulta SQL
-            con = "SELECT p.id_paciente, p.dni_paciente, p.nombre, p.apellidos, "
-                    + "p.telefono, p.habitacion, p.medico, p.enfermero, e.nombre "   
-                    + "FROM (paciente p JOIN paciente_enfermedades pe ON "
-                    + "p.id_paciente = pe.id_paciente ) JOIN enfermedad e "
-                    + "ON e.id_enfermedad = pe.id_enfermedad "
-                    + "WHERE p.medico = " + medico_id;
-            resultados = s.executeQuery(con);
-        }
-        catch (Exception e) { // Error en al realizar la consulta
-            System.out.println("Error en la petición a la BD");
-        }
-        
-        try{
-            ArrayList<String>  enfermedades = new ArrayList<String> ();
-            
-            resultados.next();
-                    
-            int id = resultados.getInt(1);
-            String dni = resultados.getNString(2);
-            String nombre = resultados.getNString(3);
-            String apellidos = resultados.getNString(4);
-            int habitacion = resultados.getInt(6);
-            int medico_p_id = resultados.getInt(7);
-            int enfermero_id = resultados.getInt(8);
-            if(!enfermedades.contains(resultados.getNString(9)))
-                enfermedades.add(resultados.getNString(9));
-            
-            while(resultados.next()){
-                if(id == resultados.getInt(1))
-                {
-                    if(!enfermedades.contains(resultados.getNString(9)))
-                        enfermedades.add(resultados.getNString(9));
-                }
-                else{
-                    pacientes.add(new Paciente(id, dni, nombre, apellidos, medico_p_id, enfermero_id, habitacion));
-                    enfermedades = new ArrayList<String> ();
-                
-                    id = resultados.getInt(1);
-                    dni = resultados.getNString(2);
-                    nombre = resultados.getNString(3);
-                    apellidos = resultados.getNString(4);
-                    habitacion = resultados.getInt(6);
-                    medico_p_id = resultados.getInt(7);
-                    enfermero_id = resultados.getInt(8);
-                    
-                    if(!enfermedades.contains(resultados.getNString(9)))
-                        enfermedades.add(resultados.getNString(9));
-                }
-            }
-            pacientes.add(new Paciente(id, dni, nombre, apellidos, medico_p_id, enfermero_id, habitacion)); 
-        }
-        catch(SQLException sqle){
-            System.out.println("Error en la retirada de datos: " + sqle.getMessage());
-            return null;
-        }
-        System.out.print("SALGo EN GET PACIENTES\n");
         return pacientes;
     }
     
@@ -192,7 +125,7 @@ public class DAOmedico {
         return medicamentos;
     }
     
-    public static void setHistorialPaciente(int id){
+     public static void setHistorialPaciente(int id){
         ResultSet resultados = null;
         int historial=0;
         int paciente=0;
@@ -228,6 +161,5 @@ public class DAOmedico {
         catch (Exception e) { // Error en al realizar la consulta
             System.out.println("Error en la petición a la BD");
         }
-        
     }
 }

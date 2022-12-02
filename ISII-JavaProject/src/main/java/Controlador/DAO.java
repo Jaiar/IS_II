@@ -1,11 +1,6 @@
 package Controlador;
 
-import Modelo.Medico;
-import Modelo.Enfermero;
-import Modelo.Gestor;
 import Modelo.Usuario;
-
-import Controlador.UserFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -55,11 +50,9 @@ public class DAO {
          con = "SELECT * FROM usuario WHERE user = '"+usuario+"' AND pass = '"+contraseña+"'";
          resultados = s.executeQuery(con);
          }
-        catch (Exception e) { // Error en al realizar la consulta
+        catch (SQLException e) { // Error en al realizar la consulta
             System.out.println("Error en la petición a la BD");
         }
-        
-        Object usuario_devuelto;
         // Recoger todos los datos de la consulta.
         int id=0, rol=0;
         String dni_usuario="undefined", nombre="undefined", apellidos="undefined";

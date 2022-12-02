@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controlador;
 
 import Modelo.Paciente;
@@ -61,7 +57,7 @@ public class DAOpacientes {
         return pacientes;
     }
     
-    public static ArrayList getEnfermedades(int id){
+    public static ArrayList getEnfermedades(int id_paciente){
         ResultSet resultados = null;
         
         try {
@@ -70,7 +66,7 @@ public class DAOpacientes {
          // Consulta SQL
          con = "SELECT e.id_enfermedad, e.nombre, e.enfermedades_relacionadas, e.contagiosa "
                  + " FROM paciente_enfermedades pe JOIN enfermedad e ON (pe.id_enfermedad = e.id_enfermedad)"
-                 + " WHERE pe.id_paciente = " + id;
+                 + " WHERE pe.id_paciente = " + id_paciente;
          resultados = s.executeQuery(con);
         }
         catch (Exception e) { // Error en al realizar la consulta

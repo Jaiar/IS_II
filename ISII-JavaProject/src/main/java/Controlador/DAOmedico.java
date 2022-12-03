@@ -1,5 +1,7 @@
 package Controlador;
 
+import Modelo.Enfermedad;
+import Modelo.Enfermero;
 import Modelo.Medico;
 import Modelo.Paciente;
 import Modelo.Medicamento;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.Locale;
 /**
  *
  * @author algar
@@ -17,9 +20,8 @@ import java.util.Date;
 public class DAOmedico {
     
     public static ArrayList getAllMedicos(){
-        DAO.conectarDB();
         ResultSet resultados = null;
-        ArrayList<Medico> medicos = new ArrayList<Medico>();
+        
         try {
             String con;
             Statement s = DAO.getConnection().createStatement();
@@ -31,6 +33,7 @@ public class DAOmedico {
             System.out.println("Error en la petición a la BD");
         }
         
+        ArrayList<Medico> medicos = new ArrayList<>();
         try{
             while(resultados.next()){
                 int code = resultados.getInt(1);
@@ -90,14 +93,15 @@ public class DAOmedico {
         return pacientes;
     }
     
-    public static ArrayList getMedicamentosByNombre(String nombre_medicamento){
+    public static ArrayList<Medicamento> getMedicamentosByNombre(String nombre_medicamento){
         ResultSet resultados = null;
         
         try {
             String con;
             Statement s = DAO.getConnection().createStatement();
+            Locale SPANISH = Locale.forLanguageTag("es");
             // Consulta SQL
-            con = "SELECT * FROM medicamentos WHERE LOWER(nombre) LIKE '" + nombre_medicamento.toLowerCase() + "%';";
+            con = "SELECT * FROM medicamento WHERE LOWER(nombre) LIKE '" + nombre_medicamento.toLowerCase(SPANISH) + "%';";
             resultados = s.executeQuery(con);
         }
         catch (SQLException e) { // Error en al realizar la consulta
@@ -123,6 +127,39 @@ public class DAOmedico {
         }
         
         return medicamentos;
+    }
+    
+    public static ArrayList<Enfermedad> getEnfermedadesByNombre(String nombre_enfermedad){
+        ResultSet resultados = null;
+        
+        try {
+            String con;
+            Statement s = DAO.getConnection().createStatement();
+            // Consulta SQL
+            Locale SPANISH = Locale.forLanguageTag("es");
+            con = "SELECT * FROM enfermedad WHERE LOWER(nombre) LIKE '" + nombre_enfermedad.toLowerCase(SPANISH) +"%';";
+            resultados = s.executeQuery(con);
+            }
+        catch (SQLException e) { // Error en al realizar la consulta
+            System.out.println("getEnfermedadesByNombre @ DAOmedico -- error en la base de datos");
+            return null;
+        }
+        
+        ArrayList<Enfermedad> enfermedades = new ArrayList<>();
+        
+        try{
+            while( resultados.next() ){
+                int id = resultados.getInt(1);
+                String nombre = resultados.getNString(2);
+                int enf_rel = resultados.getInt(3);
+                boolean contagiosa = resultados.getBoolean(4);
+                enfermedades.add(new Enfermedad(id, nombre, contagiosa));
+            }
+        }catch(SQLException sqle){
+            System.out.println("getEnfermedadesByNombre @ DAOmedico -- error en la recogida de datos");
+        }
+        
+        return enfermedades;
     }
     
      public static void setHistorialPaciente(int id){

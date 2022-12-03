@@ -5,6 +5,7 @@ import Modelo.Enfermedad;
 import Modelo.Medico;
 
 import Controlador.DAOmedico;
+import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -169,15 +170,18 @@ public class InfoMedicamento extends javax.swing.JFrame {
             return;
         }
         
-        Medicamento[] medicamentos;
+        ArrayList<Medicamento> arr = new ArrayList<Medicamento>();
         try{
-            medicamentos = (Medicamento[])DAOmedico.getMedicamentosByNombre(texto).toArray();
+            arr = DAOmedico.getMedicamentosByNombre(texto);
         }catch(NullPointerException npe){
             JOptionPane.showMessageDialog(this, "No se ha encontrado el medicamento", "Busqueda de medicamento", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        this.cbo_medicamentos.setModel(new DefaultComboBoxModel(medicamentos));
+        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        dcbm.addAll(arr);
+        this.cbo_medicamentos.setModel(dcbm);
+        this.cbo_medicamentos.setPopupVisible(true);
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void cbo_medicamentosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cbo_medicamentosKeyPressed

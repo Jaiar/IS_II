@@ -17,16 +17,16 @@ import java.util.TimeZone;
 public class DAO {
     private static Connection conexionBD;
     
-    protected DAO(){}
+    private DAO(){}
     
-    protected final static Connection getConnection(){
+    public final static Connection getConnection(){
         if(conexionBD == null)
             DAO.conectarDB();
         
         return DAO.conexionBD;
     }
     
-    protected final static void conectarDB(){
+    private final static void conectarDB(){
     
         String bd = "jdbc:mysql://localhost/hospitalito?serverTimezone=" + TimeZone.getDefault().getID();
         try {

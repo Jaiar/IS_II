@@ -4,22 +4,19 @@
  */
 package Vista;
 
-import Controlador.DAOenfermedad;
-import Modelo.Medicamento;
+import Controlador.DAOmedico;
 import Modelo.Enfermedad;
 import Modelo.Medico;
-
-import java.awt.Component;
 import java.util.ArrayList;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
+import java.util.Vector;
+
 import javax.swing.JTextField;
 import javax.swing.text.Document;
 import javax.swing.text.BadLocationException;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Bobby
@@ -36,6 +33,7 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         initComponents();
         
         this.enf_select = null;
+        this.user = user;
     }
 
     /**
@@ -210,12 +208,33 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         // TODO add your handling code here:
         if ( evt.getStateChange() != java.awt.event.ItemEvent.SELECTED )
             return;
-        
-        this.enf_select = (Enfermedad) this.cbo_enfermedad.getSelectedItem();
+        try{
+            this.enf_select = (Enfermedad) this.cbo_enfermedad.getSelectedItem();
+        }catch(ClassCastException cce){}
     }//GEN-LAST:event_cbo_enfermedadItemStateChanged
 
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
+        Document doc = (Document)((JTextField) this.cbo_enfermedad.getEditor().getEditorComponent()).getDocument();
+        String texto;
+        try {
+            texto = doc.getText(0, doc.getLength());
+        } catch (BadLocationException ex) {
+            System.out.println("btn_buscarActionPerformed @ InfoMedicamento -- BadLocation in document from JComboBox");
+            return;
+        }
         
+        ArrayList<Enfermedad> enfermedades_arrlist = new ArrayList<Enfermedad>();
+        try{
+            enfermedades_arrlist = DAOmedico.getEnfermedadesByNombre(texto);
+        }catch(NullPointerException npe){
+            JOptionPane.showMessageDialog(this, "No se ha encontrado la enfermedad", "Busqueda de enfermedad", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        dcbm.addAll(enfermedades_arrlist);
+        this.cbo_enfermedad.setModel(dcbm);
+        this.cbo_enfermedad.setPopupVisible(true);
     }//GEN-LAST:event_btn_buscarActionPerformed
 
 

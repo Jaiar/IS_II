@@ -44,6 +44,10 @@ public class Enfermedad {
         return this.enfermedades_relacionadas;
     }
     
+    public int getId(){
+        return this.id;
+    }
+    
     /**
     * Obtiene el nombre de la enfermedad
     * @return  nombre de la enfermedad.

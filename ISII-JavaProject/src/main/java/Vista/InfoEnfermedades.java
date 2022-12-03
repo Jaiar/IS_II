@@ -4,6 +4,7 @@
  */
 package Vista;
 
+import Controlador.DAOenfermedad;
 import Controlador.DAOmedico;
 import Modelo.Enfermedad;
 import Modelo.Medico;
@@ -15,6 +16,7 @@ import javax.swing.text.Document;
 import javax.swing.text.BadLocationException;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -76,6 +78,12 @@ public class InfoEnfermedades extends javax.swing.JFrame {
             }
         });
 
+        lst_medicamentos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lst_medicamentos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lst_medicamentosValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(lst_medicamentos);
 
         btn_salir.setText("Salir");
@@ -89,6 +97,7 @@ public class InfoEnfermedades extends javax.swing.JFrame {
 
         jLabel4.setText("Enfermedades relacionadas:");
 
+        lst_enfermedades.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(lst_enfermedades);
 
         jLabel5.setText("Dosis recomendada:");
@@ -205,12 +214,27 @@ public class InfoEnfermedades extends javax.swing.JFrame {
     }//GEN-LAST:event_ch_contagiosaActionPerformed
 
     private void cbo_enfermedadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_enfermedadItemStateChanged
-        // TODO add your handling code here:
-        if ( evt.getStateChange() != java.awt.event.ItemEvent.SELECTED )
+        Object selected_obj = ((javax.swing.JComboBox)evt.getSource()).getSelectedItem();
+        
+        if (!( selected_obj instanceof Enfermedad ))
             return;
-        try{
-            this.enf_select = (Enfermedad) this.cbo_enfermedad.getSelectedItem();
-        }catch(ClassCastException cce){}
+        
+        Enfermedad enfermedad = (Enfermedad)selected_obj;
+        this.enf_select = enfermedad;
+        
+        ArrayList<Modelo.Medicamento> medicamentos = DAOenfermedad.getMedicamentosTratan(enfermedad.getId());
+        
+        DefaultListModel dflstmodel = new DefaultListModel();
+        dflstmodel.addAll(medicamentos);
+        this.lst_medicamentos.setModel(dflstmodel);
+        
+        ArrayList<Enfermedad> enfermedades_relacionadas = DAOenfermedad.getEnfermedadesRelacionadas(enfermedad.getId());
+        
+        DefaultListModel dflstmodel2 = new DefaultListModel();
+        dflstmodel.addAll(enfermedades_relacionadas);
+        this.lst_enfermedades.setModel(dflstmodel2);
+        
+        this.ch_contagiosaActionPerformed(null);
     }//GEN-LAST:event_cbo_enfermedadItemStateChanged
 
     private void btn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_buscarActionPerformed
@@ -236,6 +260,20 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         this.cbo_enfermedad.setModel(dcbm);
         this.cbo_enfermedad.setPopupVisible(true);
     }//GEN-LAST:event_btn_buscarActionPerformed
+
+    private void lst_medicamentosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lst_medicamentosValueChanged
+        Object obj_selected = evt.getSource();
+        
+        if(!( obj_selected instanceof javax.swing.JList ))
+            return;
+        
+        Modelo.Medicamento medicamento = (Modelo.Medicamento)((javax.swing.JList)obj_selected).getSelectedValue();
+        
+        Modelo.Tratamiento trat = (Modelo.Tratamiento)DAOenfermedad.getTratamientos(medicamento.getId(), this.enf_select.getId());
+        
+        this.txt_dosis_dia.setText(""+trat.getVeces_dosis());
+        this.txt_dosis_recom.setText(""+trat.getDosis() + " mg");
+    }//GEN-LAST:event_lst_medicamentosValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

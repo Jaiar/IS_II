@@ -22,4 +22,16 @@ public class Tratamiento {
         this.dosis = dosis;
         this.veces_dosis = veces_dosis;
     }
+    
+    public int getDosis(){
+        return this.dosis;
+    }
+    
+    public int getId(){
+        return this.id;
+    }
+    
+    public int getVeces_dosis(){
+        return this.veces_dosis;
+    }
 }

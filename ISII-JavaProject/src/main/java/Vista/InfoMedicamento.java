@@ -78,16 +78,19 @@ public class InfoMedicamento extends javax.swing.JFrame {
             }
         });
 
+        lst_enfer_tratadas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(lst_enfer_tratadas);
 
         jLabel4.setText("Enfermedades que trata:");
 
+        lst_alergias.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(lst_alergias);
 
         jLabel3.setText("Alergias que puede provocar:");
 
         jLabel5.setText("Efectos secundarios:");
 
+        lst_efect_secun.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(lst_efect_secun);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N

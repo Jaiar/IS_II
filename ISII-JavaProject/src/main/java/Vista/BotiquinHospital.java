@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Vista;
 
 import Modelo.Enfermero;
@@ -21,14 +17,17 @@ public class BotiquinHospital extends javax.swing.JFrame {
     private DefaultListModel listaMedicamentosBotiquin;
     private ArrayList<Medicamento> medicamentos;
     
-    int number;
-    
     /**
      * Creates new form VistaBotiquin
      */
     public BotiquinHospital(Enfermero enfermero) {
         initComponents();
         this.enfermero = enfermero;
+        
+        listaMedicamentosBotiquin = new DefaultListModel();
+        medicamentos = Modelo.Botiquin.getBotiquin().consultar();
+        listaMedicamentosBotiquin.addAll(medicamentos);
+        lst_botiquin.setModel(listaMedicamentosBotiquin);
     }
 
     /**
@@ -55,11 +54,7 @@ public class BotiquinHospital extends javax.swing.JFrame {
 
         jLabel2.setText("Cantidad mínima:");
 
-        lst_botiquin.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        lst_botiquin.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(lst_botiquin);
 
         btn_atras.setText("Atrás");
@@ -125,20 +120,20 @@ public class BotiquinHospital extends javax.swing.JFrame {
     private void findButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findButtonActionPerformed
         // TODO add your handling code here:
         
+        int number;
         try{
-            
-            number = Integer.parseInt(txt_cantminima.getText());
-            System.out.println("El numero es: "+ number);
-            listaMedicamentosBotiquin = new DefaultListModel();
-            medicamentos = enfermero.consultarBotiquin(number);
-
-            lst_botiquin.setModel(listaMedicamentosBotiquin);
+            number = Integer.parseInt(txt_cantminima.getText());   
         }
         catch (NumberFormatException ex){
             ex.printStackTrace();
+            return;
         }
+            
+        ArrayList<Medicamento> medicamentos = this.enfermero.consultarBotiquin(number);
         
-        
+        listaMedicamentosBotiquin = new DefaultListModel();
+        listaMedicamentosBotiquin.addAll(medicamentos);
+        lst_botiquin.setModel(listaMedicamentosBotiquin);
     }//GEN-LAST:event_findButtonActionPerformed
 
    

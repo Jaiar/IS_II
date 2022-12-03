@@ -4,7 +4,7 @@
  */
 package Modelo;
 
-import Controlador.DAOenfermero;
+import Controlador.DAObotiquin;
 import java.util.ArrayList;
 /**
  *
@@ -12,16 +12,23 @@ import java.util.ArrayList;
  */
 public class Botiquin {
     private ArrayList<Medicamento> medicamentos;
+    private static Botiquin botiquin;
     
-    public Botiquin(){
-        
+    private Botiquin(){
         medicamentos = null;
-       
+    }
+    
+    public static Botiquin getBotiquin(){
+        if( botiquin == null ){
+            botiquin = new Botiquin();
+        }
+        
+        return botiquin;
     }
     
     public ArrayList consultar(){
         if ( medicamentos == null )
-            ;//Consulta SQL para obtener todos los medicamentos
+            medicamentos = DAObotiquin.getAllMedicamentos();
         
         return medicamentos;
     }

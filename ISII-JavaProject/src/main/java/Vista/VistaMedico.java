@@ -21,7 +21,7 @@ import javax.swing.DefaultListModel;
 public class VistaMedico extends javax.swing.JFrame {
 
     private AltaPaciente vistaDarAltaPaciente;
-    private InfoMedicamentos vistaMedicamento;
+    private InfoMedicamento vistaMedicamento;
     private ConsultarHistorial viewHistorialPaciente;
     private InfoEnfermedades viewInfoEfermedades;
     private Login viewLogin;
@@ -271,7 +271,7 @@ public class VistaMedico extends javax.swing.JFrame {
 
     private void InfoMedicamenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoMedicamenteButtonActionPerformed
         // TODO add your handling code here:
-        new InfoMedicamentos(this.medico).setVisible(true);
+        new InfoMedicamento(this.medico).setVisible(true);
         dispose();
     }//GEN-LAST:event_InfoMedicamenteButtonActionPerformed
 

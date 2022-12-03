@@ -76,7 +76,7 @@ public class Enfermedad {
     
     @Override
     public String toString(){
-        return "Nombre: " + nombre + "\n" + "Contagiosa: " + (contagiosa ? "Si":"No") + "\n\n";
+        return nombre;
     }
 }
 

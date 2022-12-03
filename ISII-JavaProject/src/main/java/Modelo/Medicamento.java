@@ -42,8 +42,11 @@ public class Medicamento {
         this.efecto_s = efecto_s;
         this.cantidad = cantidad;
        
-    }  
+    }
     
+    public int getId(){
+        return this.id;
+    }
     /**
     * Obtiene los alérgenos que contiene el medicamento.
     * @return alérgenos que contiene el medicamento.

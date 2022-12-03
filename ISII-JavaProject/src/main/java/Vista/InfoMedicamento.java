@@ -5,11 +5,14 @@ import Modelo.Enfermedad;
 import Modelo.Medico;
 
 import Controlador.DAOmedico;
+import Controlador.DAOmedicamento;
+
 import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.DefaultListModel;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 /**
@@ -64,6 +67,11 @@ public class InfoMedicamento extends javax.swing.JFrame {
         });
 
         cbo_medicamentos.setEditable(true);
+        cbo_medicamentos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbo_medicamentosItemStateChanged(evt);
+            }
+        });
         cbo_medicamentos.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 cbo_medicamentosKeyPressed(evt);
@@ -188,6 +196,29 @@ public class InfoMedicamento extends javax.swing.JFrame {
         if( evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER )
             this.btn_buscarActionPerformed(null);
     }//GEN-LAST:event_cbo_medicamentosKeyPressed
+
+    private void cbo_medicamentosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_medicamentosItemStateChanged
+        Object selected_obj = ((javax.swing.JComboBox)evt.getSource()).getSelectedItem();
+        
+        if (!( selected_obj instanceof Medicamento ))
+            return;
+        
+        Medicamento medicamento = (Medicamento)selected_obj;
+        
+        ArrayList<Enfermedad> enfermedades = DAOmedicamento.getEnfermedadesTratadas(medicamento.getId());
+        
+        DefaultListModel dflstmodel = new DefaultListModel();
+        dflstmodel.addAll(enfermedades);
+        this.lst_enfer_tratadas.setModel(dflstmodel);
+        
+        DefaultListModel dflstmodel2 = new DefaultListModel();
+        dflstmodel2.addElement(medicamento.getAlergia());
+        this.lst_alergias.setModel(dflstmodel2);
+        
+        DefaultListModel dflstmodel3 = new DefaultListModel();
+        dflstmodel3.addElement(medicamento.getEfecto_s());
+        this.lst_efect_secun.setModel(dflstmodel3);
+    }//GEN-LAST:event_cbo_medicamentosItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Vista;
 
 import java.util.Date;
@@ -19,12 +15,10 @@ import javax.swing.DefaultListModel;
  */
 public class AltaPaciente extends javax.swing.JFrame {
     private VistaMedico viewMedico;
-    private Medico medico;
-    private Enfermero enfermero;
-    private Gestor gestor;
+    private boolean was_focused = false;
     
     private String pacienteNuevo;
-    private LocalDate currentdate = LocalDate.now();
+    private LocalDate currentdate;
     
     private Paciente paciente;
     
@@ -34,12 +28,10 @@ public class AltaPaciente extends javax.swing.JFrame {
     /**
      * Creates new form DarAltaPaciente
      */
-    public AltaPaciente(Medico medico, Enfermero enfermero, Gestor gestor, Paciente paciente) {
+    public AltaPaciente(Medico medico, Paciente paciente) {
         initComponents();
-        this.medico = medico;
-        this.enfermero = enfermero;
-        this.gestor = gestor;
         this.paciente = paciente;
+        this.medico = paciente;
         
         RellenarDatos();
     }
@@ -89,11 +81,6 @@ public class AltaPaciente extends javax.swing.JFrame {
         labelDNIPaciente.setText("DNI:");
 
         textDNIPaciente.setEditable(false);
-        textDNIPaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textDNIPacienteActionPerformed(evt);
-            }
-        });
 
         labelNombrePaciente.setText("Nombre:");
 
@@ -230,10 +217,6 @@ public class AltaPaciente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void textDNIPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDNIPacienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textDNIPacienteActionPerformed
 
     private void textNombrePacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNombrePacienteActionPerformed
         // TODO add your handling code here:

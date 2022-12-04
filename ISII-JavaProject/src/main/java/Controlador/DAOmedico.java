@@ -199,4 +199,38 @@ public class DAOmedico {
             System.out.println("Error en la petición a la BD");
         }
     }
+     
+    public static Paciente getPacienteByDNI(String dni){
+        ResultSet resultados = null;
+        
+        try{
+            Statement s = DAO.getConnection().createStatement();
+            String consult = "SELECT * FROM paciente WHERE dni = '" + dni + "';";
+            
+            resultados = s.executeQuery(consult);
+        }catch( SQLException sqle ){
+            System.out.println("getPacientesByDNI @ DAOmedico -- error en la consulta SQL");
+            System.out.println(sqle.getMessage());
+            return null;
+        }
+        
+        Paciente paciente = null;
+        
+        try{
+            if(! resultados.next() )
+                return null;        // No existe ningún paciente con ese dni
+            
+            int id = resultados.getInt(1);
+            
+        }catch( SQLException sqle ){
+            System.out.println("getPacientesByDNI @ DAOmedico -- error recogiendo los datos");
+            System.out.println(sqle.getMessage());
+            return null;
+        }catch ( NullPointerException npe ){
+            System.out.println("getPacientesByDNI @ DAOmedico -- ResultSet nulo");
+            return null;
+        }
+        
+        return paciente;
+    }
 }

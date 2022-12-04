@@ -264,7 +264,7 @@ public class VistaMedico extends javax.swing.JFrame {
 
     private void DarAltaPacienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DarAltaPacienteButtonActionPerformed
         // TODO add your handling code here:
-        vistaDarAltaPaciente = new AltaPaciente(medico,enfermero,gestor, pacientes.get(listaEnfermos.getSelectedIndex()));
+        vistaDarAltaPaciente = new AltaPaciente(medico, pacientes.get(listaEnfermos.getSelectedIndex()));
         vistaDarAltaPaciente.setVisible(true);
         dispose();
     }//GEN-LAST:event_DarAltaPacienteButtonActionPerformed

@@ -7,6 +7,7 @@ import Modelo.Medicamento;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.sql.SQLException;
 

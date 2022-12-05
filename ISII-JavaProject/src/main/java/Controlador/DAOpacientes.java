@@ -2,10 +2,15 @@ package Controlador;
 
 import Modelo.Paciente;
 import Modelo.Enfermedad;
+import Modelo.Historial;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.util.ArrayList;
+
+import java.time.LocalDate;
 
 /**
  *
@@ -123,5 +128,47 @@ public class DAOpacientes {
             System.out.println("Error: Null Pointer");
             return null;
         }
+    }
+    
+    public static ArrayList getHistorial(Paciente paciente){
+        ResultSet resultados = null;
+        try{
+            Statement s = DAO.getConnection().createStatement();
+            String query = "SELECT * "
+                        + "FROM historialmedico "
+                        + "WHERE id_paciente = " + paciente.getID() + ";";
+            
+            resultados = s.executeQuery(query);
+        }catch( SQLException sqle ){
+            System.out.println("getHistorial @ DAOpacientes -- error en ejecutar la query");
+            System.out.println( sqle.getMessage() );
+        }
+        
+        ArrayList<Historial> historiales = new ArrayList<Historial>();
+        
+        int id;
+        int id_paciente;
+        int id_enfermedad;
+        LocalDate date;
+        
+        try{
+            while( resultados.next() ){
+                id = resultados.getInt(1);
+                id_paciente = resultados.getInt(2);
+                id_enfermedad = resultados.getInt(3);
+                try{
+                    date = resultados.getDate(4).toLocalDate();
+                }catch(SQLException sqle){
+                    date = LocalDate.now();
+                }
+                
+                historiales.add(new Historial(id, id_paciente, id_enfermedad, date));
+            }
+        }catch( SQLException sqle ){
+            System.out.println("getHistorial @ DAOpacientes -- error al fetchear datos");
+            System.out.println( sqle.getMessage() );
+        }
+        
+        return historiales;
     }
 }

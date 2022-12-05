@@ -1,11 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Modelo;
+
 import Controlador.DAOmedico;
-import java.util.Date;
+
+import java.time.LocalDate;
+
 import java.util.ArrayList;
+import java.util.Date;
 /**
  *
  * @author jaumearnau
@@ -43,10 +43,12 @@ public class Medico extends Usuario{
     public Date getFecha(){
         return this.incorporacion;
     }
-    public ArrayList<Paciente> setAltaPaciente(int num){
-        DAOmedico.setHistorialPaciente(num);
-        pacientes = DAOmedico.getPacientes(code);
-        return pacientes;
+    public void setAltaPaciente(Paciente paciente, Enfermedad enfermedad, LocalDate fecha) throws UnsupportedOperationException {
+        DAOmedico.addToHistorialPaciente(paciente, enfermedad, fecha);
+    }
+    
+    public void datDeAltaPaciente(Paciente paciente, Enfermedad enfermedad, LocalDate fecha){
+        DAOmedico.darDeAltaNuevoPaciente(paciente, enfermedad, fecha);
     }
     
     @Override

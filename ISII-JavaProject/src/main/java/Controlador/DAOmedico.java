@@ -1,18 +1,22 @@
 package Controlador;
 
 import Modelo.Enfermedad;
-import Modelo.Enfermero;
 import Modelo.Medico;
 import Modelo.Paciente;
 import Modelo.Medicamento;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-
 import java.sql.SQLException;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  *
  * @author algar
@@ -162,43 +166,79 @@ public class DAOmedico {
         return enfermedades;
     }
     
-     public static void setHistorialPaciente(int id){
+     public static void addToHistorialPaciente(Paciente paciente, Enfermedad enfermedad, LocalDate fecha) throws UnsupportedOperationException {
         ResultSet resultados = null;
-        int historial=0;
-        int paciente=0;
-        int enfermedad=0;
-        try {
-            String con;
+        
+        // Comprobamos que no exista una transacción ya hecha en la misma fecha
+        
+        System.out.println(fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+        try{
             Statement s = DAO.getConnection().createStatement();
-            // Consulta SQL
-            con = "SELECT * INTO " +historial+","+paciente+","+enfermedad +"FROM pacientes_enfermedades WHERE id_paciente = " + id;
-            resultados = s.executeQuery(con);
-         }
-        catch (Exception e) { // Error en al realizar la consulta
-            System.out.println("Error en la petición a la BD");
+            
+            String query = "SELECT id_paciente "
+                        + "FROM historialmedico "
+                        + "WHERE id_paciente = " + paciente.getID()
+                        + "AND fecha_alta = '" + fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "';";
+        }catch(SQLException sqle){
+            System.out.println("addToHistorialPaciente @ DAOmedico -- error en la query");
+            System.out.println(sqle.getMessage());
+            sqle.printStackTrace();
         }
         try {
-            String con;
-            Statement s = DAO.getConnection().createStatement();
-            // Consulta SQL
-            con = "DELETE FROM pacientes_enfermedades WHERE id_paciente =" + id;
-            resultados = s.executeQuery(con);
-         }
-        catch (Exception e) { // Error en al realizar la consulta
-            System.out.println("Error en la petición a la BD");
+            if ( resultados.next() )
+                throw new UnsupportedOperationException("Ya existe una entrada en el historial para esa fecha. \n\t"
+                        + "DNI: " + paciente.getDNI() + " -- Fecha: " + fecha + ".");
+            
+        }catch(SQLException sqle){
+            System.out.println("addToHistorialPaciente @ DAOmedico -- error en comprobación de datos");
+            System.out.println(sqle.getMessage());
+        }
+        catch( NullPointerException npe ){
+            // Something
+            System.out.println(resultados);
         }
         
-        try {
-            String con;
-            Statement s = DAO.getConnection().createStatement();
-            // Consulta SQL
-            con = "INSERT INTO historialmedico (id_historial, id_paciente, id_enfermedad, fecha_alta) VALUES (" + historial +","+paciente+","+enfermedad+",SYSDATE()";
-            resultados = s.executeQuery(con);
-         }
-        catch (Exception e) { // Error en al realizar la consulta
-            System.out.println("Error en la petición a la BD");
+        try{
+            Connection conn = DAO.getConnection();
+            Statement s = conn.createStatement();
+            
+            String query = "INSERT INTO historialmedico (id_historialmedico, id_paciente, id_enfermedad, fecha_alta)"
+                    + "VALUES (23, "+ paciente.getID() + ", " + enfermedad.getId() + ",  STR_TO_DATE('" + fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "', '%d-%m-%Y'));";
+            s.executeUpdate(query);
+            conn.commit();
+        }catch(SQLException sqle){
+            System.out.println("addToHistorialPaciente @ DAOmedico -- error en inserción de datos");
+            System.out.println(sqle.getMessage());
         }
     }
+     
+     public static boolean darDeAltaNuevoPaciente(Paciente paciente, Enfermedad enfermedad, LocalDate fecha ){
+        ResultSet resultados = null;
+         
+        try{
+            Statement s = DAO.getConnection().createStatement();
+            String query = "INSERT INTO paciente "
+                    + "VALUES ( " + paciente.getID() + ","
+                    + paciente.getDNI() + ", "
+                    + paciente.getNombre() + ", "
+                    + paciente.getApellidos() + ", "
+                    + paciente.getTelefono() + ", "
+                    + paciente.getHabitacion() + ", "
+                    + paciente.getMedico() + ", "
+                    + paciente.getEnfermero()
+                    + ");";
+            
+            s.executeUpdate(query);
+            
+        }catch( SQLException sqle ){
+            System.out.println("darDeAlataNuevoPaciente @ DAOmedico -- error en comprobación de datos");
+            System.out.println(sqle.getMessage());
+            
+            return false;
+        }
+        
+        return true;
+     }
      
     public static Paciente getPacienteByDNI(String dni){
         ResultSet resultados = null;

@@ -4,7 +4,7 @@
  */
 package Modelo;
 
-import java.util.ArrayList;
+import java.util.Random;
 
 import Controlador.DAOpacientes;
 import java.util.ArrayList;
@@ -21,6 +21,7 @@ public class Paciente {
     private int doc_id;
     private int enfer_id;
     private int room_id;
+    private int telefono = -1;
     private int id;
     
     public Paciente(int id, String dni, String nombre, String apellidos, int doc, int enfer, int room){
@@ -69,18 +70,6 @@ public class Paciente {
         return true;//Si hay una igualdad será falso y sino verdad
     }
     public ArrayList<Enfermedad> getEnfermedades(){
-        /*
-        String enfe="";
-        System.out.print("\n length 3-->" + enfermedad.size());
-        
-        for(Enfermedad e: enfermedad)
-        {
-            enfe += e.toSting() ;
-            enfe += "\n.............................\n";
-            System.out.print("\n ccc-->" + e.toSting());
-            
-        }
-        */
         if ( this.enfermedades == null )
             this.enfermedades = DAOpacientes.getEnfermedades(this.id);
         
@@ -101,13 +90,29 @@ public class Paciente {
     public String getApellidos(){
         return this.apellidos;
     }
+    
+    public int getEnfermero(){
+        return this.enfer_id;
+    }
+    
+    public int getTelefono(){
+        if ( telefono == -1 )
+            // Generar nuevo número de telefono
+            telefono = 1000000000 - new Random().nextInt(100000000) + 1;
+        
+        return telefono;
+    }
 
     public int getHabitacion() {
         return room_id;
     }
     
+    public int getMedico(){
+        return this.doc_id;
+    }
+    
     @Override
     public String toString(){
-        return "Nombre: " + nombre + " " + apellidos + " -- DNI: "+ dni + "| ROOM: " + room_id;
+        return apellidos + ", " + nombre;
     }
 }

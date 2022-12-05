@@ -17,6 +17,7 @@ public class UserFactory {
         MEDICO,
         ENFERMERO,
         GESTOR;
+        
         public static Usuario_Tipo getTipo(int i){
             switch(i){
                 case 1: return MEDICO;

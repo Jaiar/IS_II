@@ -1,26 +1,28 @@
 package Vista;
 
-import java.util.Date;
-import Modelo.Enfermero;
-import Modelo.Gestor;
+import Controlador.DAOmedico;
+
 import Modelo.Medico;
 import Modelo.Paciente;
 import Modelo.Enfermedad;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 /**
  *
  * @author roralo3
  */
 public class AltaPaciente extends javax.swing.JFrame {
-    private VistaMedico viewMedico;
     private boolean was_focused = false;
-    
-    private String pacienteNuevo;
+    private Medico medico;
+  
     private LocalDate currentdate;
     
     private Paciente paciente;
+    private boolean paciente_existente;
     
     private ArrayList<String> Pacientes;
     private DefaultListModel listaHistorialPacientes;
@@ -31,9 +33,20 @@ public class AltaPaciente extends javax.swing.JFrame {
     public AltaPaciente(Medico medico, Paciente paciente) {
         initComponents();
         this.paciente = paciente;
-        this.medico = paciente;
+        this.medico = medico;
+        this.currentdate = LocalDate.now();
         
         RellenarDatos();
+        
+        this.paciente_existente = true;
+    }
+    
+    public AltaPaciente(Medico medico){
+        initComponents();
+        
+        this.medico = medico;
+        
+        this.paciente_existente = false;
     }
 
     public void RellenarDatos()
@@ -42,8 +55,8 @@ public class AltaPaciente extends javax.swing.JFrame {
         this.textNombrePaciente.setText(paciente.getNombre());
         this.apellidosTextPaciente.setText(paciente.getApellidos());
         
-        String text = paciente.getEnfermedades().stream().map(e -> e.toString() + "\n").reduce("", String::concat);
-        this.enfermedadText.setText(text);
+        ArrayList<Enfermedad> enfermedades = Controlador.DAOenfermedad.getEnfermedades();
+        this.cbo_enfer.setModel(new DefaultComboBoxModel(enfermedades.toArray()));
 
         this.DiaComboBox.addItem(currentdate.getDayOfMonth()+"");
         this.MesComboBox.addItem(currentdate.getMonthValue()+"");
@@ -72,9 +85,9 @@ public class AltaPaciente extends javax.swing.JFrame {
         MesComboBox = new javax.swing.JComboBox<>();
         AñoComboBox = new javax.swing.JComboBox<>();
         labelEnferemedad = new javax.swing.JLabel();
-        enfermedadText = new javax.swing.JTextField();
         addHistorialButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
+        cbo_enfer = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,8 +127,6 @@ public class AltaPaciente extends javax.swing.JFrame {
 
         labelEnferemedad.setText("Enfermedad:");
 
-        enfermedadText.setEditable(false);
-
         addHistorialButton.setText("Añadir al Historial");
         addHistorialButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +147,11 @@ public class AltaPaciente extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelEnferemedad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbo_enfer, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labeApellidosPacientes)
                         .addGap(18, 18, 18)
@@ -158,13 +173,9 @@ public class AltaPaciente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(AñoComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelEnferemedad)
-                        .addGap(18, 18, 18)
-                        .addComponent(enfermedadText)
-                        .addGap(35, 35, 35))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(addHistorialButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(85, 85, 85)
@@ -206,7 +217,7 @@ public class AltaPaciente extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelEnferemedad)
-                            .addComponent(enfermedadText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cbo_enfer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
                         .addComponent(addHistorialButton))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -227,24 +238,19 @@ public class AltaPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_AñoComboBoxActionPerformed
 
     private void addHistorialButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHistorialButtonActionPerformed
-     
+        Enfermedad enfermedad = (Enfermedad) this.cbo_enfer.getSelectedItem();
         
-        listaHistorialPacientes = new DefaultListModel();
-        medico.setAltaPaciente(paciente.getID());
+        if ( enfermedad == null ){
+            JOptionPane.showMessageDialog(this, "No se ha seleccionado ninguna enfermedad", "Dar de alta", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         
-        pacienteNuevo = (paciente.getEnfermedades() +" "+ currentdate);
-        //Pacientes.add(Pacientenuevo);
-        //for (String s : Pacientes) {
-            listaHistorialPacientes.addElement(pacienteNuevo);
-        //}
-        
-        jList1.setModel(listaHistorialPacientes);
+        if ( paciente_existente )
+            DAOmedico.addToHistorialPaciente(paciente, enfermedad, LocalDate.now());
     }//GEN-LAST:event_addHistorialButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        // TODO add your handling code here:
-        viewMedico = new VistaMedico(medico);
-        viewMedico.setVisible(true);
+        new VistaMedico(medico).setVisible(true);
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 
@@ -255,7 +261,7 @@ public class AltaPaciente extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> MesComboBox;
     private javax.swing.JButton addHistorialButton;
     private javax.swing.JTextField apellidosTextPaciente;
-    private javax.swing.JTextField enfermedadText;
+    private javax.swing.JComboBox<Enfermedad> cbo_enfer;
     private javax.swing.JButton exitButton;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;

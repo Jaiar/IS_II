@@ -47,7 +47,7 @@ public class VistaMedico extends javax.swing.JFrame {
        
         if(pacientes.size()!=0)
             for (Paciente p: pacientes)
-                listaEnfermosModel.addElement(p.toString());
+                listaEnfermosModel.addElement(p);
         
         listaEnfermos.setModel(listaEnfermosModel);
         
@@ -155,11 +155,6 @@ public class VistaMedico extends javax.swing.JFrame {
             }
         });
 
-        listaEnfermos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         listaEnfermos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 listaEnfermosMouseClicked(evt);
@@ -230,7 +225,7 @@ public class VistaMedico extends javax.swing.JFrame {
                     .addComponent(InfoEnfermedadButton)
                     .addComponent(HistorialPacienteButton)
                     .addComponent(InfoMedicamenteButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(SalirButton)
                 .addContainerGap())
         );
@@ -264,8 +259,7 @@ public class VistaMedico extends javax.swing.JFrame {
 
     private void DarAltaPacienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DarAltaPacienteButtonActionPerformed
         // TODO add your handling code here:
-        vistaDarAltaPaciente = new AltaPaciente(medico, pacientes.get(listaEnfermos.getSelectedIndex()));
-        vistaDarAltaPaciente.setVisible(true);
+        new AltaPaciente(medico, this.listaEnfermos.getSelectedValue()).setVisible(true);
         dispose();
     }//GEN-LAST:event_DarAltaPacienteButtonActionPerformed
 
@@ -313,7 +307,7 @@ public class VistaMedico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JList<String> listaEnfermos;
+    private javax.swing.JList<Paciente> listaEnfermos;
     private javax.swing.JTextField mesText;
     // End of variables declaration//GEN-END:variables
 }

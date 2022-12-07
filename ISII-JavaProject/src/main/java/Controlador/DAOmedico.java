@@ -261,6 +261,8 @@ public class DAOmedico {
                 return null;        // No existe ningún paciente con ese dni
             
             int id = resultados.getInt(1);
+            String nombre = resultados.getNString(2);
+            String apellidos = resultados.getNString(3);
             
         }catch( SQLException sqle ){
             System.out.println("getPacientesByDNI @ DAOmedico -- error recogiendo los datos");

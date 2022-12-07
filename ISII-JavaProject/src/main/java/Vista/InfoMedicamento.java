@@ -6,6 +6,7 @@ import Modelo.Medico;
 
 import Controlador.DAOmedico;
 import Controlador.DAOmedicamento;
+import Modelo.Botiquin;
 
 import java.util.ArrayList;
 
@@ -181,9 +182,9 @@ public class InfoMedicamento extends javax.swing.JFrame {
             return;
         }
         
-        ArrayList<Medicamento> arr = new ArrayList<Medicamento>();
+        ArrayList<Medicamento> arr = new ArrayList<>();
         try{
-            arr = DAOmedico.getMedicamentosByNombre(texto);
+            arr = Botiquin.getMedicamentosByNombre(texto);
         }catch(NullPointerException npe){
             JOptionPane.showMessageDialog(this, "No se ha encontrado el medicamento", "Busqueda de medicamento", JOptionPane.ERROR_MESSAGE);
             return;
@@ -208,7 +209,7 @@ public class InfoMedicamento extends javax.swing.JFrame {
         
         Medicamento medicamento = (Medicamento)selected_obj;
         
-        ArrayList<Enfermedad> enfermedades = DAOmedicamento.getEnfermedadesTratadas(medicamento.getId());
+        ArrayList<Enfermedad> enfermedades = medicamento.getEnfermedadesTratadas();
         
         DefaultListModel dflstmodel = new DefaultListModel();
         dflstmodel.addAll(enfermedades);

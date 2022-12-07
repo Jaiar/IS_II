@@ -232,7 +232,7 @@ public class AñadirPaciente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonExitMouseClicked
-        viewMedico = new VistaMedico(medico);
+        viewMedico = new VistaMedico(null);
         viewMedico.setVisible(true);
         dispose();        
     }//GEN-LAST:event_botonExitMouseClicked

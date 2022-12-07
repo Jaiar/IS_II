@@ -112,8 +112,7 @@ public class BotiquinHospital extends javax.swing.JFrame {
 
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
         // TODO add your handling code here:
-        viewEnfemeros  = new VistaEnfermeros(enfermero);
-        viewEnfemeros.setVisible(true);
+        this.enfermero.launchMenu();
         this.dispose();
     }//GEN-LAST:event_btn_atrasActionPerformed
 

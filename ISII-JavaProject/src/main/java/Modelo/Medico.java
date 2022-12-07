@@ -25,7 +25,7 @@ public class Medico extends Usuario {
     }
     
     public Paciente getPacienteByDNI(String DNI){
-        return DAOmedico.getPacienteByDNI(dni);
+        return DAOmedico.getPacienteByDNI(DNI);
     }
     
     public ArrayList getEnfermedadesByNombre(String texto){

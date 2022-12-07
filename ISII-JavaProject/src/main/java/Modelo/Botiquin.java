@@ -11,11 +11,9 @@ import java.util.ArrayList;
  * @author jaumearnau
  */
 public class Botiquin {
-    private ArrayList<Medicamento> medicamentos;
     private static Botiquin botiquin;
     
     private Botiquin(){
-        medicamentos = null;
     }
     
     public static Botiquin getBotiquin(){
@@ -26,10 +24,12 @@ public class Botiquin {
         return botiquin;
     }
     
-    public ArrayList consultar(){
-        if ( medicamentos == null )
-            medicamentos = DAObotiquin.getAllMedicamentos();
+    public static ArrayList getMedicamentosByNombre(String nombre){
+        return DAObotiquin.getMedicamentosByNombre(nombre);
+    }
+    
+    public ArrayList<Medicamento> consultar(){
         
-        return medicamentos;
+        return DAObotiquin.getAllMedicamentos();
     }
 }

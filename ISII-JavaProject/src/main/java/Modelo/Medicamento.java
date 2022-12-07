@@ -53,6 +53,10 @@ public class Medicamento {
         return (Tratamiento) DAOmedicamento.getTratamiento(this.id, id_enfermedad);
     }
     
+    public ArrayList<Enfermedad> getEnfermedadesTratadas(){
+        return DAOmedicamento.getEnfermedadesTratadas(this.id);
+    }
+    
     /**
     * Obtiene los alérgenos que contiene el medicamento.
     * @return alérgenos que contiene el medicamento.

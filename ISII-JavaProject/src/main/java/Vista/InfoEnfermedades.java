@@ -8,8 +8,9 @@ import Controlador.DAOenfermedad;
 import Controlador.DAOmedico;
 import Modelo.Enfermedad;
 import Modelo.Medico;
+import Modelo.Medicamento;
 import java.util.ArrayList;
-import java.util.Vector;
+
 
 import javax.swing.JTextField;
 import javax.swing.text.Document;
@@ -262,12 +263,8 @@ public class InfoEnfermedades extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void lst_medicamentosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lst_medicamentosValueChanged
-        Object obj_selected = evt.getSource();
         
-        if(!( obj_selected instanceof javax.swing.JList ))
-            return;
-        
-        Modelo.Medicamento medicamento = (Modelo.Medicamento)((javax.swing.JList)obj_selected).getSelectedValue();
+        Modelo.Medicamento medicamento = (Modelo.Medicamento)this.lst_medicamentos.getSelectedValue();
         
         Modelo.Tratamiento trat = (Modelo.Tratamiento)DAOenfermedad.getTratamientos(medicamento.getId(), this.enf_select.getId());
         
@@ -290,7 +287,7 @@ public class InfoEnfermedades extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JList<String> lst_enfermedades;
-    private javax.swing.JList<String> lst_medicamentos;
+    private javax.swing.JList<Medicamento> lst_medicamentos;
     private javax.swing.JTextField txt_dosis_dia;
     private javax.swing.JTextField txt_dosis_recom;
     // End of variables declaration//GEN-END:variables

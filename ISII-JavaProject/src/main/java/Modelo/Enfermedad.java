@@ -47,11 +47,19 @@ public class Enfermedad {
         this.enfermedades_relacionadas = null;
     }  
     
+    public static ArrayList getEnfermedades(){
+        return DAOenfermedad.getEnfermedades();
+    }
+    
     public ArrayList getEnfermedadesRelacionadas(){
         if ( this.enfermedades_relacionadas == null )
             this.enfermedades_relacionadas = DAOenfermedad.getEnfermedadesRelacionadas(this.id);
         
         return this.enfermedades_relacionadas;
+    }
+    
+    public ArrayList getMedicamentosQueLaTratan(){
+        return DAOenfermedad.getMedicamentosTratan(this.id);
     }
     
     public int getId(){

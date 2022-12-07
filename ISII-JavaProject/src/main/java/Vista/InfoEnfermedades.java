@@ -1,16 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Vista;
 
-import Controlador.DAOenfermedad;
-import Controlador.DAOmedico;
 import Modelo.Enfermedad;
 import Modelo.Medico;
 import Modelo.Medicamento;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.text.Document;
@@ -25,14 +19,13 @@ import javax.swing.JOptionPane;
  * @author Bobby
  */
 public class InfoEnfermedades extends javax.swing.JFrame {
-    private VistaMedico viewMedico;
-    private Object user;
+    private Medico user;
     
     private Enfermedad enf_select;
     /**
      * Creates new form InfoEnfermedades
      */
-    public InfoEnfermedades(Object user) {
+    public InfoEnfermedades(Medico user) {
         initComponents();
         
         this.enf_select = null;
@@ -215,26 +208,17 @@ public class InfoEnfermedades extends javax.swing.JFrame {
     }//GEN-LAST:event_ch_contagiosaActionPerformed
 
     private void cbo_enfermedadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_enfermedadItemStateChanged
-        Object selected_obj = ((javax.swing.JComboBox)evt.getSource()).getSelectedItem();
-        
-        if (!( selected_obj instanceof Enfermedad ))
-            return;
-        
-        Enfermedad enfermedad = (Enfermedad)selected_obj;
-        this.enf_select = enfermedad;
-        
-        ArrayList<Modelo.Medicamento> medicamentos = DAOenfermedad.getMedicamentosTratan(enfermedad.getId());
+        this.enf_select = (Enfermedad)this.cbo_enfermedad.getSelectedItem();
         
         DefaultListModel dflstmodel = new DefaultListModel();
-        dflstmodel.addAll(medicamentos);
+        dflstmodel.addAll(this.enf_select.getMedicamentosQueLaTratan());
         this.lst_medicamentos.setModel(dflstmodel);
         
-        ArrayList<Enfermedad> enfermedades_relacionadas = DAOenfermedad.getEnfermedadesRelacionadas(enfermedad.getId());
-        
         DefaultListModel dflstmodel2 = new DefaultListModel();
-        dflstmodel.addAll(enfermedades_relacionadas);
+        dflstmodel.addAll(this.enf_select.getEnfermedadesRelacionadas());
         this.lst_enfermedades.setModel(dflstmodel2);
         
+        // Poner el valor de contagiosa en la checkbox
         this.ch_contagiosaActionPerformed(null);
     }//GEN-LAST:event_cbo_enfermedadItemStateChanged
 
@@ -250,7 +234,7 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         
         ArrayList<Enfermedad> enfermedades_arrlist = new ArrayList<Enfermedad>();
         try{
-            enfermedades_arrlist = DAOmedico.getEnfermedadesByNombre(texto);
+            enfermedades_arrlist = this.user.getEnfermedadesByNombre(texto);
         }catch(NullPointerException npe){
             JOptionPane.showMessageDialog(this, "No se ha encontrado la enfermedad", "Busqueda de enfermedad", JOptionPane.ERROR_MESSAGE);
             return;
@@ -266,7 +250,7 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         
         Modelo.Medicamento medicamento = (Modelo.Medicamento)this.lst_medicamentos.getSelectedValue();
         
-        Modelo.Tratamiento trat = (Modelo.Tratamiento)DAOenfermedad.getTratamientos(medicamento.getId(), this.enf_select.getId());
+        Modelo.Tratamiento trat = medicamento.getTratamiento(this.enf_select.getId());
         
         this.txt_dosis_dia.setText(""+trat.getVeces_dosis());
         this.txt_dosis_recom.setText(""+trat.getDosis() + " mg");

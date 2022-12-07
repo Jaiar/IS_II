@@ -55,7 +55,7 @@ public class AltaPaciente extends javax.swing.JFrame {
         this.textNombrePaciente.setText(paciente.getNombre());
         this.apellidosTextPaciente.setText(paciente.getApellidos());
         
-        ArrayList<Enfermedad> enfermedades = Controlador.DAOenfermedad.getEnfermedades();
+        ArrayList<Enfermedad> enfermedades = Enfermedad.getEnfermedades();
         this.cbo_enfer.setModel(new DefaultComboBoxModel(enfermedades.toArray()));
 
         this.DiaComboBox.addItem(currentdate.getDayOfMonth()+"");

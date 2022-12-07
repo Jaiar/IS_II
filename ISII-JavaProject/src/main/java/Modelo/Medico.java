@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author jaumearnau
  */
-public class Medico extends Usuario{
+public class Medico extends Usuario {
     private ArrayList<Paciente> pacientes;
     
     public Medico( int code, String name, String surname, String dni, String tele, Date anyo){
@@ -22,6 +22,14 @@ public class Medico extends Usuario{
             pacientes = DAOmedico.getPacientes(this.code);
         
         return pacientes;
+    }
+    
+    public Paciente getPacienteByDNI(String DNI){
+        return DAOmedico.getPacienteByDNI(dni);
+    }
+    
+    public ArrayList getEnfermedadesByNombre(String texto){
+        return DAOmedico.getEnfermedadesByNombre(texto);
     }
 
     public String getNombre() {

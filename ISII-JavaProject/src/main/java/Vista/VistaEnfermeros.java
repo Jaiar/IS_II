@@ -273,7 +273,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
     }//GEN-LAST:event_SalirButtonActionPerformed
 
     private void anyadirPacienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anyadirPacienteButtonActionPerformed
-        añadirPaciente = new AñadirPaciente(medico,enfermero,gestor,paciente);
+        añadirPaciente = new AñadirPaciente(enfermero, paciente);
         viewLogin.setVisible(true);
         dispose();       
     }//GEN-LAST:event_anyadirPacienteButtonActionPerformed

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Vista;
 
 import Modelo.Enfermero;
@@ -19,24 +15,18 @@ import javax.swing.DefaultListModel;
 public class AñadirPaciente extends javax.swing.JFrame {
 
     private VistaMedico viewMedico;
-    private Medico medico;
     private Enfermero enfermero;
-    private Gestor gestor;
     private ArrayList<Paciente> pacientes;
     private LocalDate currentdate = LocalDate.now();
     
     private Paciente paciente;
-    
-    private ArrayList<String> Pacientes;
     private DefaultListModel listaHistorialPacientes;
     /**
      * Creates new form AñadirPaciente
      */
-    public AñadirPaciente(Medico medico, Enfermero enfermero, Gestor gestor,Paciente paciente) {
+    public AñadirPaciente(Enfermero enfermero ,Paciente paciente) {
         initComponents();
-        this.medico = medico;
         this.enfermero = enfermero;
-        this.gestor = gestor;
         this.paciente = paciente;
         
         RellenarDatos();

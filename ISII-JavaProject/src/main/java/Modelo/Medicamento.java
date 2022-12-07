@@ -4,6 +4,7 @@
  */
 package Modelo;
 
+import Controlador.DAOmedicamento;
 import java.util.ArrayList;
 
 /**
@@ -47,6 +48,11 @@ public class Medicamento {
     public int getId(){
         return this.id;
     }
+    
+    public Tratamiento getTratamiento(int id_enfermedad){
+        return (Tratamiento) DAOmedicamento.getTratamiento(this.id, id_enfermedad);
+    }
+    
     /**
     * Obtiene los alérgenos que contiene el medicamento.
     * @return alérgenos que contiene el medicamento.

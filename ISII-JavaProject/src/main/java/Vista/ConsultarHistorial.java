@@ -20,14 +20,14 @@ import java.util.ArrayList;
  */
 public class ConsultarHistorial extends javax.swing.JFrame {
 
-    private Object user;
+    private Medico user;
     private Paciente paciente_actual;
     private boolean contagiosa = false;
     
     /**
      * Creates new form ConsultarHistorial
      */
-    public ConsultarHistorial(Object user) {
+    public ConsultarHistorial(Medico user) {
         initComponents();
         
         this.user = user;
@@ -217,14 +217,14 @@ public class ConsultarHistorial extends javax.swing.JFrame {
         
         DefaultListModel default_list_model = new DefaultListModel();
         
-        this.paciente_actual = DAOmedico.getPacienteByDNI(dni);
+        this.paciente_actual = this.user.getPacienteByDNI(dni);
         
         if(this.paciente_actual == null){
             JOptionPane.showMessageDialog(this, "Paciente no encontrado", "Buscar paciente", JOptionPane.ERROR_MESSAGE);
             return;
         }
         
-        ArrayList<Historial> historial = (ArrayList<Historial>) DAOmedico.getHistorial(this.paciente_actual.getID());
+        ArrayList<Historial> historial = this.paciente_actual.getHistorial();
         
         default_list_model.addAll(historial);
         this.lst_fecha.setModel(default_list_model);
@@ -232,7 +232,7 @@ public class ConsultarHistorial extends javax.swing.JFrame {
 
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
         // TODO add your handling code here:
-        new VistaMedico((Medico)user).setVisible(true);
+        this.user.launchMenu();
         dispose();
     }//GEN-LAST:event_btn_atrasActionPerformed
 
@@ -253,7 +253,7 @@ public class ConsultarHistorial extends javax.swing.JFrame {
         Historial historial_selected = this.lst_fecha.getSelectedValue();
         
         DefaultListModel dlm = new DefaultListModel();
-        Enfermedad enf = (Enfermedad) DAOenfermedad.getEnfermedad(historial_selected.getEnfermedadId());
+        Enfermedad enf = historial_selected.getEnfermedad();
         dlm.addElement(enf);
         
         this.lst_enfermedades.setModel(dlm);

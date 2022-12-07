@@ -44,4 +44,32 @@ public class DAOmedicamento {
         
         return enfermedades;
     }
+    
+    public static Object getTratamiento(int id_med, int id_enf){
+        ResultSet resultados = null;
+        
+        try {
+            String con;
+            Statement s = DAO.getConnection().createStatement();
+            // Consulta SQL
+            con = "SELECT * "
+                    + "FROM tratamiento "
+                    + "WHERE id_medicamento = " + id_med
+                    + " AND id_enfermedad = " + id_enf + ";";
+            
+            resultados = s.executeQuery(con);
+            }
+        catch (SQLException e) { // Error en al realizar la consulta
+            System.out.println("Error en la petición a la BD -- " + e.getMessage());
+        }
+        
+        try{
+            resultados.next();
+            
+            return ModelFactory.buildTratamiento(resultados);
+        }catch(SQLException sqle){
+            System.out.println("Error en la retirada de datos: " + sqle.getMessage());
+            return null;
+        }
+    }
 }

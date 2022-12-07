@@ -75,6 +75,11 @@ public class Paciente {
         
         return enfermedades;
     }
+    
+    public ArrayList getHistorial(){
+        return DAOpaciente.getHistorial(this.id);
+    }
+    
     public int getDoctor(){
         return doc_id;
     }

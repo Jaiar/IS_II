@@ -25,7 +25,7 @@ public class DAOenfermero {
             String con;
             Statement s = DAO.getConnection().createStatement();
             // Consulta SQL
-            con = "SELECT * FROM usuario WHERE rol = 2";
+            con = "SELECT * FROM usuario";
             resultados = s.executeQuery(con);
             }
         catch (Exception e) { // Error en al realizar la consulta
@@ -34,14 +34,10 @@ public class DAOenfermero {
         
         try{
             while(resultados.next()){
-                int code = resultados.getInt(1);
-                String dni = resultados.getNString(2);
-                String nombre = resultados.getNString(3);
-                String apellidos = resultados.getNString(4);
-                int rol = resultados.getInt(5);
-                Date fecha = resultados.getDate(6);
-                Enfermero enf = new Modelo.Enfermero(code, nombre, apellidos, dni, null, fecha);
-                enfermeros.add(enf);
+                Object enf = UserFactory.buildUsuario(resultados);
+                
+                if( enf instanceof Enfermero)
+                    enfermeros.add((Enfermero)enf);
             }
         }
         catch(SQLException sqle){
@@ -71,13 +67,7 @@ public class DAOenfermero {
         
         try{
             while(resultados.next()){
-                int id_med = resultados.getInt(1);
-                String nombre = resultados.getNString(2);
-                String alergias = resultados.getNString(3);
-                String efect_secund = resultados.getNString(4);
-                int cantidad_med = resultados.getInt(5);
-                
-                medicamentos.add(new Medicamento(id_med, nombre, alergias, efect_secund, cantidad_med));
+                medicamentos.add(ModelFactory.buildMedicamento(resultados));
             }
         }
         catch(SQLException sqle){
@@ -105,22 +95,10 @@ public class DAOenfermero {
         
         try{
             while(resultados.next()){
-                int id = resultados.getInt(1);
-                String dni = resultados.getNString(2);
-                String nombre = resultados.getNString(3);
-                String apellidos = resultados.getNString(4);
-                int habitacion = resultados.getInt(6);
-                int medico_p_id = resultados.getInt(7);
-                int enfermero_id = resultados.getInt(8);
-                
-                pacientes.add(new Paciente(id, dni, nombre, apellidos, medico_p_id, enfermero_id, habitacion));
+                pacientes.add(ModelFactory.buildPaciente(resultados));
             }
         }catch(SQLException sqle){
             System.out.println("DAOmedico @ getPacientes -- Error en retirar datos: " + sqle.getMessage());
-            return null;
-        }
-        catch(NullPointerException npe){
-            System.out.println("DAOmedico @ getPacientes -- Resultados nulo: " + npe.getMessage());
             return null;
         }
         

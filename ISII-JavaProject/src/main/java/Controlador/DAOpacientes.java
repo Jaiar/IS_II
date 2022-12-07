@@ -1,10 +1,9 @@
 package Controlador;
 
-import Modelo.Paciente;
-import Modelo.Enfermedad;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.util.ArrayList;
 
 /**
@@ -15,7 +14,7 @@ public class DAOpacientes {
     
     public static ArrayList getAllPacientes(){
         ResultSet resultados = null;
-        ArrayList<Paciente> pacientes = new ArrayList<Paciente>();
+        ArrayList pacientes = new ArrayList();
         try {
          String con;
          Statement s = DAO.getConnection().createStatement();
@@ -28,24 +27,9 @@ public class DAOpacientes {
         }
         
         try{
-            int id;
-            String dni;
-            String nombre;
-            String apellidos;
-            int habitacion;
-            int medico_p_id;
-            int enfermero_id;
-
             while(resultados.next()){
-                id = resultados.getInt(1);
-                dni = resultados.getNString(2);
-                nombre = resultados.getNString(3);
-                apellidos = resultados.getNString(4);
-                habitacion = resultados.getInt(6);
-                medico_p_id = resultados.getInt(7);
-                enfermero_id = resultados.getInt(8);
                 
-                pacientes.add(new Paciente(id, dni, nombre, apellidos, medico_p_id, enfermero_id, habitacion));
+                pacientes.add(ModelFactory.buildPaciente(resultados));
 
             }
         }
@@ -69,27 +53,20 @@ public class DAOpacientes {
                  + " WHERE pe.id_paciente = " + id_paciente;
          resultados = s.executeQuery(con);
         }
-        catch (Exception e) { // Error en al realizar la consulta
-            System.out.println("Error en la petición a la BD: get enfermedades");
-            e.printStackTrace();
+        catch (SQLException sqle) { // Error en al realizar la consulta
+            System.out.println("getEnfermedades @ DAOpacientes error en query");
+            System.out.println(sqle.getMessage());
         }
-        ArrayList<Enfermedad> enfermedades = new ArrayList<Enfermedad>();
+        
+        ArrayList enfermedades = new ArrayList();
+        
         try{
             while(resultados.next()){
-                int id_e = resultados.getInt(1);
-                String nombre = resultados.getNString(2);
-                int e_rel = resultados.getInt(3);
-                boolean contagiosa = resultados.getInt(4) == 1;
-                
-                enfermedades.add(new Enfermedad(id_e, nombre, contagiosa));
+                enfermedades.add(ModelFactory.buildEnfermedad(resultados));
             }
         }
         catch(SQLException sqle){
             System.out.println("Error en la retirada de datos: " + sqle.getMessage());
-            return null;
-        }
-        catch(NullPointerException npe){
-            System.out.println("Error: Null Pointer");
             return null;
         }
         

@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class DAOenfermedad {
     public static ArrayList<Enfermedad> getEnfermedades(){
         ResultSet resultados = null;
-        ArrayList<Enfermedad> enfermedades = new ArrayList<Enfermedad>();
+        ArrayList enfermedades = new ArrayList();
         try {
          String con;
          Statement s = DAO.getConnection().createStatement();
@@ -29,11 +29,7 @@ public class DAOenfermedad {
         
         try{
             while(resultados.next()){
-                int id = resultados.getInt(1);
-                String nombre = resultados.getNString(2);
-                int enfer_rel = resultados.getInt(3);
-                boolean contagiosa = resultados.getBoolean(4);
-                enfermedades.add(new Enfermedad( id, nombre, contagiosa ));
+                enfermedades.add(ModelFactory.buildEnfermedad(resultados));
             }
         }
         catch(SQLException sqle){
@@ -43,10 +39,33 @@ public class DAOenfermedad {
         
         return enfermedades;
     }
+    
+    public static Object getEnfermedad(int id_enfer){
+        ResultSet resultados = null;
+        try {
+         String con;
+         Statement s = DAO.getConnection().createStatement();
+         // Consulta SQL
+         con = "SELECT * FROM enfermedad  WHERE id_enfermedad = " + id_enfer +";";
+         resultados = s.executeQuery(con);
+         }
+        catch (Exception e) { // Error en al realizar la consulta
+            System.out.println("Error en la petición a la BD");
+            return null;
+        }
+        
+        try{
+            resultados.next();
+            return ModelFactory.buildEnfermedad(resultados);
+        }
+        catch(SQLException sqle){
+            System.out.println("Error en la retirada de datos: " + sqle.getMessage());
+            return null;
+        }
+    }
      
     public static ArrayList getMedicamentosTratan(int id_enf){
         ResultSet resultados = null;
-        ArrayList<Enfermedad> enfermedades_tratadas = new ArrayList<Enfermedad>();
         try {
             String con;
             Statement s = DAO.getConnection().createStatement();
@@ -62,15 +81,10 @@ public class DAOenfermedad {
             System.out.println("Error en la petición a la BD -- " + e.getMessage());
         }
         
-        ArrayList <Medicamento> medicamentos = new ArrayList<>();
+        ArrayList medicamentos = new ArrayList();
         try{
             while(resultados.next()){
-                int id = resultados.getInt(1);
-                String nombre = resultados.getNString(2);
-                String alergias = resultados.getNString(3);
-                String efect_secun = resultados.getNString(4);
-                int cantidad = resultados.getInt(5);
-                medicamentos.add(new Medicamento(id, nombre, alergias, efect_secun, cantidad));
+                medicamentos.add(ModelFactory.buildMedicamento(resultados));
             }
         }catch (SQLException sqle){}
         
@@ -79,12 +93,11 @@ public class DAOenfermedad {
      
     public static ArrayList getEnfermedadesRelacionadas(int id_enf){
          ResultSet resultados = null;
-        ArrayList<Enfermedad> enfermedades_tratadas = new ArrayList<Enfermedad>();
         try {
             String con;
             Statement s = DAO.getConnection().createStatement();
             // Consulta SQL
-            con =     "SELECT e.id_enfermedad, e.nombre, e.contagiosa "
+            con =     "SELECT e.id_enfermedad, e.nombre, e.enfermedades_relacionadas, e.contagiosa "
                     + "FROM tratamiento t, medicamento m, enfermedad e "
                     + "WHERE t.id_enfermedad = " + id_enf
                         + " AND t.id_medicamento = m.id_medicamento"
@@ -97,15 +110,16 @@ public class DAOenfermedad {
             System.out.println("Error en la petición a la BD -- " + e.getMessage());
         }
         
-        ArrayList <Enfermedad> enfermedades = new ArrayList<>();
+        ArrayList enfermedades = new ArrayList();
         try{
             while(resultados.next()){
-                int id = resultados.getInt(1);
-                String nombre = resultados.getNString(2);
-                boolean contagiosa = resultados.getBoolean(3);
-                enfermedades.add(new Enfermedad( id, nombre, contagiosa ));
+                enfermedades.add(ModelFactory.buildEnfermedad(resultados));
             }
-        }catch (SQLException sqle){}
+        }catch (SQLException sqle){
+            System.out.println("getEnfermedadesRelacionadas @ DAOenfermedad");
+            System.out.println(sqle.getMessage());
+            return null;
+        }
         
         return enfermedades;
      }
@@ -131,13 +145,7 @@ public class DAOenfermedad {
         try{
             resultados.next();
             
-            int id = resultados.getInt(1);
-            int medicamento = id_med;
-            int enfermedad = id_enf;
-            int dosis = resultados.getInt(4);
-            int veces_dosis = resultados.getInt(5);
-            
-            return new Modelo.Tratamiento(id, medicamento, enfermedad, dosis, veces_dosis);
+            return ModelFactory.buildTratamiento(resultados);
         }catch(SQLException sqle){
             System.out.println("Error en la retirada de datos: " + sqle.getMessage());
             return null;

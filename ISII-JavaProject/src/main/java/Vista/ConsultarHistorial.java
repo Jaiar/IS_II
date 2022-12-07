@@ -1,15 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Vista;
 
-
-import Controlador.DAOpacientes;
-import java.util.List;
 import Modelo.Enfermedad;
 import Modelo.Medico;
+import Modelo.Paciente;
+import Modelo.Historial;
+
+import Controlador.DAOmedico;
+import Controlador.DAOenfermedad;
+
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
+import java.util.ArrayList;
+
 
 /**
  *
@@ -18,6 +21,7 @@ import javax.swing.DefaultListModel;
 public class ConsultarHistorial extends javax.swing.JFrame {
 
     private Object user;
+    private Paciente paciente_actual;
     private boolean contagiosa = false;
     
     /**
@@ -65,13 +69,15 @@ public class ConsultarHistorial extends javax.swing.JFrame {
         jLabel1.setText("HISTORIAL MÉDICO");
         jLabel1.setPreferredSize(new java.awt.Dimension(150, 30));
 
-        lst_fecha.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        lst_fecha.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lst_fecha.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lst_fechaValueChanged(evt);
+            }
         });
         jScrollPane1.setViewportView(lst_fecha);
 
+        lst_enfermedades.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lst_enfermedades.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lst_enfermedadesValueChanged(evt);
@@ -209,13 +215,19 @@ public class ConsultarHistorial extends javax.swing.JFrame {
         // TODO add your handling code here:
         String dni = txt_dni.getText();
         
-        List enfermedades = DAOpacientes.getEnfermedadesByDNI(dni);
-        
         DefaultListModel default_list_model = new DefaultListModel();
         
-        default_list_model.addAll(enfermedades);
+        this.paciente_actual = DAOmedico.getPacienteByDNI(dni);
         
-        this.lst_enfermedades.setModel(default_list_model);
+        if(this.paciente_actual == null){
+            JOptionPane.showMessageDialog(this, "Paciente no encontrado", "Buscar paciente", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        ArrayList<Historial> historial = (ArrayList<Historial>) DAOmedico.getHistorial(this.paciente_actual.getID());
+        
+        default_list_model.addAll(historial);
+        this.lst_fecha.setModel(default_list_model);
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void btn_atrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_atrasActionPerformed
@@ -237,6 +249,16 @@ public class ConsultarHistorial extends javax.swing.JFrame {
         this.ch_contagiosa.setSelected(this.contagiosa);
     }//GEN-LAST:event_lst_enfermedadesValueChanged
 
+    private void lst_fechaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lst_fechaValueChanged
+        Historial historial_selected = this.lst_fecha.getSelectedValue();
+        
+        DefaultListModel dlm = new DefaultListModel();
+        Enfermedad enf = (Enfermedad) DAOenfermedad.getEnfermedad(historial_selected.getEnfermedadId());
+        dlm.addElement(enf);
+        
+        this.lst_enfermedades.setModel(dlm);
+    }//GEN-LAST:event_lst_fechaValueChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_atras;
@@ -254,7 +276,7 @@ public class ConsultarHistorial extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<Enfermedad> lst_enfermedades;
-    private javax.swing.JList<String> lst_fecha;
+    private javax.swing.JList<Historial> lst_fecha;
     private javax.swing.JList<String> lst_medicamentos;
     private javax.swing.JTextField txt_dni;
     private javax.swing.JTextField txt_dosis_dia;

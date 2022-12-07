@@ -11,7 +11,6 @@ import java.sql.Statement;
 import java.sql.SQLException;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 
 import java.time.LocalDate;
@@ -40,13 +39,7 @@ public class DAOmedico {
         ArrayList<Medico> medicos = new ArrayList<>();
         try{
             while(resultados.next()){
-                int code = resultados.getInt(1);
-                String dni = resultados.getNString(2);
-                String nombre = resultados.getNString(3);
-                String apellidos = resultados.getNString(4);
-                int rol = resultados.getInt(5);
-                Date fecha = resultados.getDate(6);
-                Medico med = new Modelo.Medico(code, nombre, apellidos, dni, "", fecha);
+                Medico med = (Medico)UserFactory.buildUsuario(resultados);
                 medicos.add(med);
             }
         }
@@ -75,15 +68,7 @@ public class DAOmedico {
         
         try{
             while(resultados.next()){
-                int id = resultados.getInt(1);
-                String dni = resultados.getNString(2);
-                String nombre = resultados.getNString(3);
-                String apellidos = resultados.getNString(4);
-                int habitacion = resultados.getInt(6);
-                int medico_p_id = resultados.getInt(7);
-                int enfermero_id = resultados.getInt(8);
-                
-                pacientes.add(new Paciente(id, dni, nombre, apellidos, medico_p_id, enfermero_id, habitacion));
+                pacientes.add(ModelFactory.buildPaciente(resultados));
             }
         }catch(SQLException sqle){
             System.out.println("DAOmedico @ getPacientes -- Error en retirar datos: " + sqle.getMessage());
@@ -116,13 +101,7 @@ public class DAOmedico {
         
         try{
             while(resultados.next()){
-                int id = resultados.getInt(1);
-                String nombre = resultados.getNString(2);
-                String alergias = resultados.getNString(3);
-                String efectos_secundarios = resultados.getNString(4);
-                int cantidad = resultados.getInt(5);
-                
-                medicamentos.add(new Medicamento(id, nombre, alergias, efectos_secundarios, cantidad));
+                medicamentos.add(ModelFactory.buildMedicamento(resultados));
             }
         }
         catch(SQLException sqle){
@@ -153,11 +132,7 @@ public class DAOmedico {
         
         try{
             while( resultados.next() ){
-                int id = resultados.getInt(1);
-                String nombre = resultados.getNString(2);
-                int enf_rel = resultados.getInt(3);
-                boolean contagiosa = resultados.getBoolean(4);
-                enfermedades.add(new Enfermedad(id, nombre, contagiosa));
+                enfermedades.add(ModelFactory.buildEnfermedad(resultados));
             }
         }catch(SQLException sqle){
             System.out.println("getEnfermedadesByNombre @ DAOmedico -- error en la recogida de datos");
@@ -245,7 +220,7 @@ public class DAOmedico {
         
         try{
             Statement s = DAO.getConnection().createStatement();
-            String consult = "SELECT * FROM paciente WHERE dni = '" + dni + "';";
+            String consult = "SELECT * FROM paciente WHERE dni_paciente = '" + dni + "';";
             
             resultados = s.executeQuery(consult);
         }catch( SQLException sqle ){
@@ -260,9 +235,7 @@ public class DAOmedico {
             if(! resultados.next() )
                 return null;        // No existe ningún paciente con ese dni
             
-            int id = resultados.getInt(1);
-            String nombre = resultados.getNString(2);
-            String apellidos = resultados.getNString(3);
+            paciente = ModelFactory.buildPaciente(resultados);
             
         }catch( SQLException sqle ){
             System.out.println("getPacientesByDNI @ DAOmedico -- error recogiendo los datos");
@@ -274,5 +247,35 @@ public class DAOmedico {
         }
         
         return paciente;
+    }
+    
+    public static ArrayList getHistorial(int id_paciente){
+        ResultSet resultados = null;
+        
+        try{
+            Statement s = DAO.getConnection().createStatement();
+            
+            String query = "SELECT * FROM historialmedico WHERE id_paciente = " + id_paciente + ";";
+            
+            resultados = s.executeQuery(query);
+            
+        }catch(SQLException sqle){
+            System.out.println("getHistorial @ DAOmedico -- error consulta sql");
+            System.out.println(sqle.getMessage());
+            return null;
+        }
+        
+        ArrayList historial = new ArrayList();
+        
+        try{
+            while(resultados.next()){
+                historial.add(ModelFactory.buildHistorial(resultados));
+            }
+        }catch(SQLException sqle){
+            System.out.println("getHistorial @ DAOmedico -- error recuperando data");
+            System.out.println(sqle.getMessage());
+        }
+        
+        return historial;
     }
 }

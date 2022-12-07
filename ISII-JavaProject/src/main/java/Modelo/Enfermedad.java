@@ -22,6 +22,8 @@ public class Enfermedad {
     // Enfermedades relacionadas
     private ArrayList<Enfermedad> enfermedades_relacionadas;
     
+    private int enfer_rel;
+    
     // Enfermedad contagiosa o no
     private boolean contagiosa;
     /**
@@ -34,6 +36,14 @@ public class Enfermedad {
         this.id = id;
         this.nombre = nombre;
         this.contagiosa = contagiosa;
+        this.enfermedades_relacionadas = null;
+    }  
+    
+    public Enfermedad(int id, String nombre, int enfer_rel,  boolean contagiosa) {
+        this.id = id;
+        this.nombre = nombre;
+        this.contagiosa = contagiosa;
+        this.enfer_rel = enfer_rel;
         this.enfermedades_relacionadas = null;
     }  
     

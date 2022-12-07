@@ -8,6 +8,9 @@ import Modelo.Usuario;
 
 import java.util.Date;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author algar
@@ -28,8 +31,27 @@ public class UserFactory {
         }
     }
     
-    public static Usuario hacerUsuario(Usuario_Tipo u_t, int id, String nombre, String apellidos, String dni_usuario, int telefono, Date fecha_incorporacion){
-        switch(u_t){
+    public static Usuario buildUsuario(ResultSet resultados){
+        int rol;
+        int id;
+        String dni_usuario;
+        String nombre;
+        String apellidos;
+        Date fecha_incorporacion;
+        try{
+            rol = resultados.getInt(5);  
+            id = resultados.getInt(1);
+            dni_usuario = resultados.getNString(2);
+            nombre = resultados.getNString(3);
+            apellidos = resultados.getNString(4);
+            fecha_incorporacion = resultados.getDate(6);
+        }catch(SQLException sqle){
+            System.out.println("buildUsuario failed.");
+            System.out.println(sqle.getMessage());
+            return null;
+        }
+        
+        switch(Usuario_Tipo.getTipo(rol)){
             case MEDICO:
                 return new Medico( id, nombre, apellidos, dni_usuario, null, fecha_incorporacion);
             case ENFERMERO:

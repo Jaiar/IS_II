@@ -1,51 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Modelo;
-import java.util.ArrayList;
+
+import java.time.LocalDate;
+
 /**
  *
  * @author Mehdi
  */
 public class Historial {
-    private String DNI;
-    private String fecha;
-    private String enfermedad;
-   private ArrayList<String> fechas = new ArrayList<String>();
-   private ArrayList<String> enfermedades = new ArrayList<String>();
-   
-   public void setDNI(String newDNI) {
-    this.DNI = newDNI;
-  }
-    public void setfecha(String newfecha) {
-    this.fecha = newfecha;
-  }
-     public void setenfermedad(String newenfermedad) {
-    this.enfermedad = newenfermedad;
-  }
-      public void setfechas(ArrayList newfechas) {
-    this.fechas = newfechas;
-  }
-       public void setenfermedades(ArrayList newenfermedades) {
-    this.enfermedades = newenfermedades;
-  }
-      public String geDNI() {
-    return DNI;
-  }
-       public String getfecha() {
-    return fecha;
-  }
-        public String getenfermedad() {
-    return enfermedad;
-  }
-        public ArrayList<String> getfechas() {
-    return fechas;
-        }
-     public ArrayList<String> getenfermedades() {
-    return enfermedades;
-  }
-}
-  
+    private int id;
+    private int paciente_id;
+    private int enfermedad_id;
+    private LocalDate fecha;
 
-   
+    public Historial(int id, int paciente_id, int enfermedad_id, LocalDate fecha){
+        this.id = id;
+        this.paciente_id = paciente_id;
+        this.enfermedad_id = enfermedad_id;
+        this.fecha = fecha;
+    }
+    
+    public int getEnfermedadId(){
+        return this.enfermedad_id;
+    }
+    
+    @Override
+    public String toString(){
+        return fecha.toString();
+    }
+}

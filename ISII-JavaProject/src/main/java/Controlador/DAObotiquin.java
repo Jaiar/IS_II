@@ -24,24 +24,17 @@ public class DAObotiquin {
         catch (Exception e) { // Error en al realizar la consulta
             System.out.println("Error en la petición a la BD -- " + e.getMessage());
         }
-        ArrayList<Modelo.Medicamento> medicamentos = new ArrayList<>();
+        ArrayList medicamentos = new ArrayList();
         
         try{
             while(resultados.next()){
-                int id = resultados.getInt(1);
-                String nombre = resultados.getNString(2);
-                String alergias = resultados.getNString(3);
-                String efectos_secundarios = resultados.getNString(4);
-                int cantidad = resultados.getInt(5);
-                
-                medicamentos.add(new Modelo.Medicamento(id, nombre, alergias, efectos_secundarios, cantidad));
+                medicamentos.add(ModelFactory.buildMedicamento(resultados));
             }
         }
         catch(SQLException sqle){
             System.out.println("Error en la retirada de datos: " + sqle.getMessage());
             return null;
         }
-        
         return medicamentos;
     }
 }

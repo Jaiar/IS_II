@@ -19,7 +19,7 @@ public class DAOmedicamento {
             String con;
             Statement s = DAO.getConnection().createStatement();
             // Consulta SQL
-            con =     "SELECT e.id_enfermedad, e.nombre, e.contagiosa "
+            con =     "SELECT e.id_enfermedad, e.nombre,e.enfermedades_relacionadas, e.contagiosa "
                     + "FROM tratamiento t, enfermedad e "
                     + "WHERE t.id_enfermedad = e.id_enfermedad "
                             + "AND id_medicamento = " + id_med + ";";
@@ -33,12 +33,14 @@ public class DAOmedicamento {
         ArrayList <Enfermedad> enfermedades = new ArrayList<>();
         try{
             while(resultados.next()){
-                int id = resultados.getInt(1);
-                String nombre = resultados.getNString(2);
-                boolean contagiosa = resultados.getBoolean(3);
-                enfermedades.add(new Enfermedad( id, nombre, contagiosa ));
+                
+                enfermedades.add(ModelFactory.buildEnfermedad(resultados));
             }
-        }catch (SQLException sqle){}
+        }catch (SQLException sqle){
+            System.out.println("Error sqle");
+            System.out.println(sqle.getMessage());
+            return null;
+        }
         
         return enfermedades;
     }

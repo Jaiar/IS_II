@@ -143,35 +143,6 @@ public class DAOenfermedad {
             return null;
         }
     }
-    
-    public static Enfermedad getEnfermedad(int id_enfer){
-        ResultSet resultados = null;
-        
-        try {
-            Statement s = DAO.getConnection().createStatement();
-            String query = "SELECT * FROM enfermedad WHERE id_enfermedad = " + id_enfer + ";";
-            
-            resultados = s.executeQuery(query);
-        }catch( SQLException sqle ){
-            System.out.println("getEnfermedad @ DAOenfermedad -- error en la query ");
-            System.out.println(sqle.getMessage());
-        }
-        
-        try {
-            resultados.next();
-            
-            int id = resultados.getInt(1);
-            String nombre = resultados.getNString(2);
-            boolean contagiosa = resultados.getBoolean(4);
-            
-            return new Enfermedad(id, nombre, contagiosa);
-        }catch(SQLException sqle){
-            System.out.println("getEnfermedad @ DAOenfermedad -- error fetching ");
-            System.out.println(sqle.getMessage());
-        }
-        
-        return null;
-    }
 }
 
 

@@ -248,34 +248,4 @@ public class DAOmedico {
         
         return paciente;
     }
-    
-    public static ArrayList getHistorial(int id_paciente){
-        ResultSet resultados = null;
-        
-        try{
-            Statement s = DAO.getConnection().createStatement();
-            
-            String query = "SELECT * FROM historialmedico WHERE id_paciente = " + id_paciente + ";";
-            
-            resultados = s.executeQuery(query);
-            
-        }catch(SQLException sqle){
-            System.out.println("getHistorial @ DAOmedico -- error consulta sql");
-            System.out.println(sqle.getMessage());
-            return null;
-        }
-        
-        ArrayList historial = new ArrayList();
-        
-        try{
-            while(resultados.next()){
-                historial.add(ModelFactory.buildHistorial(resultados));
-            }
-        }catch(SQLException sqle){
-            System.out.println("getHistorial @ DAOmedico -- error recuperando data");
-            System.out.println(sqle.getMessage());
-        }
-        
-        return historial;
-    }
 }

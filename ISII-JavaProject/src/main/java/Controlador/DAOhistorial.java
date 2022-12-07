@@ -32,5 +32,4 @@ public class DAOhistorial {
             return null;
         }
     }
-    }
 }

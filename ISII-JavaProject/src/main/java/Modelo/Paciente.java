@@ -77,7 +77,7 @@ public class Paciente {
     }
     
     public ArrayList getHistorial(){
-        return DAOpaciente.getHistorial(this.id);
+        return DAOpacientes.getHistorial(this.id);
     }
     
     public int getDoctor(){

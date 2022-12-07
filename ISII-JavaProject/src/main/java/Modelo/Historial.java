@@ -2,7 +2,7 @@ package Modelo;
 
 import java.time.LocalDate;
 
-import Controlador.DAO
+import Controlador.DAOhistorial;
 
 /**
  *
@@ -21,8 +21,8 @@ public class Historial {
         this.fecha = fecha;
     }
     
-    public int getEnfermedad(){
-        return DAOhistorial.;
+    public Enfermedad getEnfermedad(){
+        return (Enfermedad) DAOhistorial.getEnfermedad(this.enfermedad_id);
     }
     
     @Override

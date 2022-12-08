@@ -31,9 +31,9 @@ public class Enfermero extends Usuario{
         return DAOenfermero.getMedicamentosHospital(num);
     }
     
-    public ArrayList<Paciente> getPaciente(int id){
+    public ArrayList<Paciente> getPacientes(){
         if ( pacientes == null )
-            pacientes = DAOenfermero.getPacientes(id);
+            pacientes = DAOenfermero.getPacientes(this.code);
         
         return pacientes;
     }

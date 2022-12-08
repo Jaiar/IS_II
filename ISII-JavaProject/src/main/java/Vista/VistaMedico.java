@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import Modelo.Paciente;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -243,9 +244,13 @@ public class VistaMedico extends javax.swing.JFrame {
     }//GEN-LAST:event_InfoEnfermedadButtonActionPerformed
 
     private void DarAltaPacienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DarAltaPacienteButtonActionPerformed
-        // TODO add your handling code here:
-        new AltaPaciente(medico, this.listaEnfermos.getSelectedValue()).setVisible(true);
-        dispose();
+        try{
+            new AltaPaciente(medico, this.listaEnfermos.getSelectedValue()).setVisible(true);
+            dispose();
+        }catch(NullPointerException npe){
+            JOptionPane.showMessageDialog(this, "Seleccione primero un paciente", "Alta Paciente", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     }//GEN-LAST:event_DarAltaPacienteButtonActionPerformed
 
     private void InfoMedicamenteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InfoMedicamenteButtonActionPerformed

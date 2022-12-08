@@ -237,14 +237,19 @@ public class AñadirPaciente extends javax.swing.JFrame {
 
     private void botonAñadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAñadirMouseClicked
          
-        paciente.newPaciente(this.textDNI.getText( ),this.textNombre.getText(), 
- this.textApellidos.getText(),this.textEnfermedad.getText(),
-         Integer.parseInt(this.textDoctor.getText()),Integer.parseInt(this.textEnfermero.getText()),
-       Integer.parseInt(this.textHabitacion.getText()));
+        paciente.newPaciente(
+                this.textDNI.getText( ),
+                this.textNombre.getText(), 
+                this.textApellidos.getText(),
+                this.textEnfermedad.getText(),
+                Integer.parseInt(this.textDoctor.getText()),
+                Integer.parseInt(this.textEnfermero.getText()),
+                Integer.parseInt(this.textHabitacion.getText())
+        );
         
         
         listaHistorialPacientes = new DefaultListModel();
-        pacientes = medico.getPacientes();
+        pacientes = enfermero.getPacientes();
        
        
         for (Paciente p: pacientes)

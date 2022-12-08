@@ -35,6 +35,10 @@ public class Paciente {
         this.enfermedades = null;
     }
     
+    public static ArrayList<Paciente> getAllPacientes(){
+        return (ArrayList<Paciente>) DAOpacientes.getAllPacientes();
+    }
+    
     /**
      * Si tenemos una coinciendencia en fecha y DNI en una entrada en el historial 
      * del enfermo, el sistema debe lanzar una excepción.

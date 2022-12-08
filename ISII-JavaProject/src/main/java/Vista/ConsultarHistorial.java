@@ -5,9 +5,6 @@ import Modelo.Medico;
 import Modelo.Paciente;
 import Modelo.Historial;
 
-import Controlador.DAOmedico;
-import Controlador.DAOenfermedad;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 

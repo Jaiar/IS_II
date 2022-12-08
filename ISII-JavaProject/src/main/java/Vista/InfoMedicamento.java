@@ -3,9 +3,6 @@ package Vista;
 import Modelo.Medicamento;
 import Modelo.Enfermedad;
 import Modelo.Medico;
-
-import Controlador.DAOmedico;
-import Controlador.DAOmedicamento;
 import Modelo.Botiquin;
 
 import java.util.ArrayList;

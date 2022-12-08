@@ -19,15 +19,7 @@ import javax.swing.DefaultListModel;
  * @author algar
  */
 public class VistaMedico extends javax.swing.JFrame {
-
-    private AltaPaciente vistaDarAltaPaciente;
-    private InfoMedicamento vistaMedicamento;
-    private ConsultarHistorial viewHistorialPaciente;
-    private InfoEnfermedades viewInfoEfermedades;
-    private Login viewLogin;
     private Medico medico;
-    private Enfermero enfermero;
-    private Gestor gestor;
     private ArrayList<Paciente> pacientes;
     private LocalDate currentdate = LocalDate.now();
     
@@ -45,7 +37,7 @@ public class VistaMedico extends javax.swing.JFrame {
         listaEnfermosModel = new DefaultListModel();
         pacientes = medico.getPacientes();
        
-        if(pacientes.size()!=0)
+        if(!pacientes.isEmpty())
             for (Paciente p: pacientes)
                 listaEnfermosModel.addElement(p);
         
@@ -271,8 +263,7 @@ public class VistaMedico extends javax.swing.JFrame {
 
     private void SalirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirButtonActionPerformed
         // TODO add your handling code here:
-        viewLogin = new Login();
-        viewLogin.setVisible(true);
+        new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_SalirButtonActionPerformed
 
@@ -280,8 +271,6 @@ public class VistaMedico extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(listaEnfermos.getSelectedIndex() == -1)
             return;
-
-        System.out.print("YYYYYY");
         
         // Crea el texto que se pondrá en el JTextArea que tiene el historial de enfermedades.
         String text = pacientes.get(listaEnfermos.getSelectedIndex()).getEnfermedades().stream().map(e -> e.toString() + "\n").reduce("", String::concat);

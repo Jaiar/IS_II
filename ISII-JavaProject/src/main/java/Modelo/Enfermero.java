@@ -19,6 +19,10 @@ public class Enfermero extends Usuario{
         
     }
     
+    public static ArrayList<Enfermero> getAllEnfermeros(){
+        return (ArrayList<Enfermero>) DAOenfermero.getAllEnfermeros();
+    }
+    
     public void listaDeEnfermos(int code){
         //La consulta a la base de datos y almacenamos los pacientes en la lista de pacientes   
     }

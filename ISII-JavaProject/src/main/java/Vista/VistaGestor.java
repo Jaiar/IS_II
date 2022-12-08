@@ -1,17 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Vista;
 
-import Controlador.DAOenfermero;
-import Controlador.DAO;
-import Controlador.DAOmedico;
 import Modelo.Enfermero;
 import Modelo.Gestor;
 import Modelo.Medico;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.DefaultListModel;
 
 /**
@@ -45,8 +37,8 @@ public class VistaGestor extends javax.swing.JFrame {
         venfermeros = new ArrayList<Enfermero>();
         vmedicos = new ArrayList<Medico>();
         
-        venfermeros = DAOenfermero.getAllEnfermeros();
-        vmedicos = DAOmedico.getAllMedicos();
+        venfermeros = Enfermero.getAllEnfermeros();
+        vmedicos = Medico.getAllMedicos();
         
         for(int i=0; i<venfermeros.size(); i++)
             enfermerosList.addElement(venfermeros.get(i).getNombre());

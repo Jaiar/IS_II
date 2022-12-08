@@ -15,12 +15,8 @@ import javax.swing.DefaultListModel;
  */
 public class VistaEnfermeros extends javax.swing.JFrame {
     private BotiquinHospital vistaBotiquin;
-    private Login viewLogin ;
     private Enfermero enfermero;
-    private Medico medico;
-    private Gestor gestor;
     private Paciente paciente;
-    private AñadirPaciente añadirPaciente;
     private LocalDate currentdate = LocalDate.now();
     private DefaultListModel<String> pacientesList;
     private ArrayList<Paciente> vpacientes;
@@ -36,8 +32,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
         this.txt_anyo.setText(currentdate.getYear()+"");
         pacientesList = new DefaultListModel<String>();
         
-        vpacientes = new ArrayList<Paciente>();   
-        vpacientes = DAOpacientes.getAllPacientes();
+        vpacientes = Paciente.getAllPacientes();
         
                 
         for(int i=0; i<vpacientes.size(); i++)
@@ -267,14 +262,12 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
     private void SalirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirButtonActionPerformed
         // TODO add your handling code here:
-        viewLogin = new Login();
-        viewLogin.setVisible(true);
+        this.enfermero.launchMenu();
         dispose();
     }//GEN-LAST:event_SalirButtonActionPerformed
 
     private void anyadirPacienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anyadirPacienteButtonActionPerformed
-        añadirPaciente = new AñadirPaciente(enfermero, paciente);
-        viewLogin.setVisible(true);
+        new AñadirPaciente(enfermero, paciente).setVisible(true);
         dispose();       
     }//GEN-LAST:event_anyadirPacienteButtonActionPerformed
 

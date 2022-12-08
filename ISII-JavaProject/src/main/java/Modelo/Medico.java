@@ -17,11 +17,16 @@ public class Medico extends Usuario {
         super(code, name, surname, dni, tele, anyo);
         this.pacientes = null;
     } 
+    
     public ArrayList<Paciente> getPacientes(){
         if (pacientes == null )
             pacientes = DAOmedico.getPacientes(this.code);
         
         return pacientes;
+    }
+    
+    public static ArrayList<Medico> getAllMedicos(){
+        return (ArrayList<Medico>) DAOmedico.getAllMedicos();
     }
     
     public Paciente getPacienteByDNI(String DNI){

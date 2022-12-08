@@ -4,6 +4,8 @@ import Modelo.Enfermedad;
 import Modelo.Medico;
 import Modelo.Paciente;
 import Modelo.Historial;
+import Modelo.Medicamento;
+import Modelo.Tratamiento;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -18,6 +20,7 @@ import java.util.ArrayList;
 public class ConsultarHistorial extends javax.swing.JFrame {
 
     private Medico user;
+    private Enfermedad enf_selected;
     private Paciente paciente_actual;
     private boolean contagiosa = false;
     
@@ -102,6 +105,12 @@ public class ConsultarHistorial extends javax.swing.JFrame {
             }
         });
 
+        lst_medicamentos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lst_medicamentos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lst_medicamentosValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(lst_medicamentos);
 
         jLabel5.setText("Medicamento que la tratan:");
@@ -153,7 +162,7 @@ public class ConsultarHistorial extends javax.swing.JFrame {
                                 .addComponent(btn_atras)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -166,7 +175,7 @@ public class ConsultarHistorial extends javax.swing.JFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(txt_dosis_dia, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(txt_dosis_recom, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addContainerGap(26, Short.MAX_VALUE))))))
+                                .addContainerGap(20, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +198,7 @@ public class ConsultarHistorial extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
@@ -198,7 +207,7 @@ public class ConsultarHistorial extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txt_dosis_dia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(btn_atras)
                         .addGap(15, 15, 15))
                     .addComponent(jScrollPane2))
@@ -240,10 +249,16 @@ public class ConsultarHistorial extends javax.swing.JFrame {
 
     private void lst_enfermedadesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lst_enfermedadesValueChanged
         // Usuario selecciona una enfermedad -- mostrar informacion
-        Enfermedad enf = this.lst_enfermedades.getSelectedValue();
+        this.enf_selected = this.lst_enfermedades.getSelectedValue();
         
-        this.contagiosa = enf.getContagiosa();
+        this.contagiosa = this.enf_selected.getContagiosa();
         this.ch_contagiosa.setSelected(this.contagiosa);
+        
+        ArrayList<Medicamento> m = this.enf_selected.getMedicamentosQueLaTratan();
+        
+        DefaultListModel dlm = new DefaultListModel();
+        dlm.addAll(m);
+        this.lst_medicamentos.setModel(dlm);
     }//GEN-LAST:event_lst_enfermedadesValueChanged
 
     private void lst_fechaValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lst_fechaValueChanged
@@ -255,6 +270,15 @@ public class ConsultarHistorial extends javax.swing.JFrame {
         
         this.lst_enfermedades.setModel(dlm);
     }//GEN-LAST:event_lst_fechaValueChanged
+
+    private void lst_medicamentosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lst_medicamentosValueChanged
+        Medicamento m = this.lst_medicamentos.getSelectedValue();
+        
+        Tratamiento trat = m.getTratamiento(this.enf_selected.getId());
+        
+        this.txt_dosis_dia.setText("" + trat.getDosis());
+        this.txt_dosis_recom.setText("" + trat.getVeces_dosis());
+    }//GEN-LAST:event_lst_medicamentosValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -274,7 +298,7 @@ public class ConsultarHistorial extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<Enfermedad> lst_enfermedades;
     private javax.swing.JList<Historial> lst_fecha;
-    private javax.swing.JList<String> lst_medicamentos;
+    private javax.swing.JList<Medicamento> lst_medicamentos;
     private javax.swing.JTextField txt_dni;
     private javax.swing.JTextField txt_dosis_dia;
     private javax.swing.JTextField txt_dosis_recom;

@@ -1,8 +1,6 @@
 package Vista;
 
 import Modelo.Enfermero;
-import Modelo.Gestor;
-import Modelo.Medico;
 import Modelo.Paciente;
 import java.time.LocalDate;
 import java.util.ArrayList;

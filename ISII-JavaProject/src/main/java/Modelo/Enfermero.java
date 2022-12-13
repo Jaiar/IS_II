@@ -28,6 +28,9 @@ public class Enfermero extends Usuario{
     }
     
     public ArrayList consultarBotiquin(int num){
+        if(num<0)
+            throw new UnsupportedOperationException();
+        
         return DAOenfermero.getMedicamentosHospital(num);
     }
     

@@ -31,7 +31,7 @@ public class DAOenfermedadTest {
          System.out.println("GetMedicamentosTratan");
          int enf_id = 1000000;
          ArrayList resultado = DAOenfermedad.getMedicamentosTratan(enf_id);
-         assertEquals(0,resultado);
+         assertEquals(0,resultado.size());
     }
 
     @Test
@@ -39,7 +39,7 @@ public class DAOenfermedadTest {
         System.out.println("GetEnfermedadesRelacionadas");
          int enf_id = 1000000;
          ArrayList resultado = DAOenfermedad.getEnfermedadesRelacionadas(enf_id);
-         assertEquals(0,resultado);
+         assertEquals(0,resultado.size());
     }
     
 }

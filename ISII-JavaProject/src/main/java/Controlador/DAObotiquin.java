@@ -53,6 +53,7 @@ public class DAObotiquin {
         }
         catch (SQLException e) { // Error en al realizar la consulta
             System.out.println("Error en la petición a la BD");
+            throw new UnsupportedOperationException();
         }
         
         ArrayList medicamentos = new ArrayList();

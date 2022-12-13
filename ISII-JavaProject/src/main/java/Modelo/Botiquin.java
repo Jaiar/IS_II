@@ -13,9 +13,6 @@ import java.util.ArrayList;
 public class Botiquin {
     private static Botiquin botiquin;
     
-    private Botiquin(){
-    }
-    
     public static Botiquin getBotiquin(){
         if( botiquin == null ){
             botiquin = new Botiquin();

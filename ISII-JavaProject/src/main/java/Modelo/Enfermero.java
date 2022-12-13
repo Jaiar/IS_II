@@ -1,6 +1,7 @@
 package Modelo;
 
 import Controlador.DAOenfermero;
+import Controlador.DAOpacientes;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -23,11 +24,14 @@ public class Enfermero extends Usuario{
         return (ArrayList<Enfermero>) DAOenfermero.getAllEnfermeros();
     }
     
-    public void listaDeEnfermos(int code){
-        //La consulta a la base de datos y almacenamos los pacientes en la lista de pacientes   
+    public ArrayList listaDeEnfermos(){
+        return (ArrayList<Paciente>) DAOenfermero.getPacientes(code);
     }
     
     public ArrayList consultarBotiquin(int num){
+        if(num<0)
+           throw new NullPointerException();
+        
         return DAOenfermero.getMedicamentosHospital(num);
     }
     

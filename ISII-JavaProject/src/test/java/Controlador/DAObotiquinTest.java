@@ -8,7 +8,6 @@ import Modelo.Botiquin;
 import Modelo.Medicamento;
 import java.util.ArrayList;
 import org.junit.Assert;
-import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
@@ -46,7 +45,7 @@ public class DAObotiquinTest {
         //LLamada a la base de datos
         ArrayList result = DAObotiquin.getMedicamentosByNombre(nombre_medicamento);
         
-        assertSame(prueba, result);
+        Assert.assertSame(prueba, result);
     }
     
     @Test(expected = Exception.class)

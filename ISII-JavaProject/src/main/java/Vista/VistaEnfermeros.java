@@ -32,7 +32,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
         this.txt_anyo.setText(currentdate.getYear()+"");
         pacientesList = new DefaultListModel<String>();
         
-        vpacientes = Paciente.getAllPacientes();
+        vpacientes = enfermero.listaDeEnfermos();
         
                 
         for(int i=0; i<vpacientes.size(); i++)
@@ -60,7 +60,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         l_pacientes = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        listaMediicamentos = new javax.swing.JTextArea();
         jLabel4 = new javax.swing.JLabel();
         BotiquinHospitalButton = new javax.swing.JButton();
         SalirButton = new javax.swing.JButton();
@@ -77,6 +77,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
         jLabel1.setText("Dia:");
 
+        dia.setEditable(false);
         dia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 diaActionPerformed(evt);
@@ -85,6 +86,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
         jLabel2.setText("Mes:");
 
+        txt_mes.setEditable(false);
         txt_mes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_mesActionPerformed(evt);
@@ -93,12 +95,18 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
         jLabel3.setText("Año:");
 
+        txt_anyo.setEditable(false);
         txt_anyo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_anyoActionPerformed(evt);
             }
         });
 
+        l_pacientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                l_pacientesMouseClicked(evt);
+            }
+        });
         l_pacientes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 l_pacientesValueChanged(evt);
@@ -106,9 +114,10 @@ public class VistaEnfermeros extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(l_pacientes);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        listaMediicamentos.setEditable(false);
+        listaMediicamentos.setColumns(20);
+        listaMediicamentos.setRows(5);
+        jScrollPane2.setViewportView(listaMediicamentos);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel4.setText("Enfermeros");
@@ -142,6 +151,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
         lbl_hab.setText("Habitación:");
 
+        jtf_apellidos.setEditable(false);
         jtf_apellidos.setText("                     ");
         jtf_apellidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,6 +159,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
             }
         });
 
+        jtf_hab.setEditable(false);
         jtf_hab.setText("                     ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -167,8 +178,8 @@ public class VistaEnfermeros extends javax.swing.JFrame {
                                 .addComponent(dia, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_mes, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_mes, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -285,6 +296,18 @@ public class VistaEnfermeros extends javax.swing.JFrame {
         
     }//GEN-LAST:event_l_pacientesValueChanged
 
+    private void l_pacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_l_pacientesMouseClicked
+        // TODO add your handling code here:
+                // TODO add your handling code here:
+        if(l_pacientes.getSelectedIndex() == -1)
+            return;
+        //ArrayList enfermedades = l_pacientes.getSelectedIndex()).getEnfermedades();
+        // Crea el texto que se pondrá en el JTextArea que tiene el historial de enfermedades.
+        String text = vpacientes.get(l_pacientes.getSelectedIndex()).getEnfermedades().stream().map(e -> e.toString() + "\n").reduce("", String::concat);
+
+        listaMediicamentos.setText(text);
+    }//GEN-LAST:event_l_pacientesMouseClicked
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -300,12 +323,12 @@ public class VistaEnfermeros extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jtf_apellidos;
     private javax.swing.JTextField jtf_hab;
     private javax.swing.JList<String> l_pacientes;
     private javax.swing.JLabel lbl_apellidos;
     private javax.swing.JLabel lbl_hab;
+    private javax.swing.JTextArea listaMediicamentos;
     private javax.swing.JTextField txt_anyo;
     private javax.swing.JTextField txt_mes;
     // End of variables declaration//GEN-END:variables

@@ -303,7 +303,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
             return;
         //ArrayList enfermedades = l_pacientes.getSelectedIndex()).getEnfermedades();
         // Crea el texto que se pondrá en el JTextArea que tiene el historial de enfermedades.
-        String text = vpacientes.get(l_pacientes.getSelectedIndex()).getEnfermedades().stream().map(e -> e.toString() + "\n").reduce("", String::concat);
+        String text = vpacientes.get(l_pacientes.getSelectedIndex()).getMedicamentos().stream().map(e -> e.toString() + "\n").reduce("", String::concat);
 
         listaMediicamentos.setText(text);
     }//GEN-LAST:event_l_pacientesMouseClicked

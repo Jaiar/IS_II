@@ -6,6 +6,9 @@ import java.sql.Statement;
 
 import java.util.ArrayList;
 
+
+import Modelo.Enfermedad;
+import Modelo.Medicamento;
 /**
  *
  * @author rrajo
@@ -130,5 +133,41 @@ public class DAOpacientes {
         }
         
         return historial;
+    }
+    
+    public static ArrayList getMedicamentos(int id_paciente){
+        ArrayList enfermedades = DAOpacientes.getEnfermedades(id_paciente);
+        ResultSet resultados = null;
+        
+        ArrayList<Medicamento> medicamentos = new ArrayList<>();
+        
+        for(Enfermedad e: (ArrayList<Enfermedad>)enfermedades){
+            try{
+                Statement s = DAO.getConnection().createStatement();
+
+                String query = "SELECT m.id_medicamento, m.nombre, m.alergias, m.efectos_secundarios, m.cantidad "
+                             + "FROM tratamiento t, medicamento m "
+                             + "WHERE t.id_enfermedad = " + e.getId()
+                             + " AND t.id_medicamento = m.id_medicamento ;";
+
+                resultados = s.executeQuery(query);
+
+            }catch(SQLException sqle){
+                System.out.println("getMedicamentos @ DAOpacientes -- error consulta sql");
+                System.out.println(sqle.getMessage());
+                return null;
+            }
+            
+            try{
+            while(resultados.next()){
+                medicamentos.add(ModelFactory.buildMedicamento(resultados));
+            }
+            }catch(SQLException sqle){
+                System.out.println("getMedicamentos @ DAOpacietnes -- error recuperando data");
+                System.out.println(sqle.getMessage());
+            }
+        }
+        
+        return medicamentos;
     }
 }

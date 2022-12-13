@@ -80,6 +80,10 @@ public class Paciente {
         return enfermedades;
     }
     
+    public ArrayList<Medicamento> getMedicamentos(){
+        return DAOpacientes.getMedicamentos(this.id);
+    }
+    
     public ArrayList getHistorial(){
         return DAOpacientes.getHistorial(this.id);
     }

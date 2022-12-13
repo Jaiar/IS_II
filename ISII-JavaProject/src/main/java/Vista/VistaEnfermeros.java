@@ -77,6 +77,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
         jLabel1.setText("Dia:");
 
+        dia.setEditable(false);
         dia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 diaActionPerformed(evt);
@@ -85,6 +86,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
         jLabel2.setText("Mes:");
 
+        txt_mes.setEditable(false);
         txt_mes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_mesActionPerformed(evt);
@@ -93,6 +95,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
         jLabel3.setText("Año:");
 
+        txt_anyo.setEditable(false);
         txt_anyo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_anyoActionPerformed(evt);
@@ -142,6 +145,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
         lbl_hab.setText("Habitación:");
 
+        jtf_apellidos.setEditable(false);
         jtf_apellidos.setText("                     ");
         jtf_apellidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,6 +153,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
             }
         });
 
+        jtf_hab.setEditable(false);
         jtf_hab.setText("                     ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -167,8 +172,8 @@ public class VistaEnfermeros extends javax.swing.JFrame {
                                 .addComponent(dia, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txt_mes, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txt_mes, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

@@ -29,26 +29,26 @@
                   <Component id="jLabel4" min="-2" pref="327" max="-2" attributes="0"/>
                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="DarAltaPacienteButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="darAltaPacienteButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="InfoEnfermedadButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="infoEnfermedadButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="InfoMedicamenteButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="infoMedicamenteButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="HistorialPacienteButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="historialPacienteButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jLabel1" min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Component id="diaLabel" min="-2" pref="37" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="diaText" min="-2" pref="71" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Component id="mesLabel" min="-2" pref="37" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="mesText" min="-2" pref="86" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Component id="anyoLabel" min="-2" pref="37" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="anyoText" min="-2" pref="71" max="-2" attributes="0"/>
                               </Group>
@@ -63,7 +63,7 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
-              <Component id="SalirButton" min="-2" max="-2" attributes="0"/>
+              <Component id="salirButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -76,11 +76,11 @@
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="diaText" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="diaLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="mesText" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="mesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="anyoText" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="anyoLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -89,13 +89,13 @@
               </Group>
               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="DarAltaPacienteButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="InfoEnfermedadButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="HistorialPacienteButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="InfoMedicamenteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="darAltaPacienteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="infoEnfermedadButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="historialPacienteButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="infoMedicamenteButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="38" max="32767" attributes="0"/>
-              <Component id="SalirButton" min="-2" max="-2" attributes="0"/>
+              <Component id="salirButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -105,13 +105,12 @@
     <Component class="javax.swing.JTextField" name="diaText">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="diaTextActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
+    <Component class="javax.swing.JLabel" name="diaLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Dia:"/>
       </Properties>
@@ -119,13 +118,12 @@
     <Component class="javax.swing.JTextField" name="mesText">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mesTextActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
+    <Component class="javax.swing.JLabel" name="mesLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Mes:"/>
       </Properties>
@@ -133,13 +131,12 @@
     <Component class="javax.swing.JTextField" name="anyoText">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="anyoTextActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="anyoLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="A&#xf1;o:"/>
       </Properties>
@@ -168,44 +165,44 @@
         <Property name="text" type="java.lang.String" value="M&#xe9;dicos"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="DarAltaPacienteButton">
+    <Component class="javax.swing.JButton" name="darAltaPacienteButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Dar Alta Paciente"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DarAltaPacienteButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="darAltaPacienteButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="InfoEnfermedadButton">
+    <Component class="javax.swing.JButton" name="infoEnfermedadButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Informaci&#xf3;n enfermedad"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="InfoEnfermedadButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="infoEnfermedadButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="HistorialPacienteButton">
+    <Component class="javax.swing.JButton" name="historialPacienteButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Consultar historial paciente"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HistorialPacienteButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="historialPacienteButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="InfoMedicamenteButton">
+    <Component class="javax.swing.JButton" name="infoMedicamenteButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Informaci&#xf3;n medicamento"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="InfoMedicamenteButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="infoMedicamenteButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="SalirButton">
+    <Component class="javax.swing.JButton" name="salirButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Salir"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SalirButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salirButtonActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane3">

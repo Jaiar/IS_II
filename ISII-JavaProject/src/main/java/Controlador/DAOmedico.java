@@ -3,7 +3,6 @@ package Controlador;
 import Modelo.Enfermedad;
 import Modelo.Medico;
 import Modelo.Paciente;
-import Modelo.Medicamento;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

@@ -122,6 +122,6 @@ public class Paciente {
     
     @Override
     public String toString(){
-        return apellidos + ", " + nombre;
+        return apellidos + ", " + nombre + " ----> ROOM: "+ room_id;
     }
 }

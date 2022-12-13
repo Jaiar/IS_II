@@ -50,13 +50,13 @@ public class BotiquinHospital extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        cantidadMinLabel = new javax.swing.JLabel();
         txt_cantminima = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         lst_botiquin = new javax.swing.JList<>();
         btn_atras = new javax.swing.JButton();
         findButton = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        cantidadDispoLabel = new javax.swing.JLabel();
         lbl_cantidad = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,7 +64,7 @@ public class BotiquinHospital extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setText("Botiquin");
 
-        jLabel2.setText("Cantidad mínima:");
+        cantidadMinLabel.setText("Cantidad mínima:");
 
         lst_botiquin.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lst_botiquin.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -88,7 +88,7 @@ public class BotiquinHospital extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Cantidad disponible:");
+        cantidadDispoLabel.setText("Cantidad disponible:");
 
         lbl_cantidad.setText("0");
 
@@ -100,13 +100,13 @@ public class BotiquinHospital extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                        .addComponent(cantidadMinLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_cantminima, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(findButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
+                        .addComponent(cantidadDispoLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lbl_cantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -123,10 +123,10 @@ public class BotiquinHospital extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(cantidadMinLabel)
                     .addComponent(txt_cantminima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(findButton)
-                    .addComponent(jLabel3)
+                    .addComponent(cantidadDispoLabel)
                     .addComponent(lbl_cantidad))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,10 +178,10 @@ public class BotiquinHospital extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_atras;
+    private javax.swing.JLabel cantidadDispoLabel;
+    private javax.swing.JLabel cantidadMinLabel;
     private javax.swing.JButton findButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_cantidad;
     private javax.swing.JList<Medicamento> lst_botiquin;

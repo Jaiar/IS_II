@@ -6,10 +6,7 @@ package Controlador;
 
 import Modelo.Usuario;
 import java.sql.ResultSet;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import java.sql.SQLException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -18,38 +15,70 @@ import static org.junit.Assert.*;
  * @author jaumearnau
  */
 public class UserFactoryTest {
-    
-    public UserFactoryTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of buildUsuario method, of class UserFactory.
      */
-    @Test
-    public void testBuildUsuario() {
-        System.out.println("buildUsuario");
+    @Test(expected = NullPointerException.class)
+    public void testBuildUsuarioNull() {
+        System.out.println("buildUsuarioNull");
         ResultSet resultados = null;
         Usuario expResult = null;
         Usuario result = UserFactory.buildUsuario(resultados);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
+    @Test
+    public void testBuildUsuarioMedico(){
+        System.out.println("builUsuarioMedico");
+        ResultSet rs;
+        try{
+            String query = "SELECT * FROM usuarios WHERE rol = 1;";
+            rs = DAO.getConnection().createStatement().executeQuery(query);
+            rs.next();
+        }catch(SQLException sqle){
+            System.out.println("Error en base de datos");
+            return;
+        }
+        
+        Object res = UserFactory.buildUsuario(rs);
+        
+        assertTrue(res instanceof Modelo.Medico);
+    }
+    
+    @Test
+    public void testBuildUsuarioEnfermero(){
+        System.out.println("builUsuarioEnfermero");
+        ResultSet rs;
+        try{
+            String query = "SELECT * FROM usuarios WHERE rol = 2;";
+            rs = DAO.getConnection().createStatement().executeQuery(query);
+            rs.next();
+        }catch(SQLException sqle){
+            System.out.println("Error en base de datos");
+            return;
+        }
+        
+        Object res = UserFactory.buildUsuario(rs);
+        
+        assertTrue(res instanceof Modelo.Enfermero);
+    }
+    
+    @Test
+    public void testBuildUsuarioGestor(){
+        System.out.println("builUsuario");
+        ResultSet rs;
+        try{
+            String query = "SELECT * FROM usuarios WHERE rol = 3;";
+            rs = DAO.getConnection().createStatement().executeQuery(query);
+            rs.next();
+        }catch(SQLException sqle){
+            System.out.println("Error en base de datos");
+            return;
+        }
+        
+        Object res = UserFactory.buildUsuario(rs);
+        
+        assertTrue(res instanceof Modelo.Gestor);
+    }
 }

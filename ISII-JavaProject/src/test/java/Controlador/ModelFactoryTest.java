@@ -4,16 +4,8 @@
  */
 package Controlador;
 
-import Modelo.Enfermedad;
-import Modelo.Historial;
-import Modelo.Medicamento;
-import Modelo.Paciente;
-import Modelo.Tratamiento;
 import java.sql.ResultSet;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import java.sql.SQLException;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -25,91 +17,104 @@ public class ModelFactoryTest {
     
     public ModelFactoryTest() {
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
 
     /**
      * Test of buildPaciente method, of class ModelFactory.
      */
     @Test
-    public void testBuildPaciente() {
-        System.out.println("buildPaciente");
-        ResultSet resultados = null;
-        Paciente expResult = null;
-        Paciente result = ModelFactory.buildPaciente(resultados);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of buildEnfermedad method, of class ModelFactory.
-     */
-    @Test
-    public void testBuildEnfermedad() {
-        System.out.println("buildEnfermedad");
-        ResultSet resultados = null;
-        Enfermedad expResult = null;
-        Enfermedad result = ModelFactory.buildEnfermedad(resultados);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of buildMedicamento method, of class ModelFactory.
-     */
-    @Test
-    public void testBuildMedicamento() {
+    public void testBuildMedicamento(){
         System.out.println("buildMedicamento");
-        ResultSet resultados = null;
-        Medicamento expResult = null;
-        Medicamento result = ModelFactory.buildMedicamento(resultados);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ResultSet rs;
+        try{
+            String query = "SELECT * FROM medicamento;";
+            rs = DAO.getConnection().createStatement().executeQuery(query);
+            rs.next();
+        }catch(SQLException sqle){
+            System.out.println("Error en base de datos");
+            return;
+        }
+        
+        Object res = ModelFactory.buildMedicamento(rs);
+        
+        assertTrue(res instanceof Modelo.Medicamento);
     }
-
-    /**
-     * Test of buildHistorial method, of class ModelFactory.
-     */
     @Test
-    public void testBuildHistorial() {
-        System.out.println("buildHistorial");
-        ResultSet resultados = null;
-        Historial expResult = null;
-        Historial result = ModelFactory.buildHistorial(resultados);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of buildTratamiento method, of class ModelFactory.
-     */
-    @Test
-    public void testBuildTratamiento() {
-        System.out.println("buildTratamiento");
-        ResultSet resultados = null;
-        Tratamiento expResult = null;
-        Tratamiento result = ModelFactory.buildTratamiento(resultados);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testBuildEnfermedad(){
+        System.out.println("buildEnfermedad");
+        ResultSet rs;
+        try{
+            String query = "SELECT * FROM enfermedad;";
+            rs = DAO.getConnection().createStatement().executeQuery(query);
+            rs.next();
+        }catch(SQLException sqle){
+            System.out.println("Error en base de datos");
+            return;
+        }
+        
+        Object res = ModelFactory.buildEnfermedad(rs);
+        
+        assertTrue(res instanceof Modelo.Enfermedad);
     }
     
+    @Test
+    public void testBuildTratamiento(){
+        System.out.println("buildTratamiento");
+        ResultSet rs;
+        try{
+            String query = "SELECT * FROM tratamiento;";
+            rs = DAO.getConnection().createStatement().executeQuery(query);
+            rs.next();
+        }catch(SQLException sqle){
+            System.out.println("Error en base de datos");
+            return;
+        }
+        
+        Object res = ModelFactory.buildTratamiento(rs);
+        
+        assertTrue(res instanceof Modelo.Tratamiento);
+    }
+    
+    @Test
+    public void testBuildHistorial(){
+        System.out.println("buildHistorial");
+        ResultSet rs;
+        try{
+            String query = "SELECT * FROM historialmedico;";
+            rs = DAO.getConnection().createStatement().executeQuery(query);
+            rs.next();
+        }catch(SQLException sqle){
+            System.out.println("Error en base de datos");
+            return;
+        }
+        
+        Object res = ModelFactory.buildHistorial(rs);
+        
+        assertTrue(res instanceof Modelo.Historial);
+    }
+    
+    @Test
+    public void testBuildUsuario(){
+        System.out.println("buildPaciente");
+        ResultSet rs;
+        try{
+            String query = "SELECT * FROM pacientes;";
+            rs = DAO.getConnection().createStatement().executeQuery(query);
+            rs.next();
+        }catch(SQLException sqle){
+            System.out.println("Error en base de datos");
+            return;
+        }
+        
+        Object res = ModelFactory.buildPaciente(rs);
+        
+        assertTrue(res instanceof Modelo.Paciente);
+    }
+    
+    @Test(expected=NullPointerException.class)
+    public void testBuildNull(){
+        System.out.println("buildNull");
+        ResultSet rs = null;
+        
+        Object res = ModelFactory.buildEnfermedad(rs);
+    }
 }

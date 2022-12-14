@@ -38,6 +38,7 @@ public class UserFactory {
         String nombre;
         String apellidos;
         Date fecha_incorporacion;
+        
         try{
             rol = resultados.getInt(5);  
             id = resultados.getInt(1);

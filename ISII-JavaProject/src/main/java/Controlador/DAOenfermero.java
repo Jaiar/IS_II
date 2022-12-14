@@ -25,7 +25,7 @@ public class DAOenfermero {
             String con;
             Statement s = DAO.getConnection().createStatement();
             // Consulta SQL
-            con = "SELECT * FROM usuario";
+            con = "SELECT * FROM usuario WHERE rol = 2";
             resultados = s.executeQuery(con);
             }
         catch (Exception e) { // Error en al realizar la consulta

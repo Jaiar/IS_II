@@ -26,7 +26,6 @@ public class DAOmedicoTest {
         System.out.println("getPacientes");
         int medico_id = 999;
         ArrayList result = DAOmedico.getPacientes(medico_id);
-        
         assertEquals(0,result.size());
     }
 

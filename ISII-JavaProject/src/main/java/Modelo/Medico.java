@@ -56,6 +56,7 @@ public class Medico extends Usuario {
     public Date getFecha(){
         return this.incorporacion;
     }
+    
     public void setAltaPaciente(Paciente paciente, Enfermedad enfermedad, LocalDate fecha) throws UnsupportedOperationException {
         DAOmedico.addToHistorialPaciente(paciente, enfermedad, fecha);
     }

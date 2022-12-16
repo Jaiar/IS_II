@@ -1,9 +1,10 @@
 package Vista;
 
 import Modelo.Medico;
+import Modelo.Visita;
+import Modelo.Paciente;
 
 import java.time.LocalDate;
-import Modelo.Paciente;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -14,10 +15,6 @@ import javax.swing.JOptionPane;
  */
 public class VistaMedico extends javax.swing.JFrame {
     private Medico medico;
-    private ArrayList<Paciente> pacientes;
-    private LocalDate currentdate = LocalDate.now();
-    
-    private DefaultListModel listaEnfermosModel;
     
     /**
      * Creates new form MedicoVista
@@ -25,18 +22,20 @@ public class VistaMedico extends javax.swing.JFrame {
     public VistaMedico(Medico medico) {
         initComponents();
         
+        this.medico = medico;
+        
+        LocalDate currentdate = LocalDate.now();
+        
         this.diaText.setText(currentdate.getDayOfMonth()+"");
         this.mesText.setText(currentdate.getMonth()+"");
         this.anyoText.setText(currentdate.getYear()+"");
-        listaEnfermosModel = new DefaultListModel();
-        pacientes = medico.getPacientesCitaHoy();
+        DefaultListModel listaEnfermosModel = new DefaultListModel();
        
-        for (Paciente p: pacientes)
-            listaEnfermosModel.addElement(p);
+        ArrayList<Visita> visitas = medico.getVisitasHoy();
+        
+        listaEnfermosModel.addAll(visitas);
         
         listaEnfermos.setModel(listaEnfermosModel);
-        
-        this.medico = medico;
     }
 
     /**
@@ -64,33 +63,19 @@ public class VistaMedico extends javax.swing.JFrame {
         salirButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         listaEnfermos = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         diaText.setEditable(false);
-        diaText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                diaTextActionPerformed(evt);
-            }
-        });
 
         diaLabel.setText("Dia:");
 
         mesText.setEditable(false);
-        mesText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mesTextActionPerformed(evt);
-            }
-        });
 
         mesLabel.setText("Mes:");
 
         anyoText.setEditable(false);
-        anyoText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                anyoTextActionPerformed(evt);
-            }
-        });
 
         anyoLabel.setText("Año:");
 
@@ -144,6 +129,8 @@ public class VistaMedico extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(listaEnfermos);
 
+        jLabel1.setText("Síntomas:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,37 +139,37 @@ public class VistaMedico extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(darAltaPacienteButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(infoEnfermedadButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(infoMedicamenteButton)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(historialPacienteButton))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(diaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(diaText, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(mesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(mesText, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(12, 12, 12)
-                                    .addComponent(anyoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(anyoText, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(jScrollPane3))
-                            .addGap(18, 18, 18)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(39, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(salirButton)
-                .addGap(63, 63, 63))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(salirButton)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(darAltaPacienteButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(infoEnfermedadButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(infoMedicamenteButton)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(historialPacienteButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(diaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(diaText, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(mesLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(mesText, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(anyoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(anyoText, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane3))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,36 +183,25 @@ public class VistaMedico extends javax.swing.JFrame {
                     .addComponent(mesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(mesLabel)
                     .addComponent(anyoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(anyoLabel))
-                .addGap(18, 18, 18)
+                    .addComponent(anyoLabel)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane3))
-                .addGap(64, 64, 64)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(darAltaPacienteButton)
                     .addComponent(infoEnfermedadButton)
                     .addComponent(historialPacienteButton)
                     .addComponent(infoMedicamenteButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addComponent(salirButton)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void diaTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diaTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_diaTextActionPerformed
-
-    private void mesTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_mesTextActionPerformed
-
-    private void anyoTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anyoTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_anyoTextActionPerformed
 
     private void historialPacienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historialPacienteButtonActionPerformed
         // TODO add your handling code here:
@@ -241,7 +217,7 @@ public class VistaMedico extends javax.swing.JFrame {
 
     private void darAltaPacienteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darAltaPacienteButtonActionPerformed
         try{
-            new AltaPaciente(medico, this.listaEnfermos.getSelectedValue()).setVisible(true);
+            new AltaPaciente(medico, this.listaEnfermos.getSelectedValue().getPaciente()).setVisible(true);
             dispose();
         }catch(NullPointerException npe){
             JOptionPane.showMessageDialog(this, "Seleccione primero un paciente", "Alta Paciente", JOptionPane.ERROR_MESSAGE);
@@ -266,8 +242,10 @@ public class VistaMedico extends javax.swing.JFrame {
         if(listaEnfermos.getSelectedIndex() == -1)
             return;
         
+        String text = this.listaEnfermos.getSelectedValue().getSintomas();
+        
         // Crea el texto que se pondrá en el JTextArea que tiene el historial de enfermedades.
-        String text = pacientes.get(listaEnfermos.getSelectedIndex()).getEnfermedades().stream().map(e -> e.toString() + "\n").reduce("", String::concat);
+        //String text = listaEnfermos.getSelectedValue().getPaciente().getEnfermedades().stream().map(e -> e.toString() + "\n").reduce("", String::concat);
 
         enfermedadText.setText(text);
 
@@ -285,10 +263,11 @@ public class VistaMedico extends javax.swing.JFrame {
     private javax.swing.JButton historialPacienteButton;
     private javax.swing.JButton infoEnfermedadButton;
     private javax.swing.JButton infoMedicamenteButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JList<Paciente> listaEnfermos;
+    private javax.swing.JList<Visita> listaEnfermos;
     private javax.swing.JLabel mesLabel;
     private javax.swing.JTextField mesText;
     private javax.swing.JButton salirButton;

@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.time.LocalDate;
+import Controlador.DAOvisita;
 
 /**
  *
@@ -27,5 +28,20 @@ public class Visita {
     
     public LocalDate getFecha(){
         return this.fecha;
+    }
+    
+    public int getId(){
+        return this.id;
+    }
+    
+    public Paciente getPaciente(){
+        return DAOvisita.getPaciente(this.id);
+    }
+    
+    @Override
+    public String toString(){
+        Paciente paciente = this.getPaciente();
+        
+        return paciente.getNombre() + ", " + paciente.getApellidos() + " --> Habitación: " + paciente.getHabitacion();
     }
 }

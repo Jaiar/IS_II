@@ -3,6 +3,7 @@
 import Modelo.Enfermedad;
 import Modelo.Medico;
 import Modelo.Paciente;
+import Modelo.Visita;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -81,36 +82,67 @@ public class DAOmedico {
         return pacientes;
     }
     
-    public static ArrayList getPacientesAVisitar(int id_med, LocalDate ld){
+    public static ArrayList getVisitas(int id_med, LocalDate ld){
         ResultSet resultados = null;
-        ArrayList<Paciente> pacientes = new ArrayList<>();
+        ArrayList<Visita> visitas = new ArrayList<>();
         
         try {
             String con;
             Statement s = DAO.getConnection().createStatement();
             // Consulta SQL
-            con = "SELECT p.* FROM visita v, paciente p WHERE v.id_paciente = p.id_paciente AND medico = " + id_med 
+            con = "SELECT * FROM visita WHERE id_medico = " + id_med 
                     + " AND fecha_cita = '" + ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "';";
             resultados = s.executeQuery(con);
         }
         catch (Exception e) { // Error en al realizar la consulta
-            System.out.println("DAOmedico @ getPacientes -- Error en la petición a la BD\n--" + e.getMessage());
+            System.out.println("DAOmedico @ getVisitas -- Error en la petición a la BD\n--" + e.getMessage());
         }
         
         try{
             while(resultados.next()){
-                pacientes.add(ModelFactory.buildPaciente(resultados));
+                visitas.add(ModelFactory.buildVisita(resultados));
             }
         }catch(SQLException sqle){
-            System.out.println("DAOmedico @ getPacientes \n-- Error en retirar datos: " + sqle.getMessage());
+            System.out.println("DAOmedico @ getVisitas \n-- Error en retirar datos: " + sqle.getMessage());
             return null;
         }
         catch(NullPointerException npe){
-            System.out.println("DAOmedico @ getPacientes \n-- Resultados nulo: " + npe.getMessage());
+            System.out.println("DAOmedico @ getVisitas \n-- Resultados nulo: " + npe.getMessage());
             return null;
         }
         
-        return pacientes;
+        return visitas;
+    }
+    
+    public static Paciente getPacienteEnVisita(int id_visita){
+        ResultSet resultados = null;
+        
+        try {
+            String con;
+            Statement s = DAO.getConnection().createStatement();
+            // Consulta SQL
+            con = "SELECT p.* FROM visita v paciente p WHERE v.id_visita = " + id_visita
+                    + " AND v.id_paciente = p.id_paciente";
+            resultados = s.executeQuery(con);
+        }
+        catch (Exception e) { // Error en al realizar la consulta
+            System.out.println("DAOmedico @ getPacientesEnVisita -- Error en la petición a la BD\n--" + e.getMessage());
+        }
+        
+        try{
+            while(resultados.next()){
+                return ModelFactory.buildPaciente(resultados);
+            }
+        }catch(SQLException sqle){
+            System.out.println("DAOmedico @ getPacientesEnVisita \n-- Error en retirar datos: " + sqle.getMessage());
+            return null;
+        }
+        catch(NullPointerException npe){
+            System.out.println("DAOmedico @ getPacientesEnVisita \n-- Resultados nulo: " + npe.getMessage());
+            return null;
+        }
+        
+        return null;
     }
     
     public static ArrayList getEnfermedadesByNombre(String nombre_enfermedad){

@@ -10,6 +10,7 @@ import Modelo.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class ModelFactory {
     public static Paciente buildPaciente(ResultSet resultados){
@@ -86,6 +87,21 @@ public class ModelFactory {
             int veces_dosis = resultados.getInt(5);
             
             return new Tratamiento(id, medicamento, enfermedad, dosis, veces_dosis);
+        }catch(SQLException sqle){
+            System.out.println("Error en la retirada de datos: " + sqle.getMessage());
+            return null;
+        }
+    }
+    
+    public static Visita buildVisita(ResultSet resultados){
+        try{
+            int id = resultados.getInt(1);
+            int id_paciente = resultados.getInt(2);
+            int id_medico = resultados.getInt(3);
+            String sintoma = resultados.getNString(4);
+            LocalDate fecha = resultados.getDate(5).toLocalDate();
+            
+            return new Visita(id, id_paciente, id_medico, sintoma, fecha);
         }catch(SQLException sqle){
             System.out.println("Error en la retirada de datos: " + sqle.getMessage());
             return null;

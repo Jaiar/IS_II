@@ -64,6 +64,13 @@ CREATE TABLE `visita` (
     `fecha_cita` date NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE `medicamento_paciente` (
+	`id_medicamento_paciente` int(11) NOT NULL,
+    `id_paciente` int(11) NOT NULL,
+    `id_medicamento` int(11) NOT NULL,
+    `fecha` date NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
+
 --
 -- Estructura de tabla para la tabla `medicamento`
 --
@@ -159,6 +166,11 @@ ALTER TABLE `visita`
   ADD PRIMARY KEY (`id_visita`),
   ADD KEY `fk_historial_enfermedad` (`id_medico`),
   ADD KEY `fk_historial_paciente` (`id_paciente`);
+  
+ALTER TABLE `medicamento_paciente`
+  ADD PRIMARY KEY (`id_medicamento_paciente`),
+  ADD KEY `fk_m_p_medicamento` (`id_medicamento`),
+  ADD KEY `fk_m_p_paciente` (`id_paciente`);
 
 --
 -- Indices de la tabla `medicamento`
@@ -219,6 +231,9 @@ ALTER TABLE `visita`
   ADD CONSTRAINT `fk_visita_medico` FOREIGN KEY (`id_medico`) REFERENCES `usuario` (`id_usuario`),
   ADD CONSTRAINT `fk_visita_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`);
 
+ALTER TABLE `medicamento_paciente`
+  ADD CONSTRAINT `fk_medicamento_paciente_medicamento` FOREIGN KEY (`id_medicamento`) REFERENCES `medicamento` (`id_medicamento`),
+  ADD CONSTRAINT `fk_medicamento_paciente_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`);
 --
 -- Filtros para la tabla `paciente`
 --

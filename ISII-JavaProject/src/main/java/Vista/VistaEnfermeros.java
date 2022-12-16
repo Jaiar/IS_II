@@ -14,12 +14,8 @@ import javax.swing.DefaultListModel;
  * @author ernes
  */
 public class VistaEnfermeros extends javax.swing.JFrame {
-    private BotiquinHospital vistaBotiquin;
     private Enfermero enfermero;
     private Paciente paciente;
-    private LocalDate currentdate = LocalDate.now();
-    private DefaultListModel<String> pacientesList;
-    private ArrayList<Paciente> vpacientes;
 
     /**
      * Creates new form EnfermerosVista
@@ -27,18 +23,16 @@ public class VistaEnfermeros extends javax.swing.JFrame {
     public VistaEnfermeros(Enfermero enfermero) {
         initComponents();
         this.enfermero = enfermero;
+        
+        LocalDate currentdate = LocalDate.now();
         this.dia.setText(currentdate.getDayOfMonth()+"");
         this.txt_mes.setText(currentdate.getMonth()+"");
         this.txt_anyo.setText(currentdate.getYear()+"");
-        pacientesList = new DefaultListModel<String>();
+        DefaultListModel pacientesList = new DefaultListModel();
         
-        vpacientes = enfermero.listaDeEnfermos();
+        pacientesList.addAll(this.enfermero.getPacientesATratar());
         
-                
-        for(int i=0; i<vpacientes.size(); i++)
-            pacientesList.addElement(vpacientes.get(i).getNombre());
-        
-        l_pacientes.setModel(pacientesList);
+        this.l_pacientes.setModel(pacientesList);
     }
 
     /**
@@ -78,35 +72,15 @@ public class VistaEnfermeros extends javax.swing.JFrame {
         jLabel1.setText("Dia:");
 
         dia.setEditable(false);
-        dia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                diaActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Mes:");
 
         txt_mes.setEditable(false);
-        txt_mes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_mesActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Año:");
 
         txt_anyo.setEditable(false);
-        txt_anyo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_anyoActionPerformed(evt);
-            }
-        });
 
-        l_pacientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                l_pacientesMouseClicked(evt);
-            }
-        });
         l_pacientes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 l_pacientesValueChanged(evt);
@@ -153,11 +127,6 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
         jtf_apellidos.setEditable(false);
         jtf_apellidos.setText("                     ");
-        jtf_apellidos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtf_apellidosActionPerformed(evt);
-            }
-        });
 
         jtf_hab.setEditable(false);
         jtf_hab.setText("                     ");
@@ -252,22 +221,9 @@ public class VistaEnfermeros extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void diaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_diaActionPerformed
-
-    private void txt_mesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_mesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_mesActionPerformed
-
-    private void txt_anyoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_anyoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_anyoActionPerformed
-
     private void BotiquinHospitalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotiquinHospitalButtonActionPerformed
         // TODO add your handling code here:
-        vistaBotiquin = new BotiquinHospital (enfermero);
-        vistaBotiquin.setVisible(true);
+        new BotiquinHospital (enfermero).setVisible(true);
         dispose();
     }//GEN-LAST:event_BotiquinHospitalButtonActionPerformed
 
@@ -282,31 +238,16 @@ public class VistaEnfermeros extends javax.swing.JFrame {
         dispose();       
     }//GEN-LAST:event_anyadirPacienteButtonActionPerformed
 
-    private void jtf_apellidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_apellidosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtf_apellidosActionPerformed
-
     private void l_pacientesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_l_pacientesValueChanged
-        int x = l_pacientes.getSelectedIndex();
-        Paciente paciente = vpacientes.get(x);
+        Paciente paciente = this.l_pacientes.getSelectedValue();
 
         this.jtf_apellidos.setText(paciente.getApellidos());
         this.jtf_hab.setText(""+paciente.getHabitacion());
 
+        String text = this.enfermero.getMedicamentosPaciente(paciente.getID()).stream().map(e -> e.toString() + "\n").reduce("", String::concat);
         
+        this.listaMediicamentos.setText(text);
     }//GEN-LAST:event_l_pacientesValueChanged
-
-    private void l_pacientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_l_pacientesMouseClicked
-        // TODO add your handling code here:
-                // TODO add your handling code here:
-        if(l_pacientes.getSelectedIndex() == -1)
-            return;
-        //ArrayList enfermedades = l_pacientes.getSelectedIndex()).getEnfermedades();
-        // Crea el texto que se pondrá en el JTextArea que tiene el historial de enfermedades.
-        String text = vpacientes.get(l_pacientes.getSelectedIndex()).getMedicamentos().stream().map(e -> e.toString() + "\n").reduce("", String::concat);
-
-        listaMediicamentos.setText(text);
-    }//GEN-LAST:event_l_pacientesMouseClicked
 
 
 
@@ -325,7 +266,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jtf_apellidos;
     private javax.swing.JTextField jtf_hab;
-    private javax.swing.JList<String> l_pacientes;
+    private javax.swing.JList<Paciente> l_pacientes;
     private javax.swing.JLabel lbl_apellidos;
     private javax.swing.JLabel lbl_hab;
     private javax.swing.JTextArea listaMediicamentos;

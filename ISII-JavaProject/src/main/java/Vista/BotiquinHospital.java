@@ -170,7 +170,7 @@ public class BotiquinHospital extends javax.swing.JFrame {
         }catch(NullPointerException npe){
             System.out.println("NullPointerException -- lst_botiquinValueChanged");
             System.out.println(npe.getMessage());
-            this.lbl_cantidad.setText("0");
+            this.lbl_cantidad.setText("");
         }
     }//GEN-LAST:event_lst_botiquinValueChanged
 

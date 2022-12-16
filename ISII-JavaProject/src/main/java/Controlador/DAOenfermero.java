@@ -9,7 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import java.sql.SQLException;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -46,6 +47,63 @@ public class DAOenfermero {
         }
         
         return enfermeros;
+    }
+    
+    public static ArrayList getPacientesATratar(LocalDate ld){
+        ResultSet resultados = null;
+        ArrayList<Paciente> pacientes = new ArrayList<>();
+        
+        try {
+            String con;
+            Statement s = DAO.getConnection().createStatement();
+            // Consulta SQL
+            con = "SELECT DISTINCT p.* FROM medicamento_paciente mp, paciente p WHERE mp.id_paciente = p.id_paciente AND mp.fecha = '" + ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))+ "'"; 
+            resultados = s.executeQuery(con);
+        }
+        catch (Exception e) { // Error en al realizar la consulta
+            System.out.println("DAOmedico @ getPacientesATratar -- Error en la petición a la BD");
+        }
+        
+        try{
+            while(resultados.next()){
+                pacientes.add(ModelFactory.buildPaciente(resultados));
+                
+            }
+        }catch(SQLException sqle){
+            System.out.println("DAOmedico @ getPacientesATratar -- Error en retirar datos: " + sqle.getMessage());
+            return null;
+        }
+        
+        return pacientes;
+    }
+    
+    public static ArrayList getMedicamentosPaciente(int id_pac, LocalDate ld){
+        ResultSet resultados = null;
+        ArrayList medicamentos = new ArrayList<>();
+        
+        try {
+            String con;
+            Statement s = DAO.getConnection().createStatement();
+            // Consulta SQL
+            con = "SELECT m.* FROM medicamento_paciente mp, medicamento m WHERE mp.id_paciente = "+ id_pac
+                    +" AND mp.fecha = '" + ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "'"
+                    + " AND mp.id_medicamento = m.id_medicamento;";
+            resultados = s.executeQuery(con);
+        }
+        catch (Exception e) { // Error en al realizar la consulta
+            System.out.println("DAOmedico @ getMedicamentosPaciente -- Error en la petición a la BD");
+        }
+        
+        try{
+            while(resultados.next()){
+                medicamentos.add(ModelFactory.buildMedicamento(resultados));
+            }
+        }catch(SQLException sqle){
+            System.out.println("DAOmedico @ getMedicamentosPaciente -- Error en retirar datos: " + sqle.getMessage());
+            return null;
+        }
+        
+        return medicamentos;
     }
     
     public static ArrayList getMedicamentosHospital(int cantidad){

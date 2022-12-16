@@ -51,11 +51,8 @@ public class Enfermedad {
         return DAOenfermedad.getEnfermedades();
     }
     
-    public ArrayList getEnfermedadesRelacionadas(){
-        if ( this.enfermedades_relacionadas == null )
-            this.enfermedades_relacionadas = DAOenfermedad.getEnfermedadesRelacionadas(this.id);
-        
-        return this.enfermedades_relacionadas;
+    public ArrayList<Enfermedad> getEnfermedadesRelacionadas(){
+        return (ArrayList<Enfermedad>) DAOenfermedad.getEnfermedadesRelacionadas(this.id);
     }
     
     public ArrayList getMedicamentosQueLaTratan(){

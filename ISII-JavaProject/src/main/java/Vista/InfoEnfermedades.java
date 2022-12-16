@@ -247,13 +247,17 @@ public class InfoEnfermedades extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void lst_medicamentosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lst_medicamentosValueChanged
-        
         Modelo.Medicamento medicamento = (Modelo.Medicamento)this.lst_medicamentos.getSelectedValue();
+        Modelo.Tratamiento trat = null;
+        try{
+            trat = medicamento.getTratamiento(this.enf_select.getId());
+        }catch(NullPointerException npe){
+            System.out.println("Prevented");
+            return;
+        }
         
-        Modelo.Tratamiento trat = medicamento.getTratamiento(this.enf_select.getId());
-        
-        this.txt_dosis_dia.setText(""+trat.getVeces_dosis());
-        this.txt_dosis_recom.setText(""+trat.getDosis() + " mg");
+        this.txt_dosis_dia.setText("" + trat.getVeces_dosis());
+        this.txt_dosis_recom.setText("" + trat.getDosis() + " mg");
     }//GEN-LAST:event_lst_medicamentosValueChanged
 
 

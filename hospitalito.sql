@@ -301,10 +301,10 @@ VALUES(2, 2, 2, 40, 1);
 
 -- HISTORIALES MEDICOS --
 INSERT INTO historialmedico
-VALUES(1, 1, 1, 12-12-2020);
+VALUES(1, 1, 1, '2020-12-10');
 
 INSERT INTO historialmedico
-VALUES(2, 2, 2, 10-10-2010);
+VALUES(2, 2, 2, '2010-10-10');
 
 -- PACIENTES ENFERMEDADES --
 INSERT INTO paciente_enfermedades

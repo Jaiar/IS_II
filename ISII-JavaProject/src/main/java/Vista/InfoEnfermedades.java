@@ -208,7 +208,12 @@ public class InfoEnfermedades extends javax.swing.JFrame {
     }//GEN-LAST:event_ch_contagiosaActionPerformed
 
     private void cbo_enfermedadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbo_enfermedadItemStateChanged
-        this.enf_select = (Enfermedad)this.cbo_enfermedad.getSelectedItem();
+        Object aux = this.cbo_enfermedad.getSelectedItem();
+        
+        if( !(aux instanceof Enfermedad))
+            return;
+        
+        this.enf_select = (Enfermedad)aux;
         
         DefaultListModel dflstmodel = new DefaultListModel();
         dflstmodel.addAll(this.enf_select.getMedicamentosQueLaTratan());
@@ -232,7 +237,7 @@ public class InfoEnfermedades extends javax.swing.JFrame {
             return;
         }
         
-        ArrayList<Enfermedad> enfermedades_arrlist = new ArrayList<Enfermedad>();
+        ArrayList<Enfermedad> enfermedades_arrlist = new ArrayList<>();
         try{
             enfermedades_arrlist = this.user.getEnfermedadesByNombre(texto);
         }catch(NullPointerException npe){

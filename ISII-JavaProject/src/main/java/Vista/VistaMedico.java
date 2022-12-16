@@ -29,11 +29,10 @@ public class VistaMedico extends javax.swing.JFrame {
         this.mesText.setText(currentdate.getMonth()+"");
         this.anyoText.setText(currentdate.getYear()+"");
         listaEnfermosModel = new DefaultListModel();
-        pacientes = medico.getPacientes();
+        pacientes = medico.getPacientesCitaHoy();
        
-        if(!pacientes.isEmpty())
-            for (Paciente p: pacientes)
-                listaEnfermosModel.addElement(p);
+        for (Paciente p: pacientes)
+            listaEnfermosModel.addElement(p);
         
         listaEnfermos.setModel(listaEnfermosModel);
         

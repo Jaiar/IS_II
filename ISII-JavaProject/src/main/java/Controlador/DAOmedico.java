@@ -1,4 +1,4 @@
-package Controlador;
+ package Controlador;
 
 import Modelo.Enfermedad;
 import Modelo.Medico;
@@ -81,7 +81,39 @@ public class DAOmedico {
         return pacientes;
     }
     
-    public static ArrayList<Enfermedad> getEnfermedadesByNombre(String nombre_enfermedad){
+    public static ArrayList getPacientesAVisitar(int id_med, LocalDate ld){
+        ResultSet resultados = null;
+        ArrayList<Paciente> pacientes = new ArrayList<>();
+        
+        try {
+            String con;
+            Statement s = DAO.getConnection().createStatement();
+            // Consulta SQL
+            con = "SELECT p.* FROM visita v, paciente p WHERE v.id_paciente = p.id_paciente AND medico = " + id_med 
+                    + " AND fecha_cita = '" + ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "';";
+            resultados = s.executeQuery(con);
+        }
+        catch (Exception e) { // Error en al realizar la consulta
+            System.out.println("DAOmedico @ getPacientes -- Error en la petición a la BD\n--" + e.getMessage());
+        }
+        
+        try{
+            while(resultados.next()){
+                pacientes.add(ModelFactory.buildPaciente(resultados));
+            }
+        }catch(SQLException sqle){
+            System.out.println("DAOmedico @ getPacientes \n-- Error en retirar datos: " + sqle.getMessage());
+            return null;
+        }
+        catch(NullPointerException npe){
+            System.out.println("DAOmedico @ getPacientes \n-- Resultados nulo: " + npe.getMessage());
+            return null;
+        }
+        
+        return pacientes;
+    }
+    
+    public static ArrayList getEnfermedadesByNombre(String nombre_enfermedad){
         ResultSet resultados = null;
         
         try {
@@ -114,15 +146,13 @@ public class DAOmedico {
         ResultSet resultados = null;
         
         // Comprobamos que no exista una transacción ya hecha en la misma fecha
-        
-        System.out.println(fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
         try{
             Statement s = DAO.getConnection().createStatement();
             
             String query = "SELECT id_paciente "
                         + "FROM historialmedico "
                         + "WHERE id_paciente = " + paciente.getID()
-                        + "AND fecha_alta = '" + fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "';";
+                        + "AND fecha_alta = '" + fecha.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "';";
         }catch(SQLException sqle){
             System.out.println("addToHistorialPaciente @ DAOmedico -- error en la query");
             System.out.println(sqle.getMessage());

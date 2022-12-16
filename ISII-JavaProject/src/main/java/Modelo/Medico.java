@@ -25,6 +25,10 @@ public class Medico extends Usuario {
         return pacientes;
     }
     
+    public ArrayList<Paciente> getPacientesCitaHoy(){
+        return DAOmedico.getPacientesAVisitar(this.code, LocalDate.now());
+    }
+    
     public static ArrayList<Medico> getAllMedicos(){
         return (ArrayList<Medico>) DAOmedico.getAllMedicos();
     }

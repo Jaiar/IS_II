@@ -73,6 +73,11 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         });
 
         lst_medicamentos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lst_medicamentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lst_medicamentosMouseClicked(evt);
+            }
+        });
         lst_medicamentos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lst_medicamentosValueChanged(evt);
@@ -220,7 +225,7 @@ public class InfoEnfermedades extends javax.swing.JFrame {
         this.lst_medicamentos.setModel(dflstmodel);
         
         DefaultListModel dflstmodel2 = new DefaultListModel();
-        dflstmodel.addAll(this.enf_select.getEnfermedadesRelacionadas());
+        dflstmodel2.addAll(this.enf_select.getEnfermedadesRelacionadas());
         this.lst_enfermedades.setModel(dflstmodel2);
         
         // Poner el valor de contagiosa en la checkbox
@@ -252,18 +257,26 @@ public class InfoEnfermedades extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_buscarActionPerformed
 
     private void lst_medicamentosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lst_medicamentosValueChanged
-        Modelo.Medicamento medicamento = (Modelo.Medicamento)this.lst_medicamentos.getSelectedValue();
-        Modelo.Tratamiento trat = null;
-        try{
-            trat = medicamento.getTratamiento(this.enf_select.getId());
-        }catch(NullPointerException npe){
-            System.out.println("Prevented");
-            return;
-        }
         
-        this.txt_dosis_dia.setText("" + trat.getVeces_dosis());
-        this.txt_dosis_recom.setText("" + trat.getDosis() + " mg");
     }//GEN-LAST:event_lst_medicamentosValueChanged
+
+    private void lst_medicamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lst_medicamentosMouseClicked
+        // TODO add your handling code here:
+         if(this.lst_medicamentos.getSelectedIndex()!= -1)
+        {
+            Modelo.Medicamento medicamento = (Modelo.Medicamento)this.lst_medicamentos.getSelectedValue();
+            Modelo.Tratamiento trat = null;
+            try{
+                trat = medicamento.getTratamiento(this.enf_select.getId());
+            }catch(NullPointerException npe){
+                System.out.println("Prevented");
+                return;
+            }
+
+            this.txt_dosis_dia.setText("" + trat.getVeces_dosis());
+            this.txt_dosis_recom.setText("" + trat.getDosis() + " mg");
+        }
+    }//GEN-LAST:event_lst_medicamentosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

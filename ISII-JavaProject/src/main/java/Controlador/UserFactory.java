@@ -37,6 +37,7 @@ public class UserFactory {
         String dni_usuario;
         String nombre;
         String apellidos;
+        String telefono;
         Date fecha_incorporacion;
         
         try{
@@ -46,6 +47,7 @@ public class UserFactory {
             nombre = resultados.getNString(3);
             apellidos = resultados.getNString(4);
             fecha_incorporacion = resultados.getDate(6);
+            telefono = resultados.getNString(7);
         }catch(SQLException sqle){
             System.out.println("buildUsuario failed.");
             System.out.println(sqle.getMessage());
@@ -54,11 +56,11 @@ public class UserFactory {
         
         switch(Usuario_Tipo.getTipo(rol)){
             case MEDICO:
-                return new Medico( id, nombre, apellidos, dni_usuario, null, fecha_incorporacion);
+                return new Medico( id, nombre, apellidos, dni_usuario, telefono, fecha_incorporacion);
             case ENFERMERO:
-                return new Enfermero(id, nombre, apellidos, dni_usuario, null, fecha_incorporacion);
+                return new Enfermero(id, nombre, apellidos, dni_usuario, telefono, fecha_incorporacion);
             case GESTOR:
-                return new Gestor( id, nombre, apellidos, dni_usuario, null, fecha_incorporacion);
+                return new Gestor( id, nombre, apellidos, dni_usuario, telefono, fecha_incorporacion);
             default:
                 return null;
         }

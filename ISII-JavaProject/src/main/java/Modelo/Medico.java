@@ -73,6 +73,10 @@ public class Medico extends Usuario {
     public void launchMenu(){
         new Vista.VistaMedico(this).setVisible(true);
     }
+    @Override
+    public String toString(){
+        return nombre + "," + apellidos;
+    }
 }
 
 

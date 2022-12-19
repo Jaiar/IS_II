@@ -1,6 +1,7 @@
 package Modelo;
 
 import Controlador.DAOenfermero;
+import Controlador.DAOmedico;
 import Controlador.DAOpacientes;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,8 +34,18 @@ public class Enfermero extends Usuario{
         return (ArrayList<Enfermero>) DAOenfermero.getAllEnfermeros();
     }
     
+    public ArrayList getEnfermedades(){
+        return DAOenfermero.getEnfermedades();
+    }
+    public ArrayList getMedicos(){
+        return DAOenfermero.getMedicos();
+    }
     public ArrayList listaDeEnfermos(){
         return (ArrayList<Paciente>) DAOenfermero.getPacientes(code);
+    }
+   
+    public void datDeAltaPaciente(Paciente paciente, Enfermedad enfermedad, LocalDate fecha){
+        DAOenfermero.darDeAltaNuevoPaciente(paciente, enfermedad, fecha);
     }
     
     public ArrayList consultarBotiquin(int num){

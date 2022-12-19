@@ -243,13 +243,22 @@ public class DAOmedico {
         
     }
      
-     public static boolean darDeAltaNuevoPaciente(Paciente paciente, Enfermedad enfermedad, LocalDate fecha ){
+    public static boolean darDeAltaNuevoPaciente(Paciente paciente, Enfermedad enfermedad, LocalDate fecha ){
         ResultSet resultados = null;
          
         try{
-            Statement s = DAO.getConnection().createStatement();
+            Connection conn = DAO.getConnection();
+            Connection con = DAO.getConnection();
+            Statement s = conn.createStatement();
+            Statement sa = con.createStatement();
+            ResultSet rs = sa.executeQuery("SELECT MAX(id_historialmedico)+1 AS max FROM historialmedico;");
+            rs.next();
+            int id = rs.getInt("max");
+            
+            Statement ss = DAO.getConnection().createStatement();
             String query = "INSERT INTO paciente "
-                    + "VALUES ( " + paciente.getID() + ","
+                    + "VALUES ( " 
+                    + id + ","
                     + paciente.getDNI() + ", "
                     + paciente.getNombre() + ", "
                     + paciente.getApellidos() + ", "
@@ -259,7 +268,7 @@ public class DAOmedico {
                     + paciente.getEnfermero()
                     + ");";
             
-            s.executeUpdate(query);
+            ss.executeUpdate(query);
             
         }catch( SQLException sqle ){
             System.out.println("darDeAlataNuevoPaciente @ DAOmedico -- error en comprobación de datos");

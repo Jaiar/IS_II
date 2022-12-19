@@ -1,10 +1,16 @@
 package Vista;
 
+import Modelo.Enfermedad;
 import Modelo.Enfermero;
+import Modelo.Historial;
+import Modelo.Medico;
 import Modelo.Paciente;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,7 +20,7 @@ public class AñadirPaciente extends javax.swing.JFrame {
 
     private VistaEnfermeros vistaEnfermeros;
     private Enfermero enfermero;
-    private ArrayList<Paciente> pacientes;
+    private ArrayList<Historial> historial;
     private LocalDate currentdate = LocalDate.now();
     
     private Paciente paciente;
@@ -30,6 +36,32 @@ public class AñadirPaciente extends javax.swing.JFrame {
         this.mestext.setText(currentdate.getMonthValue()+"");
         this.anyoText.setText(currentdate.getYear()+"");
         this.textEnfermero.setText(enfermero.getApellidos() + ", "+enfermero.getNombre());
+        
+       
+        
+        DefaultComboBoxModel listaEnfermosModel = new DefaultComboBoxModel();
+        ArrayList<Enfermedad> enfermedades_arrlist;
+        try{
+            enfermedades_arrlist = this.enfermero.getEnfermedades();
+        }catch(NullPointerException npe){
+            JOptionPane.showMessageDialog(this, "No se ha encontrado la enfermedad", "Busqueda de enfermedad", JOptionPane.ERROR_MESSAGE);
+            return;
+        }        
+        listaEnfermosModel.addAll(enfermedades_arrlist);
+        enfermedadesCombox.setModel(listaEnfermosModel);
+        
+        DefaultComboBoxModel listaMedicosModel = new DefaultComboBoxModel();
+        ArrayList<Medico> doctor_lista;
+        try{
+            enfermedades_arrlist = this.enfermero.getMedicos();
+        }catch(NullPointerException npe){
+            JOptionPane.showMessageDialog(this, "No se ha encontrado la enfermedad", "Busqueda de enfermedad", JOptionPane.ERROR_MESSAGE);
+            return;
+        }        
+        listaMedicosModel.addAll(enfermedades_arrlist);
+        doctorCombox.setModel(listaMedicosModel);
+        
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -279,23 +311,22 @@ public class AñadirPaciente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonAñadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAñadirMouseClicked
-         
-        paciente.newPaciente(
-                this.textDNI.getText( ),
-                this.textNombre.getText(), 
-                this.textApellidos.getText(),
-                this.textEnfermedad.getText(),
-                Integer.parseInt(this.textDoctor.getText()),
-                Integer.parseInt(this.textEnfermero.getText()),
-                Integer.parseInt(this.textHabitacion.getText())
-        );
-        
+        Object aux = this.doctorCombox.getSelectedItem();
+        Medico medico = (Medico) aux;
+        paciente = new Paciente(0, this.textDNI.getText(),  this.textNombre.getText(),
+                                this.textApellidos.getText(), 
+                                medico.getId(),
+                                enfermero.getId(), 
+                                currentdate.getDayOfMonth());
+        LocalDate ahora = LocalDate.now();
+        enfermero.datDeAltaPaciente(paciente, (Enfermedad)enfermedadesCombox.getSelectedItem() ,ahora);
         
         listaHistorialPacientes = new DefaultListModel();
-        pacientes = enfermero.getPacientes();
+        // FALTA ESTO
+        //historial = enfermero.getHistorialPaciente();
        
        
-        for (Paciente p: pacientes)
+        for (Historial p: historial)
             listaHistorialPacientes.addElement(p.toString());
 
         //this.historialtext.setModel(listaHistorialPacientes);

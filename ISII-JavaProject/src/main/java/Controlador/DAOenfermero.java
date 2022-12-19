@@ -1,8 +1,11 @@
 package Controlador;
 
+import Modelo.Enfermedad;
 import Modelo.Enfermero;
 import Modelo.Medicamento;
+import Modelo.Medico;
 import Modelo.Paciente;
+import java.sql.Connection;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -11,6 +14,7 @@ import java.util.ArrayList;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  *
@@ -47,6 +51,63 @@ public class DAOenfermero {
         }
         
         return enfermeros;
+    }
+    public static ArrayList getMedicos()
+    {
+        ResultSet resultados = null;
+        
+        try {
+            String con;
+            Statement s = DAO.getConnection().createStatement();
+            // Consulta SQL
+            con = "SELECT * FROM usuario WHERE rol = 1";
+            resultados = s.executeQuery(con);
+            }
+        catch (Exception e) { // Error en al realizar la consulta
+            System.out.println("Error en la petición a la BD");
+        }
+        
+        ArrayList<Medico> medicos = new ArrayList<>();
+        try{
+            while(resultados.next()){
+                Medico med = (Medico)UserFactory.buildUsuario(resultados);
+                medicos.add(med);
+            }
+        }
+        catch(SQLException sqle){
+            System.out.println("Error en la retirada de datos: " + sqle.getMessage());
+            return null;
+        }
+        
+        return medicos;
+    }
+    public static ArrayList getEnfermedades()
+    {
+        ResultSet resultados = null;
+        
+        try {
+            String con;
+            Statement s = DAO.getConnection().createStatement();
+            // Consulta SQL
+            con = "SELECT * FROM enfermedad;";
+            resultados = s.executeQuery(con);
+            }
+        catch (SQLException e) { // Error en al realizar la consulta
+            System.out.println("getEnfermedadesByNombre @ DAOmedico -- error en la base de datos");
+            return null;
+        }
+        
+        ArrayList<Enfermedad> enfermedades = new ArrayList<>();
+        
+        try{
+            while( resultados.next() ){
+                enfermedades.add(ModelFactory.buildEnfermedad(resultados));
+            }
+        }catch(SQLException sqle){
+            System.out.println("getEnfermedadesByNombre @ DAOmedico -- error en la recogida de datos");
+        }
+        
+        return enfermedades;
     }
     
     public static ArrayList getPacientesATratar(LocalDate ld){
@@ -162,4 +223,40 @@ public class DAOenfermero {
         
         return pacientes;
     }
+    public static boolean darDeAltaNuevoPaciente(Paciente paciente, Enfermedad enfermedad, LocalDate fecha ){
+        ResultSet resultados = null;
+         
+        try{
+            Connection conn = DAO.getConnection();
+            Connection con = DAO.getConnection();
+            Statement s = conn.createStatement();
+            Statement sa = con.createStatement();
+            ResultSet rs = sa.executeQuery("SELECT MAX(id_historialmedico)+1 AS max FROM historialmedico;");
+            rs.next();
+            int id = rs.getInt("max");
+            
+            Statement ss = DAO.getConnection().createStatement();
+            String query = "INSERT INTO paciente "
+                    + "VALUES ( " 
+                    + id + ","
+                    + paciente.getDNI() + ", "
+                    + paciente.getNombre() + ", "
+                    + paciente.getApellidos() + ", "
+                    + paciente.getTelefono() + ", "
+                    + paciente.getHabitacion() + ", "
+                    + paciente.getMedico() + ", "
+                    + paciente.getEnfermero()
+                    + ");";
+            
+            ss.executeUpdate(query);
+            
+        }catch( SQLException sqle ){
+            System.out.println("darDeAlataNuevoPaciente @ DAOmedico -- error en comprobación de datos");
+            System.out.println(sqle.getMessage());
+            
+            return false;
+        }
+        
+        return true;
+     }
 }

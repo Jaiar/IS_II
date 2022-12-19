@@ -15,6 +15,8 @@ import java.util.Locale;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -206,16 +208,39 @@ public class DAOmedico {
         
         try{
             Connection conn = DAO.getConnection();
+            Connection con = DAO.getConnection();
             Statement s = conn.createStatement();
+            Statement sa = con.createStatement();
             
-            String query = "INSERT INTO historialmedico (id_historialmedico, id_paciente, id_enfermedad, fecha_alta)"
-                    + "VALUES (23, "+ paciente.getID() + ", " + enfermedad.getId() + ",  STR_TO_DATE('" + fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "', '%d-%m-%Y'));";
-            s.executeUpdate(query);
-            conn.commit();
+            ResultSet rs = sa.executeQuery("SELECT MAX(id_historialmedico)+1 AS max FROM historialmedico;");
+            rs.next();
+            int id = rs.getInt("max");
+            
+            
+            
+            String insertar = "INSERT INTO historialmedico (id_historialmedico, id_paciente, id_enfermedad, fecha_alta)"
+                    + "VALUES ("+id+", "+ paciente.getID() + ", " + enfermedad.getId() + ",  STR_TO_DATE('" + fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "', '%d-%m-%Y'));";
+            s.executeUpdate(insertar);
+            
         }catch(SQLException sqle){
             System.out.println("addToHistorialPaciente @ DAOmedico -- error en inserción de datos");
             System.out.println(sqle.getMessage());
         }
+        
+
+        try {
+            Connection conn = DAO.getConnection();
+            Statement s = conn.createStatement();
+            
+            String borrar = "DELETE FROM paciente_enfermedades WHERE id_paciente = "+paciente.getID()+" AND id_enfermedad = "+enfermedad.getId();
+            s.executeUpdate(borrar);
+        } catch (SQLException ex) {
+            System.out.println("addToHistorialPaciente @ DAOmedico -- error en el borrado de datos");
+            System.out.println(ex.getMessage());
+        }
+            
+        
+        
     }
      
      public static boolean darDeAltaNuevoPaciente(Paciente paciente, Enfermedad enfermedad, LocalDate fecha ){

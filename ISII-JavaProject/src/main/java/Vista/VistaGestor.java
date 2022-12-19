@@ -151,14 +151,15 @@ public class VistaGestor extends javax.swing.JFrame {
                         .addGap(54, 54, 54)
                         .addComponent(lbl_medicos))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30)
+                        .addGap(23, 23, 23)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(lbl_enfermeros)))
+                        .addGap(40, 40, 40)
+                        .addComponent(lbl_enfermeros))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -247,25 +248,29 @@ public class VistaGestor extends javax.swing.JFrame {
     private void list_medicosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_list_medicosValueChanged
         list_enfermeros.clearSelection();
         int x = list_medicos.getSelectedIndex();
-        Medico medaux = vmedicos.get(x);
+        if(x != -1){
+            Medico medaux = vmedicos.get(x);
 
-        this.jtf_nombre.setText(medaux.getNombre());
-        this.jtf_apellidos.setText(medaux.getApellidos());
-        this.jtf_dni.setText(medaux.getDni());
-        this.jtf_tel.setText(medaux.getTelefono());
-        this.jtf_fecha.setText(medaux.getFecha().toString());
+            this.jtf_nombre.setText(medaux.getNombre());
+            this.jtf_apellidos.setText(medaux.getApellidos());
+            this.jtf_dni.setText(medaux.getDni());
+            this.jtf_tel.setText(medaux.getTelefono());
+            this.jtf_fecha.setText(medaux.getFecha().toString());
+        }
     }//GEN-LAST:event_list_medicosValueChanged
 
     private void list_enfermerosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_list_enfermerosValueChanged
         list_medicos.clearSelection();
         int x = list_enfermeros.getSelectedIndex();
-        Enfermero enferaux = venfermeros.get(x);
+        if(x != -1){
+            Enfermero enferaux = venfermeros.get(x);
 
-        this.jtf_nombre.setText(enferaux.getNombre());
-        this.jtf_apellidos.setText(enferaux.getApellidos());
-        this.jtf_dni.setText(enferaux.getDni());
-        this.jtf_tel.setText(enferaux.getTelefono());
-        this.jtf_fecha.setText(enferaux.getFecha().toString());
+            this.jtf_nombre.setText(enferaux.getNombre());
+            this.jtf_apellidos.setText(enferaux.getApellidos());
+            this.jtf_dni.setText(enferaux.getDni());
+            this.jtf_tel.setText(enferaux.getTelefono());
+            this.jtf_fecha.setText(enferaux.getFecha().toString());
+        }
     }//GEN-LAST:event_list_enfermerosValueChanged
 
   

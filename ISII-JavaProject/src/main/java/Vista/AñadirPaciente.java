@@ -337,12 +337,7 @@ public class AñadirPaciente extends javax.swing.JFrame {
         
         //listaHistorialPacientes = new DefaultListModel();
         
-        historial = paciente.getHistorial();
-        String text="";
-        for (Historial p: historial)
-            text += p.toString() + "\n";
-
-        this.historialtext.setText(text);
+        
     }//GEN-LAST:event_botonAñadirMouseClicked
 
     private void textHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textHabitacionActionPerformed
@@ -362,13 +357,31 @@ public class AñadirPaciente extends javax.swing.JFrame {
         else if(textNombre.getText() == null)
             JOptionPane.showMessageDialog(this, "Selecciona una Nombre ", "Alta Paciente", JOptionPane.ERROR_MESSAGE);                
         else if(textApellidos.getText() == null)
-            JOptionPane.showMessageDialog(this, "Selecciona una Apellidos ", "Alta Paciente", JOptionPane.ERROR_MESSAGE);                
-    
-        
-        
-        
-        
-        
+            JOptionPane.showMessageDialog(this, "Selecciona una Apellidos ", "Alta Paciente", JOptionPane.ERROR_MESSAGE); 
+        else
+        {
+            Object aux = this.doctorCombox.getSelectedItem();
+            Medico medico = (Medico) aux;
+            paciente = enfermero.getDatosPaciente(this.textDNI.getText());
+            if(paciente == null)
+            {
+                paciente = new Paciente(0, this.textDNI.getText(),  this.textNombre.getText(),
+                                    this.textApellidos.getText(), 
+                                    medico.getId(),
+                                    enfermero.getId(), 
+                                    currentdate.getDayOfMonth());
+                LocalDate ahora = LocalDate.now();
+                enfermero.datDeAltaPaciente(paciente, (Enfermedad)enfermedadesCombox.getSelectedItem() , ahora);
+                JOptionPane.showMessageDialog(this, "PACIENTE AÑADIDO CORRECTAMENTE", "Alta Paciente", JOptionPane.INFORMATION_MESSAGE); 
+            }
+            historial = paciente.getHistorial();
+            String text="";
+            for (Historial p: historial)
+                text += p.toString() + "\n";
+
+            this.historialtext.setText(text);
+        }
+       
     }//GEN-LAST:event_botonAñadirActionPerformed
 
     private void botonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonExitActionPerformed

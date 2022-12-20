@@ -261,11 +261,12 @@ public class DAOenfermero {
             String co;
             Statement state = DAO.getConnection().createStatement();
             // Si ya existe le asigno el anterior id
-            co = "SELECT * FROM paciente WHERE dni_paciente = " + paciente.getDNI();
+            co = "SELECT * FROM paciente WHERE dni_paciente = '" + paciente.getDNI() + "';";
             resultados = state.executeQuery(co);
             
-            if(co != null)
+            if(resultados != null)
             {
+                resultados.next();
                 Statement ss = DAO.getConnection().createStatement();
                 String query = "INSERT INTO paciente "
                     + "VALUES ( " 
@@ -308,7 +309,7 @@ public class DAOenfermero {
             
             
         }catch( SQLException sqle ){
-            System.out.println("darDeAlataNuevoPaciente @ DAOmedico -- error en comprobación de datos");
+            System.out.println("darDeAlataNuevoPaciente @ DAOenfermero -- error en comprobación de datos");
             System.out.println(sqle.getMessage());
             
             return false;

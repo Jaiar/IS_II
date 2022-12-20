@@ -7,6 +7,7 @@ import Modelo.Paciente;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import Controlador.DAOpacientes;
+import Modelo.Visita;
 import javax.swing.DefaultListModel;
 
 /**
@@ -60,10 +61,6 @@ public class VistaEnfermeros extends javax.swing.JFrame {
         SalirButton = new javax.swing.JButton();
         anyadirPacienteButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        lbl_apellidos = new javax.swing.JLabel();
-        lbl_hab = new javax.swing.JLabel();
-        jtf_apellidos = new javax.swing.JTextField();
-        jtf_hab = new javax.swing.JTextField();
 
         jMenu1.setText("jMenu1");
 
@@ -121,16 +118,6 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
         jLabel5.setText("Lista Medicamentos:");
 
-        lbl_apellidos.setText("Apellidos:");
-
-        lbl_hab.setText("Habitación:");
-
-        jtf_apellidos.setEditable(false);
-        jtf_apellidos.setText("                     ");
-
-        jtf_hab.setEditable(false);
-        jtf_hab.setText("                     ");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,19 +145,8 @@ public class VistaEnfermeros extends javax.swing.JFrame {
                                 .addGap(13, 13, 13)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lbl_apellidos)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jtf_apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(lbl_hab))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGap(102, 102, 102)
-                                        .addComponent(jLabel5)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtf_hab, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
+                                .addGap(102, 102, 102)
+                                .addComponent(jLabel5)))
                         .addGap(49, 49, 49))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -200,12 +176,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbl_apellidos)
-                            .addComponent(lbl_hab)
-                            .addComponent(jtf_apellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtf_hab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(14, 14, 14)
+                        .addGap(36, 36, 36)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -239,12 +210,14 @@ public class VistaEnfermeros extends javax.swing.JFrame {
     }//GEN-LAST:event_anyadirPacienteButtonActionPerformed
 
     private void l_pacientesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_l_pacientesValueChanged
-        Paciente paciente = this.l_pacientes.getSelectedValue();
+        if(l_pacientes.getSelectedIndex() == -1)
+            return;
+        
+        Visita visita = this.l_pacientes.getSelectedValue();
 
-        this.jtf_apellidos.setText(paciente.getApellidos());
-        this.jtf_hab.setText(""+paciente.getHabitacion());
-
-        String text = this.enfermero.getMedicamentosPaciente(paciente.getID()).stream().map(e -> e.toString() + "\n").reduce("", String::concat);
+        String text = visita.getPaciente().getMedicamentos().toString();
+        
+        // String text = this.enfermero.getMedicamentosPaciente(paciente.getID()).stream().map(e -> e.toString() + "\n").reduce("", String::concat);
         
         this.listaMediicamentos.setText(text);
     }//GEN-LAST:event_l_pacientesValueChanged
@@ -264,11 +237,7 @@ public class VistaEnfermeros extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jtf_apellidos;
-    private javax.swing.JTextField jtf_hab;
-    private javax.swing.JList<Paciente> l_pacientes;
-    private javax.swing.JLabel lbl_apellidos;
-    private javax.swing.JLabel lbl_hab;
+    private javax.swing.JList<Visita> l_pacientes;
     private javax.swing.JTextArea listaMediicamentos;
     private javax.swing.JTextField txt_anyo;
     private javax.swing.JTextField txt_mes;

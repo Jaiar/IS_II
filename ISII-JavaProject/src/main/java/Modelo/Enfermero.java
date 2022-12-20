@@ -23,7 +23,7 @@ public class Enfermero extends Usuario{
     }
     
     public ArrayList<Paciente> getPacientesATratar(){
-        return (ArrayList<Paciente>) DAOenfermero.getPacientesATratar(LocalDate.now());
+        return (ArrayList<Paciente>) DAOenfermero.getPacientesATratar(this.code, LocalDate.now());
     }
     
     public ArrayList<Medicamento> getMedicamentosPaciente(int id_paciente){

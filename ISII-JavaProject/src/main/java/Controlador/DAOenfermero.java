@@ -5,6 +5,7 @@ import Modelo.Enfermero;
 import Modelo.Medicamento;
 import Modelo.Medico;
 import Modelo.Paciente;
+import Modelo.Visita;
 import java.sql.Connection;
 
 import java.sql.ResultSet;
@@ -110,15 +111,16 @@ public class DAOenfermero {
         return enfermedades;
     }
     
-    public static ArrayList getPacientesATratar(LocalDate ld){
+    public static ArrayList getPacientesATratar(int id_enf, LocalDate ld){
         ResultSet resultados = null;
-        ArrayList<Paciente> pacientes = new ArrayList<>();
+        ArrayList<Visita> visitas = new ArrayList<>();
         
         try {
             String con;
             Statement s = DAO.getConnection().createStatement();
             // Consulta SQL
-            con = "SELECT DISTINCT p.* FROM medicamento_paciente mp, paciente p WHERE mp.id_paciente = p.id_paciente AND mp.fecha = '" + ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))+ "'"; 
+            con = "SELECT * FROM visita WHERE id_medico = " + id_enf 
+                    + " AND fecha_cita = '" + ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "';";
             resultados = s.executeQuery(con);
         }
         catch (Exception e) { // Error en al realizar la consulta
@@ -127,7 +129,7 @@ public class DAOenfermero {
         
         try{
             while(resultados.next()){
-                pacientes.add(ModelFactory.buildPaciente(resultados));
+                visitas.add(ModelFactory.buildVisita(resultados));
                 
             }
         }catch(SQLException sqle){
@@ -135,7 +137,7 @@ public class DAOenfermero {
             return null;
         }
         
-        return pacientes;
+        return visitas;
     }
     
     public static ArrayList getMedicamentosPaciente(int id_pac, LocalDate ld){

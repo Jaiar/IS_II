@@ -251,6 +251,9 @@ public class ConsultarHistorial extends javax.swing.JFrame {
         // Usuario selecciona una enfermedad -- mostrar informacion
         this.enf_selected = this.lst_enfermedades.getSelectedValue();
         
+        if(this.enf_selected == null)
+            return;
+        
         this.contagiosa = this.enf_selected.getContagiosa();
         this.ch_contagiosa.setSelected(this.contagiosa);
         
@@ -273,6 +276,9 @@ public class ConsultarHistorial extends javax.swing.JFrame {
 
     private void lst_medicamentosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lst_medicamentosValueChanged
         Medicamento m = this.lst_medicamentos.getSelectedValue();
+        
+        if( m == null )
+            return;
         
         Tratamiento trat = m.getTratamiento(this.enf_selected.getId());
         

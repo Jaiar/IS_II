@@ -254,69 +254,87 @@ public class DAOenfermero {
         
         return null;
     }
-    
-    public static boolean darDeAltaNuevoPaciente(Paciente paciente, Enfermedad enfermedad, LocalDate fecha ){
+
+    public static boolean darDeAltaNuevoPaciente(Paciente paciente, Enfermedad enfermedad, LocalDate fecha){
         ResultSet resultados = null;
-         
+
         try{
-            
+
             String co;
             Statement state = DAO.getConnection().createStatement();
             // Si ya existe le asigno el anterior id
-            co = "SELECT * FROM paciente WHERE dni_paciente = '" + paciente.getDNI() + "';";
+            co = "SELECT MAX(id_paciente)+1 as max FROM paciente;";
             resultados = state.executeQuery(co);
             
-            if(resultados != null)
-            {
-                resultados.next();
-                Statement ss = DAO.getConnection().createStatement();
-                String query = "INSERT INTO paciente "
-                    + "VALUES ( " 
-                    + resultados.getInt(1) + ","
-                    + paciente.getDNI() + ", "
-                    + paciente.getNombre() + ", "
-                    + paciente.getApellidos() + ", "
-                    + paciente.getTelefono() + ", "
-                    + paciente.getHabitacion() + ", "
-                    + paciente.getMedico() + ", "
-                    + paciente.getEnfermero()
-                    + ");";
-                ss.executeUpdate(query);
-            }
-            else
-            {
-                Connection conn = DAO.getConnection();
-                Connection con = DAO.getConnection();
-                Statement s = conn.createStatement();
-                Statement sa = con.createStatement();
-                ResultSet rs = sa.executeQuery("SELECT MAX(id_historialmedico)+1 AS max FROM historialmedico;");
-                rs.next();
-                int id = rs.getInt("max");
+            resultados.next();
 
-                Statement ss = DAO.getConnection().createStatement();
-                String query = "INSERT INTO paciente "
-                        + "VALUES ( " 
-                        + id + ","
-                        + paciente.getDNI() + ", "
-                        + paciente.getNombre() + ", "
-                        + paciente.getApellidos() + ", "
-                        + paciente.getTelefono() + ", "
-                        + paciente.getHabitacion() + ", "
-                        + paciente.getMedico() + ", "
-                        + paciente.getEnfermero()
-                        + ");";
-                ss.executeUpdate(query);
-            }
-            
-            
-            
-        }catch( SQLException sqle ){
-            System.out.println("darDeAlataNuevoPaciente @ DAOenfermero -- error en comprobación de datos");
+            Statement ss = DAO.getConnection().createStatement();
+            String query = "INSERT INTO paciente "
+                + "VALUES ( " 
+                + resultados.getInt(1) + ", '"
+                + paciente.getDNI() + "', '"
+                + paciente.getNombre() + "', '"
+                + paciente.getApellidos() + "', '"
+                + paciente.getTelefono() + "', "
+                + paciente.getHabitacion() + ", "
+                + paciente.getMedico() + ", "
+                + paciente.getEnfermero()
+                + ");";
+            ss.executeUpdate(query);
+        }catch(SQLException sqle){
+            System.out.println("darDeAltaNuevoPaciente@DAOenfermero -- error en actualización.");
             System.out.println(sqle.getMessage());
-            
             return false;
         }
         
         return true;
-     }
+    }
+    
+    public static boolean anyadirAlHistorial(Paciente paciente, Enfermedad enfermedad, LocalDate fecha){
+        ResultSet resultados = null;
+        
+        
+        System.out.print(paciente.getID());
+        
+        try{
+            Statement s = DAO.getConnection().createStatement();
+            String comprobante = "SELECT MAX(fecha_alta) FROM historialmedico WHERE id_paciente = " + paciente.getID() + ";";
+            resultados = s.executeQuery(comprobante);
+            
+            if(resultados.next())
+                if(resultados.getDate(1).toLocalDate().equals(fecha))
+                    return false;
+        }catch(SQLException sqle){
+            System.out.println("anyadirAlHistorial@DAOenfermero -- error en actualización.");
+            System.out.println(sqle.getMessage());
+            return false;
+        }
+        catch(NullPointerException npe){
+            System.out.println("NPE");
+            System.out.println(npe.getMessage());
+        }
+        
+        try{
+            Statement s = DAO.getConnection().createStatement();
+            String query = "SELECT MAX(id_historialmedico)+1 FROM historialmedico;";
+            resultados = s.executeQuery(query);
+            
+            if(!resultados.next())
+                return false;
+            
+            String insert = "INSERT INTO historialmedico"
+                    + " VALUES ("
+                    + resultados.getInt(1) + ","
+                    + paciente.getID() + ","
+                    + enfermedad.getId() +","
+                    + "STR_TO_DATE('" + fecha.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "', '%d-%m-%Y'));";
+            
+            DAO.getConnection().createStatement().executeUpdate(insert);
+        }catch(SQLException sqle){
+            System.out.println("anyadirAlHistorial@DAOenfermero -- error en actualización.");
+            System.out.println(sqle.getMessage());
+            return false;
+        }
+        return true;
+    }
 }

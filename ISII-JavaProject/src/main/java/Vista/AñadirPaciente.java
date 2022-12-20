@@ -54,7 +54,7 @@ public class AñadirPaciente extends javax.swing.JFrame {
         try{
             enfermedades_arrlist = this.enfermero.getMedicos();
         }catch(NullPointerException npe){
-            JOptionPane.showMessageDialog(this, "No se ha encontrado la enfermedad", "Busqueda de enfermedad", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se ha encontrado el medico", "Busqueda de medico", JOptionPane.ERROR_MESSAGE);
             return;
         }        
         listaMedicosModel.addAll(enfermedades_arrlist);
@@ -137,11 +137,6 @@ public class AñadirPaciente extends javax.swing.JFrame {
         });
 
         botonAñadir.setText("Añadir");
-        botonAñadir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                botonAñadirMouseClicked(evt);
-            }
-        });
         botonAñadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAñadirActionPerformed(evt);
@@ -211,11 +206,11 @@ public class AñadirPaciente extends javax.swing.JFrame {
                                         .addComponent(labelApellidos))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(25, 25, 25)
-                                        .addComponent(labelNombre)))
-                                .addGap(0, 14, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(buscarPaciente)))
+                                        .addComponent(labelNombre))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(17, 17, 17)
+                                        .addComponent(buscarPaciente)))
+                                .addGap(0, 14, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, Short.MAX_VALUE)
@@ -324,22 +319,6 @@ public class AñadirPaciente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonAñadirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonAñadirMouseClicked
-        Object aux = this.doctorCombox.getSelectedItem();
-        Medico medico = (Medico) aux;
-        paciente = new Paciente(0, this.textDNI.getText(),  this.textNombre.getText(),
-                                this.textApellidos.getText(), 
-                                medico.getId(),
-                                enfermero.getId(), 
-                                currentdate.getDayOfMonth());
-        LocalDate ahora = LocalDate.now();
-        enfermero.datDeAltaPaciente(paciente, (Enfermedad)enfermedadesCombox.getSelectedItem() ,ahora);
-        
-        //listaHistorialPacientes = new DefaultListModel();
-        
-        
-    }//GEN-LAST:event_botonAñadirMouseClicked
-
     private void textHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textHabitacionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textHabitacionActionPerformed
@@ -362,17 +341,32 @@ public class AñadirPaciente extends javax.swing.JFrame {
         {
             Object aux = this.doctorCombox.getSelectedItem();
             Medico medico = (Medico) aux;
-            paciente = enfermero.getDatosPaciente(this.textDNI.getText());
+            paciente = enfermero.getDatosPaciente(this.textDNI.getText().trim());
             if(paciente == null)
             {
-                paciente = new Paciente(0, this.textDNI.getText(),  this.textNombre.getText(),
+                paciente = new Paciente(0, this.textDNI.getText().trim(),  this.textNombre.getText(),
                                     this.textApellidos.getText(), 
                                     medico.getId(),
                                     enfermero.getId(), 
                                     currentdate.getDayOfMonth());
                 LocalDate ahora = LocalDate.now();
-                enfermero.datDeAltaPaciente(paciente, (Enfermedad)enfermedadesCombox.getSelectedItem() , ahora);
-                JOptionPane.showMessageDialog(this, "PACIENTE AÑADIDO CORRECTAMENTE", "Alta Paciente", JOptionPane.INFORMATION_MESSAGE); 
+                if(enfermero.darDeAltaNuevoPaciente(paciente, (Enfermedad)enfermedadesCombox.getSelectedItem() , ahora)){
+                    JOptionPane.showMessageDialog(this, "PACIENTE AÑADIDO CORRECTAMENTE", "Alta Paciente", JOptionPane.INFORMATION_MESSAGE);
+                    paciente = enfermero.getDatosPaciente(paciente.getDNI());
+                    
+                    if(enfermero.anyadirAlHistorial(paciente, (Enfermedad)enfermedadesCombox.getSelectedItem(), LocalDate.now()))
+                        JOptionPane.showMessageDialog(this, "Historial añadido correctamente", "Alta Paciente", JOptionPane.INFORMATION_MESSAGE);
+                    else
+                        JOptionPane.showMessageDialog(this, "No se puede añadir entrada al historial del paciente", "Alta Paciente", JOptionPane.ERROR_MESSAGE); 
+                }
+                else
+                    JOptionPane.showMessageDialog(this, "No se puede añadir entrada al historial del paciente", "Alta Paciente", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                if(enfermero.anyadirAlHistorial(paciente, (Enfermedad)enfermedadesCombox.getSelectedItem(), LocalDate.now()))
+                    JOptionPane.showMessageDialog(this, "Historial añadido correctamente", "Alta Paciente", JOptionPane.INFORMATION_MESSAGE);
+                else
+                    JOptionPane.showMessageDialog(this, "No se puede añadir entrada al historial del paciente", "Alta Paciente", JOptionPane.ERROR_MESSAGE); 
             }
             historial = paciente.getHistorial();
             String text="";

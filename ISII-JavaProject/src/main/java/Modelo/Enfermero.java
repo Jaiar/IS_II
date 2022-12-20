@@ -42,8 +42,12 @@ public class Enfermero extends Usuario{
         return (ArrayList<Paciente>) DAOenfermero.getPacientes(code);
     }
    
-    public void datDeAltaPaciente(Paciente paciente, Enfermedad enfermedad, LocalDate fecha){
-        DAOenfermero.darDeAltaNuevoPaciente(paciente, enfermedad, fecha);
+    public boolean darDeAltaNuevoPaciente(Paciente paciente, Enfermedad enfermedad, LocalDate fecha){
+        return DAOenfermero.darDeAltaNuevoPaciente(paciente, enfermedad, fecha);
+    }
+    
+    public boolean anyadirAlHistorial(Paciente paciente, Enfermedad enfermedad, LocalDate fecha){
+        return DAOenfermero.anyadirAlHistorial(paciente, enfermedad, fecha);
     }
     
     public ArrayList consultarBotiquin(int num){

@@ -15,8 +15,7 @@ import java.util.Locale;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *
@@ -92,7 +91,7 @@ public class DAOmedico {
             String con;
             Statement s = DAO.getConnection().createStatement();
             // Consulta SQL
-            con = "SELECT * FROM visita WHERE id_medico = " + id_med 
+            con = "SELECT * FROM visita WHERE id_usuario = " + id_med 
                     + " AND fecha_cita = '" + ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "';";
             resultados = s.executeQuery(con);
         }

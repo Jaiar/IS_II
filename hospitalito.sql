@@ -32,7 +32,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `enfermedad` (
   `id_enfermedad` int(11) NOT NULL,
-  `nombre` varchar(11) NOT NULL,
+  `nombre` varchar(200) NOT NULL,
   `enfermedades_relacionadas` int(11),
   `contagiosa` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -59,8 +59,8 @@ CREATE TABLE `historialmedico` (
 CREATE TABLE `visita` (
 	`id_visita` int(11) NOT NULL,
     `id_paciente` int(11) NOT NULL,
-    `id_medico` int(11) NOT NULL,
-    `sintomas` varchar(150) DEFAULT NULL,
+    `id_usuario` int(11) NOT NULL,
+    `sintomas` varchar(200) DEFAULT NULL,
     `fecha_cita` date NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -77,9 +77,9 @@ CREATE TABLE `medicamento_paciente` (
 
 CREATE TABLE `medicamento` (
   `id_medicamento` int(11) NOT NULL,
-  `nombre` varchar(30) NOT NULL,
-  `alergias` varchar(30) DEFAULT NULL,
-  `efectos_secundarios` varchar(30) DEFAULT NULL,
+  `nombre` varchar(200) NOT NULL,
+  `alergias` varchar(200) DEFAULT NULL,
+  `efectos_secundarios` varchar(200) DEFAULT NULL,
   `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -92,8 +92,8 @@ CREATE TABLE `medicamento` (
 CREATE TABLE `paciente` (
   `id_paciente` int(8) NOT NULL,
   `dni_paciente` varchar(8) NOT NULL,
-  `nombre` varchar(30) NOT NULL,
-  `apellidos` varchar(50) NOT NULL,
+  `nombre` varchar(200) NOT NULL,
+  `apellidos` varchar(200) NOT NULL,
   `telefono` int(9) NOT NULL,
   `habitacion` int(3) NOT NULL,
   `medico` int(11) NOT NULL,
@@ -135,10 +135,11 @@ CREATE TABLE `tratamiento` (
 CREATE TABLE `usuario` (
   `id_usuario` int(11) NOT NULL,
   `dni_usuario` varchar(8) NOT NULL,
-  `nombre` varchar(30) NOT NULL,
-  `apellidos` varchar(50) NOT NULL,
+  `nombre` varchar(200) NOT NULL,
+  `apellidos` varchar(200) NOT NULL,
   `rol` smallint(3) NOT NULL,
   `fecha_incorporacion` date NOT NULL,
+  `telefono` varchar(9) NOT NULL,
   `user` varchar(20) NOT NULL,
   `pass` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -164,7 +165,7 @@ ALTER TABLE `historialmedico`
 
 ALTER TABLE `visita`
   ADD PRIMARY KEY (`id_visita`),
-  ADD KEY `fk_historial_enfermedad` (`id_medico`),
+  ADD KEY `fk_historial_enfermedad` (`id_usuario`),
   ADD KEY `fk_historial_paciente` (`id_paciente`);
   
 ALTER TABLE `medicamento_paciente`
@@ -228,7 +229,7 @@ ALTER TABLE `historialmedico`
   ADD CONSTRAINT `fk_historial_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`);
   
 ALTER TABLE `visita`
-  ADD CONSTRAINT `fk_visita_medico` FOREIGN KEY (`id_medico`) REFERENCES `usuario` (`id_usuario`),
+  ADD CONSTRAINT `fk_visita_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
   ADD CONSTRAINT `fk_visita_paciente` FOREIGN KEY (`id_paciente`) REFERENCES `paciente` (`id_paciente`);
 
 ALTER TABLE `medicamento_paciente`
@@ -258,33 +259,33 @@ COMMIT;
 
 -- MEDICOS --
 INSERT INTO usuario
-VALUES (01, "M000000", "MEDICO", "PRUEBA", 1, '2001-01-01', "medico", "medico");
+VALUES (01, "M000000", "MEDICO", "PRUEBA", 1, '2001-01-01', "123456789", "medico", "medico");
 
 INSERT INTO usuario
-VALUES (10, "M000001", "DON VICENTE", "CERVERON", 1, '2001-01-01', "don", "vicente");
+VALUES (10, "M000001", "DON VICENTE", "CERVERON", 1, '2001-01-01', "123456789","don", "vicente");
 
 INSERT INTO usuario
-VALUES (11, "M000002", "ARMANCIO", "ORTEGA", 1, '2011-01-01', "armancio", "ortega");
+VALUES (11, "M000002", "ARMANCIO", "ORTEGA", 1, '2011-01-01', "123456789","armancio", "ortega");
 
 -- ENFERMEROS --
 INSERT INTO usuario
-VALUES (02, "E000000", "ENFERMERO", "PRUEBA", 2, '2001-01-01', "enfermero", "enfermero");
+VALUES (02, "E000000", "ENFERMERO", "PRUEBA", 2, '2001-01-01', "123456789","enfermero", "enfermero");
 
 INSERT INTO usuario
-VALUES (20, "E000001", "ANTONIO", "BOLUDA", 2, '2002-02-02', "antonio", "boluda");
+VALUES (20, "E000001", "ANTONIO", "BOLUDA", 2, '2002-02-02', "123456789","antonio", "boluda");
 
 INSERT INTO usuario
-VALUES (21, "E000002", "MEHDI", "FRANCES", 2, '2003-03-03', "mehdi", "frances");
+VALUES (21, "E000002", "MEHDI", "FRANCES", 2, '2003-03-03',"123456789", "mehdi", "frances");
 
 -- GESTORES --
 INSERT INTO usuario
-VALUES (03, "G000000", "GESTOR", "PRUEBA", 3, '2001-01-01', "gestor", "gestor");
+VALUES (03, "G000000", "GESTOR", "PRUEBA", 3, '2001-01-01', "123456789","gestor", "gestor");
 
 INSERT INTO usuario
-VALUES (30, "G000001", "RICARDO", "FERRIS", 3, '2005-08-06', "ricardo", "ferris");
+VALUES (30, "G000001", "RICARDO", "FERRIS", 3, '2005-08-06',"123456789", "ricardo", "ferris");
 
 INSERT INTO usuario
-VALUES (31, "G000002", "MARIANO", "RAHOY", 3, '1960-08-06', "mariano", "rahoy");
+VALUES (31, "G000002", "MARIANO", "RAHOY", 3, '1960-08-06', "123456789","mariano", "rahoy");
 
 -- PACIENTES --
 INSERT INTO paciente
@@ -295,17 +296,20 @@ VALUES (2, "P000001", "ROBERTO", "INIESTA", 622222222, 1, 2, 2);
 
 -- MEDICAMENTOS --
 INSERT INTO medicamento
-VALUES (1, "aspirina", "sin alergias", "eres plata en el lol", 5);
+VALUES (1, "aspirina", "sin alergias", "PERDIDA DE APETITO", 5);
 
 INSERT INTO medicamento
-VALUES (2, "dalsy", "Te matriculas en la UV", "Tienes depresion", 10);
+VALUES (2, "dalsy", "H3O", "PROBLEMAS GASTROINTESTINALES", 10);
+
+INSERT INTO medicamento
+VALUES (3, "PARACETAMOL", "Te matriculas en la UV", "PROBLEMAS GASTROINTESTINALES", 10);
 
 -- ENFERMEDADES --
 INSERT INTO enfermedad
-VALUES(1, "juegas al lol", null, true);
+VALUES(1, "DOLOR DE CABEZA", null, true);
 
 INSERT INTO enfermedad
-VALUES(2, "hueles mal", 1, false);
+VALUES(2, "GASTROENTERITIS", 1, false);
 
 -- TRATAMIENTOS --
 INSERT INTO tratamiento
@@ -313,6 +317,10 @@ VALUES(1, 1, 1, 20, 2);
 
 INSERT INTO tratamiento
 VALUES(2, 2, 2, 40, 1);
+
+INSERT INTO tratamiento
+VALUES(3, 3, 2, 40, 1);
+
 
 -- HISTORIALES MEDICOS --
 INSERT INTO historialmedico
@@ -327,6 +335,16 @@ VALUES(1, 1, 1);
 
 INSERT INTO paciente_enfermedades
 VALUES(2, 2, 2);
+
+-- CITAS MEDICO --
+INSERT INTO visita
+VALUES (1, 1, 1, "Dolor de gargantúa", sysdate());
+
+INSERT INTO visita
+VALUES (2, 2, 1, "Protuberancia en el cuello", sysdate());
+
+INSERT INTO visita
+VALUES (3, 2, 2, "Protuberancia en el cuello", sysdate());
 
 COMMIT;
 

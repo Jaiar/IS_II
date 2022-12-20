@@ -6,7 +6,6 @@ import Modelo.Historial;
 import Modelo.Medico;
 import Modelo.Paciente;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -98,6 +97,7 @@ public class AñadirPaciente extends javax.swing.JFrame {
         historialLabel = new javax.swing.JLabel();
         enfermedadesCombox = new javax.swing.JComboBox<>();
         doctorCombox = new javax.swing.JComboBox<>();
+        buscarPaciente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(815, 484));
@@ -163,11 +163,19 @@ public class AñadirPaciente extends javax.swing.JFrame {
 
         anyoText.setEditable(false);
 
+        historialtext.setEditable(false);
         historialtext.setColumns(20);
         historialtext.setRows(5);
         jScrollPane1.setViewportView(historialtext);
 
         historialLabel.setText("Historial Paciente");
+
+        buscarPaciente.setText("Buscar");
+        buscarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarPacienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -178,63 +186,62 @@ public class AñadirPaciente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textHabitacion, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(enfermedadesCombox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(doctorCombox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(textDNI)
+                            .addComponent(textNombre, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(textApellidos, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(23, 23, 23)
+                                        .addComponent(labelHabitacion))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(14, 14, 14)
+                                        .addComponent(labelEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(34, 34, 34)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(labelDoctor)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(7, 7, 7)
-                                                .addComponent(labelDNI)))
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(textDNI)
-                                    .addComponent(textNombre, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(textApellidos, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(textHabitacion, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(enfermedadesCombox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(labelDoctor))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(23, 23, 23)
-                                                .addComponent(labelApellidos))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(25, 25, 25)
-                                                .addComponent(labelNombre))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(23, 23, 23)
-                                                .addComponent(labelHabitacion)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE))
-                                    .addComponent(doctorCombox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGap(41, 41, 41)
+                                        .addComponent(labelDNI))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 75, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                        .addComponent(jLabel2)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addComponent(mestext, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                        .addComponent(jLabel1)
-                                                        .addGap(18, 18, 18)
-                                                        .addComponent(diatext, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                        .addComponent(jLabel3)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(labelEnfermero)
-                                                            .addComponent(anyoText, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                .addGap(23, 23, 23))
-                                            .addComponent(botonAñadir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(55, 55, 55))
+                                        .addGap(23, 23, 23)
+                                        .addComponent(labelApellidos))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(textEnfermero, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGap(25, 25, 25)
+                                        .addComponent(labelNombre)))
+                                .addGap(0, 14, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(labelEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(17, 17, 17)
+                                .addComponent(buscarPaciente)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(mestext, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(jLabel1)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(diatext, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                .addComponent(jLabel3)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(labelEnfermero)
+                                                    .addComponent(anyoText, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGap(23, 23, 23))
+                                    .addComponent(botonAñadir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(55, 55, 55))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(textEnfermero, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(historialLabel)
@@ -250,15 +257,48 @@ public class AñadirPaciente extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(4, 4, 4)
+                                .addComponent(historialLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(diatext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))
+                                .addGap(21, 21, 21)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(mestext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
+                                .addGap(25, 25, 25)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(anyoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(147, 147, 147)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(botonAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(botonExit)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(61, 61, 61)
+                                        .addComponent(labelEnfermero)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(textEnfermero, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
                         .addComponent(labelDNI)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buscarPaciente)
+                        .addGap(22, 22, 22)
                         .addComponent(labelNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -269,42 +309,16 @@ public class AñadirPaciente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelEnfermedad)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labelEnfermero)
-                            .addComponent(enfermedadesCombox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(enfermedadesCombox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textEnfermero, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(labelDoctor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(doctorCombox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(labelDoctor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(doctorCombox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(14, 14, 14)
                         .addComponent(labelHabitacion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
-                        .addComponent(historialLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(diatext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(mestext, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(anyoText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(147, 147, 147)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botonAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonExit))))
-                .addGap(30, 30, 30))
+                        .addComponent(textHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -321,15 +335,9 @@ public class AñadirPaciente extends javax.swing.JFrame {
         LocalDate ahora = LocalDate.now();
         enfermero.datDeAltaPaciente(paciente, (Enfermedad)enfermedadesCombox.getSelectedItem() ,ahora);
         
-        listaHistorialPacientes = new DefaultListModel();
-        // FALTA ESTO
-        //historial = enfermero.getHistorialPaciente();
-       
-       
-        for (Historial p: historial)
-            listaHistorialPacientes.addElement(p.toString());
-
-        //this.historialtext.setModel(listaHistorialPacientes);
+        //listaHistorialPacientes = new DefaultListModel();
+        
+        
     }//GEN-LAST:event_botonAñadirMouseClicked
 
     private void textHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textHabitacionActionPerformed
@@ -338,6 +346,42 @@ public class AñadirPaciente extends javax.swing.JFrame {
 
     private void botonAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAñadirActionPerformed
         // TODO add your handling code here:
+        if(doctorCombox.getSelectedItem()==null)
+            JOptionPane.showMessageDialog(this, "Selecciona un Doctor ", "Alta Paciente", JOptionPane.ERROR_MESSAGE);                
+        else if(enfermedadesCombox.getSelectedItem()==null)
+            JOptionPane.showMessageDialog(this, "Selecciona una Enfermedad ", "Alta Paciente", JOptionPane.ERROR_MESSAGE);                
+        else if(textHabitacion.getText()== null)
+            JOptionPane.showMessageDialog(this, "Selecciona una Habitación ", "Alta Paciente", JOptionPane.ERROR_MESSAGE);                
+        else if(textDNI.getText() == null)
+            JOptionPane.showMessageDialog(this, "Selecciona una DNI ", "Alta Paciente", JOptionPane.ERROR_MESSAGE);                
+        else if(textNombre.getText() == null)
+            JOptionPane.showMessageDialog(this, "Selecciona una Nombre ", "Alta Paciente", JOptionPane.ERROR_MESSAGE);                
+        else if(textApellidos.getText() == null)
+            JOptionPane.showMessageDialog(this, "Selecciona una Apellidos ", "Alta Paciente", JOptionPane.ERROR_MESSAGE); 
+        else
+        {
+            Object aux = this.doctorCombox.getSelectedItem();
+            Medico medico = (Medico) aux;
+            paciente = enfermero.getDatosPaciente(this.textDNI.getText());
+            if(paciente == null)
+            {
+                paciente = new Paciente(0, this.textDNI.getText(),  this.textNombre.getText(),
+                                    this.textApellidos.getText(), 
+                                    medico.getId(),
+                                    enfermero.getId(), 
+                                    currentdate.getDayOfMonth());
+                LocalDate ahora = LocalDate.now();
+                enfermero.datDeAltaPaciente(paciente, (Enfermedad)enfermedadesCombox.getSelectedItem() , ahora);
+                JOptionPane.showMessageDialog(this, "PACIENTE AÑADIDO CORRECTAMENTE", "Alta Paciente", JOptionPane.INFORMATION_MESSAGE); 
+            }
+            historial = paciente.getHistorial();
+            String text="";
+            for (Historial p: historial)
+                text += p.toString() + "\n";
+
+            this.historialtext.setText(text);
+        }
+       
     }//GEN-LAST:event_botonAñadirActionPerformed
 
     private void botonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonExitActionPerformed
@@ -350,11 +394,36 @@ public class AñadirPaciente extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_botonExitMouseClicked
 
+    private void buscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPacienteActionPerformed
+        // TODO add your handling code here:
+        
+            paciente = enfermero.getDatosPaciente(this.textDNI.getText());
+            if(paciente == null)
+            {
+                JOptionPane.showMessageDialog(this, "DNI no encontrado en la BD", "Alta Paciente", JOptionPane.ERROR_MESSAGE);                
+            }
+            else{
+        
+                textDNI.setText(paciente.getDNI());
+                textApellidos.setText(paciente.getApellidos());
+                textNombre.setText(paciente.getNombre());
+
+                historial = paciente.getHistorial();
+
+                String text="";
+                for (Historial p: historial)
+                    text += p.toString() + "\n";
+
+                this.historialtext.setText(text);
+            }
+    }//GEN-LAST:event_buscarPacienteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField anyoText;
     private javax.swing.JButton botonAñadir;
     private javax.swing.JButton botonExit;
+    private javax.swing.JButton buscarPaciente;
     private javax.swing.JTextField diatext;
     private javax.swing.JComboBox<String> doctorCombox;
     private javax.swing.JComboBox<String> enfermedadesCombox;

@@ -1,8 +1,6 @@
 package Modelo;
 
 import Controlador.DAOenfermero;
-import Controlador.DAOmedico;
-import Controlador.DAOpacientes;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,6 +60,9 @@ public class Enfermero extends Usuario{
         return pacientes;
     }
     
+    public Paciente getDatosPaciente(String dni_paciente){
+        return DAOenfermero.getDatosPaciente(dni_paciente);
+    }
     public String getNombre() {
         return nombre;
     }

@@ -27,6 +27,6 @@ public class Historial {
     
     @Override
     public String toString(){
-        return fecha.toString();
+        return fecha.toString() + " - - " + getEnfermedad().toString();
     }
 }

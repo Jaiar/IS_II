@@ -350,7 +350,7 @@ public class AñadirPaciente extends javax.swing.JFrame {
                                     enfermero.getId(), 
                                     currentdate.getDayOfMonth());
                 LocalDate ahora = LocalDate.now();
-                if(enfermero.darDeAltaNuevoPaciente(paciente, (Enfermedad)enfermedadesCombox.getSelectedItem() , ahora)){
+                if(enfermero.darDeAltaNuevoPaciente(paciente, (Enfermedad)enfermedadesCombox.getSelectedItem() , LocalDate.now())){
                     JOptionPane.showMessageDialog(this, "PACIENTE AÑADIDO CORRECTAMENTE", "Alta Paciente", JOptionPane.INFORMATION_MESSAGE);
                     paciente = enfermero.getDatosPaciente(paciente.getDNI());
                     

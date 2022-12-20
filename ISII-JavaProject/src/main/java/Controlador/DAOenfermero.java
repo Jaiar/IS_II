@@ -119,7 +119,7 @@ public class DAOenfermero {
             String con;
             Statement s = DAO.getConnection().createStatement();
             // Consulta SQL
-            con = "SELECT * FROM visita WHERE id_medico = " + id_enf 
+            con = "SELECT * FROM visita WHERE id_usuario = " + id_enf 
                     + " AND fecha_cita = '" + ld.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "';";
             resultados = s.executeQuery(con);
         }

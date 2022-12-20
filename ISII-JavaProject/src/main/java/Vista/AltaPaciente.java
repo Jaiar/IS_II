@@ -5,6 +5,7 @@ import Controlador.DAOmedico;
 import Modelo.Medico;
 import Modelo.Paciente;
 import Modelo.Enfermedad;
+import Controlador.DAOhistorial;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,7 +26,10 @@ public class AltaPaciente extends javax.swing.JFrame {
     private boolean paciente_existente;
     
     private ArrayList<String> Pacientes;
-    private DefaultListModel listaHistorialPacientes;
+    
+    private DefaultListModel listahist = new DefaultListModel();
+    
+    private ArrayList<String> array_hist = new ArrayList<String>();
     
     /**
      * Creates new form DarAltaPaciente
@@ -61,6 +65,18 @@ public class AltaPaciente extends javax.swing.JFrame {
         this.DiaComboBox.addItem(currentdate.getDayOfMonth()+"");
         this.MesComboBox.addItem(currentdate.getMonthValue()+"");
         this.AñoComboBox.addItem(currentdate.getYear()+"");
+        
+        
+        
+        array_hist = DAOhistorial.getHistorial(paciente.getID());    
+        
+        if (!array_hist.isEmpty())
+        {
+        for(int i=0; i<array_hist.size(); i++)
+            listahist.addElement(array_hist.get(i));
+        }
+        
+        historial.setModel(listahist); 
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -78,7 +94,7 @@ public class AltaPaciente extends javax.swing.JFrame {
         textNombrePaciente = new javax.swing.JTextField();
         apellidosTextPaciente = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        historial = new javax.swing.JList<>();
         labelHistorialMedico = new javax.swing.JLabel();
         labelFecha = new javax.swing.JLabel();
         DiaComboBox = new javax.swing.JComboBox<>();
@@ -108,7 +124,7 @@ public class AltaPaciente extends javax.swing.JFrame {
 
         apellidosTextPaciente.setEditable(false);
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(historial);
 
         labelHistorialMedico.setText("Historial");
 
@@ -263,7 +279,7 @@ public class AltaPaciente extends javax.swing.JFrame {
     private javax.swing.JTextField apellidosTextPaciente;
     private javax.swing.JComboBox<Enfermedad> cbo_enfer;
     private javax.swing.JButton exitButton;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> historial;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labeApellidosPacientes;
     private javax.swing.JLabel labelDNIPaciente;

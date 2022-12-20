@@ -221,6 +221,7 @@ public class VistaMedico extends javax.swing.JFrame {
             dispose();
         }catch(NullPointerException npe){
             JOptionPane.showMessageDialog(this, "Seleccione primero un paciente", "Alta Paciente", JOptionPane.ERROR_MESSAGE);
+            System.out.println("Error al seleccionar paciente: "+npe);
             return;
         }
     }//GEN-LAST:event_darAltaPacienteButtonActionPerformed

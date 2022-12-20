@@ -217,8 +217,6 @@ public class VistaEnfermeros extends javax.swing.JFrame {
 
         String text = visita.getPaciente().getMedicamentos().toString();
         
-        // String text = this.enfermero.getMedicamentosPaciente(paciente.getID()).stream().map(e -> e.toString() + "\n").reduce("", String::concat);
-        
         this.listaMediicamentos.setText(text);
     }//GEN-LAST:event_l_pacientesValueChanged
 

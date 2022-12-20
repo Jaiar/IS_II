@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Locale;
+
 
 /**
  *
@@ -209,7 +209,7 @@ public class DAOenfermero {
             resultados = s.executeQuery(con);
         }
         catch (Exception e) { // Error en al realizar la consulta
-            System.out.println("DAOmedico @ getPacientes -- Error en la petición a la BD");
+            System.out.println("DAOenfermero @ getPacientes -- Error en la petición a la BD");
         }
         
         try{
@@ -217,28 +217,59 @@ public class DAOenfermero {
                 pacientes.add(ModelFactory.buildPaciente(resultados));
             }
         }catch(SQLException sqle){
-            System.out.println("DAOmedico @ getPacientes -- Error en retirar datos: " + sqle.getMessage());
+            System.out.println("DAOenfermero @ getPacientes -- Error en retirar datos: " + sqle.getMessage());
             return null;
         }
         
         return pacientes;
     }
+    public static Paciente getDatosPaciente(String dni_paciente){
+        ResultSet resultados = null;
+        
+        try {
+            String con;
+            Statement s = DAO.getConnection().createStatement();
+            // Consulta SQL
+            con = "SELECT * FROM paciente WHERE dni_paciente = '"+ dni_paciente + "';";
+            resultados = s.executeQuery(con);
+        }
+        catch (Exception e) { // Error en al realizar la consulta
+            System.out.println("DAOenfermero 1@ getPacientesEnVisita -- Error en la petición a la BD\n--" + e.getMessage());
+        }
+        
+        try{
+            while(resultados.next()){
+                return ModelFactory.buildPaciente(resultados);
+            }
+        }catch(SQLException sqle){
+            System.out.println("DAOenfermero 2@ getPacientesEnVisita \n-- Error en retirar datos: " + sqle.getMessage());
+            return null;
+        }
+        catch(NullPointerException npe){
+            System.out.println("DAOenfermero 3@ getPacientesEnVisita \n-- Resultados nulo: " + npe.getMessage());
+            return null;
+        }
+        
+        return null;
+    }
+    
     public static boolean darDeAltaNuevoPaciente(Paciente paciente, Enfermedad enfermedad, LocalDate fecha ){
         ResultSet resultados = null;
          
         try{
-            Connection conn = DAO.getConnection();
-            Connection con = DAO.getConnection();
-            Statement s = conn.createStatement();
-            Statement sa = con.createStatement();
-            ResultSet rs = sa.executeQuery("SELECT MAX(id_historialmedico)+1 AS max FROM historialmedico;");
-            rs.next();
-            int id = rs.getInt("max");
             
-            Statement ss = DAO.getConnection().createStatement();
-            String query = "INSERT INTO paciente "
+            String co;
+            Statement state = DAO.getConnection().createStatement();
+            // Si ya existe le asigno el anterior id
+            co = "SELECT * FROM paciente WHERE dni_paciente = " + paciente.getDNI();
+            resultados = state.executeQuery(co);
+            
+            if(co != null)
+            {
+                Statement ss = DAO.getConnection().createStatement();
+                String query = "INSERT INTO paciente "
                     + "VALUES ( " 
-                    + id + ","
+                    + resultados.getInt(1) + ","
                     + paciente.getDNI() + ", "
                     + paciente.getNombre() + ", "
                     + paciente.getApellidos() + ", "
@@ -247,8 +278,34 @@ public class DAOenfermero {
                     + paciente.getMedico() + ", "
                     + paciente.getEnfermero()
                     + ");";
+                ss.executeUpdate(query);
+            }
+            else
+            {
+                Connection conn = DAO.getConnection();
+                Connection con = DAO.getConnection();
+                Statement s = conn.createStatement();
+                Statement sa = con.createStatement();
+                ResultSet rs = sa.executeQuery("SELECT MAX(id_historialmedico)+1 AS max FROM historialmedico;");
+                rs.next();
+                int id = rs.getInt("max");
+
+                Statement ss = DAO.getConnection().createStatement();
+                String query = "INSERT INTO paciente "
+                        + "VALUES ( " 
+                        + id + ","
+                        + paciente.getDNI() + ", "
+                        + paciente.getNombre() + ", "
+                        + paciente.getApellidos() + ", "
+                        + paciente.getTelefono() + ", "
+                        + paciente.getHabitacion() + ", "
+                        + paciente.getMedico() + ", "
+                        + paciente.getEnfermero()
+                        + ");";
+                ss.executeUpdate(query);
+            }
             
-            ss.executeUpdate(query);
+            
             
         }catch( SQLException sqle ){
             System.out.println("darDeAlataNuevoPaciente @ DAOmedico -- error en comprobación de datos");

@@ -62,6 +62,9 @@ public class Enfermero extends Usuario{
         return pacientes;
     }
     
+    public Paciente getDatosPaciente(String dni_paciente){
+        return DAOenfermero.getDatosPaciente(dni_paciente);
+    }
     public String getNombre() {
         return nombre;
     }

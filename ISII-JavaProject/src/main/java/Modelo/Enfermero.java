@@ -1,8 +1,6 @@
 package Modelo;
 
 import Controlador.DAOenfermero;
-import Controlador.DAOmedico;
-import Controlador.DAOpacientes;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;

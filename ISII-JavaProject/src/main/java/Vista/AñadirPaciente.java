@@ -6,7 +6,6 @@ import Modelo.Historial;
 import Modelo.Medico;
 import Modelo.Paciente;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -164,6 +163,7 @@ public class AñadirPaciente extends javax.swing.JFrame {
 
         anyoText.setEditable(false);
 
+        historialtext.setEditable(false);
         historialtext.setColumns(20);
         historialtext.setRows(5);
         jScrollPane1.setViewportView(historialtext);
@@ -215,8 +215,7 @@ public class AñadirPaciente extends javax.swing.JFrame {
                                 .addGap(0, 14, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
-                                .addComponent(buscarPaciente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(buscarPaciente)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, Short.MAX_VALUE)
@@ -336,14 +335,14 @@ public class AñadirPaciente extends javax.swing.JFrame {
         LocalDate ahora = LocalDate.now();
         enfermero.datDeAltaPaciente(paciente, (Enfermedad)enfermedadesCombox.getSelectedItem() ,ahora);
         
-        listaHistorialPacientes = new DefaultListModel();
+        //listaHistorialPacientes = new DefaultListModel();
         
         historial = paciente.getHistorial();
-       
+        String text="";
         for (Historial p: historial)
-            listaHistorialPacientes.addElement(p.toString());
+            text += p.toString() + "\n";
 
-        //this.historialtext.setModel(listaHistorialPacientes);
+        this.historialtext.setText(text);
     }//GEN-LAST:event_botonAñadirMouseClicked
 
     private void textHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textHabitacionActionPerformed
@@ -352,6 +351,24 @@ public class AñadirPaciente extends javax.swing.JFrame {
 
     private void botonAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAñadirActionPerformed
         // TODO add your handling code here:
+        if(doctorCombox.getSelectedItem()==null)
+            JOptionPane.showMessageDialog(this, "Selecciona un Doctor ", "Alta Paciente", JOptionPane.ERROR_MESSAGE);                
+        else if(enfermedadesCombox.getSelectedItem()==null)
+            JOptionPane.showMessageDialog(this, "Selecciona una Enfermedad ", "Alta Paciente", JOptionPane.ERROR_MESSAGE);                
+        else if(textHabitacion.getText()== null)
+            JOptionPane.showMessageDialog(this, "Selecciona una Habitación ", "Alta Paciente", JOptionPane.ERROR_MESSAGE);                
+        else if(textDNI.getText() == null)
+            JOptionPane.showMessageDialog(this, "Selecciona una DNI ", "Alta Paciente", JOptionPane.ERROR_MESSAGE);                
+        else if(textNombre.getText() == null)
+            JOptionPane.showMessageDialog(this, "Selecciona una Nombre ", "Alta Paciente", JOptionPane.ERROR_MESSAGE);                
+        else if(textApellidos.getText() == null)
+            JOptionPane.showMessageDialog(this, "Selecciona una Apellidos ", "Alta Paciente", JOptionPane.ERROR_MESSAGE);                
+    
+        
+        
+        
+        
+        
     }//GEN-LAST:event_botonAñadirActionPerformed
 
     private void botonExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonExitActionPerformed
@@ -366,11 +383,26 @@ public class AñadirPaciente extends javax.swing.JFrame {
 
     private void buscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarPacienteActionPerformed
         // TODO add your handling code here:
-        paciente = enfermero.getDatosPaciente(this.textDNI.getText());
         
-        textDNI.setText(paciente.getDNI());
-        textApellidos.setText(paciente.getApellidos());
-        textNombre.setText(paciente.getNombre());
+            paciente = enfermero.getDatosPaciente(this.textDNI.getText());
+            if(paciente == null)
+            {
+                JOptionPane.showMessageDialog(this, "DNI no encontrado en la BD", "Alta Paciente", JOptionPane.ERROR_MESSAGE);                
+            }
+            else{
+        
+                textDNI.setText(paciente.getDNI());
+                textApellidos.setText(paciente.getApellidos());
+                textNombre.setText(paciente.getNombre());
+
+                historial = paciente.getHistorial();
+
+                String text="";
+                for (Historial p: historial)
+                    text += p.toString() + "\n";
+
+                this.historialtext.setText(text);
+            }
     }//GEN-LAST:event_buscarPacienteActionPerformed
 
 

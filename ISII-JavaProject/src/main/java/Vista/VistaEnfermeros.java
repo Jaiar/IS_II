@@ -193,13 +193,13 @@ public class VistaEnfermeros extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotiquinHospitalButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotiquinHospitalButtonActionPerformed
-        // TODO add your handling code here:
+
         new BotiquinHospital (enfermero).setVisible(true);
         dispose();
     }//GEN-LAST:event_BotiquinHospitalButtonActionPerformed
 
     private void SalirButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirButtonActionPerformed
-        // TODO add your handling code here:
+
         new Login().setVisible(true);
         dispose();
     }//GEN-LAST:event_SalirButtonActionPerformed

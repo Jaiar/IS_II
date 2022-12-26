@@ -46,7 +46,7 @@ public class Enfermedad {
     }  
     
     public static ArrayList getEnfermedades(){
-        return DAOenfermedad.getEnfermedades();
+        return (ArrayList) DAOenfermedad.getEnfermedades();
     }
     
     public ArrayList<Enfermedad> getEnfermedadesRelacionadas(){
@@ -54,7 +54,7 @@ public class Enfermedad {
     }
     
     public ArrayList getMedicamentosQueLaTratan(){
-        return DAOenfermedad.getMedicamentosTratan(this.id);
+        return (ArrayList) DAOenfermedad.getMedicamentosTratan(this.id);
     }
     
     public int getId(){

@@ -13,14 +13,14 @@ public class Tratamiento {
     int medicamento;
     int enfermedad;
     int dosis;
-    int veces_dosis;
+    int vecesDosis;
     
     public Tratamiento(int id, int medicamento, int enfermedad, int dosis, int veces_dosis){
         this.id = id;
         this.medicamento = medicamento;
         this.enfermedad = enfermedad;
         this.dosis = dosis;
-        this.veces_dosis = veces_dosis;
+        this.vecesDosis = veces_dosis;
     }
     
     public int getDosis(){
@@ -32,6 +32,6 @@ public class Tratamiento {
     }
     
     public int getVeces_dosis(){
-        return this.veces_dosis;
+        return this.vecesDosis;
     }
 }

@@ -18,9 +18,9 @@ public class Paciente {
     private String nombre;
     private String apellidos;
     private ArrayList<Enfermedad> enfermedades;
-    private int doc_id;
-    private int enfer_id;
-    private int room_id;
+    private int docId;
+    private int enferId;
+    private int roomId;
     private int telefono = -1;
     private int id;
     
@@ -29,9 +29,9 @@ public class Paciente {
         this.dni = dni;
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.doc_id= doc;
-        this.enfer_id = enfer;
-        this.room_id = room;
+        this.docId= doc;
+        this.enferId = enfer;
+        this.roomId = room;
         this.enfermedades = null;
     }
     
@@ -57,11 +57,11 @@ public class Paciente {
             this.dni = dni;
             this.nombre = nombre;
             this.apellidos = apellidos;
-            this.doc_id= doc;
-            this.enfer_id = enfer;
+            this.docId= doc;
+            this.enferId = enfer;
             this.enfermedades = new ArrayList<Enfermedad>();
             //this.enfermedad.add(enfermedad);
-            this.room_id = room;
+            this.roomId = room;
             
             return true;
         }
@@ -89,7 +89,7 @@ public class Paciente {
     }
     
     public int getDoctor(){
-        return doc_id;
+        return docId;
     }
     public int getID(){
         return id;
@@ -105,7 +105,7 @@ public class Paciente {
     }
     
     public int getEnfermero(){
-        return this.enfer_id;
+        return this.enferId;
     }
     
     public int getTelefono(){
@@ -117,15 +117,15 @@ public class Paciente {
     }
 
     public int getHabitacion() {
-        return room_id;
+        return roomId;
     }
     
     public int getMedico(){
-        return this.doc_id;
+        return this.docId;
     }
     
     @Override
     public String toString(){
-        return apellidos + ", " + nombre + " ----> ROOM: "+ room_id;
+        return apellidos + ", " + nombre + " ----> ROOM: "+ roomId;
     }
 }

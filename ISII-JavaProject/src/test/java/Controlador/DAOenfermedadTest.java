@@ -22,7 +22,7 @@ public class DAOenfermedadTest {
     public void testGetEnfermedades() {
          System.out.println("GetEnfermedades");
          int nula = 0;
-         ArrayList resultado = DAOenfermedad.getEnfermedades();
+         ArrayList resultado = (ArrayList) DAOenfermedad.getEnfermedades();
          assertNotSame(nula,resultado.size());
     }
 
@@ -30,7 +30,7 @@ public class DAOenfermedadTest {
     public void testGetMedicamentosTratan() {
          System.out.println("GetMedicamentosTratan");
          int enf_id = 1000000;
-         ArrayList resultado = DAOenfermedad.getMedicamentosTratan(enf_id);
+         ArrayList resultado = (ArrayList) DAOenfermedad.getMedicamentosTratan(enf_id);
          assertEquals(0,resultado.size());
     }
 
@@ -38,7 +38,7 @@ public class DAOenfermedadTest {
     public void testGetEnfermedadesRelacionadas() {
         System.out.println("GetEnfermedadesRelacionadas");
          int enf_id = 1000000;
-         ArrayList resultado = DAOenfermedad.getEnfermedadesRelacionadas(enf_id);
+         ArrayList resultado = (ArrayList) DAOenfermedad.getEnfermedadesRelacionadas(enf_id);
          assertEquals(0,resultado.size());
     }
     

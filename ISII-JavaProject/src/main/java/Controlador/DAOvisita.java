@@ -10,6 +10,8 @@ import java.sql.Statement;
  * @author algar
  */
 public class DAOvisita {
+    private DAOvisita(){}
+    
     public static Paciente getPaciente(int id){
         ResultSet resultados = null;
         

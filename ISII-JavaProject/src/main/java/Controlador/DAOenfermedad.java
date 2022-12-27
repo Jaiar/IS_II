@@ -8,12 +8,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import java.sql.SQLException;
+import java.util.List;
 /**
  *
  * @author Mehdi
  */
 public class DAOenfermedad {
-    public static ArrayList<Enfermedad> getEnfermedades(){
+    public static List<Enfermedad> getEnfermedades(){
         ResultSet resultados = null;
         ArrayList enfermedades = new ArrayList();
         try {
@@ -40,7 +41,7 @@ public class DAOenfermedad {
         return enfermedades;
     }
      
-    public static ArrayList getMedicamentosTratan(int id_enf){
+    public static List <Medicamento> getMedicamentosTratan(int id_enf){
         ResultSet resultados = null;
         try {
             String con;
@@ -67,7 +68,7 @@ public class DAOenfermedad {
         return medicamentos;
     }
      
-    public static ArrayList getEnfermedadesRelacionadas(int id_enf){
+    public static List getEnfermedadesRelacionadas(int id_enf){
     ResultSet resultados = null;
         try {
             String con;

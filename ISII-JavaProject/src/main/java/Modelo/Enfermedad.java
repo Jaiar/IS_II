@@ -20,9 +20,8 @@ public class Enfermedad {
     private String nombre;
     
     // Enfermedades relacionadas
-    private ArrayList<Enfermedad> enfermedades_relacionadas;
+    private ArrayList<Enfermedad> enfermedadesRelacionadas;
     
-    private int enfer_rel;
     
     // Enfermedad contagiosa o no
     private boolean contagiosa;
@@ -36,19 +35,18 @@ public class Enfermedad {
         this.id = id;
         this.nombre = nombre;
         this.contagiosa = contagiosa;
-        this.enfermedades_relacionadas = null;
+        this.enfermedadesRelacionadas = null;
     }  
     
     public Enfermedad(int id, String nombre, int enfer_rel,  boolean contagiosa) {
         this.id = id;
         this.nombre = nombre;
         this.contagiosa = contagiosa;
-        this.enfer_rel = enfer_rel;
-        this.enfermedades_relacionadas = null;
+        this.enfermedadesRelacionadas = null;
     }  
     
     public static ArrayList getEnfermedades(){
-        return DAOenfermedad.getEnfermedades();
+        return (ArrayList) DAOenfermedad.getEnfermedades();
     }
     
     public ArrayList<Enfermedad> getEnfermedadesRelacionadas(){
@@ -56,7 +54,7 @@ public class Enfermedad {
     }
     
     public ArrayList getMedicamentosQueLaTratan(){
-        return DAOenfermedad.getMedicamentosTratan(this.id);
+        return (ArrayList) DAOenfermedad.getMedicamentosTratan(this.id);
     }
     
     public int getId(){

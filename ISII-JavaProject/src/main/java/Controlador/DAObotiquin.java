@@ -1,11 +1,13 @@
 package Controlador;
 
+import java.util.List;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,7 +15,9 @@ import java.util.Locale;
  */
 public class DAObotiquin {
     
-    public static ArrayList getAllMedicamentos(){
+    private DAObotiquin(){}
+    
+    public static List getAllMedicamentos(){
         ResultSet resultados = null;
         
         try {
@@ -25,9 +29,9 @@ public class DAObotiquin {
             resultados = s.executeQuery(con);
             }
         catch (Exception e) { // Error en al realizar la consulta
-            System.out.println("Error en la petición a la BD -- " + e.getMessage());
+            Logger.getLogger("LoggerP").log("Error en la petición a la BD -- " + e.getMessage());
         }
-        ArrayList medicamentos = new ArrayList();
+        List medicamentos = new ArrayList();
         
         try{
             while(resultados.next()){
@@ -41,13 +45,13 @@ public class DAObotiquin {
         return medicamentos;
     }
     
-    public static ArrayList getMedicamentosByNombre(String nombre_medicamento){
+    public static List getMedicamentosByNombre(String nombreMedicamento){
         ResultSet resultados = null;
         
         try {
             String con;
             Statement s = DAO.getConnection().createStatement();
-            Locale SPANISH = Locale.forLanguageTag("es");
+            Locale spanish = Locale.forLanguageTag("es");
             // Consulta SQL
             con = "SELECT * FROM medicamento WHERE LOWER(nombre) LIKE '" + nombre_medicamento.toLowerCase(SPANISH) + "%';";
             resultados = s.executeQuery(con);
@@ -57,7 +61,7 @@ public class DAObotiquin {
             throw new UnsupportedOperationException();
         }
         
-        ArrayList medicamentos = new ArrayList();
+        List medicamentos = new ArrayList();
         
         try{
             while(resultados.next()){
@@ -66,7 +70,7 @@ public class DAObotiquin {
         }
         catch(SQLException sqle){
             System.out.println("Error en la retirada de datos: " + sqle.getMessage());
-            return null;
+            return new ArrayList();
         }
         
         return medicamentos;

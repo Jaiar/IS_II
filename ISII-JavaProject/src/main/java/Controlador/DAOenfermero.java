@@ -6,7 +6,6 @@ import Modelo.Medicamento;
 import Modelo.Medico;
 import Modelo.Paciente;
 import Modelo.Visita;
-import java.sql.Connection;
 
 import java.sql.ResultSet;
 import java.sql.Statement;

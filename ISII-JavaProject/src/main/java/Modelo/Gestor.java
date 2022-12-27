@@ -20,6 +20,6 @@ public class Gestor extends Usuario{
     
     @Override
     public void launchMenu(){
-        new Vista.VistaGestor(this).setVisible(true);
+        new vista.VistaGestor(this).setVisible(true);
     }
 }

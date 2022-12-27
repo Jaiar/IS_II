@@ -1,5 +1,5 @@
 
-package Vista;
+package vista;
 
 import Controlador.DAO;
 import Modelo.Usuario;

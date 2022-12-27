@@ -1,6 +1,7 @@
 package Modelo;
 
 import Controlador.DAOmedico;
+import java.io.Serializable;
 
 import java.time.LocalDate;
 
@@ -10,7 +11,7 @@ import java.util.Date;
  *
  * @author jaumearnau
  */
-public class Medico extends Usuario {
+public class Medico extends Usuario implements Serializable {
     private ArrayList<Paciente> pacientes;
     
     public Medico( int code, String name, String surname, String dni, String tele, Date anyo){
@@ -71,7 +72,7 @@ public class Medico extends Usuario {
     
     @Override
     public void launchMenu(){
-        new Vista.VistaMedico(this).setVisible(true);
+        new vista.VistaMedico(this).setVisible(true);
     }
     @Override
     public String toString(){

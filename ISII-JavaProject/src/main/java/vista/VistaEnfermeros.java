@@ -1,4 +1,4 @@
-package Vista;
+package vista;
 
 import Modelo.Gestor;
 import Modelo.Enfermero;

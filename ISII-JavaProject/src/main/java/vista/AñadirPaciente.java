@@ -1,4 +1,4 @@
-package Vista;
+package vista;
 
 import Modelo.Enfermedad;
 import Modelo.Enfermero;
@@ -100,7 +100,6 @@ public class AñadirPaciente extends javax.swing.JFrame {
         buscarPaciente = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(815, 484));
 
         labelDNI.setText("DNI");
 

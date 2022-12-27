@@ -1,4 +1,4 @@
-package Vista;
+package vista;
 
 import Controlador.DAOmedico;
 
@@ -6,9 +6,9 @@ import Modelo.Medico;
 import Modelo.Paciente;
 import Modelo.Enfermedad;
 import Controlador.DAOhistorial;
+import Modelo.Historial;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author roralo3
  */
 public class AltaPaciente extends javax.swing.JFrame {
-    private boolean was_focused = false;
+    boolean was_focused = false;
     private Medico medico;
   
     private LocalDate currentdate;
@@ -25,11 +25,9 @@ public class AltaPaciente extends javax.swing.JFrame {
     private Paciente paciente;
     private boolean paciente_existente;
     
-    private ArrayList<String> Pacientes;
+    private DefaultListModel<String> listahist = new DefaultListModel<>();
     
-    private DefaultListModel listahist = new DefaultListModel();
     
-    private ArrayList<String> array_hist = new ArrayList<String>();
     
     /**
      * Creates new form DarAltaPaciente
@@ -40,7 +38,7 @@ public class AltaPaciente extends javax.swing.JFrame {
         this.medico = medico;
         this.currentdate = LocalDate.now();
         
-        RellenarDatos();
+        rellenarDatos();
         
         this.paciente_existente = true;
     }
@@ -53,7 +51,7 @@ public class AltaPaciente extends javax.swing.JFrame {
         this.paciente_existente = false;
     }
 
-    public void RellenarDatos()
+    public void rellenarDatos()
     {
         this.textDNIPaciente.setText( paciente.getDNI());
         this.textNombrePaciente.setText(paciente.getNombre());
@@ -67,13 +65,13 @@ public class AltaPaciente extends javax.swing.JFrame {
         this.AñoComboBox.addItem(currentdate.getYear()+"");
         
         
+        ArrayList<String> arrayhist = new ArrayList<>();
+        arrayhist = DAOhistorial.getHistorial(paciente.getID());    
         
-        array_hist = DAOhistorial.getHistorial(paciente.getID());    
-        
-        if (!array_hist.isEmpty())
+        if (!arrayhist.isEmpty())
         {
-        for(int i=0; i<array_hist.size(); i++)
-            listahist.addElement(array_hist.get(i));
+            for(int i=0; i<arrayhist.size(); i++)
+                listahist.addElement(arrayhist.get(i));
         }
         
         historial.setModel(listahist); 
@@ -116,11 +114,6 @@ public class AltaPaciente extends javax.swing.JFrame {
         labeApellidosPacientes.setText("Apellidos:");
 
         textNombrePaciente.setEditable(false);
-        textNombrePaciente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textNombrePacienteActionPerformed(evt);
-            }
-        });
 
         apellidosTextPaciente.setEditable(false);
 
@@ -244,10 +237,6 @@ public class AltaPaciente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void textNombrePacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNombrePacienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textNombrePacienteActionPerformed
 
     private void AñoComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AñoComboBoxActionPerformed
         // TODO add your handling code here:

@@ -1,5 +1,6 @@
-package Vista;
+package vista;
 
+import Vista.*;
 import Modelo.Enfermero;
 import Modelo.Gestor;
 import Modelo.Medico;
@@ -127,11 +128,6 @@ public class VistaGestor extends javax.swing.JFrame {
         lbl_tel.setText("Teléfono");
 
         jtf_dni.setText("                   ");
-        jtf_dni.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtf_dniActionPerformed(evt);
-            }
-        });
 
         lbl_fecha.setText("Fecha:");
 
@@ -240,10 +236,6 @@ public class VistaGestor extends javax.swing.JFrame {
         viewLogin.setVisible(true);
         dispose();
     }//GEN-LAST:event_btn_salirActionPerformed
-
-    private void jtf_dniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtf_dniActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtf_dniActionPerformed
 
     private void list_medicosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_list_medicosValueChanged
         list_enfermeros.clearSelection();

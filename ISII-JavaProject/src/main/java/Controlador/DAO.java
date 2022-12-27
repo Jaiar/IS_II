@@ -31,7 +31,7 @@ public class DAO {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Driver de mysql
             // Conexión usando usuario y clave de administrador de la BD
-            conexionBD = DriverManager.getConnection(bd, "root", "root");
+            conexionBD = DriverManager.getConnection(bd, "root", "hospitalito");
         } 
         catch (Exception e) { // Error en la conexión con la BD
             

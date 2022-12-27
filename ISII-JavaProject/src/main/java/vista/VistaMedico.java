@@ -1,5 +1,10 @@
-package Vista;
+package vista;
 
+import vista.InfoEnfermedades;
+import vista.ConsultarHistorial;
+import vista.InfoMedicamento;
+import vista.Login;
+import vista.AltaPaciente;
 import Modelo.Medico;
 import Modelo.Visita;
 import Modelo.Paciente;

@@ -89,6 +89,6 @@ public class Enfermero extends Usuario{
     
     @Override
     public void launchMenu(){
-        new Vista.VistaEnfermeros(this).setVisible(true);
+        new vista.VistaEnfermeros(this).setVisible(true);
     }
 }

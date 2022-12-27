@@ -1,4 +1,4 @@
-package Vista;
+package vista;
 
 import Modelo.Enfermero;
 import Modelo.Medicamento;

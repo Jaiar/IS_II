@@ -266,7 +266,7 @@ public class AltaPaciente extends javax.swing.JFrame {
     }//GEN-LAST:event_addHistorialButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        new VistaMedico(medico).setVisible(true);
+        //new VistaMedico(medico).setVisible(true);
         dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 

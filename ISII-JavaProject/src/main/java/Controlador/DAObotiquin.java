@@ -29,7 +29,7 @@ public class DAObotiquin {
             resultados = s.executeQuery(con);
             }
         catch (Exception e) { // Error en al realizar la consulta
-            Logger.getLogger("LoggerP").log("Error en la petición a la BD -- " + e.getMessage());
+             System.out.println("Error en la petición a la BD");
         }
         List medicamentos = new ArrayList();
         
@@ -53,7 +53,7 @@ public class DAObotiquin {
             Statement s = DAO.getConnection().createStatement();
             Locale spanish = Locale.forLanguageTag("es");
             // Consulta SQL
-            con = "SELECT * FROM medicamento WHERE LOWER(nombre) LIKE '" + nombre_medicamento.toLowerCase(SPANISH) + "%';";
+            con = "SELECT * FROM medicamento WHERE LOWER(nombre) LIKE '" + nombreMedicamento.toLowerCase() + "%';";
             resultados = s.executeQuery(con);
         }
         catch (SQLException e) { // Error en al realizar la consulta

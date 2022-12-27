@@ -18,7 +18,7 @@ import Modelo.Paciente;
 /**
  *
  * @author algar
- */
+ *//*
 @RunWith(JUnit4.class)
 public class DAOpacientesTest {
     private DAOpacientesTest daopacientestest = new DAOpacientesTest();
@@ -46,3 +46,4 @@ public class DAOpacientesTest {
     
     
 }
+*/

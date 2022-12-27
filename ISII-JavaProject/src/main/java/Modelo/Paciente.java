@@ -36,7 +36,7 @@ public class Paciente {
     }
     
     public static ArrayList<Paciente> getAllPacientes(){
-        return (ArrayList<Paciente>) DAOpacientes.getAllPacientes();
+        return DAOpacientes.getAllPacientes();
     }
     
     /**
@@ -59,8 +59,8 @@ public class Paciente {
             this.apellidos = apellidos;
             this.docId= doc;
             this.enferId = enfer;
-            this.enfermedades = new ArrayList<Enfermedad>();
-            //this.enfermedad.add(enfermedad);
+            this.enfermedades = new ArrayList<>();
+            
             this.roomId = room;
             
             return true;

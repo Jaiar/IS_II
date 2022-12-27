@@ -22,7 +22,7 @@ public class DAObotiquinTest {
     @Test
     public void testGetAllMedicamentos() {
         System.out.println("getAllMedicamentos");
-        ArrayList result = DAObotiquin.getAllMedicamentos();
+        ArrayList result = (ArrayList) DAObotiquin.getAllMedicamentos();
         ArrayList exp_result = Botiquin.getBotiquin().consultar();
         
         Assert.assertArrayEquals(result.toArray(), exp_result.toArray());
@@ -43,7 +43,7 @@ public class DAObotiquinTest {
         prueba.add(dalsy);
         
         //LLamada a la base de datos
-        ArrayList result = DAObotiquin.getMedicamentosByNombre(nombre_medicamento);
+        ArrayList result = (ArrayList) DAObotiquin.getMedicamentosByNombre(nombre_medicamento);
         
         Assert.assertSame(prueba, result);
     }

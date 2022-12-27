@@ -22,11 +22,11 @@ public class Botiquin {
     }
     
     public static ArrayList getMedicamentosByNombre(String nombre){
-        return DAObotiquin.getMedicamentosByNombre(nombre);
+        return (ArrayList) DAObotiquin.getMedicamentosByNombre(nombre);
     }
     
-    public ArrayList<Medicamento> consultar(){
+    public ArrayList consultar(){
         
-        return DAObotiquin.getAllMedicamentos();
+        return (ArrayList) DAObotiquin.getAllMedicamentos();
     }
 }
